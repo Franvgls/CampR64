@@ -1,0 +1,39 @@
+---
+title: "Configuración de rutas en CampR64"
+output:
+  html_document:
+    df_print: paged
+vignette: "%\\VignetteIndexEntry{Configuración de rutas en CampR64} %\\VignetteEngine{knitr::rmarkdown}
+  %\\VignetteEncoding{UTF-8}\n"
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introducción
+
+CampR64 utiliza un sistema flexible de rutas para localizar los ficheros DBF de cada campaña...
+Este sistema permite:
+
+- definir rutas por defecto dentro del paquete
+
+- sobrescribirlas mediante un archivo de configuración del usuario
+
+- trabajar en distintos entornos (local, server) sin modificar el código del paquete
+
+Esta viñeta explica cómo funciona el sistema de rutas, dónde se encuentran los archivos de configuración y cómo personalizarlos correctamente.
+Estructura general: campRoots
+
+El paquete define una estructura base llamada campRoots, que contiene las rutas por defecto para cada entorno:
+
+```
+campRoots$local$cant
+campRoots$local$porc
+campRoots$local$arsa
+campRoots$local$medi
+campRoots$local$especies
+```

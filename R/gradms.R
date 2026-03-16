@@ -1,13 +1,35 @@
-#'Transforma grados, minutos y segundos a grados decimales
+#' Transforma grados, minutos y segundos a grados decimales
 #'
-#'Transforma grados y minutos decimales a grados decimales, avisa si el dato es incorrecto, es decir minutos o segundos más de 60
-#'@param x grados, minuto y segundos en formato "GGG:MM:SS", vector de caracter
-#'@examples gradms("43:14:25")
-#'@family Conversion unidades
-#'@export
-gradms<- function(x) {
-  dms<-do.call(rbind, strsplit(as.character(x), ":"))
-  if (any(as.numeric(dms[2:3])>60)) stop("Los datos en minutos y segundos no pueden ser más de 60, revise datos")
-  dec<-as.numeric(dms[,1])+(as.numeric(dms[,2])+as.numeric(dms[,3])/60)/60
-  dec
+#' Convierte valores expresados como \code{"GGG:MM:SS"} a grados decimales.
+#' Avisa si los minutos o segundos son mayores de 60.
+#'
+#' @param x Vector de caracteres con formato \code{"GGG:MM:SS"}.
+#' @examples
+#' gradms("43:14:25")
+#' @family Conversion unidades
+#' @export
+gradms <- function(x) {
+  
+  # Separar G, M, S en columnas
+  dms <- do.call(rbind, strsplit(as.character(x), ":"))
+  
+  # Comprobación de formato correcto
+  if (ncol(dms) != 3) {
+    stop("El formato debe ser 'GGG:MM:SS'")
+  }
+  
+  # Convertir a numérico
+  G <- as.numeric(dms[, 1])
+  M <- as.numeric(dms[, 2])
+  S <- as.numeric(dms[, 3])
+  
+  # Validación de minutos y segundos
+  if (any(M > 60 | S > 60, na.rm = TRUE)) {
+    stop("Los minutos y segundos no pueden ser mayores de 60, revise datos")
+  }
+  
+  # Conversión a grados decimales
+  dec <- G + (M + S / 60) / 60
+  
+  return(dec)
 }

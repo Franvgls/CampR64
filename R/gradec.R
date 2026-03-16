@@ -5,7 +5,17 @@
 #'@examples gradec(43.3080)
 #'@family Conversion unidades
 #'@export
-gradec<- function(x) {
-  if (any(c(x-trunc(x))>.6)) stop("Los datos en grados y minutos decimales no pueden ser más de .60, revise datos")
-  trunc(x)+(x-trunc(x))*100/60
+gradec <- function(x) {
+  if (!is.numeric(x)) stop("x debe ser numérico (grados y minutos decimales)")
+  
+  mins <- x - trunc(x)
+  bad  <- mins > 0.60
+  
+  if (any(bad))
+    warning("Hay valores con minutos > .60; se ponen a NA")
+  
+  out <- trunc(x) + mins * 100 / 60
+  out[bad] <- NA_real_
+  
+  out
 }

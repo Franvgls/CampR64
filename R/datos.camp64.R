@@ -1,130 +1,82 @@
-#' Datos de abundancia y biomasa de una especie (versión DBFREAD, sin ODBC)
+#' Datos de abundancia y biomasa de una especie 
 #'
-#' Extrae los datos de abundancia y biomasa estratificados (solo lances con
-#' validez 1) de una especie o conjunto de especies a partir de los ficheros
-#' FAUNA y LANCE de una campaña. Devuelve un data.frame con sector, lance,
-#' peso, número y arsect.
-#'
-#' Esta versión elimina la dependencia de ODBC/32 bits y utiliza `dbfread`
-#' para leer directamente los ficheros DBF. Es científicamente equivalente
-#' a `datos.camp()` y adecuada para R de 64 bits.
-#'
-#' @param gr Grupo de la especie: 1 peces, 2 crustáceos, 3 moluscos,
-#'   4 equinodermos, 5 invertebrados, 6 deshechos/otros, 9 todos excepto 6.
-#' @param esp Código de especie (numérico o carácter de ancho 3). 999 para todas.
-#' @param camp Campaña: "NXX", "PXX", "1XX", "2XX".
-#' @param dns Origen de datos: "Cant", "Porc", "Arsa", "Medi".
-#' @param cor.time Si TRUE, corrige abundancias por duración del lance.
-#' @param kg Si TRUE, devuelve peso en kg; si FALSE, en gramos.
-#' @param verbose Si TRUE, muestra avisos informativos.
-#'
-#' @return Un data.frame con columnas:
-#'   sector, lance, weight.time, peso, numero, arsect.
-#'
-#' @examples
-#' \dontrun{
-#'   datos.camp64(1, 50, "P10", "Porc", kg = FALSE, cor.time = TRUE)
-#' }
-#'
+#' Función de acceso a datos: 
+#' Extrae los datos de abundancia y biomasa estratificados (solo lances con validez 1) de una especie o conjunto de especies a partir de las faunísticas de una campaña. Crea una tabla con información del sector(número) y estrato (letra), lance, peso, número y arsect
+#' Funciones para obtener data.frame de especies concretas a partir de los ficheros del Camp
+#' @param gr grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados 6 para deshechos y otros. 9 incluye todos los grupos a excepción del 6
+#' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo
+#' @param camp Campaña de la que se extraen los datos: un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
+#' @param dns Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant, Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param cor.time Si T corrige las abundancias en función de la duración del lance
+#' @param kg Si T datos en kgs, si F en gramos 
+#' @param verbose si T avisa de que hay más de una especie y los datos mezclados pueden ser engañosos
+#' @return Devuelve un data.frame con los datos de la especie por lance: sector,lance,peso,numero,arsect (área del sector al que pertence el lance)
+#' @details Saca los datos de los lances estratificados, por ello se produce un error si encuentra un lance con validez 1 y estrato o sector sin información.
+#' @examples datos.camp(1,50,"P10","Porc",kg=FALSE, cor.time=TRUE)
 #' @export
-datos.camp64 <- function(gr, esp, camp, dns,
-                         cor.time = TRUE, kg = TRUE, verbose = TRUE) {
-
-  if (length(camp) > 1)
-    stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")
-
-  # Formateo de códigos
-  esp_formatted <- format(esp, width = 3, justify = "right")
-  gr_formated  <- format(gr, width = 1)
-
-  # ------------------------------------------------------------------
-  # 1. Lectura de FAUNAxx.DBF con dbfread
-  # ------------------------------------------------------------------
-  fichero_fauna <- paste0("FAUNA", camp, ".DBF")
-  path_fauna <- get_camp_file(fichero_fauna, dns)
-
-  if (!file.exists(path_fauna))
-    stop(paste("No encuentro el fichero de fauna:", path_fauna))
-
-  fauna <- foreign::read.dbf(path_fauna)
-  names(fauna) <- tolower(names(fauna))
-  names(fauna) <- gsub("_", ".", names(fauna))
-
-  fauna <- fauna[, c("lance", "grupo", "esp", "peso.gr", "numero")]
-
-  # ------------------------------------------------------------------
-  # 2. Filtrado por grupo/especie
-  # ------------------------------------------------------------------
-  if (length(esp) == 1) {
-    if (gr != "9" & esp != "999") {
-      absp <- fauna[fauna$grupo == gr & fauna$esp == esp_formatted, ]
-    } else if (gr != "9" & esp == "999") {
-      absp <- fauna[fauna$grupo == gr, ]
-    } else if (gr == "9" & esp == "999") {
-      absp <- fauna[fauna$grupo != 6, ]
+datos.camp64<-function(gr,esp,camp,zona,dns="local",cor.time=TRUE,kg=TRUE,verbose=TRUE) {
+  if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
+  fauna<-readCampDBF("fauna",zona,camp,dns)
+  if (length(esp)==1) {
+    if (gr!="9" & esp!="999") {
+      absp<-fauna[fauna$grupo==as.integer(gr) & fauna$esp==as.integer(esp),c(1,4:5)] }
+    if (gr!="9" & esp=="999") {
+      absp<-fauna[fauna$grupo==as.integer(gr),c(1,4:5)] }
+    if (gr=="9" & esp=="999") {
+      absp<-fauna[fauna$grupo!=6,c(1,4:5)] }
+  }
+  else {
+    absp<-fauna[fauna$grupo==gr & fauna$esp %in% as.integer(esp),c(1,4:5)]
+  }
+  lan<-datlan.camp64(camp,zona,dns,redux=TRUE,incl2=FALSE,incl0=FALSE)
+  if (any(is.na(lan$sector) | is.na(lan$estrato))) stop(paste("Lances con validez 1 fuera estratificación en campaña: ",camp,". Revise: lance",camp,".dbf lance: ",lan[is.na(lan$estrato),"lance"],sep=""))
+  lan<-lan[,c("lance","sector","weight.time")]
+  names(absp)<-gsub("_",".",tolower(names(absp)))
+  if (any((gr=="9" | esp=="999" | length(esp)>1))) {
+    absp<-data.frame(lance=names(tapply(absp$peso.gr,absp$lance,sum)),peso.gr=tapply(absp$peso.gr,absp$lance,sum),
+                     numero=tapply(absp$numero,absp$lance,sum)) }
+  absp$lance<-as.numeric(as.character(absp$lance))
+  area<-NULL
+  dumb<-readCampDBF("camp",zona,camp[1],dns)
+  # for (i in 21:45) {
+  #   area<-paste(area,dumb[i],sep=",")
+  # }
+  # area<-substr(area,2,nchar(area))
+  area<-dumb[,21:45]    #RODBC::sqlQuery(ch1,paste("select ",area," from CAMP",camp,sep=""))
+  #browser()
+  if ((sum(is.na(area))/length(area))==1) {
+    stop(paste("El fichero",paste("camp",camp,".dbf,",sep=""),"está vacío, define la estratificación de la campaña",camp))
+  }
+  #browser()
+  if (zona=="Cant" & (sum(is.na(area))/length(area))>.4) {
+    warning("Muchos NAs en fichero camp",camp,", está definida la campaña ",camp,"? Revisar antes de aceptar el resultado")
+  }
+  area<-area[-which(is.na(area) | area==0)]
+  area<-as.data.frame(cbind(substr(names(area),2,3),as.numeric(t(area))))
+  names(area)<-c("sector","arsect")
+  area$sector<-toupper(area$sector)
+  #RODBC::odbcClose(ch1)
+  names(lan)<-c("lance","sector","weight.time")
+  names(absp)<-c("lance","peso","numero")
+  especial<-sum(absp$peso,na.rm=T)
+  if (kg) { absp$peso<-absp$peso/1000 }
+  mm<-merge(lan,absp,by.x="lance",by.y="lance",all.x=TRUE)
+  mm$numero[which(is.na(mm$numero))]<-0
+  mm$peso[which(is.na(mm$peso))]<-0
+  if (any(cor.time,camp=="N83",camp=="N84")) {
+    if (any(mm$weight.time==0)) {
+      mm$weight.time[mm$weight.time==0]=.1
+      warning("Hay lances con duración 0 minutos, revisa validez")
     }
-  } else {
-    absp <- fauna[fauna$grupo == gr & fauna$esp %in% esp_formatted, ]
+    mm$peso<-mm$peso/mm$weight.time
+    mm$numero<-mm$numero/mm$weight.time
   }
-
-  # ------------------------------------------------------------------
-  # 3. Agregación por lance
-  # ------------------------------------------------------------------
-  if (nrow(absp) > 0) {
-    absp <- aggregate(cbind(peso.gr, numero) ~ lance,
-                      data = absp, sum, na.rm = TRUE)
-  } else {
-    absp <- data.frame(lance = integer(0),
-                       peso.gr = numeric(0),
-                       numero = numeric(0))
-  }
-
-  names(absp)[names(absp) == "peso.gr"] <- "peso"
-
-  # ------------------------------------------------------------------
-  # 4. Datos de LANCE (usando datlan.camp64)
-  # ------------------------------------------------------------------
-  lan <- datlan.camp64(camp, dns, redux = TRUE, incl2 = FALSE, incl0 = FALSE)
-
-  if (any(is.na(lan$sector) | is.na(lan$estrato)))
-    stop("Lances con validez 1 fuera de estratificación en campaña ", camp)
-
-  lan_base <- lan[, c("lance", "sector", "weight.time", "arsect")]
-
-  # ------------------------------------------------------------------
-  # 5. Unión fauna + lances
-  # ------------------------------------------------------------------
-  mm <- merge(lan_base, absp, by = "lance", all.x = TRUE)
-
-  mm$numero[is.na(mm$numero)] <- 0
-  mm$peso[is.na(mm$peso)]     <- 0
-
-  # ------------------------------------------------------------------
-  # 6. Conversión a kg y corrección por tiempo
-  # ------------------------------------------------------------------
-  if (kg)
-    mm$peso <- mm$peso / 1000
-
-  if (cor.time || camp %in% c("N83", "N84")) {
-    if (any(mm$weight.time == 0)) {
-      mm$weight.time[mm$weight.time == 0] <- 0.1
-      warning("Hay lances con duración 0 minutos; weight.time forzado a 0.1")
-    }
-    mm$peso   <- mm$peso   / mm$weight.time
-    mm$numero <- mm$numero / mm$weight.time
-  }
-
-  # ------------------------------------------------------------------
-  # 7. Limpieza final
-  # ------------------------------------------------------------------
-  datos <- mm
-  datos$arsect <- as.numeric(datos$arsect)
-
-  if (verbose && length(esp) > 1)
-    message("Códigos de especie agrupados: ", paste(esp, collapse = ", "))
-
-  datos <- datos[order(datos$lance), ]
-  datos <- datos[, c("sector", "lance", "weight.time", "peso", "numero", "arsect")]
-
-  datos
+#  mm<-mm[,-3]
+  datos<-merge(mm,area,by.x="sector",by.y="sector")
+  datos$arsect<-as.numeric(as.character(datos$arsect))
+  #browser()
+  if (especial>0 & sum(mm$numero)==0) {message(paste("campaña ",camp,","," capturas en lances especiales pero no en los lances válidos estandarizados",sep="")) }
+  if (length(esp)>1 & verbose) {print(c("Códigos de especie: ",esp))}
+  #print(lan[order(lan$lance),])
+  datos[order(datos$lance),]
 }

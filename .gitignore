@@ -3,3 +3,30 @@
 .RData
 .Ruserdata
 output/".Rprofile" 
+SSH KEY Campr64.txt
+# Configuración local de rutas — nunca al repo
+inst/config/configRoots_user.R
+.CampR64/
+.Renviron
+
+# Datos de campañas
+*.dbf
+*.DBF
+
+# Ficheros temporales R
+*.Rdb
+*.rdx
+*.rda.bak
+# Configuración local de rutas — nunca al repo
+inst/config/configRoots_user.R
+.CampR64/
+.Renviron
+
+# Datos de campañas
+*.dbf
+*.DBF
+
+# Ficheros temporales R
+*.Rdb
+*.rdx
+*.rda.bak

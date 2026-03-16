@@ -2,11 +2,23 @@ Package: CampR64
 Type: Package
 Title: CampR Modernizado para R 4.4.0
 Version: 0.1.0
-Author: Francisco Velasco
-Maintainer: Francisco Velasco <tu_email>
+Author: Fran Velasco
+Maintainer: Fran Velasco <franvgls@gmail.com>
 Description: Version modernizada de CampR sin ODBC, con lectura directa de DBF y estructura modular.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:
-    foreign
+    foreign,
+    dplyr,
+    maps,
+    mapdata,
+    data.table,
+    hablar
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 3.5)
