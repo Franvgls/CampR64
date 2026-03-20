@@ -14,69 +14,96 @@
 #' @details Saca los datos de los lances estratificados, por ello se produce un error si encuentra un lance con validez 1 y estrato o sector sin información.
 #' @examples datos.camp(1,50,"P10","Porc",kg=FALSE, cor.time=TRUE)
 #' @export
-datos.camp64<-function(gr,esp,camp,zona,dns="local",cor.time=TRUE,kg=TRUE,verbose=TRUE) {
-  if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
-  fauna<-readCampDBF("fauna",zona,camp,dns)
-  if (length(esp)==1) {
-    if (gr!="9" & esp!="999") {
-      absp<-fauna[fauna$grupo==as.integer(gr) & fauna$esp==as.integer(esp),c(1,4:5)] }
-    if (gr!="9" & esp=="999") {
-      absp<-fauna[fauna$grupo==as.integer(gr),c(1,4:5)] }
-    if (gr=="9" & esp=="999") {
-      absp<-fauna[fauna$grupo!=6,c(1,4:5)] }
+datos.camp64 <- function(gr, esp, camp, zona, dns="local", 
+                         cor.time=TRUE, kg=TRUE, verbose=TRUE,
+                         incl2=FALSE) {
+  
+  dns <- match.arg(dns)
+  if (length(camp) > 1) stop("más de una campaña seleccionada")
+  
+  fauna <- readCampDBF("fauna", zona, camp, dns)
+  
+  # Filtro de especie/grupo
+  if (length(esp) == 1) {
+    if (gr != "9" & esp != "999")
+      absp <- fauna[fauna$grupo == as.integer(gr) & 
+                      fauna$esp == as.integer(esp), c(1,4:5)]
+    if (gr != "9" & esp == "999")
+      absp <- fauna[fauna$grupo == as.integer(gr), c(1,4:5)]
+    if (gr == "9" & esp == "999")
+      absp <- fauna[fauna$grupo != 6, c(1,4:5)]
+  } else {
+    absp <- fauna[fauna$grupo == gr & 
+                    fauna$esp %in% as.integer(esp), c(1,4:5)]
   }
-  else {
-    absp<-fauna[fauna$grupo==gr & fauna$esp %in% as.integer(esp),c(1,4:5)]
+  names(absp) <- gsub("_", ".", tolower(names(absp)))
+  
+  if (any(gr=="9" | esp=="999" | length(esp) > 1)) {
+    absp <- data.frame(
+      lance   = names(tapply(absp$peso.gr, absp$lance, sum)),
+      peso.gr = tapply(absp$peso.gr, absp$lance, sum),
+      numero  = tapply(absp$numero, absp$lance, sum))
   }
-  lan<-datlan.camp64(camp,zona,dns,redux=TRUE,incl2=FALSE,incl0=FALSE)
-  if (any(is.na(lan$sector) | is.na(lan$estrato))) stop(paste("Lances con validez 1 fuera estratificación en campaña: ",camp,". Revise: lance",camp,".dbf lance: ",lan[is.na(lan$estrato),"lance"],sep=""))
-  lan<-lan[,c("lance","sector","weight.time")]
-  names(absp)<-gsub("_",".",tolower(names(absp)))
-  if (any((gr=="9" | esp=="999" | length(esp)>1))) {
-    absp<-data.frame(lance=names(tapply(absp$peso.gr,absp$lance,sum)),peso.gr=tapply(absp$peso.gr,absp$lance,sum),
-                     numero=tapply(absp$numero,absp$lance,sum)) }
-  absp$lance<-as.numeric(as.character(absp$lance))
-  area<-NULL
-  dumb<-readCampDBF("camp",zona,camp[1],dns)
-  # for (i in 21:45) {
-  #   area<-paste(area,dumb[i],sep=",")
-  # }
-  # area<-substr(area,2,nchar(area))
-  area<-dumb[,21:45]    #RODBC::sqlQuery(ch1,paste("select ",area," from CAMP",camp,sep=""))
-  #browser()
-  if ((sum(is.na(area))/length(area))==1) {
-    stop(paste("El fichero",paste("camp",camp,".dbf,",sep=""),"está vacío, define la estratificación de la campaña",camp))
-  }
-  #browser()
-  if (zona=="Cant" & (sum(is.na(area))/length(area))>.4) {
-    warning("Muchos NAs en fichero camp",camp,", está definida la campaña ",camp,"? Revisar antes de aceptar el resultado")
-  }
-  area<-area[-which(is.na(area) | area==0)]
-  area<-as.data.frame(cbind(substr(names(area),2,3),as.numeric(t(area))))
-  names(area)<-c("sector","arsect")
-  area$sector<-toupper(area$sector)
-  #RODBC::odbcClose(ch1)
-  names(lan)<-c("lance","sector","weight.time")
-  names(absp)<-c("lance","peso","numero")
-  especial<-sum(absp$peso,na.rm=T)
-  if (kg) { absp$peso<-absp$peso/1000 }
-  mm<-merge(lan,absp,by.x="lance",by.y="lance",all.x=TRUE)
-  mm$numero[which(is.na(mm$numero))]<-0
-  mm$peso[which(is.na(mm$peso))]<-0
-  if (any(cor.time,camp=="N83",camp=="N84")) {
-    if (any(mm$weight.time==0)) {
-      mm$weight.time[mm$weight.time==0]=.1
-      warning("Hay lances con duración 0 minutos, revisa validez")
+  absp$lance <- as.numeric(as.character(absp$lance))
+  names(absp) <- c("lance", "peso", "numero")
+  if (kg) absp$peso <- absp$peso / 1000
+  
+  # ── BIFURCACIÓN PRINCIPAL ──────────────────────────────────────────
+  
+  if (!incl2) {
+    # ── Rama estándar: abundancia estratificada (IBTS) ────────────────
+    lan <- datlan.camp64(camp, zona, dns, redux=TRUE, 
+                         incl2=FALSE, incl0=FALSE)
+    if (any(is.na(lan$sector) | is.na(lan$estrato)))
+      stop(paste("Lances con validez 1 fuera de estratificación en", camp))
+    
+    lan <- lan[, c("lance","sector","weight.time")]
+    
+    # Áreas de estrato
+    dumb <- readCampDBF("camp", zona, camp, dns)
+    area <- dumb[, 21:45]
+    if ((sum(is.na(area)) / length(area)) == 1)
+      stop(paste("campXXX.dbf vacío, sin estratificación para", camp))
+    area <- area[-which(is.na(area) | area == 0)]
+    area <- as.data.frame(cbind(substr(names(area), 2, 3), 
+                                as.numeric(t(area))))
+    names(area) <- c("sector", "arsect")
+    area$sector <- toupper(area$sector)
+    
+    # Merge lances estándar → capturas (NA→0 en lances sin captura)
+    mm <- merge(lan, absp, by="lance", all.x=TRUE)
+    mm$numero[is.na(mm$numero)] <- 0
+    mm$peso[is.na(mm$peso)]     <- 0
+    
+    if (cor.time | camp %in% c("N83","N84")) {
+      if (any(mm$weight.time == 0)) {
+        mm$weight.time[mm$weight.time == 0] <- 0.1
+        warning("Lances con duración 0 min — revisa validez")
+      }
+      mm$peso   <- mm$peso   / mm$weight.time
+      mm$numero <- mm$numero / mm$weight.time
     }
-    mm$peso<-mm$peso/mm$weight.time
-    mm$numero<-mm$numero/mm$weight.time
+    
+    datos <- merge(mm, area, by="sector")
+    datos$arsect <- as.numeric(as.character(datos$arsect))
+    
+  } else {
+    # ── Rama total: suma directa con lances especiales ────────────────
+    lan <- datlan.camp64(camp, zona, dns, redux=TRUE, 
+                         incl2=TRUE, incl0=FALSE)
+    lan <- lan[, c("lance","sector","weight.time")]
+    
+    mm <- merge(lan, absp, by="lance", all.x=TRUE)
+    mm$numero[is.na(mm$numero)] <- 0
+    mm$peso[is.na(mm$peso)]     <- 0
+    
+    # Sin ponderación por área — arsect = 1 para todos
+    mm$arsect <- 1
+    datos <- mm
   }
-#  mm<-mm[,-3]
-  datos<-merge(mm,area,by.x="sector",by.y="sector")
-  datos$arsect<-as.numeric(as.character(datos$arsect))
-  #browser()
-  if (especial>0 & sum(mm$numero)==0) {message(paste("campaña ",camp,","," capturas en lances especiales pero no en los lances válidos estandarizados",sep="")) }
-  if (length(esp)>1 & verbose) {print(c("Códigos de especie: ",esp))}
-  #print(lan[order(lan$lance),])
-  datos[order(datos$lance),]
+  
+  if (length(esp) > 1 & verbose) 
+    print(c("Códigos de especie: ", esp))
+  
+  datos[order(datos$lance), ]
 }

@@ -4,7 +4,8 @@
 #' @param gr Grupo de la especie: 1 peces, 2 crustaceos 3 moluscos 4 equinodermos 5 invertebrados. 6 Desechos y otros inorgánicos no tiene sentido sacar tallas, sólo recogidas en peces, crustáceos decápodos y algunos moluscos
 #' @param esp Código de la especie numerico o caracter con tres espacios. 999 para todas las especies del grupo 
 #' @param camps Campaña a representar en el mapa de un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param dns Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant", Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param dns elige de dónde se toman los datos, si del ordenador "local" o del servidor "serv"
 #' @param tmin Talla mínima del intervalo de tallas a incluir
 #' @param tmax Talla máxima del intervalo de tallas a incluir
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
@@ -43,7 +44,6 @@ maphistal64<-function(gr,esp,camps,zona="cant",dns="local",tmin=0,tmax=999,cor.t
     medida<-c("cm")
     }
   else { medida<-ifelse(unid.camp64(gr,esp,zona,dns)[1]==1,"cm","mm") }
-  esp<-format(esp,width=3,justify="r")
 	ndat<-length(camps)
 	dumb<-NULL
 	for (i in 1:ndat) {
@@ -183,7 +183,7 @@ maphistal64<-function(gr,esp,camps,zona="cant",dns="local",tmin=0,tmax=999,cor.t
 					pch=ifelse(dumb$numero[subscripts]>0,16,ifelse(ceros,4,NA)),col=colo)}
 				})
 			}
-	if (plot) {print(mapdist)}
+	if (plot) {return(mapdist)}
 	if (out.dat) {
 	  if (ind=="n") dumb$numero<-round(dumb$numero,1)
     if (ind=="p") dumb$peso<-round(dumb$peso,2)

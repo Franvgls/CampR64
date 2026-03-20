@@ -1,16 +1,54 @@
-#' Crea gráficos de burbujas de la abundancia sqrt(num) 
-#' 
-#' Tipico bubleplot de análisis de VPA y evaluación de poblaciones con gráfico por edad y año
-#' @param gr Grupo de la especie: 1 peces sólo hay claves de talla para peces y cigala?
-#' @param esp Código de la especie numérico o carácter con tres espacios. Sólo admite una especie por gráfica
-#' @param camps Serie historica de campañas de la que se extraen los datos. Todas las campañas han de tener ALKs para las especie en cuestión
-#' @param dns Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant", Golfo de Cádiz "Arsa" (proporciona los datos para Medits pero no saca mapas)
-#' @param plus Edad plus: Edad considerada como plus, todas las edades mayores se suman como edad +
-#' @param recr edad de reclutamiento para especies con reclutamiento en edad 1 o mayor
-#' @param cor.time Si T corrige las abundancias en función de la duración del lance
-#' @examples bubbage.camp(1,43,Nsh[1:29],"Cant",8,0)
-#' @return Saca un lattice de descenso de abundancia logarítmica con la edad con dato de la pendiente para cada año. También saca una matriz de abundancias por años x edad columnas x filas
+#' Gráfico de burbujas de abundancia por edad y campaña
+#'
+#' Genera un panel de 5 gráficos para el análisis de abundancia a la edad
+#' a lo largo de una serie histórica de campañas: abundancia absoluta,
+#' proporción por edad, ambas estandarizadas por la mediana de la serie
+#' (azul = sobre la mediana, rojo = bajo), y abundancia de la edad de
+#' reclutamiento a lo largo del tiempo.
+#'
+#' @details
+#' Requiere que todas las campañas de `camps` tengan claves talla-edad (ALK)
+#' disponibles para la especie. La campaña `"N87"` se trata como `NA`
+#' (sin datos) por ausencia de muestreo de edades ese año.
+#'
+#' La edad `plus` agrupa todas las edades superiores. El tamaño de las
+#' burbujas es proporcional a `sqrt(n/max(n))`.
+#'
+#' @param gr Grupo taxonómico (solo peces — requiere ALK).
+#' @param esp Código numérico de especie. Solo admite una especie.
+#' @param camps Vector de campañas de la serie histórica (p.ej. `Nsh`).
+#'   Todas deben tener ALK disponible.
+#' @param zona Zona: `"cant"`, `"porc"`, `"arsa"`, `"medi"`.
+#' @param dns Origen de datos: `"local"` o `"serv"`.
+#' @param plus Edad plus — las edades superiores se acumulan en esta
+#'   clase. Por defecto `8`.
+#' @param recr Edad de reclutamiento para el panel inferior de la serie
+#'   temporal. Por defecto `0`.
+#' @param cor.time Si `TRUE` corrige por duración del lance.
+#'
+#' @returns Invisiblemente, imprime en consola la matriz de abundancias
+#'   edad (filas) × campaña (columnas). El gráfico principal se produce
+#'   como efecto lateral.
+#'
+#' @seealso [logabage.camp64()] para descenso logarítmico por cohorte,
+#'   [edadstr.camp64()] para los datos de abundancia a la edad
+#'
 #' @family edades
+#'
+#' @examples
+#' \dontrun{
+#' # Gallo (Lepidorhombus whiffiagonis, esp=43) — Cantábrico
+#' bubbage.camp64(gr=1, esp=43, camps=Nsh, zona="cant", dns="local",
+#'               plus=8, recr=0)
+#'
+#' # Bacaladilla (esp=51) — Cantábrico, reclutamiento edad 1
+#' bubbage.camp64(gr=1, esp=51, camps=Nsh, zona="cant", dns="local",
+#'               plus=8, recr=1)
+#'
+#' # Gallo whiff (esp=43) — Porcupine
+#' bubbage.camp64(gr=1, esp=43, camps=Psh, zona="porc", dns="local",
+#'               plus=8, recr=0)
+#' }
 #' @export
 bubbage.camp64 <-function(gr,esp,camps,zona="porc",dns="local",plus=8,recr=0,cor.time=TRUE) {
   if (length(esp)>1) {

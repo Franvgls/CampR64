@@ -38,13 +38,18 @@ Función de resultados: abundancias estratificadas por edad para cada sector geo
 }
 \examples{
 edadsect.camp("1"," 45","P01","Porc",8)
+
 }
 \seealso{
 Other edades: 
+\code{\link{AbAgStatRec.camp64}()},
 \code{\link{GetAlk.camp64}()},
 \code{\link{bubbage.camp64}()},
+\code{\link{datagegr.camp64}()},
 \code{\link{edadstr.camp64}()},
 \code{\link{grafedtal.camp64}()},
-\code{\link{grafedtal.camps64}()}
+\code{\link{grafedtal.camps64}()},
+\code{\link{logabage.camp64}()},
+\code{\link{maphistage64}()}
 }
 \concept{edades}

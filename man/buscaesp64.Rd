@@ -21,6 +21,7 @@ buscaesp(1,50)
 }
 \seealso{
 Other datos_especies: 
+\code{\link{BuscaAphia64}()},
 \code{\link{buscacod64}()},
 \code{\link{camptoyear}()}
 }

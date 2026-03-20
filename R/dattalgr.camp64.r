@@ -4,7 +4,8 @@
 #' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
 #' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo
 #' @param camp Campaña a representar en el mapa de un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param dns Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant, Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
+#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
+#' @param dns Elige si los datos se toman del ordenador "local" o del servidor "serv"
 #' @param tmin Talla mínima
 #' @param tmax Talla máxima
 #' @param cor.time Si T corrige abundancias con la duración del lance para llevarlo a 30 minutos
@@ -12,12 +13,12 @@
 #' @param sex Permite elegir entre machos(1), hembras(2) o indeterminados(3), NA escoge sin tener en cuenta el sexo
 #' @param ind Parámetro a representar saca los datos en "p"eso o "n"úmero
 #' @seealso {\link{datgr.camp}}
-#' @examples dattalgr.camp("1",c(44:45),"N94","Cant",0,45,ind="p")
+#' @examples dattalgr.camp64("1",c(44:45),"N94","cant","local",0,45,ind="p")
 #' @export
 dattalgr.camp64<- function(gr,esp,camp,zona="cant",dns="local",tmin=1,tmax=999,cor.time=TRUE,incl2=TRUE,sex=NA,ind="n") {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
   #esp<-format(esp,width=3,justify="r")
-  tallas<-readCampDBF("ntall","zona","camp","dsn")      #RODBC::sqlFetch(ch1,paste("NTALL",camp,sep=""))
+  tallas<-readCampDBF("ntall",zona,camp,dns)      #RODBC::sqlFetch(ch1,paste("NTALL",camp,sep=""))
   #  browser()
   if (length(esp)>1 | any(esp=="999")) {
     if (!is.na(sex)) {
@@ -34,7 +35,8 @@ dattalgr.camp64<- function(gr,esp,camp,zona="cant",dns="local",tmin=1,tmax=999,c
       ntalls<-tallas[,c(1,4,7,6,8,5,9)] }
   }
   else {
-    ntalls<-tallas[tallas$gr==gr & tallas$esp %in% as.integer(esp),c(1,4,7,6,8,5,9)]
+    ntalls<-tallas[tallas$gr==gr & tallas$esp %in% as.integer(esp),
+                   c("lance", "cate", "peso_m", "sexo", "talla", "peso_gr", "numer")]
   }
   lan<-datlan.camp64(camp,zona,dns,redux=TRUE,incl2=incl2)
   #RODBC::odbcClose(ch1)
@@ -50,7 +52,7 @@ dattalgr.camp64<- function(gr,esp,camp,zona="cant",dns="local",tmin=1,tmax=999,c
     ntalls$lance<-as.numeric(as.character(ntalls$lance))
     ntalls$numer<-ntalls$numer*ntalls$peso.gr/ntalls$peso.m
     if (ind=="p") {
-      ab<-talpes.camp(gr,esp)
+      ab<-talpes.camp(gr,esp,zona,dsn)
       ntalls$peso<-(ntalls$numer*ab[1]*(ntalls$talla+.5)^ab[2])/1000
       ntalls.tot<-tapply(ntalls$peso,ntalls[,c("lance","cate")],sum)
       ntalls.capts<-tapply(ntalls$peso.gr/1000,ntalls[,c("lance","cate")],mean)

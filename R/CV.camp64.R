@@ -15,7 +15,7 @@
 #' @seealso {\link{CV.camps}}, {\link{CV.bt.camp}}
 #' @export
 CV.camp64<- function(gr,esp,camp,zona,dns="local",ind="p",cor.time=TRUE,kg=TRUE,Nas=FALSE,excl.sect=NA,verbose=TRUE) {
-  if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de m?s de una")}
+  if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
   mm<-datos.camp64(gr,esp,camp,zona,dns,kg=kg,cor.time=cor.time,verbose=verbose)
   if (any(!is.na(excl.sect))) {
     for (i in 1:length(excl.sect)) {mm<-mm[-grep(excl.sect[i],as.character(mm$sector)),]}

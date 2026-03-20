@@ -17,8 +17,16 @@
 CV.camps64<-function(gr,esp,camps,zona,dns=c("local","serv"),cor.time=TRUE,kg=TRUE,dec=2,excl.sect=NA,verbose=TRUE) {
   ndat<-length(camps)
   dumb<-data.frame(datos.camp64(gr,esp,camps[1],zona,dns,cor.time=cor.time,kg=kg,verbose=verbose),camp=camps[1])
-  for (i in 2:ndat) {
-    dumb<-rbind(dumb,data.frame(datos.camp64(gr,esp,camps[i],zona,dns,cor.time=cor.time,kg=kg,verbose=verbose),camp=camps[i]))
+  # for (i in 2:ndat) {
+  #   dumb<-rbind(dumb,data.frame(datos.camp64(gr,esp,camps[i],zona,dns,cor.time=cor.time,kg=kg,verbose=verbose),camp=camps[i]))
+  # }
+  if (ndat > 1) {
+    for (i in 2:ndat) {
+      dumb <- rbind(dumb, data.frame(datos.camp64(gr, esp, camps[i], zona, dns,
+                                                  cor.time=cor.time, kg=kg,
+                                                  verbose=verbose), 
+                                     camp=camps[i]))
+    }
   }
   if (any(!is.na(excl.sect))) {
     for (i in 1:length(excl.sect)) {dumb<-dumb[-grep(excl.sect[i],as.character(dumb$sector)),]}

@@ -9,9 +9,12 @@ inst/config/configRoots_user.R
 .CampR64/
 .Renviron
 
-# Datos de campañas
+# Datos de campañas y demas
 *.dbf
 *.DBF
+*.csv
+*.txt
+*.xlsx
 
 # Ficheros temporales R
 *.Rdb
@@ -21,10 +24,6 @@ inst/config/configRoots_user.R
 inst/config/configRoots_user.R
 .CampR64/
 .Renviron
-
-# Datos de campañas
-*.dbf
-*.DBF
 
 # Ficheros temporales R
 *.Rdb

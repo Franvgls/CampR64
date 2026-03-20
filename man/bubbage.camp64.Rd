@@ -2,7 +2,7 @@
 % Please edit documentation in R/bubbage.camp64.r
 \name{bubbage.camp64}
 \alias{bubbage.camp64}
-\title{Crea gráficos de burbujas de la abundancia sqrt(num)}
+\title{Gráfico de burbujas de abundancia por edad y campaña}
 \usage{
 bubbage.camp64(
   gr,
@@ -16,35 +16,73 @@ bubbage.camp64(
 )
 }
 \arguments{
-\item{gr}{Grupo de la especie: 1 peces sólo hay claves de talla para peces y cigala?}
+\item{gr}{Grupo taxonómico (solo peces — requiere ALK).}
 
-\item{esp}{Código de la especie numérico o carácter con tres espacios. Sólo admite una especie por gráfica}
+\item{esp}{Código numérico de especie. Solo admite una especie.}
 
-\item{camps}{Serie historica de campañas de la que se extraen los datos. Todas las campañas han de tener ALKs para las especie en cuestión}
+\item{camps}{Vector de campañas de la serie histórica (p.ej. \code{Nsh}).
+Todas deben tener ALK disponible.}
 
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant", Golfo de Cádiz "Arsa" (proporciona los datos para Medits pero no saca mapas)}
+\item{zona}{Zona: \code{"cant"}, \code{"porc"}, \code{"arsa"}, \code{"medi"}.}
 
-\item{plus}{Edad plus: Edad considerada como plus, todas las edades mayores se suman como edad +}
+\item{dns}{Origen de datos: \code{"local"} o \code{"serv"}.}
 
-\item{recr}{edad de reclutamiento para especies con reclutamiento en edad 1 o mayor}
+\item{plus}{Edad plus — las edades superiores se acumulan en esta
+clase. Por defecto \code{8}.}
 
-\item{cor.time}{Si T corrige las abundancias en función de la duración del lance}
+\item{recr}{Edad de reclutamiento para el panel inferior de la serie
+temporal. Por defecto \code{0}.}
+
+\item{cor.time}{Si \code{TRUE} corrige por duración del lance.}
 }
 \value{
-Saca un lattice de descenso de abundancia logarítmica con la edad con dato de la pendiente para cada año. También saca una matriz de abundancias por años x edad columnas x filas
+Invisiblemente, imprime en consola la matriz de abundancias
+edad (filas) × campaña (columnas). El gráfico principal se produce
+como efecto lateral.
 }
 \description{
-Tipico bubleplot de análisis de VPA y evaluación de poblaciones con gráfico por edad y año
+Genera un panel de 5 gráficos para el análisis de abundancia a la edad
+a lo largo de una serie histórica de campañas: abundancia absoluta,
+proporción por edad, ambas estandarizadas por la mediana de la serie
+(azul = sobre la mediana, rojo = bajo), y abundancia de la edad de
+reclutamiento a lo largo del tiempo.
+}
+\details{
+Requiere que todas las campañas de \code{camps} tengan claves talla-edad (ALK)
+disponibles para la especie. La campaña \code{"N87"} se trata como \code{NA}
+(sin datos) por ausencia de muestreo de edades ese año.
+
+La edad \code{plus} agrupa todas las edades superiores. El tamaño de las
+burbujas es proporcional a \code{sqrt(n/max(n))}.
 }
 \examples{
-bubbage.camp(1,43,Nsh[1:29],"Cant",8,0)
+\dontrun{
+# Gallo (Lepidorhombus whiffiagonis, esp=43) — Cantábrico
+bubbage.camp64(gr=1, esp=43, camps=Nsh, zona="cant", dns="local",
+              plus=8, recr=0)
+
+# Bacaladilla (esp=51) — Cantábrico, reclutamiento edad 1
+bubbage.camp64(gr=1, esp=51, camps=Nsh, zona="cant", dns="local",
+              plus=8, recr=1)
+
+# Gallo whiff (esp=43) — Porcupine
+bubbage.camp64(gr=1, esp=43, camps=Psh, zona="porc", dns="local",
+              plus=8, recr=0)
+}
 }
 \seealso{
+\code{\link[=logabage.camp64]{logabage.camp64()}} para descenso logarítmico por cohorte,
+\code{\link[=edadstr.camp64]{edadstr.camp64()}} para los datos de abundancia a la edad
+
 Other edades: 
+\code{\link{AbAgStatRec.camp64}()},
 \code{\link{GetAlk.camp64}()},
+\code{\link{datagegr.camp64}()},
 \code{\link{edadsect.camp64}()},
 \code{\link{edadstr.camp64}()},
 \code{\link{grafedtal.camp64}()},
-\code{\link{grafedtal.camps64}()}
+\code{\link{grafedtal.camps64}()},
+\code{\link{logabage.camp64}()},
+\code{\link{maphistage64}()}
 }
 \concept{edades}

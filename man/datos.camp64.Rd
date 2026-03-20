@@ -12,7 +12,8 @@ datos.camp64(
   dns = "local",
   cor.time = TRUE,
   kg = TRUE,
-  verbose = TRUE
+  verbose = TRUE,
+  incl2 = FALSE
 )
 }
 \arguments{

@@ -25,7 +25,9 @@ dattalgr.camp64(
 
 \item{camp}{Campaña a representar en el mapa de un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
 
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant, Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados}
+\item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados}
+
+\item{dns}{Elige si los datos se toman del ordenador "local" o del servidor "serv"}
 
 \item{tmin}{Talla mínima}
 
@@ -43,7 +45,7 @@ dattalgr.camp64(
 Muestra los datos de abundancia de una especie o conjunto de especies de un rango de tallas determinado a partir de las distribuciones de tallas. También puede mostrar los datos de biomasa a partir de la relación talla-peso
 }
 \examples{
-dattalgr.camp("1",c(44:45),"N94","Cant",0,45,ind="p")
+dattalgr.camp64("1",c(44:45),"N94","cant","local",0,45,ind="p")
 }
 \seealso{
 {\link{datgr.camp}}

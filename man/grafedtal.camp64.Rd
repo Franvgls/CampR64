@@ -71,10 +71,14 @@ grafedtal.camp(1,43,"P09","Porc",es=FALSE,out.dat=TRUE)
 {\link{grafedtal.camps}}
 
 Other edades: 
+\code{\link{AbAgStatRec.camp64}()},
 \code{\link{GetAlk.camp64}()},
 \code{\link{bubbage.camp64}()},
+\code{\link{datagegr.camp64}()},
 \code{\link{edadsect.camp64}()},
 \code{\link{edadstr.camp64}()},
-\code{\link{grafedtal.camps64}()}
+\code{\link{grafedtal.camps64}()},
+\code{\link{logabage.camp64}()},
+\code{\link{maphistage64}()}
 }
 \concept{edades}

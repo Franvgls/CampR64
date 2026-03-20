@@ -31,7 +31,6 @@ dtall.camp64<- function(gr,esp,camp,zona,dns="local",cor.time=TRUE,ti=FALSE,sub=
   layout=NA,excl.sect=NA,ymax=NA,out.dat=FALSE,years=TRUE,verbose=TRUE) {
   library(lattice)
   options(scipen=2)
-  #esp<-format(esp,width=3,justify="r")
   if (length(esp)>1 | any(esp=="999")) {
     if (verbose) print("Distintas especies pueden estar medidas en distintas unidades (mm y cm o .5 cm) o a la aleta anal")
     increm<-unid.camp64(gr,esp,zona)[2] 
@@ -61,10 +60,8 @@ dtall.camp64<- function(gr,esp,camp,zona,dns="local",cor.time=TRUE,ti=FALSE,sub=
     if(is.list(ti)) tit<-ti
     else tit<-list(label=ti)
     }
-#	if (!plot & !is.na(titlab)) tit<-list(label=titlab,font=2,cex=.9)
 	ndat<-length(camp)
 	for (i in 1:ndat) {
-    #browser()
 		dtall<-dattal.camp64(gr,esp,camp[i],zona,dns="local",cor.time=cor.time,excl.sect=excl.sect,sex=sex,verbose=verbose)
 		names(dtall)<-c("talla",sexn[which(!is.na(match(dtalln,names(dtall)[2:ncol(dtall)])))])
 		sxs<- match(sixn,names(dtall)[2:length(names(dtall))])
@@ -147,7 +144,6 @@ dtall.camp64<- function(gr,esp,camp,zona,dns="local",cor.time=TRUE,ti=FALSE,sub=
         }
 			)
 			names(dtall)<-c("talla",dtalln[which(!is.na(match(sexn,names(dtall)[2:ncol(dtall)])))])
-			#print(dtall)
 			}
 	else {
 		orden=NULL

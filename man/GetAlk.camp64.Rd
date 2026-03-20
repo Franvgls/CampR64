@@ -48,10 +48,14 @@ GetAlk.camp(1,45,"P03","Porc",AltAlk="edadXYY")
 }
 \seealso{
 Other edades: 
+\code{\link{AbAgStatRec.camp64}()},
 \code{\link{bubbage.camp64}()},
+\code{\link{datagegr.camp64}()},
 \code{\link{edadsect.camp64}()},
 \code{\link{edadstr.camp64}()},
 \code{\link{grafedtal.camp64}()},
-\code{\link{grafedtal.camps64}()}
+\code{\link{grafedtal.camps64}()},
+\code{\link{logabage.camp64}()},
+\code{\link{maphistage64}()}
 }
 \concept{edades}

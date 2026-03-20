@@ -2,26 +2,34 @@
 % Please edit documentation in R/agradec.R
 \name{agradec}
 \alias{agradec}
-\title{Transforma grados decimales a grados y minutos decimales
-Convierte valores expresados en grados decimales a un formato donde la parte
-entera son los grados y la parte decimal representa los minutos decimales
-(sin segundos). Por ejemplo, 43.968 se convierte en 43 grados y 0.968*60 minutos.
-#' @param x Vector numérico con grados decimales.
-#' @examples
-#' agradec(43.968)
-#' @family Conversión unidades
-#' @export}
+\title{Conversión de grados decimales a grados y minutos decimales}
 \usage{
 agradec(x)
 }
-\description{
-Transforma grados decimales a grados y minutos decimales
-Convierte valores expresados en grados decimales a un formato donde la parte
-entera son los grados y la parte decimal representa los minutos decimales
-(sin segundos). Por ejemplo, 43.968 se convierte en 43 grados y 0.968*60 minutos.
-#' @param x Vector numérico con grados decimales.
-#' @examples
-#' agradec(43.968)
-#' @family Conversión unidades
-#' @export
+\arguments{
+\item{x}{Vector numérico con coordenadas en grados decimales.}
 }
+\value{
+Vector numérico en formato GGG.MMmm (grados + minutos decimales).
+}
+\description{
+Convierte coordenadas en grados decimales al formato grados + minutos
+decimales (GGG.MMmm), donde la parte entera son los grados y los dos
+primeros decimales representan los minutos. Por ejemplo, \verb{43.968°} →
+\verb{43 + (0.968 × 60) / 100} = \code{43.5808}.
+}
+\details{
+El formato de salida es el utilizado internamente por el programa CAMP
+(Harbour/Clipper) para almacenar coordenadas en los ficheros \code{.dbf}.
+La función inversa es \code{\link[=gradec]{gradec()}}, que convierte de GGG.MMmm a grados
+decimales.
+}
+\examples{
+agradec(43.968)   # → 43.5808
+agradec(c(43.968, -8.5))
+
+}
+\seealso{
+\code{\link[=gradec]{gradec()}}, \code{\link[=gradms]{gradms()}}
+}
+\concept{Conversión de unidades}

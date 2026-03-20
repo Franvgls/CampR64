@@ -60,8 +60,13 @@ GrafMarksGPS64("N14","Cant")
 }
 \seealso{
 Other mapas: 
+\code{\link{MapEcol.camp64}()},
 \code{\link{MapLansGPS64}()},
+\code{\link{MatchHidro.ctd64}()},
+\code{\link{armap.tot64}()},
+\code{\link{maparea64}()},
 \code{\link{maphist64}()},
+\code{\link{maphistage64}()},
 \code{\link{maphistal64}()}
 
 Other PescaWin: 

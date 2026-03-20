@@ -1,6 +1,7 @@
 #' Calcula las abundancias estratificadas por edad
 #'
 #' Función de resultados: abundancias estratificadas por edad para cada sector geográfico a partir de los datos del camp.
+#'
 #' @param gr Grupo de la especie: 1 peces sólo hay claves de talla para peces y cigala?
 #' @param esp Código de la especie numérico o carácter con tres espacios. Sólo admite una especie por gráfica
 #' @param camp Campaña de la que se extraen los datos un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
@@ -9,7 +10,9 @@
 #' @param excl.sect excluye sectores para calcular el resultado por lo sectores individualmente o en conjunto.
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param AltAlk ALK alternativa tomada de un fichero de edad del Camp edadXYY.dbf sin ruta ni extensión
+#' 
 #' @examples edadsect.camp("1"," 45","P01","Porc",8)
+#' 
 #' @family edades
 #' @export
 edadsect.camp64<-function(gr,esp,camp,zona="cant",dns="local",plus=8,excl.sect=NA,cor.time=TRUE,AltAlk=NA) {

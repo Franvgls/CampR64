@@ -59,5 +59,12 @@ Función auxiliar para sacar mapas de la campaña MEDITS
 \examples{
 MapMedit()
 }
+\seealso{
+Other mapas base: 
+\code{\link{MapIberia64}()}
+
+Other Medits: 
+\code{\link{MapIberia64}()}
+}
 \concept{Medits}
 \concept{mapas base}

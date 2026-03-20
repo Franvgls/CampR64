@@ -1,0 +1,147 @@
+---
+title: "Vignette 1.- Instalación de datos para CampR64"
+author: "Fran Velasco"
+date: "2025-12-18"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette 1.- Instalación de datos para CampR64}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+> **CampR64 vs CampR:** Esta viñeta describe la instalación para **CampR64**,
+> la versión del paquete compatible con R 4.x y posteriores (64 bits). La diferencia fundamental
+> respecto a CampR es que **no se requiere configurar orígenes de datos ODBC (DSN)**:
+> los ficheros DBF se leen directamente mediante el paquete `foreign` de R, a través de
+> la función interna `readCampDBF()`.
+
+## Requisitos de R
+
+CampR64 funciona con **R 4.x o posterior**, tanto en versión 32 como 64 bits,
+aunque está optimizado para entornos de 64 bits, que es la configuración habitual en cualquier
+instalación moderna de R.
+
+No existe restricción de versión máxima como ocurría con CampR, que requería R ≤ 3.6.3
+para poder usar el controlador ODBC con ficheros DBF en 32 bits.
+
+> **Recomendación:** usar la última versión estable de R disponible en
+> <https://cran.r-project.org/>.
+
+---
+
+## Instalación de los datos
+
+De acuerdo con la estructura del CAMP
+(*Sánchez & Fernández, 1998, Manual del programa CAMP. Versión 2.10*),
+los datos en formato Dbase III deben estar en:
+
+- Un directorio principal con el programa y el fichero maestro de especies  
+  p.ej: **c:/camp/**
+- Colgando de éste, los directorios con los datos de las distintas áreas donde se realizan las campañas.
+
+En esta versión de CampR64 están implementadas funciones para las siguientes zonas:
+
+- Demersales Norte: Galicia y el Cantábrico — *p.ej*: **c:/camp/cant/**
+- Banco de Porcupine — *p.ej*: **c:/camp/Porc/**
+- Golfo de Cádiz — *p.ej*: **c:/camp/arsa/**
+- Mediterráneo — *p.ej*: **c:/camp/medi/**
+
+Aunque técnicamente los ficheros podrían estar todos en una misma carpeta, mantener esta
+estructura de subdirectorios por zona es importante para que las funciones de CampR64 localicen
+correctamente los ficheros de cada campaña.
+
+En cada subdirectorio de zona se encuentran los ficheros propios de esa campaña:
+
+**(*campXXX.dbf*, *lanceXXX.dbf*, *faunaXXX.dbf*, *ntallXXX.dbf*, *hidroXXX.dbf* y *edadXXX.dbf*)**
+
+| Zona             | Directorio          | Código ficheros              |
+|------------------|---------------------|------------------------------|
+| Demersales Norte | `c:/camp/cant/`     | `*NXX.dbf`                  |
+| Porcupine        | `c:/camp/Porc/`     | `*PXX.dbf`                  |
+| Golfo de Cádiz   | `c:/camp/arsa/`     | `*2XX.dbf` o `*1XX.dbf`     |
+| Mediterráneo     | `c:/camp/medi/`     | `*MXX.dbf`                  |
+
+El fichero maestro de especies `especies.dbf` se encuentra en el directorio raíz `c:/camp/`.
+
+---
+
+## Lectura de ficheros DBF en R
+
+CampR64 lee los ficheros DBF directamente mediante el paquete `foreign` de R,
+a través de la función interna `readCampDBF()`. No es necesario configurar ningún
+controlador ODBC ni crear orígenes de datos DSN en el panel de control de Windows.
+
+El paquete `foreign` se instala automáticamente como dependencia de CampR64.
+
+---
+
+## Reparación de cabecera: fixupdyr.exe
+
+Los ficheros DBF generados por el programa CAMP (compilado con Clipper) llevan en la cabecera
+un código de versión distinto al del estándar dBase III. En algunos casos esto hace que
+`foreign` rechace el fichero con un mensaje de error similar a:
+
+```
+Error in read.dbf("edadn25.dbf") : edadn25.dbf is not a DBF file
+```
+
+Cuando esto ocurre, hay que reparar la cabecera del fichero con el programa
+`fixupdyr.exe`, que actualiza ese byte de versión para que el fichero sea reconocido
+como dBase III válido.
+
+> **Nota:** La reparación con `fixupdyr.exe` *no siempre es necesaria*.
+> Solo hay que ejecutarla cuando R muestra el error indicando que el fichero no es un DBF válido.
+> Una vez reparado, el fichero puede leerse directamente sin necesidad de repetir la operación.
+
+### Uso de fixupdyr.exe
+
+Desde la línea de comandos de Windows (CMD), situarse en el directorio donde esté el DBF
+y ejecutar:
+
+```
+cd c:\camp\cant
+fixupdyr.exe edadn25.dbf
+```
+
+O bien, si `fixupdyr.exe` está en el PATH del sistema, desde cualquier directorio:
+
+```
+cd c:\camp\arsa
+fixupdyr.exe edad123.dbf
+```
+
+### Añadir fixupdyr al PATH (recomendado)
+
+Para poder llamar a `fixupdyr.exe` desde cualquier directorio sin necesidad de
+copiar el ejecutable en cada subcarpeta, conviene añadir la carpeta donde se encuentre al PATH
+del sistema:
+
+1. Tecla Windows → buscar *"variables de entorno"*
+2. Editar las variables de entorno del sistema → variable **Path** → **Editar**
+3. Añadir la ruta donde esté `fixupdyr.exe`, p.ej: `c:\camp`
+4. Aceptar todo y reiniciar el CMD
+
+---
+
+## Campañas disponibles
+
+CampR64 dispone de funciones para explorar los datos disponibles en cada directorio de zona.
+Por ejemplo, para listar las campañas presentes en el directorio de Cantábrico:
+
+```{r, eval=FALSE}
+library(CampR64)
+CampsDNS.camp(path = "c:/camp/cant/")
+```
+
+---
+
+## Resumen: diferencias respecto a CampR
+
+| Aspecto                  | CampR                                  | CampR64                                         |
+|--------------------------|----------------------------------------|-------------------------------------------------|
+| Versión de R             | Máximo R 3.6.3 (32 bits)              | R 4.x o posterior (64 bits)                     |
+| Lectura DBF              | Controlador ODBC (`odbcad32.exe`)      | Paquete `foreign` vía `readCampDBF()`           |
+| Configuración DSN        | Requerida (panel de control Windows)   | No requerida                                    |
+| Reparación cabecera DBF  | Necesaria siempre                      | Solo si R indica que el fichero no es un DBF válido |
+| Estructura de directorios| c:/camp/ + subcarpetas por zona        | Igual                                           |
+| Zonas implementadas      | Cant, Porc, Arsa, Medi                 | Cant, Porc, Arsa, Medi                          |

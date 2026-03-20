@@ -17,6 +17,7 @@ buscacod("sph")
 }
 \seealso{
 Other datos_especies: 
+\code{\link{BuscaAphia64}()},
 \code{\link{buscaesp64}()},
 \code{\link{camptoyear}()}
 }

@@ -50,6 +50,11 @@ readCampDBF <- function(tipo,
   
   verbose <- isTRUE(getOption("CampR64.verbose", FALSE))
   
+  # message("DEBUG readCampDBF: tipo=", tipo, 
+  #         " zona=", zona, 
+  #         " camp=", camp, 
+  #         " dns=", dns[1])
+  
   # ----- ESPECIES -----
   if (identical(tolower(tipo), "especies")) {
     if (zona %in% c("cant","porc","medi")) {

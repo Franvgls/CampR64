@@ -37,7 +37,9 @@ maphistal64(
 
 \item{camps}{Campaña a representar en el mapa de un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
 
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant", Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)}
+\item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)}
+
+\item{dns}{elige de dónde se toman los datos, si del ordenador "local" o del servidor "serv"}
 
 \item{tmin}{Talla mínima del intervalo de tallas a incluir}
 
@@ -87,8 +89,13 @@ maphistal(1,50,Psh[1:12],"Porc",1,23,layout=c(4,3),out.dat=TRUE)
 \seealso{
 Other mapas: 
 \code{\link{GrafMarksGPS}()},
+\code{\link{MapEcol.camp64}()},
 \code{\link{MapLansGPS64}()},
-\code{\link{maphist64}()}
+\code{\link{MatchHidro.ctd64}()},
+\code{\link{armap.tot64}()},
+\code{\link{maparea64}()},
+\code{\link{maphist64}()},
+\code{\link{maphistage64}()}
 }
 \concept{mapas}
 \concept{tallas}

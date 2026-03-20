@@ -82,7 +82,12 @@ maphist(1,50,As2[15:18],"Arsa",layout=c(2,2),years=TRUE,sub="ARSA 2nd quarter")
 \seealso{
 Other mapas: 
 \code{\link{GrafMarksGPS}()},
+\code{\link{MapEcol.camp64}()},
 \code{\link{MapLansGPS64}()},
+\code{\link{MatchHidro.ctd64}()},
+\code{\link{armap.tot64}()},
+\code{\link{maparea64}()},
+\code{\link{maphistage64}()},
 \code{\link{maphistal64}()}
 }
 \concept{mapas}
