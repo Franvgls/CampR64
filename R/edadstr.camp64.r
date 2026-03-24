@@ -84,7 +84,6 @@ edadstr.camp64<-function(gr,esp,camp,zona="cant",dns="local",plus=8,cor.time=TRU
     }
     area<-substr(area,2,nchar(area))
     area<-dumb[,21:45]
-    #RODBC::odbcCloseAll()
     area<-area[-which(is.na(area) | area==0)]
     area<-as.data.frame(cbind(substr(names(area),2,3),as.numeric(t(area))))
     names(area)<-c("sector","arsect")

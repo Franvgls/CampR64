@@ -21,26 +21,20 @@ ecolgr.camp64 <-function(gr,esp=999,camp,zona="cant",dns=c("local","serv"),ind="
   absp<-readCampDBF("fauna",zona,camp,dns)
   if (gr!="9" & esp!="999") {
     absp<-absp[absp$grupo==gr & absp$esp==esp,c("lance","grupo","esp","peso_gr","numero")]
-    # absp<-RODBC::sqlQuery(ch1,paste("select lance,grupo,esp,peso_gr,numero from FAUNA",
-    #                          camp," where grupo='",gr,"' and esp='",esp,"'",sep="")) 
     }
   if (gr!="9" & esp=="999") {
     absp<-absp[absp$grupo==gr,c("lance","grupo","esp","lance","peso_gr","numero")]
-#   absp<-RODBC::sqlQuery(ch1,paste("select lance,grupo,esp,peso_gr,numero from FAUNA",camp," where grupo='",gr,"'",sep="")) 
     }
   if (gr=="9" & esp=="999") {
     absp<-absp[,c("lance","grupo","esp","lance","peso_gr","numero")]
-#   absp<-RODBC::sqlQuery(ch1,paste("select lance,grupo,esp,peso_gr,numero from FAUNA",camp,sep=""))
     absp<-absp[absp$grupo!=6,]
   }
   lan<-datlan.camp64(camp,zona,dns,redux=TRUE,incl2=TRUE,incl0=FALSE)
   if (length(lan)==1) {
     mm<-data.frame(lan=0,lat=0,long=0,prof=0,numero=0,peso.gr=0)
   }
-#  ch1<-RODBC::odbcConnect(dsn="camp")
-  especies<-readCampDBF("especies",zona,camp,dns)    #RODBC::sqlQuery(ch1,"select grupo,esp,especie from Especies")
+  especies<-readCampDBF("especies",zona,camp,dns)    
   especies<-especies[,c("grupo","esp","especie")]
-  #  RODBC::odbcCloseAll()
   especies$especie<-as.character(especies$especie)
   especies$ke<-paste(especies$grupo,format(especies$esp,width=3,justify="r"),sep=".")
   absp$ke<-paste(absp$grupo,format(absp$esp,width=3,justify="r"),sep=".")
@@ -52,7 +46,6 @@ ecolgr.camp64 <-function(gr,esp=999,camp,zona="cant",dns=c("local","serv"),ind="
   if (ind=="p") ecol<-tapply(absp$peso.gr,absp[,c(1,7)],sum)
   if (ind=="n") ecol<-tapply(absp$numero,absp[,c(1,7)],sum)
   ecol[is.na(ecol)]<-0
-  # browser()
   numbesp<-vegan::specnumber(ecol)
   div<-vegan::diversity(ecol)
   simp<-vegan::diversity(ecol,"simpson")

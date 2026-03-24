@@ -13,10 +13,7 @@
 #' @export
 datgr.camp64<- function(gr,esp,camp,zona,dns="local",cor.time=TRUE,incl2=TRUE) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
-  #esp<-format(esp,width=3,justify="r")
-  # ch1<-RODBC::odbcConnect(dsn=dns)
-  # RODBC::odbcSetAutoCommit(ch1, FALSE)
-  fauna<-readCampDBF("fauna",zona,camp,dns)  #fauna<-RODBC::sqlFetch(ch1,paste("FAUNA",camp,sep=""))
+  fauna<-readCampDBF("fauna",zona,camp,dns)  
   fauna$esp<-as.numeric(as.character(fauna$esp))
   if (length(esp)==1) {
     if (gr!="9" & esp!="999") {
@@ -30,7 +27,6 @@ datgr.camp64<- function(gr,esp,camp,zona,dns="local",cor.time=TRUE,incl2=TRUE) {
     absp<-fauna[fauna$grupo==gr & fauna$esp %in% as.integer(esp),c(1,4:5)]
   }
   lan<-datlan.camp64(camp,zona,dns,redux=TRUE,incl2=incl2)
-  #RODBC::odbcClose(ch1)
   if (length(lan)==1) {
     mm<-data.frame(lan=0,lat=0,long=0,prof=0,numero=0,peso.gr=0)
   }

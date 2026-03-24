@@ -5,13 +5,10 @@
 #' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo
 #' @export
 unid.camp64<-function(gr,esp,zona="cant",dns="local") {
-  #esp<-format(esp,width=3,justify="r")
   if (length(gr)>1 | length(esp)>2) {
     stop("Esta función no permite más de una especie por vez")
   }
   else {especie<-readCampDBF("especies",zona,dns)}
   especie<-especie[especie$grupo==gr & especie$esp==as.character(esp),c("med","increm")] 
-  #RODBC::sqlQuery(ch1,paste("select MED,INCREM from Especies where grupo='",gr,"' and esp='",esp,"'",sep=""))
-  #@RODBC::odbcClose(ch1)
   especie
 }

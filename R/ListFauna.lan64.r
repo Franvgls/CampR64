@@ -12,12 +12,8 @@
 #' @export
 ListFauna.lan64<- function(camp,zona="cant",dns=c("local","serv"),lan,gr=NA) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
-  # ch1<-RODBC::odbcConnect(dsn=dns)
-  # RODBC::odbcSetAutoCommit(ch1, FALSE)
-  #lan<-format(lan,width=3,justify="r")
   listsps<-readCampDBF("fauna",zona,camp,dns)
   listsps<-listsps[listsps$lance==lan,]
-  #listsps<-RODBC::sqlQuery(ch1,paste("select grupo,esp,lance,peso_gr,numero from FAUNA",camp," where lance='",lan,"'",sep=""))
   if (nrow(listsps)==0) {stop(paste("Sin capturas en el lance",lan))}
   if (any(!is.na(gr))) listsps<-listsps[listsps$grupo %in% gr,]
   if (nrow(listsps)==0) {stop(paste("Sin capturas del grupo",gr," en el lance",lan))}

@@ -85,14 +85,9 @@ edadsect.camp64<-function(gr,esp,camp,zona="cant",dns="local",plus=8,excl.sect=N
     lan<-datlan.camp64(camp,zona,dns,redux=TRUE,incl2=FALSE)
     lan<-lan[!is.na(lan$estrato),c("lance","sector")]
     area<-NULL
-    #dumb<-       #as.character(names(RODBC::sqlQuery(ch1,paste("select * from CAMP",camp,sep=""))))
+    
 	dumb<-readCampDBF("camp",zona,camp[1],dns)
-	# for (i in 21:45) {
-	#   area<-paste(area,dumb[i],sep=",")
-	# }
-	# area<-substr(area,2,nchar(area))
-	area<-dumb[,21:45]    #RODBC::sqlQuery(ch1,paste("select ",area," from CAMP",camp,sep=""))
-	#browser()
+	area<-dumb[,21:45]    
 	area<-area[-which(is.na(area) | area==0)]
     area<-as.data.frame(cbind(substr(names(area),2,3),as.numeric(t(area))))
     names(area)<-c("sector","arsect")
@@ -103,7 +98,6 @@ edadsect.camp64<-function(gr,esp,camp,zona="cant",dns="local",plus=8,excl.sect=N
     lan$arsect<-as.numeric(as.character(lan$arsect))
     lan$lance<-as.numeric(as.character(lan$lance))
     dumbtal<-data.frame(talla=c(0:(trunc(max(ntalls[,4])/10)*10+10)))
-    #		browser()
     ntalls<-merge(dumbtal,ntalls,by.x="talla",by.y="talla",all.x=TRUE)
     edad<-merge(dumbtal,edad,by.x="talla",by.y="talla",all.x=TRUE)
     for (i in 1:ncol(ntalls)) {

@@ -20,22 +20,15 @@ buscaesp64<- function(gr,esp,zona,dns="local",id="l") {
     if (gr!="9" & esp!="999") {
       if (id=="l") {
         especie<-especie[especie$grupo==as.character(gr) & especie$esp==esp,"especie"]         
-          #as.character(RODBC::sqlQuery(ch1,paste("select especie from Especies where grupo='",gr,
-          #                          "' and esp='",esp,"'",sep=""),as.is=TRUE)[[1]])
         }
       if (id=="i") {
         especie<-especie[especie$grupo==as.character(gr) & especie$esp==esp,"nombrei"]         
-        # especie<-as.character(RODBC::sqlQuery(ch1,paste("select nombrei from Especies where grupo='",gr,
-        #                             "' and esp='",esp,"'",sep=""),as.is=TRUE)[[1]])
         }
       if (id=="e") {
         especie<-especie[especie$grupo==as.character(gr) & especie$esp==esp,"nombrei"]         
-        #"' and esp='",esp,"'",sep=""),as.is=TRUE)[[1]])
         }
       if (id=="a") {
         especie<-especie[especie$grupo==as.character(gr) & especie$esp==esp,"aphia"]         
-        # especie<- as.character(RODBC::sqlQuery(ch1,paste("select APHIA from Especies where grupo='",gr,
-        #                              "' and esp='",esp,"'",sep=""),as.is=TRUE)[[1]])}    
       }
     }
     if (gr!="9" & esp=="999") {

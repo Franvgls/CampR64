@@ -18,9 +18,9 @@ dtallan.camp64 <- function(grupo, especie, camp, zona,
   zona <- tolower(zona)
   
   # 1) Base por lance (sector, weight.time)
-  abesp <- datos.camp64(grupo = grupo, especie = especie, camp = camp, zona = zona,
+  abesp <- datos.camp64(gr = grupo, esp = especie, camp = camp, zona = zona,
                         dns = dns, cor.time = FALSE, kg = FALSE,
-                        verbose = verbose, incl2 = FALSE, incl3 = FALSE, incl0 = FALSE, strict = FALSE)
+                        verbose = verbose, incl2 = FALSE)
   if (!is.data.frame(abesp) || !nrow(abesp)) {
     return(if (isTRUE(sexo))
       data.frame(lance=integer(0), sector=integer(0), talla=numeric(0), sexo=integer(0), n=numeric(0))

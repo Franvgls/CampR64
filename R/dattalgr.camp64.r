@@ -17,9 +17,7 @@
 #' @export
 dattalgr.camp64<- function(gr,esp,camp,zona="cant",dns="local",tmin=1,tmax=999,cor.time=TRUE,incl2=TRUE,sex=NA,ind="n") {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
-  #esp<-format(esp,width=3,justify="r")
-  tallas<-readCampDBF("ntall",zona,camp,dns)      #RODBC::sqlFetch(ch1,paste("NTALL",camp,sep=""))
-  #  browser()
+  tallas<-readCampDBF("ntall",zona,camp,dns)      
   if (length(esp)>1 | any(esp=="999")) {
     if (!is.na(sex)) {
       stop("No tiene sentido elegir sexo de más de una especie")
@@ -39,7 +37,6 @@ dattalgr.camp64<- function(gr,esp,camp,zona="cant",dns="local",tmin=1,tmax=999,c
                    c("lance", "cate", "peso_m", "sexo", "talla", "peso_gr", "numer")]
   }
   lan<-datlan.camp64(camp,zona,dns,redux=TRUE,incl2=incl2)
-  #RODBC::odbcClose(ch1)
   lan<-lan[,c("lance","lat","long","prof","weight.time")]
   names(lan)<-c("lan","lat","long","prof","weight.time")
   names(ntalls)<-gsub("_", ".",tolower(names(ntalls)))

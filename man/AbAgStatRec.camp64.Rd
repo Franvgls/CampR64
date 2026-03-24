@@ -47,8 +47,8 @@ AbAgStatRec.camp64(
 Función de resultados: abundancias estratificadas por edad en cada rectángulo ICES dentro del área de la cqampaña a partir de los datos del camp.
 }
 \examples{
-AbAgStatRec.camp(1,74,"N21","Cant",plus=3,DatGraf = FALSE)
-AbAgStatRec.camp(1,43,"P10","Porc",DatGraf = T)
+AbAgStatRec.camp64(1,74,"N21","Cant","local",plus=3,DatGraf = FALSE)
+AbAgStatRec.camp64(1,43,"P10","Porc","local",DatGraf = T)
 }
 \seealso{
 Other edades: 

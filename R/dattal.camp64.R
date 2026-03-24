@@ -26,18 +26,11 @@ dattal.camp64<- function(gr,esp,camp,zona,dns="local",cor.time=TRUE,excl.sect=NA
     if (esp=="999") {
       ntalls<-ntalls[ntalls$grupo==as.character(gr),c("lance","peso_gr","peso_m","talla","sexo","numer")]
       if (nrow(ntalls)==0 | sum(abesp$numero)==0) {ntalls<-data.frame(lance=abesp[1,"lance"],peso_gr=0,peso_m=.1,talla=1,sexo="3",numer=0,stringsAsFactors=FALSE)}
-      #ntalls<-RODBC::sqlQuery(ch1,paste("select lance,peso_gr,peso_m,talla,sexo,numer from NTALL",camp," where grupo='",gr,"'",sep=""))
     }
   }
   if (length(esp)>1) {
     ntalls<-ntalls[ntalls$grupo==as.character(gr) & ntalls$esp %in% esp,c("lance","peso_gr","peso_m","talla","sexo","numer")]
     if (nrow(ntalls)==0 | sum(abesp$numero)==0) {ntalls<-data.frame(lance=abesp[1,"lance"],peso_gr=0,peso_m=.1,talla=1,sexo="3",numer=0,stringsAsFactors=FALSE)}
-    # 
-    # ntalls<-RODBC::sqlQuery(ch1,paste("select lance,peso_gr,peso_m,talla,sexo,numer from NTALL",camp,
-    #                            " where grupo='",gr,"' and esp='",esp[1],"'",sep=""))
-    # for (i in 2:length(esp)) {
-    #   ntalls<-rbind(ntalls,RODBC::sqlQuery(ch1,paste("select lance,peso_gr,peso_m,talla,sexo,numer from NTALL",camp,
-    #                                           " where grupo='",gr,"' and esp='",esp[i],"'",sep="")))
     ntalls$sexo<-3
   }
   names(ntalls)<-gsub("_", ".",names(ntalls))

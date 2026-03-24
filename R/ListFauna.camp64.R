@@ -18,23 +18,17 @@ ListFauna.camp64<- function(gr="1",camp,zona,dns=c("local","serv"),cor.time=TRUE
   listsps<-readCampDBF("fauna",zona,camp,dns)
   listsps<-listsps[listsps$grupo==gr,c("esp","lance","peso_gr","numero")]
   lan<-datlan.camp64(camp,zona,dns,redux=TRUE,excl.sect=excl.sect,incl2=incl2==incl2,incl0=FALSE)
-  #listsps<-RODBC::sqlQuery(ch1,paste("select esp,lance,peso_gr,numero from FAUNA",camp," where grupo='",gr,"'",sep=""))
-  #lan<-datlan.camp(camp,dns,redux=TRUE,excl.sect=excl.sect,incl2=incl2,incl0=FALSE)
   lan<-lan[,c("lance","sector","validez","arsect","weight.time")]
   dumb<-merge(listsps,lan)
-  #browser()
   if (any(!is.na(excl.sect))) {
     dumb$sector<-gsub("NA","N",dumb$sector) # print(datos)
     for (i in 1:length(excl.sect)) {if (length(grep(excl.sect[i],as.character(dumb$sector)))>0) dumb<-dumb[-grep(excl.sect[i],as.character(dumb$sector)),]}
     dumb$sector<-factor(as.character(dumb$sector))
   }
-  # str(listsps)
   listaesp<-levels(factor(dumb$esp))
   ndat<-length(listaesp)
-  #print(ndat)
   dumbtap<-tapply(dumb$esp,dumb$esp,length)
   dumbres<-data.frame(gr=NULL,esp=NULL,especie=NULL,peso=NULL,numero=NULL,nlan=NULL)
-  #browser()
   for (i in 1:ndat) {
     dumbmedio <- CV.camps64(gr=gr, esp=listaesp[i], 
                             camps=camp,              # ← fix
