@@ -13,3 +13,6 @@ tiempo_decimal <- function(h_ini, h_fin) {
   # Duración en minutos reales
   (h_fin_h - h_ini_h) * 60 + (h_fin_m - h_ini_m)
 }
+
+# Operador "null-coalesce" — devuelve b si a es NULL o cadena vacía
+`%||%` <- function(a, b) if (!is.null(a) && nzchar(a)) a else b
