@@ -1,13 +1,13 @@
 #' Configurar rutas de CampR64
 #'
-#' Establece las rutas locales o de servidor para los datos de campañas
-#' y el fichero ESPECIES.DBF. La configuración se guarda en
-#' `~/.CampR64/configRoots_user.R` y es leída automáticamente al cargar
+#' Establece las rutas locales o de servidor para los datos de campaÃ±as
+#' y el fichero ESPECIES.DBF. La configuraciÃ³n se guarda en
+#' `~/.CampR64/configRoots_user.R` y es leÃ­da automÃ¡ticamente al cargar
 #' el paquete.
 #'
 #' @param env "local" o "server"
 #' @param especies Ruta al fichero ESPECIES.DBF (puede ser NULL)
-#' @param cant Ruta a los datos de Cantábrico/Norte (puede ser NULL)
+#' @param cant Ruta a los datos de CantÃ¡brico/Norte (puede ser NULL)
 #' @param porc Ruta a los datos de Porcupine (puede ser NULL)
 #' @param arsa Ruta a los datos de ARSA (puede ser NULL)
 #' @param medi Ruta a los datos de MEDITS (puede ser NULL)
