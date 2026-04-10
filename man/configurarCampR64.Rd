@@ -10,7 +10,8 @@ configurarCampR64(
   cant = NULL,
   porc = NULL,
   arsa = NULL,
-  medi = NULL
+  medi = NULL,
+  base = NULL
 )
 }
 \arguments{
@@ -18,17 +19,19 @@ configurarCampR64(
 
 \item{especies}{Ruta al fichero ESPECIES.DBF (puede ser NULL)}
 
-\item{cant}{Ruta a los datos de Cantábrico/Norte (puede ser NULL)}
+\item{cant}{Ruta a los datos de Cantabrico/Norte (puede ser NULL)}
 
 \item{porc}{Ruta a los datos de Porcupine (puede ser NULL)}
 
 \item{arsa}{Ruta a los datos de ARSA (puede ser NULL)}
 
 \item{medi}{Ruta a los datos de MEDITS (puede ser NULL)}
+
+\item{base}{Ruta al directorio raiz de datos. Si NULL se deduce de especies.}
 }
 \description{
-Establece las rutas locales o de servidor para los datos de campañas
-y el fichero ESPECIES.DBF. La configuración se guarda en
-\verb{~/.CampR64/configRoots_user.R} y es leída automáticamente al cargar
-el paquete.
+Establece las rutas locales o de servidor para los datos de campanas
+y el fichero ESPECIES.DBF. La configuracion se guarda en
+\code{~/.CampR64/configRoots_user.R} y es leida automaticamente
+al cargar el paquete.
 }
