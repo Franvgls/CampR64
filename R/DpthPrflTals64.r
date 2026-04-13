@@ -17,14 +17,24 @@
 #' @param xmax Valor máximo del eje x
 #' @param nlans Si T añade el número de lances en cada rango de profundidad
 #' @param spl Si T incluye una curva spline en el gráfico
-#' @param brks Especifica los rangos de profundidad:"Sturges" cada 100 metros, "norte" estratificación de Demersales, "porcupine" estratificación de Porcupine, "FD" cada 50 metros
-#' @param tabres Muestra una tabla resumen de la media, total de biomasa o número y frecuencia de la especie por estación según el brks especificado
+#' @param brks Especifica los rangos de profundidad: "Sturges" cada 100 metros, 
+#'   "norte" estratificación de Demersales (0,70,120,200,500,800 m), 
+#'   "porcupine" estratificación de Porcupine, "FD" cada 50 metros, 
+#'   o un vector numérico con los límites deseados. Si se usa "norte" o 
+#'   "porcupine" y existen lances fuera del rango estándar, se añade 
+#'   automáticamente un estrato adicional hasta \code{max(profundidad)}.
+#'
+#' @details Si \code{brks = "norte"} o \code{brks = "porcupine"} y hay lances 
+#'   a mayor profundidad que el límite estándar de la campaña, la función 
+#'   extiende automáticamente el último estrato hasta la profundidad máxima 
+#'   observada en lugar de generar un error. Se emite un aviso (\code{warning}) 
+#'   informando de esta situación.#' @param tabres Muestra una tabla resumen de la media, total de biomasa o número y frecuencia de la especie por estación según el brks especificado
 #' @param tit2 Añade un segundo título al gráfico especificando el rango de tallas
-#' @seealso {\link{DpthPrfl}}
+#' @seealso {\link{DpthPrfl64}}
 #' @examples DpthPrflTals64(1, 50, "N08", "cant","local",10,20,brks = "norte",tabres=TRUE,ind="p")
 #' @examples DpthPrflTals64(1,50,"P08","porc","local",10,20,brks="porcupine")
 #' @export
-DpthPrflTals64<-function(gr,esp,camps,zona="porc",dns="local",tmin=0,tmax=999,cor.time=TRUE,incl2=T,ind="n",sex=NA,es=TRUE,ti=TRUE,idi="l",xmax=NA,
+DpthPrflTals64<-function(gr,esp,camps,zona="porc",dns=c("local","serv"),tmin=0,tmax=999,cor.time=TRUE,incl2=T,ind="n",sex=NA,es=TRUE,ti=TRUE,idi="l",xmax=NA,
                        nlans=TRUE,spl=FALSE,brks="Sturges",tabres=TRUE,tit2=TRUE) {
   if (length(gr)>1 | any(gr==9)) stop("No se pueden mezclar datos de grupos distintos, solo distintas especies del mismo grupo")
   #  if (chpar)  opar<-par(no.readonly=TRUE)
@@ -34,12 +44,12 @@ DpthPrflTals64<-function(gr,esp,camps,zona="porc",dns="local",tmin=0,tmax=999,co
   values<-c("norte","porcupine","Sturges","scott","FD")
   if (!is.numeric(brks) & any(!brks %in% values)) stop("brks tiene que ser norte, porcupine, valores num?ricos o Sturges como forma de determinar los rangos de profundidad")
   if (length(esp)>1 | any(esp=="999")) {
-    if (ind=="p") stop("No se pueden sacar datos en peso de m?s de una especie")
+    if (ind=="p") stop("No se pueden sacar datos en peso de más de una especie")
     print("Distintas especies pueden estar medidas en distintas unidades (mm y cm) o a la aleta anal")
     medida<-c("cm")
   }
   else { medida<-ifelse(unid.camp64(gr,esp,zona,dns)[1]==1,"cm","mm") }
-  dumb<-maphistal64(gr,esp,camps,zona,dns,tmin,tmax,cor.time=cor.time,incl2=incl2,sex=sex,plot=FALSE,out.dat=TRUE,ind=ind)
+  dumb<-maphistal64(gr,esp,camps,zona=zona,dns=dns,tmin,tmax,cor.time=cor.time,incl2=incl2,sex=sex,plot=FALSE,out.dat=TRUE,ind=ind)
   if (ind=="n") {
     if (sum(dumb$numero)==0) {
       stop(paste("La especie",buscaesp64(gr,esp,zona,dns),"no tiene capturas o datos de talla, saque distribuci?n con DpthPrfl"))
@@ -61,11 +71,17 @@ DpthPrflTals64<-function(gr,esp,camps,zona="porc",dns="local",tmin=0,tmax=999,co
   }
   if (any(brks=="porcupine")) {
     brks=c(0,150,300,450,800)
-    if (min(dumb$prof)<brks[1] | max(dumb$prof)>brks[5]) stop("Existen lances fuera de los rangos de la campa?a, revise los datos")
+    if (min(dumb$prof)<brks[1] | max(dumb$prof)>brks[5]) {
+      warning("Existen lances fuera de los rangos de la campa?a, revise los datos")
+      brks=c(0,150,300,450,800,max(dumb$prof))
+    }
   }
   if (any(brks=="norte")) {
     brks=c(0,70,120,200,500,810)
-    if (min(dumb$prof)<brks[1] | max(dumb$prof)>brks[6]) stop("Existen lances fuera de los rangos de la campa?a, revise los datos")
+    if (min(dumb$prof)<brks[1] | max(dumb$prof)>brks[6]) {
+      warning("Existen lances fuera de los rangos de la campa?a, revise los datos")
+      brks=c(0,70,120,200,500,800,max(dumb$prof))
+    }
   }
   dumbDpth<-hist(dumb$prof,plot=FALSE,breaks=brks)
   if (ind=="n") {dumbDatDpth<-hist(rep(dumb$prof,dumb$numero),plot=FALSE,breaks=dumbDpth$breaks)}
@@ -134,7 +150,7 @@ DpthPrflTals64<-function(gr,esp,camps,zona="porc",dns="local",tmin=0,tmax=999,co
     resumen
   }
 }
-# DpthPrflTals(1, 50, "N08", "Cant",10,20,brks = "norte",tabres=TRUE,ind="p")
-# DpthPrflTals(1,50,"P08","Porc",brks="porcupine")
-# DpthPrflTals(1,50,"N08","Cant",brks=c(0,70,100,130,160,190,220))
-# DpthPrflTals(1,50,"N08","Cant",brks="FD")
+# DpthPrflTals(1, 50, "N08", "cant","local",10,20,brks = "norte",tabres=TRUE,ind="p")
+# DpthPrflTals(1,50,"P08","porc","local",brks="porcupine")
+# DpthPrflTals(1,50,"N08","cant","local",brks=c(0,70,100,130,160,190,220))
+# DpthPrflTals(1,50,"N08","cant","local",brks="FD")

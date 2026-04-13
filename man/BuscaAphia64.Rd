@@ -23,7 +23,7 @@ Función de comprobación y recuperación de AphiaIDs, funciona sólo con el fic
 Sirve para crear un fichero del que se pueden importar los códigos AphiaID al especies.dbf a través de los programas de dBase recaphia.prg o similares.
 }
 \examples{
-# BuscaAphia(1,"cant","local")
+# BuscaAphia64(1,"cant","local")
 }
 \seealso{
 Other datos_especies: 

@@ -18,6 +18,7 @@ gradms("43:14:25")
 }
 \seealso{
 Other Conversion unidades: 
+\code{\link{HdectoH}()},
 \code{\link{gradec}()}
 }
 \concept{Conversion unidades}

@@ -49,17 +49,27 @@ DpthPrfl64(
 
 \item{spl}{Si T incluye una curva spline en el gráfico}
 
-\item{brks}{Especifica los rangos de profundidad:"Sturges" cada 100 metros, "norte" estratificación de Demersales, "porcupine" estratificación de Porcupine, "FD" cada 50 metros}
-
-\item{tabres}{Muestra una tabla resumen del total de lances, media y total de biomasa o número y frecuencia de la especie por estrato según el brks especificado}
+\item{brks}{Especifica los rangos de profundidad: "Sturges" cada 100 metros,
+"norte" estratificación de Demersales (0,70,120,200,500,800 m),
+"porcupine" estratificación de Porcupine, "FD" cada 50 metros,
+o un vector numérico con los límites deseados. Si se usa "norte" o
+"porcupine" y existen lances fuera del rango estándar, se añade
+automáticamente un estrato adicional hasta \code{max(profundidad)}.}
 }
 \description{
 Crea un gráfico de perfil de distribución por profundidad de la biomasa o número de una especie o grupo de especies a partir de los datos de peso y número de la faunística tomados en una campaña
 }
+\details{
+Si \code{brks = "norte"} o \code{brks = "porcupine"} y hay lances
+a mayor profundidad que el límite estándar de la campaña, la función
+extiende automáticamente el último estrato hasta la profundidad máxima
+observada en lugar de generar un error. Se emite un aviso (\code{warning})
+informando de esta situación.#' @param tabres Muestra una tabla resumen del total de lances, media y total de biomasa o número y frecuencia de la especie por estrato según el brks especificado
+}
 \examples{
-DpthPrfl(1, 50, "N08", "Cant",brks = "norte",tabres=TRUE,ind="p")
-DpthPrfl(1,50,"P08","Porc",brks="porcupine",ti=TRUE)
+DpthPrfl64(1, 50, "N08", "cant","local",brks = "norte",tabres=TRUE,ind="p")
+DpthPrfl64(1,50,"P08","porc","local",brks="porcupine",ti=TRUE)
 }
 \seealso{
-{\link{DpthPrflTals}}
+{\link{DpthPrflTals64}}
 }

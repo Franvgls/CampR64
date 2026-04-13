@@ -38,6 +38,11 @@ distHaversine function gives the haversine calculation of distance between two g
 {\link{MapLansGPS}}
 
 Other Control de calidad: 
+\code{\link{qcLW64.camp}()},
+\code{\link{qcTalPez64.camp}()},
+\code{\link{qcTalPez64.lan}()},
+\code{\link{qcdtall64.camp}()},
+\code{\link{qcdtallrev64.camp}()},
 \code{\link{qclandatr.camp64}()}
 }
 \concept{Control de calidad}

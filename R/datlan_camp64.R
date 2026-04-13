@@ -40,6 +40,14 @@ datlan.camp64<-function(camp,zona,dns="local",incl2=TRUE,incl0=FALSE,excl.sect=N
   lan$sector<-paste0(lan$sector,toupper(lan$estrato))
   if(quarter==T) lan$quarter=substr(quarters(as.Date(lan$fecha)),2,2)
   if(year==T) lan$year=lubridate::year(lan$fecha)
+
+  # Función auxiliar: convierte hora numérica DBF (H.MM) a "HH:MM"
+  hora_fmt <- function(x) {
+    h <- trunc(x)
+    m <- round((x - h) * 100)
+    sprintf("%02d:%02d", h, m)
+  }
+
   foop<-function(camp,dns,incl2=incl2,incl0=incl0) {
     if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
     lan<-readCampDBF("lance",zona,camp,dns)
@@ -76,41 +84,36 @@ datlan.camp64<-function(camp,zona,dns="local",incl2=TRUE,incl0=FALSE,excl.sect=N
     lan$lat<-round((lan$latitud_l+lan$latitud_v)/2,4)
     lan$long<-round((lan$longitud_l+lan$longitud_v)/2,4)
     lan$prof<-(lan$prof_l+lan$prof_v)/2
-    #lan<-lan[,-c(22:19)]
-    # lan$zona<-NA
-    # for (i in c(1:nrow(lan))) {
-    #   if (lan$lat[i]>48 & lan$lat[i]<52.5 & lan$long[i]>c(-18) & lan$long[i]<c(-12)) {lan$zona[i]<- "7k"}
-    #   if (lan$lat[i]>52.5 & lan$lat[i]<54.5 & lan$long[i] > c(-18) & lan$long[i] < c(-12)) {lan$zona[i]<- "7c"}
-    #   if (lan$lat[i]>52.5 & lan$lat[i]<54.5 & lan$long[i] > c(-12)) {lan$zona[i]<- "7b"}
-    #   if (lan$lat[i]>43 & lan$lat[i]<44.5 & lan$long[i] > c(-2)) {lan$zona[i]<- "8b"}
-    #   if (lan$lat[i]>44.5 & lan$lat[i]<46 & lan$long[i] > c(-4)) {lan$zona[i]<- "8b"}
-    #   if (lan$lat[i]>43 & lan$lat[i]<44.5 & lan$long[i] > c(-11) & lan$long[i] < c(-2)) {lan$zona[i]<- "8c"}
-    #   if (lan$lat[i]>35.95 & lan$lat[i]<43 & lan$long[i] > c(-11) & lan$long[i] < c(-8.75)) {lan$zona[i]<- "9a"}
-    #   if (lan$lat[i]>35.95 & lan$lat[i]<37.75 & lan$long[i] > c(-7.5) & lan$long[i] < c(-5.50)) {lan$zona[i]<- "9a"}
-    #   if (dns=="Medi" & lan$lat[i]>35.8 & lan$long[i]>c(-5.6556)) {lan$zona[i]<-"wm.37.1"}
-    # }
     if (any(is.na(lan$zona))) {message(paste0("Al menos un lance: ",paste(lan$lance[is.na(lan$zona)],collapse = ","),
                                               " sin Zona ICES asignada, revise resultados",lan$camp[is.na(lan$zona)]))}
-    if (any(format(lan$hora_l,format="%H")>format(lan$hora_v,format="%H"))) {message(paste0("Al menos un lance ",
-                                                                                            paste(lan[format(lan$hora_l,format="%H")>format(lan$hora_v,format="%H"),c("lance")],collapse = ","),
-                                                                                            " con hora de virada antes de hora de largada"))}
-    if (any(is.na(data.table::as.ITime(gsub("\\.",":",format(lan$hora_l,format="%H")))))) {message(paste0("Al menos una hora de largada (lance: ",
-                                                                                              paste(lan[is.na(data.table::as.ITime(gsub("\\.",":",format(lan$hora_l,format="%H")))),c("lance")],collapse=","),") con hora inválida"))}
-    if (any(is.na(data.table::as.ITime(gsub("\\.",":",format(lan$hora_v,format="%H")))))) {message(paste0("Al menos una hora de virada (lance: ",
-                                                                                              paste(lan[is.na(data.table::as.ITime(gsub("\\.",":",lan$hora_v))),c("lance")],collapse = ","),") con hora inválida"))}
-    #lan<-lan[,c(1:18,23:ncol(lan))]
+    # Comprobación de horas (hora_l/hora_v son numéricos H.MM en este punto)
+    if (any(lan$hora_l > lan$hora_v)) {
+      message(paste0("Al menos un lance ",
+                     paste(lan[lan$hora_l > lan$hora_v, "lance"], collapse = ","),
+                     " con hora de virada antes de hora de largada"))
+    }
+    if (any(is.na(lan$hora_l) | lan$hora_l < 0 | lan$hora_l >= 24)) {
+      message(paste0("Al menos una hora de largada (lance: ",
+                     paste(lan[is.na(lan$hora_l) | lan$hora_l < 0 | lan$hora_l >= 24, "lance"], collapse=","),
+                     ") con hora inválida"))
+    }
+    if (any(is.na(lan$hora_v) | lan$hora_v < 0 | lan$hora_v >= 24)) {
+      message(paste0("Al menos una hora de virada (lance: ",
+                     paste(lan[is.na(lan$hora_v) | lan$hora_v < 0 | lan$hora_v >= 24, "lance"], collapse=","),
+                     ") con hora inválida"))
+    }
     lan$dista_p[lan$dista_p==0]<-NA
     lan$abert_v[lan$abert_v==0]<-NA
     lan$abert_h[lan$abert_h==0]<-NA
     lan$sali[lan$sali==0]<-NA
     lan$temp[lan$temp==0]<-NA
     lan$fecha<-as.Date(ifelse(lan$fecha < "1980-12-31", format(lan$fecha, "20%y-%m-%d"), format(lan$fecha)))
-    #format(lan$fecha,"%d-%m-%y")
-    #durlan<-dumb$DURLAN
+    # weight.time: cálculo con hora numérica (H.MM) antes de convertir a texto
     lan$weight.time<-ifelse(lan$haul.mins==60,1,2)*((trunc(lan$hora_v)+((lan$hora_v-trunc(lan$hora_v))/.6))-(trunc(lan$hora_l)+((lan$hora_l-trunc(lan$hora_l))/.6)))
     lan$weight.time<-round(lan$weight.time,3)
-    lan$hora_l<-format(lan$hora_l,format="%H")
-    lan$hora_v<-format(lan$hora_v,format="%H")
+    # Convertir horas a formato "HH:MM" (robusto para Excel y exportación)
+    lan$hora_l <- hora_fmt(lan$hora_l)
+    lan$hora_v <- hora_fmt(lan$hora_v)
     longlab=c(paste0("A",0:3),paste0(rep(c("B","C","D","E","F","G","H","J","K","L"),each=10),0:9),paste0("M",0:8))
     lan$rectlong<-cut(lan$long,breaks=seq(from=-44,to=69,by=1),labels=longlab) # ,"D9","D8"
     lan$rectlat<-cut(lan$lat,breaks=seq(from=36.0,to=85,by=.5),labels=sprintf("%02d", 1:98))
@@ -132,27 +135,21 @@ datlan.camp64<-function(camp,zona,dns="local",incl2=TRUE,incl0=FALSE,excl.sect=N
     lan$rectlong <- NULL
     if(quarter==T) lan$quarter=substr(quarters(as.Date(lan$fecha)),2,2)
     if(year==T) lan$year=lubridate::year(lan$fecha)
-    #if (!any(redux | bio)) lan<-lan[,c(1:29,33:35)]
-    #else lan<-lan[,c(1:2,30:32,9:29,33:35)]
-    #print(names(lan))
-    #barco<-dumb$BARCO
     if (!incl0) {lan<-lan[c(lan$validez!=0),]}
     if (!incl2) {lan<-lan[c(as.numeric(lan$validez)<=1),]}
     datos<-dplyr::left_join(lan,area,by="sector",na_matches = "never")
     datos$arsect<-as.numeric(as.character(datos$arsect))
     datos[order(datos$lance),]
   }
-  datos<-data.frame(camp=camp[1],foop(camp[1],dns=dns,incl2=incl2,incl0=incl0)) #,outhidro=outhidro
+  datos<-data.frame(camp=camp[1],foop(camp[1],dns=dns,incl2=incl2,incl0=incl0))
   if (length(camp)>1) {
-    for (i in camp[2:length(camp)]) datos<-dplyr::bind_rows(datos,data.frame(foop(i,dns=dns,incl2=incl2,incl0=incl0),camp=i)) #,outhidro=outhidro
+    for (i in camp[2:length(camp)]) datos<-dplyr::bind_rows(datos,data.frame(foop(i,dns=dns,incl2=incl2,incl0=incl0),camp=i))
   }
-  #  if (length(datos$camp)==0) {datos$camp<-camp}
   if (any(is.na(datos$zona))) {message(paste0("Al menos un lance: ",datos$lance[is.na(datos$zona)],
                                               " sin Zona ICES asignada, revise resultados"))}
   if (any(!is.na(excl.sect))) {
-    datos$sector<-gsub("NA","N",datos$sector) # print(datos)
+    datos$sector<-gsub("NA","N",datos$sector)
     for (i in 1:length(excl.sect)) {if (length(grep(excl.sect[i],as.character(datos$sector))>0)) datos<-datos[-grep(excl.sect[i],as.character(datos$sector)),]}
-    #		  datos$sector<-factor(as.character(datos$sector))
   }
   datos$sector<-as.character(datos$sector)
   dplyr::arrange(datos,year,lance)

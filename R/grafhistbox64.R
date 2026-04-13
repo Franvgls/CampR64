@@ -25,23 +25,26 @@
 #' @param sub Añade un subtítulo con el valor que se le ponga si no F
 #' @param cex.leg Sirve para modificar los tamaños de letra del gráfico, funciona con ejes y títulos. Por defecto en 1.1
 #' @param las Sirve para modificar la dirección de las etiquetas en el eje de las equis, por defecto F pero se cambia cuando se elige years=T, si no se cambia salen paralelas
+#' @param nboot Número de réplicas bootstrap. Reducir (ej. 200) para exploración rápida, 1000 para resultados finales.
 #' @return Crea una gráfica de evolución de las abundancias en biomasa o número y devuelve en consola un data.frame con columnas: avg,SE (error estándar),camp
 #' @seealso {\link{grafhistbox.comp}}
 #' @examples grafhistbox(1,45,Nsh[7:27],"Cant",es=FALSE,years=TRUE,tline=TRUE,DLS=FALSE,ti=TRUE,sub=TRUE)
 #' @examples grafhistbox(1,45,Nsh[1:31],"Cant",es=FALSE,years=TRUE,tline=FALSE,DLS=TRUE,ti=TRUE,sub=TRUE)
 #' @export
 grafhistbox64<-function(gr,esp,camps,zona="porc",dns="local",ind="p",cor.time=TRUE,kg=TRUE,ci.lev=.8,DLS=F,DLSrat=c(2,5),idi="l",SE=TRUE,
-  es=TRUE,excl.sect=NA,sector=NA,ti=TRUE,Nas=FALSE,ymax=NA,mar=NA,tline=FALSE,years=TRUE,sub=FALSE,cex.leg=1.1) {
+  es=TRUE,excl.sect=NA,sector=NA,ti=TRUE,Nas=FALSE,ymax=NA,mar=NA,tline=FALSE,years=TRUE,sub=FALSE,cex.leg=1.1,nboot=1000) {
   options(scipen=2)
   if (length(sector)>1) {
     stop("Para calcular más de un sector utilice excl.sect quitando los no deseados")
     } 
   if (tline & DLS) {stop("Elija línea de tendencia tline=T o cambios últimos 2 años frente a 3 previos DLS=T")}
-  op<-par("mar")
-	if (any(is.na(mar))) par(mar=c(4, 4.5, 2.5, 2.5) + 0.1)
-  else par(mar=mar,mgp=c(2.8,.8,0))
-#  par(mgp=c(2,ifelse(is.na(ymax),.7,1.5),0))
-  #esp<-format(esp,width=3,justify="r")
+  # Guardar y restaurar par de forma segura: par() devuelve los valores anteriores al establecer nuevos
+  if (any(is.na(mar))) {
+    op <- par(mar=c(4, 4.5, 2.5, 2.5) + 0.1)
+  } else {
+    op <- par(mar=mar, mgp=c(2.8,.8,0))
+  }
+  on.exit(par(op), add=TRUE)
 	ndat<-length(camps)
 	dumb<-NULL
 	dumbSETot<-data.frame(avg=NULL,SE=NULL,camp=NULL)
@@ -76,28 +79,36 @@ grafhistbox64<-function(gr,esp,camps,zona="porc",dns="local",ind="p",cor.time=TR
 		}
 	dumb$camp<-factor(dumb$camp)
 	dumbSETot$camp<-factor(dumbSETot$camp)
+	# Número de núcleos para paralelizar bootstrap (deja uno libre)
+	ncpus <- max(1L, parallel::detectCores() - 1L)
 	if (ind=="p") {
 		if (any(is.na(sector))){
-			if (ci.lev>0) dumb.env<-boot::envelope(boot::boot(dumb$peso,strmean.camps64,1000,stype="f",strata=dumb$sector,sector=dumb$sector,
-				area=dumb$arsect,camps=dumb$camp),level=ci.lev)
+			if (ci.lev>0) dumb.env<-boot::envelope(boot::boot(dumb$peso,strmean.camps64,nboot,stype="f",
+				strata=factor(dumb$sector),sector=dumb$sector,
+				area=dumb$arsect,camps=dumb$camp,
+				parallel="snow",ncpus=ncpus),level=ci.lev)
 			dumb.mean<-strmean.camps64(dumb$peso,dumb$sector,dumb$arsect,camps=dumb$camp)}
 		else {
-			if (ci.lev>0) dumb.env<-boot::envelope(boot::boot(dumb$peso[grep(sector,as.character(dumb$sector))],strmean.camps64,1000,stype="f",
-				strata=dumb$sector[grep(sector,as.character(dumb$sector))],sector=dumb$sector[grep(sector,as.character(dumb$sector))],
-				area=dumb$arsect[grep(sector,as.character(dumb$sector))],camps=dumb$camp[grep(sector,as.character(dumb$sector))]),level=ci.lev)
+			if (ci.lev>0) dumb.env<-boot::envelope(boot::boot(dumb$peso[grep(sector,as.character(dumb$sector))],strmean.camps64,nboot,stype="f",
+				strata=factor(dumb$sector[grep(sector,as.character(dumb$sector))]),sector=dumb$sector[grep(sector,as.character(dumb$sector))],
+				area=dumb$arsect[grep(sector,as.character(dumb$sector))],camps=dumb$camp[grep(sector,as.character(dumb$sector))],
+				parallel="snow",ncpus=ncpus),level=ci.lev)
 			dumb.mean<-strmean.camps64(dumb$peso[grep(sector,as.character(dumb$sector))],dumb$sector[grep(sector,as.character(dumb$sector))],
 				dumb$arsect[grep(sector,as.character(dumb$sector))],camps=dumb$camp[grep(sector,as.character(dumb$sector))])}
 			yetiq<-ifelse(es,expression("Yst"~~("kg"%*%"lan"^-1)),expression("kg"%*%"haul"^-1))
 		}
 	else {
 		if (is.na(sector)){
-			if (ci.lev>0) dumb.env<-boot::envelope(boot::boot(dumb$num,strmean.camps64,1000,stype="f",strata=dumb$sector,sector=dumb$sector,
-			area=dumb$arsect,camps=dumb$camp),level=ci.lev)
+			if (ci.lev>0) dumb.env<-boot::envelope(boot::boot(dumb$num,strmean.camps64,nboot,stype="f",
+				strata=factor(dumb$sector),sector=dumb$sector,  # <-- factor() añadido
+				area=dumb$arsect,camps=dumb$camp,
+				parallel="snow",ncpus=ncpus),level=ci.lev)
 		dumb.mean<-strmean.camps64(dumb$num,dumb$sector,dumb$arsect,camps=dumb$camp)}
 		else {
-			if (ci.lev>0) dumb.env<-boot::envelope(boot::boot(dumb$num[grep(sector,as.character(dumb$sector))],strmean.camps64,1000,stype="f",
-				strata=dumb$sector[grep(sector,as.character(dumb$sector))],sector=dumb$sector[grep(sector,as.character(dumb$sector))],
-				area=dumb$arsect[grep(sector,as.character(dumb$sector))],camps=dumb$camp[grep(sector,as.character(dumb$sector))]),level=ci.lev)
+			if (ci.lev>0) dumb.env<-boot::envelope(boot::boot(dumb$num[grep(sector,as.character(dumb$sector))],strmean.camps64,nboot,stype="f",
+				strata=factor(dumb$sector[grep(sector,as.character(dumb$sector))]),sector=dumb$sector[grep(sector,as.character(dumb$sector))],
+				area=dumb$arsect[grep(sector,as.character(dumb$sector))],camps=dumb$camp[grep(sector,as.character(dumb$sector))],
+				parallel="snow",ncpus=ncpus),level=ci.lev)
 			dumb.mean<-strmean.camps64(dumb$num[grep(sector,as.character(dumb$sector))],dumb$sector[grep(sector,as.character(dumb$sector))],
 				dumb$arsect[grep(sector,as.character(dumb$sector))],camps=dumb$camp[grep(sector,as.character(dumb$sector))])}
 			yetiq<-ifelse(es,expression("Ind"%*%"lan"^-1),expression("Ind"%*%"haul"^-1))
@@ -143,7 +154,6 @@ grafhistbox64<-function(gr,esp,camps,zona="porc",dns="local",ind="p",cor.time=TR
   else axis(1,at=1:ndat,labels=camps,las=1,cex.axis=cex.leg*.9)
 	if(ci.lev>0) axis(4,at=dumb.env$point[,ndat],labels=rev(paste(round(dumb.env$k.pt/10,0),"%")),
 		tick=FALSE,cex.axis=cex.leg*.6,las=1,line=-.5)
-	par(op)
   dumbSETot
 	}
 # grafhistbox(1,218,Psh,"Porc",es=FALSE)

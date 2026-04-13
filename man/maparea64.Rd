@@ -4,7 +4,16 @@
 \alias{maparea64}
 \title{Mapa general del banco de Porcupine}
 \usage{
-maparea64(es = TRUE, leg = TRUE, bw = FALSE, dens = 0, strat = FALSE)
+maparea64(
+  es = TRUE,
+  leg = TRUE,
+  bw = FALSE,
+  dens = 0,
+  strat = FALSE,
+  places = TRUE,
+  xlims = c(-15.5, -8.2),
+  ylims = c(50.5, 54.5)
+)
 }
 \arguments{
 \item{es}{Textos en español, si F en inglés}
@@ -26,6 +35,7 @@ Other mapas:
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},
 \code{\link{armap.tot64}()},
+\code{\link{armap64}()},
 \code{\link{maphist64}()},
 \code{\link{maphistage64}()},
 \code{\link{maphistal64}()}

@@ -14,7 +14,7 @@
 #' @details Saca los datos de los lances estratificados, por ello se produce un error si encuentra un lance con validez 1 y estrato o sector sin información.
 #' @examples datos.camp(1,50,"P10","Porc",kg=FALSE, cor.time=TRUE)
 #' @export
-datos.camp64 <- function(gr, esp, camp, zona, dns="local", 
+datos.camp64 <- function(gr, esp, camp, zona, dns=c("local","serv"), 
                          cor.time=TRUE, kg=TRUE, verbose=TRUE,
                          incl2=FALSE) {
   

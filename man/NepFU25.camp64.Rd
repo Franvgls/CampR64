@@ -29,7 +29,7 @@ NepFU25.camp64(
 \arguments{
 \item{camp}{Campaña de la que se extraen los datos: año comcreto (XX): Demersales "NXX"}
 
-\item{zona}{Sólo disponible para el Cantábrico "cant", combinados con dns "serv" busca los datos en el servidor de Santander si se han creado las odbcs}
+\item{zona}{Sólo disponible para el Cantábrico "cant", combinados con dns "serv" busca los datos en el servidor de Santander si se han creado las conexiones}
 
 \item{dns}{de dónde se toman los datos, ordenadro ("local") o del servidor ("serv")}
 

@@ -47,8 +47,8 @@ MapNort64 <- function(
     ColFU       = "chartreuse",
     FUsLab      = FALSE,
     dens        = 20,
-    xlims       = c(-9.9,-1.4),  
-    ylims       = c(41.91,44.19)
+    xlims       = c(-10,-1.4),  
+    ylims       = c(41.91,44.50)
 ) {
 
   # ── 1. CARGA DEL MAPA (Nort.sf) ───────────────────────────────────────────
@@ -156,7 +156,7 @@ MapNort64 <- function(
            fill   = if (bw) c(gray(.8), gray(.6), gray(.3))
                     else    c("lightblue", "blue", "darkblue"),
            title  = ifelse(es, "Estr. prof", "Depth strata"),
-           border = NA, bty = "n", cex = .8, inset = .05, bg = "white")
+           border = NA, bty = "o", cex = .8, inset = .05, bg = "white")
   }
 
   # ── 11. CIUDADES ──────────────────────────────────────────────────────────

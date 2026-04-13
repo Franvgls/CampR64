@@ -49,7 +49,7 @@ dattalgr.camp64<- function(gr,esp,camp,zona="cant",dns="local",tmin=1,tmax=999,c
     ntalls$lance<-as.numeric(as.character(ntalls$lance))
     ntalls$numer<-ntalls$numer*ntalls$peso.gr/ntalls$peso.m
     if (ind=="p") {
-      ab<-talpes.camp(gr,esp,zona,dsn)
+      ab<-talpes.camp64(gr,esp,zona,dns)
       ntalls$peso<-(ntalls$numer*ab[1]*(ntalls$talla+.5)^ab[2])/1000
       ntalls.tot<-tapply(ntalls$peso,ntalls[,c("lance","cate")],sum)
       ntalls.capts<-tapply(ntalls$peso.gr/1000,ntalls[,c("lance","cate")],mean)

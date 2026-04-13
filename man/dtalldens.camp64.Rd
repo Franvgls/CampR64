@@ -9,7 +9,7 @@ dtalldens.camp64(
   esp,
   camp,
   zona = "cant",
-  dns = "local",
+  dns = c("local", "serv"),
   cor.time = TRUE,
   ti = FALSE,
   idi = "l",

@@ -76,7 +76,7 @@
 | Función | Descripción |
 |---|---|
 | `datos.camp.r` | Carga datos generales de campaña |
-| `datab.r` | **Abundancias estratificadas totales** por campaña. En CampR usaba DSN RODBC (`Cant`, `Porc`, `Arsa`); en CampR64 usa `readCampDBF()` |
+| `datab.r` | **Abundancias estratificadas totales** por campaña. En CampR usaba DNS RODBC (`Cant`, `Porc`, `Arsa`); en CampR64 usa `readCampDBF()` |
 | `databEstr.r` | **Abundancias por estrato** — desagregación de `datab` por estrato de profundidad/zona dentro de la campaña |
 | `databICES.r` | **Abundancias por división ICES** — agrega los datos por las divisiones ICES que abarca cada campaña (ver tabla de zonas ICES por campaña abajo) |
 | `databICESDiv.r` | Abundancias desglosadas por subdivisión ICES individual |
@@ -93,13 +93,13 @@
 | `datagegr.camp.r` | Datos geográficos por grupos |
 | `camp_readers_dbf.r` | Lectores de archivos DBF para campañas |
 | `camptoyear.r` | Conversión campaña a año |
-| `CampsDNS.camp.R` | En CampR: nombre del DSN ODBC de cada zona. En CampR64: lista campañas disponibles por directorio |
+| `CampsDNS.camp.R` | En CampR: nombre del DNS ODBC de cada zona. En CampR64: lista campañas disponibles por directorio |
 
 #### Conexiones RODBC en CampR (obsoleto, referencia histórica)
 
-En CampR, las funciones `datab`, `databEstr`, `databICES`, etc. recibían como argumento el nombre del **DSN ODBC** configurado en el Panel de Control de Windows (32 bits). Los DSN estándar eran:
+En CampR, las funciones `datab`, `databEstr`, `databICES`, etc. recibían como argumento el nombre del **DNS ODBC** configurado en el Panel de Control de Windows (32 bits). Los DNS estándar eran:
 
-| DSN RODBC | Zona |
+| DNS RODBC | Zona |
 |---|---|
 | `Cant` | Demersales Norte — Cantábrico y Galicia |
 | `Porc` | Banco de Porcupine |
@@ -121,7 +121,7 @@ En CampR64 estos argumentos se sustituyen por la **ruta del directorio** del ár
 | **Trimestre / meses** | 3º–4º trimestre — septiembre / octubre |
 | **Nº lances aprox.** | ~120 lances |
 | **Divisiones ICES** | **8c** (Cantábrico E y Galicia S) + **9a** (Galicia W) |
-| **DSN RODBC (CampR)** | `Cant` |
+| **DNS RODBC (CampR)** | `Cant` |
 | **Tipo campaña** | Demersal — arrastre de fondo, diseño estratificado |
 | **Duración estándar lance** | **30 min** lances estándar · **40 min** lances especiales de profundidad (el arte tarda más en asentarse en el fondo) |
 
@@ -135,7 +135,7 @@ En CampR64 estos argumentos se sustituyen por la **ruta del directorio** del ár
 | **Trimestre / meses** | ~3º trimestre — septiembre |
 | **Nº lances aprox.** | ~80 lances |
 | **Divisiones ICES** | **7c** + **7b** + **7k** (zona Porcupine: `7cbk`) |
-| **DSN RODBC (CampR)** | `Porc` |
+| **DNS RODBC (CampR)** | `Porc` |
 | **Tipo campaña** | Demersal profundo — arrastre de fondo, talud atlántico |
 | **Duración estándar lance** | **30 min** |
 
@@ -149,7 +149,7 @@ En CampR64 estos argumentos se sustituyen por la **ruta del directorio** del ár
 | **Trimestres / meses** | **1xx:** 1º trimestre (febrero–marzo) · **2xx:** 4º trimestre (octubre–noviembre) |
 | **Nº lances aprox.** | ~40–44 lances por campaña |
 | **Divisiones ICES** | **9a** (Golfo de Cádiz) |
-| **DSN RODBC (CampR)** | `Arsa` |
+| **DNS RODBC (CampR)** | `Arsa` |
 | **Tipo campaña** | Demersal — dos campañas anuales (primavera e invierno) |
 | **Duración estándar lance** | **60 min** |
 
@@ -461,8 +461,8 @@ Los datos se almacenan en ficheros `.dbf` formato **dBase III**. Los ficheros ge
 | Aspecto | CampR | CampR64 |
 |---|---|---|
 | Versión R | Máximo R 3.6.3 (32 bits) | R 4.x o posterior (64 bits) |
-| Lectura DBF | Driver ODBC (`odbcad32.exe`) + DSN | Paquete `foreign` vía `readCampDBF()` |
-| Configuración DSN | Requerida (Panel de Control Windows) | **No requerida** |
+| Lectura DBF | Driver ODBC (`odbcad32.exe`) + DNS | Paquete `foreign` vía `readCampDBF()` |
+| Configuración DNS | Requerida (Panel de Control Windows) | **No requerida** |
 | Reparación cabecera DBF | Necesaria siempre | Solo si R lanza error "not a DBF file" |
 | Zonas implementadas | Cant, Porc, Arsa, Medi | Cant, Porc, Arsa, Medi |
 

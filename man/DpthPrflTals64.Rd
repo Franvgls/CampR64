@@ -9,7 +9,7 @@ DpthPrflTals64(
   esp,
   camps,
   zona = "porc",
-  dns = "local",
+  dns = c("local", "serv"),
   tmin = 0,
   tmax = 999,
   cor.time = TRUE,
@@ -60,19 +60,29 @@ DpthPrflTals64(
 
 \item{spl}{Si T incluye una curva spline en el gráfico}
 
-\item{brks}{Especifica los rangos de profundidad:"Sturges" cada 100 metros, "norte" estratificación de Demersales, "porcupine" estratificación de Porcupine, "FD" cada 50 metros}
-
-\item{tabres}{Muestra una tabla resumen de la media, total de biomasa o número y frecuencia de la especie por estación según el brks especificado}
+\item{brks}{Especifica los rangos de profundidad: "Sturges" cada 100 metros,
+"norte" estratificación de Demersales (0,70,120,200,500,800 m),
+"porcupine" estratificación de Porcupine, "FD" cada 50 metros,
+o un vector numérico con los límites deseados. Si se usa "norte" o
+"porcupine" y existen lances fuera del rango estándar, se añade
+automáticamente un estrato adicional hasta \code{max(profundidad)}.}
 
 \item{tit2}{Añade un segundo título al gráfico especificando el rango de tallas}
 }
 \description{
 Crea un gráfico de perfil de distribución por profundidad de la abundancia de una especie o grupo de especies en un rango de tallas específico a partir de los datos de distribución de tallas tomados en una campaña. También puede sacar los datos en peso pero a partir de las relaciones talla-peso, en vez de a partir de las faunísticas como en DpthPrfl
 }
+\details{
+Si \code{brks = "norte"} o \code{brks = "porcupine"} y hay lances
+a mayor profundidad que el límite estándar de la campaña, la función
+extiende automáticamente el último estrato hasta la profundidad máxima
+observada en lugar de generar un error. Se emite un aviso (\code{warning})
+informando de esta situación.#' @param tabres Muestra una tabla resumen de la media, total de biomasa o número y frecuencia de la especie por estación según el brks especificado
+}
 \examples{
 DpthPrflTals64(1, 50, "N08", "cant","local",10,20,brks = "norte",tabres=TRUE,ind="p")
 DpthPrflTals64(1,50,"P08","porc","local",10,20,brks="porcupine")
 }
 \seealso{
-{\link{DpthPrfl}}
+{\link{DpthPrfl64}}
 }

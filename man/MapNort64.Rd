@@ -25,8 +25,8 @@ MapNort64(
   ColFU = "chartreuse",
   FUsLab = FALSE,
   dens = 20,
-  xlims = c(-9.9, -1.4),
-  ylims = c(41.91, 44.19)
+  xlims = c(-10, -1.4),
+  ylims = c(41.91, 44.5)
 )
 }
 \arguments{

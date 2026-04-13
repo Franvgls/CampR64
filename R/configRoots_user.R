@@ -8,9 +8,9 @@ CampR64_paths <- list(
   ),
   serv = list(
     base = "z:/camp",
-    cant = "z:/camp/cant",
-    porc = "z:/camp/porc",
-    arsa = "z:/camp/arsa",
-    medi = "z:/camp/medi"
+    cant = "z:/camp/datos/norte",
+    porc = "z:/camp/datos/porcupin",
+    arsa = "z:/camp/datos/arsa",
+    medi = "z:/camp/datos/medits"
   )
 )

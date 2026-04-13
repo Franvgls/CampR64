@@ -27,6 +27,11 @@ qclandatr.camp("216","Arsa")
 {\link{MapLansGPS}}
 
 Other Control de calidad: 
-\code{\link{qcdistlan.camp64}()}
+\code{\link{qcLW64.camp}()},
+\code{\link{qcTalPez64.camp}()},
+\code{\link{qcTalPez64.lan}()},
+\code{\link{qcdistlan.camp64}()},
+\code{\link{qcdtall64.camp}()},
+\code{\link{qcdtallrev64.camp}()}
 }
 \concept{Control de calidad}

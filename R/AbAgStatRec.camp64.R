@@ -12,8 +12,8 @@
 #' @param incl2 Si T incluye los datos de los lances extra, tener en cuenta que no son lances oficiales para calcular los índices de abundancia
 #' @param DatGraf Si F saca tabla con abundancias en cada rectángulo ICES muestreado en la campaña, si T saca los datos para sacar gráfica con MapIStatRec
 #' @param es si T saca para etiquetas en español (Ed para edad), si FALSE en inglés (Ag para edad)
-#' @examples AbAgStatRec.camp64(1,74,"N21","Cant","local",plus=3,DatGraf = FALSE)
-#' @examples AbAgStatRec.camp64(1,43,"P10","Porc","local",DatGraf = T)
+#' @examples AbAgStatRec.camp64(1,74,"N21","cant","local",plus=3,DatGraf = FALSE)
+#' @examples AbAgStatRec.camp64(1,43,"P10","porc","local",DatGraf = T)
 #' @family edades
 #' @export
 AbAgStatRec.camp64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,mediahora=2,cor.time=TRUE,AltAlk=NA,incl2=FALSE,DatGraf=FALSE,plotrix=TRUE,es=TRUE) {

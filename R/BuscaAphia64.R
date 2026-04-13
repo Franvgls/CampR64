@@ -8,7 +8,7 @@
 #' @param export Si T crea un fichero especies.csv con todos los datos corregidos (APHIAs) en el directorio CAMP donde está el especies.dbf este es importable al especies.dbf con un append from deli with, quitando todos los peces grupo="1"
 #' @return Devuelve un data.table con datos de cada especie en el formato HL de DATRAS. DATRAS requiere que los datos no tengan cabecera y el trimestre sea el que corresponde a la campaña, además de no tener "". Por ello se debe pasar a fichero con la orden: write.table(CAMPtoHH(Xyy,dns),"nombrearchivo.csv",sep=",",quote=F,col.names=F,row.names=F))
 #' @family datos_especies
-#' @examples # BuscaAphia(1,"cant","local")
+#' @examples # BuscaAphia64(1,"cant","local")
 #' @export
 BuscaAphia64 <- function(gr = 1, zona = "cant", dns = "local", export = TRUE) {
   
@@ -45,12 +45,12 @@ BuscaAphia64 <- function(gr = 1, zona = "cant", dns = "local", export = TRUE) {
         nombre <- trimws(sub("sp\\.$", "", nombre))
       
       resultado <- tryCatch(
-        worms::wormsbynames(nombre, verbose = FALSE)$valid_AphiaID,
+        worrms::wm_name2id(nombre, verbose = FALSE),  # ← coma aquí
         error = function(e) { 
           warning("No encontrado en WoRMS: ", nombre)
           NA_real_ 
         }
-      )
+      )      
       especies$aphia[i] <- resultado
       message(nombre, " → ", resultado)
     }

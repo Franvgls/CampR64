@@ -9,7 +9,7 @@ datos.camp64(
   esp,
   camp,
   zona,
-  dns = "local",
+  dns = c("local", "serv"),
   cor.time = TRUE,
   kg = TRUE,
   verbose = TRUE,

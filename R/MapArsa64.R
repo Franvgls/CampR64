@@ -73,20 +73,35 @@ MapArsa64 <- function(xlims = c(-8.149, -5.52),
   regs_land <- setdiff(nm, regs_str)
   
   # --- 1) estratos (debajo de la costa), solo si leg=TRUE ---
+  maps::map(Arsa.map, add = TRUE, fill = TRUE,
+            col = c(rep(NA, 5), ifelse(bw, "light gray", "wheat")),
+            lwd = lwdl)
+  maps::map(Arsa.map, add = TRUE, fill = TRUE,
+            col = c(rep(NA, 6), ifelse(bw, "light gray", "wheat")),
+            lwd = lwdl) 
   if (isTRUE(leg)) {
-    cols_str <- if (bw) c(gray(.9), gray(.8), gray(.6), gray(.5), gray(.4))
-    else    strata_cols
-    for (i in seq_along(c("StrA","StrB","StrC","StrD","StrE"))) {
-      pat <- c("StrA","StrB","StrC","StrD","StrE")[i]
-      regs <- Arsa.map$names[grep(pat, Arsa.map$names, fixed = TRUE)]
-      if (length(regs) > 0)
-        maps::map(Arsa.map, regs, add = TRUE, fill = TRUE, col = cols_str[i])
+    if (!bw) {
+      maps::map(Arsa.map,Arsa.map$names[grep("StrA",Arsa.map$names,fixed=T)],add=TRUE,fill=TRUE,col="lightblue1")
+      maps::map(Arsa.map,Arsa.map$names[grep("StrB",Arsa.map$names,fixed=T)],add=TRUE,fill=TRUE,col="lightblue2")
+      maps::map(Arsa.map,Arsa.map$names[grep("StrC",Arsa.map$names,fixed=T)],add=TRUE,fill=TRUE,col="lightblue3")
+      maps::map(Arsa.map,Arsa.map$names[grep("StrD",Arsa.map$names,fixed=T)],add=TRUE,fill=TRUE,col="blue")
+      maps::map(Arsa.map,Arsa.map$names[grep("StrE",Arsa.map$names,fixed=T)],add=TRUE,fill=TRUE,col="darkblue")
+      legend("topright",c("A: 15-30 m","B: 30-70 m","C: 71-200 m","D: 201-500 m","E: 501-800 m"),fill=c("lightblue1","lightblue2","lightblue3","blue","darkblue"),title=ifelse(es,"Estr. prof","Depth strata"),cex=.8,inset=.05,bg="white")
     }
-    legend("topright",
-           c("A: 15-30 m","B: 30-70 m","C: 71-200 m","D: 201-500 m","E: 501-800 m"),
-           fill  = cols_str,
-           title = ifelse(es, "Estr. prof", "Depth strata"),
-           cex = .8, inset = .05, bg = "white")
+    else {
+      maps::map(Arsa.map,Arsa.map$names[grep("StrA",Arsa.map$names,fixed=T)],add=TRUE,fill=TRUE,col=gray(.9))
+      maps::map(Arsa.map,Arsa.map$names[grep("StrB",Arsa.map$names,fixed=T)],add=TRUE,fill=TRUE,col=gray(.8))
+      maps::map(Arsa.map,Arsa.map$names[grep("StrC",Arsa.map$names,fixed=T)],add=TRUE,fill=TRUE,col=gray(.6))
+      maps::map(Arsa.map,Arsa.map$names[grep("StrD",Arsa.map$names,fixed=T)],add=TRUE,fill=TRUE,col=gray(.5))
+      maps::map(Arsa.map,Arsa.map$names[grep("StrE",Arsa.map$names,fixed=T)],add=TRUE,fill=TRUE,col=gray(.4))
+      legend("topright",c("A: 15-30 m","B: 30-70 m","C: 71-200 m","D: 201-500 m","E: 501-800 m"),fill=c(gray(.9),gray(.8),gray(.6),gray(.5),gray(.4)),title=ifelse(es,"Estr. prof","Depth strata"),cex=.8,inset=.05,bg="white")
+      legend("topright",
+             c("A: 15-30 m","B: 30-70 m","C: 71-200 m","D: 201-500 m","E: 501-800 m"),
+             fill  = cols_str,
+             title = ifelse(es, "Estr. prof", "Depth strata"),
+             cex = .8, inset = .05, bg = "white")
+      }
+    # }
   }  
   # --- 2) tierra/Portugal encima de los estratos ---
   # if (length(regs_land) > 0) {
@@ -96,12 +111,6 @@ MapArsa64 <- function(xlims = c(-8.149, -5.52),
   #   if (is.list(m) && all(c("x","y") %in% names(m)))
   #     graphics::polypath(m$x, m$y, col = if (bw) "light gray" else land_col, border = T)
   # }
-  maps::map(Arsa.map, add = TRUE, fill = TRUE,
-            col = c(rep(NA, 5), ifelse(bw, "light gray", "wheat")),
-            lwd = lwdl)
-  maps::map(Arsa.map, add = TRUE, fill = TRUE,
-            col = c(rep(NA, 6), ifelse(bw, "light gray", "wheat")),
-            lwd = lwdl) 
   # --- 3) contorno discontínuo (Arsa.str) ---
   if (exists("Arsa.str", inherits = TRUE)) {
     s <- get("Arsa.str", inherits = TRUE)

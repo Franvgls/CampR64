@@ -47,7 +47,7 @@
 #' }
 #'
 #' @export
-dtalldens.camp64 <- function(gr, esp, camp, zona="cant", dns="local",
+dtalldens.camp64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
                              cor.time=TRUE, ti=FALSE, idi="l",
                              bw=TRUE, es=TRUE, sex=TRUE, leg=TRUE,
                              cexleg=1, layout=NA, years=TRUE,

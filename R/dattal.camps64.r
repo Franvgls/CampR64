@@ -34,7 +34,7 @@ dattal.camps64<- function(gr,esp,camps,zona,dns,tmin=0,tmax=999,cor.time=TRUE,ex
   #dumbtal<-dtall.camp(gr,esp,camps,dns,excl.sect,years,out.dat=TRUE,plot=FALSE)
   talla<-as.numeric(rownames(dumbtal))
   if (ind=="p") {
-    ab<-talpes.camp(gr,esp)
+    ab<-talpes.camp64(gr,esp,zona,dns)
     peso<-(ab[1]*(talla+.5)^ab[2])
     dumbtal<-data.frame(talla=talla,as.data.frame(dumbtal)*peso)
   }

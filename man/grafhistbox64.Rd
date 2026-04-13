@@ -28,7 +28,8 @@ grafhistbox64(
   tline = FALSE,
   years = TRUE,
   sub = FALSE,
-  cex.leg = 1.1
+  cex.leg = 1.1,
+  nboot = 1000
 )
 }
 \arguments{
@@ -77,6 +78,8 @@ grafhistbox64(
 \item{sub}{Añade un subtítulo con el valor que se le ponga si no F}
 
 \item{cex.leg}{Sirve para modificar los tamaños de letra del gráfico, funciona con ejes y títulos. Por defecto en 1.1}
+
+\item{nboot}{Número de réplicas bootstrap. Reducir (ej. 200) para exploración rápida, 1000 para resultados finales.}
 
 \item{las}{Sirve para modificar la dirección de las etiquetas en el eje de las equis, por defecto F pero se cambia cuando se elige years=T, si no se cambia salen paralelas}
 }

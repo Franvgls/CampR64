@@ -11,7 +11,7 @@
 #' otros ficheros de lances de los últimos años
 #'
 #' @param camp Campaña de la que se extraen los datos: año comcreto (XX): Demersales "NXX"
-#' @param zona Sólo disponible para el Cantábrico "cant", combinados con dns "serv" busca los datos en el servidor de Santander si se han creado las odbcs
+#' @param zona Sólo disponible para el Cantábrico "cant", combinados con dns "serv" busca los datos en el servidor de Santander si se han creado las conexiones 
 #' @param dns de dónde se toman los datos, ordenadro ("local") o del servidor ("serv")
 #' @param year si T incluye una columna con el año al final de los datos
 #' @param plot Saca el gráfico (T) o lo omite para dejar sólo los datos (F)

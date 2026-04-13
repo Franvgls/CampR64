@@ -4,11 +4,11 @@
 #' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
 #' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo
 #' @export
-unid.camp64<-function(gr,esp,zona="cant",dns="local") {
+unid.camp64<-function(gr,esp,zona="cant",dns=c("local","serv")) {
   if (length(gr)>1 | length(esp)>2) {
     stop("Esta función no permite más de una especie por vez")
   }
-  else {especie<-readCampDBF("especies",zona,dns)}
+  else {especie<-readCampDBF("especies",zona,camp=NULL,dns)}
   especie<-especie[especie$grupo==gr & especie$esp==as.character(esp),c("med","increm")] 
   especie
 }

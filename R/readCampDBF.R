@@ -42,8 +42,8 @@ readCampDBF <- function(tipo,
   dns  <- tolower(match.arg(dns))
   zona <- tolower(match.arg(zona))
   
-  # ---- clave: mapear serv/server/red → 'red', local→'local'
-  dns_key <- if (dns %in% c("serv","server","red")) "red" else "local"
+  # ---- clave: mapear serv/, local→'local'
+  dns_key <- if (dns == "serv") "serv" else "local"
   
   if (!exists("CampR64_paths"))
     stop("CampR64_paths no está definido. ¿Se cargó configRoots_user.R?")

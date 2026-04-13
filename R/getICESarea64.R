@@ -10,7 +10,11 @@ getICESarea64 <- function(camp, zona, dns = "local",
   
   # 0) Lances normalizados; redux=TRUE crea lat/long/prof
   mm <- datlan.camp64(camp = camp, zona = zona, dns = dns,
-                      redux = TRUE, bio = FALSE, keep_out = FALSE, verbose = verbose)
+                      redux = FALSE, incl2 = incl2, incl0 = incl0)
+  # Calcular punto medio del lance (equivalente a redux=TRUE)
+  mm$lat  <- (mm$latitud_l  + mm$latitud_v)  / 2
+  mm$long <- (mm$longitud_l + mm$longitud_v) / 2
+  mm$prof <- (mm$prof_l     + mm$prof_v)     / 2
   
   # 1) Requisitos duros (nombres en MINÚSCULAS)
   need_in  <- c("latitud_l","latitud_v","longitud_l","longitud_v","prof_l","prof_v","validez")

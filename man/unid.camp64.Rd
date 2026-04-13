@@ -4,7 +4,7 @@
 \alias{unid.camp64}
 \title{Unidades en que se mide una especie}
 \usage{
-unid.camp64(gr, esp, zona = "cant", dns = "local")
+unid.camp64(gr, esp, zona = "cant", dns = c("local", "serv"))
 }
 \arguments{
 \item{gr}{Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados}

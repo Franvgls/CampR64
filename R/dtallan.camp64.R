@@ -66,11 +66,12 @@ dtallan.camp64 <- function(grupo, especie, camp, zona,
   # Fallback global: si TODO PESO_M es 0/NA, fuerza una fila (legacy)
   if (all(is.na(nt$PESO_M) | nt$PESO_M == 0)) nt$PESO_M[1] <- 0.1
   
-  n_corr <- nt$NUMER * (nt$PESO_GR / nt$PESO_M)
-  n_corr[!is.finite(n_corr)] <- NA_real_
+  nt$n_corr <- nt$NUMER * (nt$PESO_GR / nt$PESO_M)
+  nt$n_corr[!is.finite(nt$n_corr)] <- NA_real_
   
-  d <- merge(nt[, c("LANCE","SEXO","TALLA")], wt_tbl, by = "LANCE", all.x = TRUE)
-  d$n <- n_corr[match(d$LANCE, nt$LANCE)]
+  nt$LANCE    <- suppressWarnings(as.integer(trimws(as.character(nt$LANCE))))
+  wt_tbl$LANCE <- as.integer(wt_tbl$LANCE)
+  d <- merge(nt[, c("LANCE","SEXO","TALLA","n_corr")], wt_tbl, by="LANCE", all.x=TRUE)
   d$WEIGHT.TIME[is.na(d$WEIGHT.TIME) | d$WEIGHT.TIME <= 0] <- 0.1
   if (isTRUE(cor.time)) d$n <- d$n / d$WEIGHT.TIME
   

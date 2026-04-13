@@ -8,24 +8,31 @@
 #' @family mapas
 #' @family Porcupine
 #' @export
-maparea64<-function(es=TRUE,leg=TRUE,bw=FALSE,dens=0,strat=FALSE) {
+maparea64<-function(es=TRUE,leg=TRUE,bw=FALSE,dens=0,strat=FALSE,places=TRUE,
+                    xlims=c(-15.5,-8.2),ylims=c(50.5,54.5)) {
   library(mapdata)
-  maps::map("worldHires",c("ireland","UK:Northern Ireland"),ylim=c(50.5,54.5),xlim=c(-15.5,-8.2),
+  maps::map("worldHires",c("ireland","UK:Northern Ireland"),ylim=ylims,xlim=xlims,
 		fill=TRUE,col="saddlebrown",type="n")
 	box()
-	rect(-16,50.,-8.,55,col=ifelse(bw,"white","lightblue1"))
+	rect(xlims[1]-0.5,ylims[1]-0.5,xlims[2]+0.5,ylims[2]+0.5,col=ifelse(bw,"white","lightblue1"))
 	abline(v=c(-15:-6),h=c(51:54),lty=3,col=gray(.2))
 	maps::map("worldHires",c("ireland","UK:Northern Ireland"),fill=TRUE,col=ifelse(!bw,"wheat","gray95"),add=TRUE)
 	detach("package:mapdata")
-	points(-(9+.0303/.6),(53+.1623/.6),pch=16,col=1)
-	text(-(9+.0303/.6),(53+.1623/.6),label="Galway",pos=3,cex=.7,font=2)
-	text(-(8.95),(52.2),label=ifelse(es,"IRLANDA","IRELAND"),cex=1.3,font=2)
+	if (places) {
+	  points(-(9+.0303/.6),(53+.1623/.6),pch=16,col=1)
+	  text(-(9+.0303/.6),(53+.1623/.6),label="Galway",pos=3,cex=.7,font=2)
+	  text(-(8.95),(52.2),label=ifelse(es,"IRLANDA","IRELAND"),cex=1.3,font=2)
+  }	
 	if (!bw) colrs=c("Steelblue2","Steelblue2","Steelblue","blue4","green","darkgreen",gray(.7))
 	else {
 		colrs=c("white","white","white","white","white","white",gray(.7))
 		#dens=0
 		}
-	maps::map(Porc.map,add=TRUE,fill=TRUE,col=colrs)
+	if (strat) {
+	  maps::map(Porc.map,add=TRUE,fill=TRUE,col=colrs)
+	} else {
+	  maps::map(Porc.map,add=TRUE,fill=FALSE,col=gray(.5),lwd=0.8)
+	}
 	if (strat) {
 	if (dens>0) {
 		polygon(maps::map(Porc.map,"1Aa",plot=FALSE)$x,maps::map(Porc.map,"1Aa",plot=FALSE)$y,density=dens)
