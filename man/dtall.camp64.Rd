@@ -9,7 +9,7 @@ dtall.camp64(
   esp,
   camp,
   zona,
-  dns = "local",
+  dns = c("local", "serv"),
   cor.time = TRUE,
   ti = FALSE,
   sub = NA,
@@ -79,8 +79,8 @@ Si plot=T saca el gráfico, pero si out.dat=T puede exportar una matriz talla(fi
 Histograma de la distribución de tallas media estratificada por sexos a partir de ficheros del camp
 }
 \examples{
-dtall.camp(1,63,Psh,"Porc",es=F,sex=F,ti=T,years=T) 
-dtall.camp(1,50,Psh,"Porc",es=F,ti=T,years=T,out.dat=T)
+dtall.camp64(1,63,Psh,zona="porc",dns=c("local","serv"),es=F,sex=F,ti=T,years=T) 
+dtall.camp64(1,50,Psh,zona="porc",dns=c("local","serv"),es=F,ti=T,years=T,out.dat=T)
 }
 \seealso{
 {\link{dtallbarplot}} {\link{dtall.lan}}

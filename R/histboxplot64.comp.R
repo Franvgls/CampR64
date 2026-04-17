@@ -27,7 +27,7 @@
 #' histboxplot64.comp(1,50,Nsh[7:27],"cant",years=TRUE)
 #' @family abunds
 #' @export
-histboxplot64.comp <- function(gr, esp, camps, zona="cant", dns="local", cor.time=TRUE,
+histboxplot64.comp <- function(gr, esp, camps, zona="cant", dns=c("local","serv"), cor.time=TRUE,
                                es=TRUE, bw=TRUE, ti=TRUE, sub=NULL, idi="l",
                                ceros=TRUE, cex.leg=1, years=TRUE,
                                profrange=NA, longrange=NA, latrange=NA) {

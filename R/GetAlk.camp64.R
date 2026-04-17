@@ -14,7 +14,7 @@
 #' @examples GetAlk.camp(1,45,"P03","Porc",AltAlk="edadXYY") 
 #' @family edades
 #' @export
-GetAlk.camp64 <- function(gr, esp, camp, zona = "cant", dns = "local",
+GetAlk.camp64 <- function(gr, esp, camp, zona = "cant", dns = c("local","serv"),
                           plus = 8, n.ots = FALSE, AltAlk = FALSE, keep_sexo=TRUE) {
   if (length(camp) > 1)
     stop("seleccionadas más de una campaña")

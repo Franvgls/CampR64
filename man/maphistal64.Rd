@@ -9,7 +9,7 @@ maphistal64(
   esp,
   camps,
   zona = "cant",
-  dns = "local",
+  dns = c("local", "serv"),
   tmin = 0,
   tmax = 999,
   cor.time = TRUE,

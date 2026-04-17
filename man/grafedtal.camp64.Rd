@@ -11,7 +11,7 @@ grafedtal.camp64(
   esp,
   camp,
   zona = "cant",
-  dns = "local",
+  dns = c("local", "serv"),
   plus = 8,
   cor.time = TRUE,
   excl.sect = NA,
@@ -65,7 +65,7 @@ Histograma de distribución de tallas con edades
 Función gráfica a partir de los ficheros del camp. Histograma distribución de tallas estratificada por edad
 }
 \examples{
-grafedtal.camp(1,43,"P09","Porc",es=FALSE,out.dat=TRUE)
+grafedtal.camp64(1,43,"P09",zona="porc",dns=c("local","serv"),es=FALSE,out.dat=TRUE)
 }
 \seealso{
 {\link{grafedtal.camps}}

@@ -25,9 +25,9 @@
 #' @seealso {\link{MapLansGPS}}
 #' @examples
 #'   print(datlan.camp64(Nsh[24:28],"cant","local",hidro=FALSE,excl.sect=c("A")))
-#'   print(datlan.camp("P16","porc","local",bio=T))
+#'   print(datlan.camp64("P16","porc","local",bio=T))
 #' @export
-datlan.camp64<-function(camp,zona,dns="local",incl2=TRUE,incl0=FALSE,excl.sect=NA,redux=FALSE,year=TRUE,quarter=TRUE,bio=FALSE) {
+datlan.camp64<-function(camp,zona,dns=c("local","serv"),incl2=TRUE,incl0=FALSE,excl.sect=NA,redux=FALSE,year=TRUE,quarter=TRUE,bio=FALSE) {
   lan<-readCampDBF("lance",zona,camp[1],dns)
   dumb<-readCampDBF("camp",zona,camp[1],dns)
   names(lan)<-tolower(names(lan))

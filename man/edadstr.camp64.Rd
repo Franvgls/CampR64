@@ -11,7 +11,7 @@ edadstr.camp64(
   esp,
   camp,
   zona = "cant",
-  dns = "local",
+  dns = c("local", "serv"),
   plus = 8,
   cor.time = TRUE,
   AltAlk = NA,

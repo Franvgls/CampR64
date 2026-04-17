@@ -28,7 +28,7 @@ sefos64.camp(
 
 \item{dns}{Elige de dónde se toman los datos, si del ordenador "local" o del servidor "serv"}
 
-\item{plus}{Cual es la edad plus (en el formato SEFOS las opciones suelen ser 3+, 5+ o 12+}
+\item{plus}{Cuál es la edad plus (en el formato SEFOS las opciones son 3+, 5+ o 12+ según el ciclo vital de la especie.}
 
 \item{cor.time}{por defecto T, corrección del tiempo de arrastre al calcular las abundancias}
 

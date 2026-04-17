@@ -17,7 +17,7 @@
 #' @family mapas
 #' @family PescaWin
 #' @export
-MapLansGPS64<-function(camp,zona="cant",dns="local",Nlans=FALSE,incl0=FALSE,xlims=NA,ylims=NA,places=TRUE,es=T,bw=FALSE,ax=T) {
+MapLansGPS64<-function(camp,zona="cant",dns=c("local","serv"),Nlans=FALSE,incl0=FALSE,xlims=NA,ylims=NA,places=TRUE,es=T,bw=FALSE,ax=T) {
   #if (!all(any(is.na(xlims)),any(is.na(ylims))))  stop("Si se especifica limite de coordenadas debe hacerlo en latitud y longitud")
   lan<-datlan.camp64(camp,zona,dns,redux=FALSE,incl2=TRUE,incl0=TRUE)
   lannul<-lan[lan$validez==0,c("longitud_l","latitud_l","prof_l","longitud_v","latitud_v","prof_v")]

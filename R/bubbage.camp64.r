@@ -50,7 +50,7 @@
 #'               plus=8, recr=0)
 #' }
 #' @export
-bubbage.camp64 <-function(gr,esp,camps,zona="porc",dns="local",plus=8,recr=0,cor.time=TRUE) {
+bubbage.camp64 <-function(gr,esp,camps,zona="porc",dns=c("local","server"),plus=8,recr=0,cor.time=TRUE) {
   if (length(esp)>1) {
     stop("Sólo se puede incluir una especie en esta función")
   }

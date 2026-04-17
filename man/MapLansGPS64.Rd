@@ -7,7 +7,7 @@
 MapLansGPS64(
   camp,
   zona = "cant",
-  dns = "local",
+  dns = c("local", "serv"),
   Nlans = FALSE,
   incl0 = FALSE,
   xlims = NA,

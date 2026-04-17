@@ -9,7 +9,7 @@ grafhistbox64(
   esp,
   camps,
   zona = "porc",
-  dns = "local",
+  dns = c("local", "serv"),
   ind = "p",
   cor.time = TRUE,
   kg = TRUE,

@@ -10,7 +10,7 @@
 #' @family datos_especies
 #' @examples # BuscaAphia64(1,"cant","local")
 #' @export
-BuscaAphia64 <- function(gr = 1, zona = "cant", dns = "local", export = TRUE) {
+BuscaAphia64 <- function(gr = 1, zona = "cant", dns = c("local","serv"), export = TRUE) {
   
   # 1. Leer especies directamente con readCampDBF
   especies <- data.table::as.data.table(

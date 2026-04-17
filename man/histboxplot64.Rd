@@ -9,7 +9,7 @@ histboxplot64(
   esp,
   camps,
   zona = "porc",
-  dns = "local",
+  dns = c("local", "serv"),
   cor.time = TRUE,
   incl2 = TRUE,
   es = T,

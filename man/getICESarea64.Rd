@@ -11,7 +11,7 @@ Requisitos (en Area): ICESNAME, Area}
 getICESarea64(
   camp,
   zona,
-  dns = "local",
+  dns = c("local", "serv"),
   incl2 = TRUE,
   incl0 = FALSE,
   verbose = FALSE

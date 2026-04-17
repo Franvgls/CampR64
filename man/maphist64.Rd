@@ -9,7 +9,7 @@ maphist64(
   esp,
   camps,
   zona = "cant",
-  dns = "local",
+  dns = c("local", "serv"),
   cor.time = TRUE,
   incl2 = TRUE,
   bw = TRUE,

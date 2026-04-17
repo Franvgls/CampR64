@@ -6,13 +6,13 @@
 #' @param todos Por defecto F. Si T lista todos los lances con valores, si no sólo los que pc.error>error
 #' @param pc.error porcentaje de error aceptable para no mostrar los lances como erróneos
 #' @return Devuelve un data.frame con campaña, lance, recorrido, recorrido según la fórmula de Haversine, recorrido según la velocidad x el tiempo, velocidad, tiempo, rumbo, rumbo estimado según posiciones,velocidad calculada a partir de la distancia y el tiempo, y los porcentajes de errores de distancia, velocidad y rumbo.
-#' @examples qcdistlan.camp("C14","Cant",pc.error=.01)
-#' @examples qcdistlan.camp("216","Arsa",pc.error=.01)
+#' @examples qcdistlan.camp64("C14","cant","local",pc.error=.01)
+#' @examples qcdistlan.camp64("216","arsa","local",pc.error=.01)
 #' @seealso {\link{MapLansGPS}}
 #' @references distHaversine function gives the haversine calculation of distance between two geographic points \code{\link[geosphere]{distHaversine}}
 #' @family Control de calidad
 #' @export
-qcdistlan.camp64<-function(camp,zona="cant",dns="local",todos=FALSE,pc.error=2) {
+qcdistlan.camp64<-function(camp,zona="cant",dns=c("local","serv"),todos=FALSE,pc.error=2) {
   dumblan<-datlan.camp64(camp,zona,dns,redux=FALSE)
   dumblan$mins<-round(dumblan$haul.mins*dumblan$weight.time,1)
   dumblan$dist.vel<-round(c(dumblan$weight.time*dumblan$haul.mins)/60*dumblan$velocidad*1852,0)

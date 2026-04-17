@@ -47,7 +47,7 @@
 #' histboxplot(1,50,Nsh,"Cant",latrange = c(42,43),graf="Graf")
 #' @family abunds
 #' @export
-histboxplot64<-function(gr,esp,camps,zona="porc",dns="local",cor.time=TRUE,incl2=TRUE,es=T,bw=TRUE,ti=TRUE,sub=NULL,out.dat=FALSE,ind="p",idi="l",
+histboxplot64<-function(gr,esp,camps,zona="porc",dns=c("local","serv"),cor.time=TRUE,incl2=TRUE,es=T,bw=TRUE,ti=TRUE,sub=NULL,out.dat=FALSE,ind="p",idi="l",
   ceros=TRUE,cex.leg=1.1,years=TRUE,profrange=NA,longrange=NA,latrange=NA,ranglabel=TRUE,nlans=TRUE,lan.cex=.6,graf=FALSE,psize=15) {
   options(scipen=2)
 #  esp<-format(esp,width=3,justify="r")

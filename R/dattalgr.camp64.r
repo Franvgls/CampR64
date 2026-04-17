@@ -15,7 +15,8 @@
 #' @seealso {\link{datgr.camp}}
 #' @examples dattalgr.camp64("1",c(44:45),"N94","cant","local",0,45,ind="p")
 #' @export
-dattalgr.camp64<- function(gr,esp,camp,zona="cant",dns="local",tmin=1,tmax=999,cor.time=TRUE,incl2=TRUE,sex=NA,ind="n") {
+dattalgr.camp64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),
+                           tmin=1,tmax=999,cor.time=TRUE,incl2=TRUE,sex=NA,ind="n") {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
   tallas<-readCampDBF("ntall",zona,camp,dns)      
   if (length(esp)>1 | any(esp=="999")) {

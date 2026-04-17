@@ -9,7 +9,7 @@ bubbage.camp64(
   esp,
   camps,
   zona = "porc",
-  dns = "local",
+  dns = c("local", "server"),
   plus = 8,
   recr = 0,
   cor.time = TRUE

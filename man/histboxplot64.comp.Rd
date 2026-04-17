@@ -9,7 +9,7 @@ histboxplot64.comp(
   esp,
   camps,
   zona = "cant",
-  dns = "local",
+  dns = c("local", "serv"),
   cor.time = TRUE,
   es = TRUE,
   bw = TRUE,

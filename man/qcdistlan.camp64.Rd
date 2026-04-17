@@ -7,7 +7,7 @@
 qcdistlan.camp64(
   camp,
   zona = "cant",
-  dns = "local",
+  dns = c("local", "serv"),
   todos = FALSE,
   pc.error = 2
 )
@@ -28,8 +28,8 @@ Devuelve un data.frame con campaña, lance, recorrido, recorrido según la fórm
 Sirve para control de calidad y asegurarse que los datos de distancias y posiciones son correctos
 }
 \examples{
-qcdistlan.camp("C14","Cant",pc.error=.01)
-qcdistlan.camp("216","Arsa",pc.error=.01)
+qcdistlan.camp64("C14","cant","local",pc.error=.01)
+qcdistlan.camp64("216","arsa","local",pc.error=.01)
 }
 \references{
 distHaversine function gives the haversine calculation of distance between two geographic points \code{\link[geosphere]{distHaversine}}

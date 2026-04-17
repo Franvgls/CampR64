@@ -15,14 +15,14 @@
 #' 
 #' @family edades
 #' @export
-edadsect.camp64<-function(gr,esp,camp,zona="cant",dns="local",plus=8,excl.sect=NA,cor.time=TRUE,AltAlk=NA) {
+edadsect.camp64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,excl.sect=NA,cor.time=TRUE,AltAlk=NA) {
   #calcula las abundancias estratificadas por edad para cada sector a partir de los datos del camp.
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
   if (length(esp)>1) {
     stop("Sólo se puede incluir una especie en esta función")
   }
  # esp<-format(esp,width=3,justify="r")
-  ntalls<-readCampDBF("ntall","cant","N25","local")
+  ntalls<-readCampDBF("ntall",zona,camp,serv)
   names(ntalls)<-gsub("_", ".",names(ntalls))
   ntalls<-ntalls[ntalls$grupo==gr & ntalls$esp==esp,c("lance","peso.gr","peso.m","talla","sexo","numer")]
   ntalls$lance<-as.numeric(as.character(ntalls$lance))

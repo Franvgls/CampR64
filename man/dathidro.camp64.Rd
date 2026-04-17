@@ -4,7 +4,13 @@
 \alias{dathidro.camp64}
 \title{Datos hidrográficos de una campaña}
 \usage{
-dathidro.camp64(camp, zona, dns = "local", year = TRUE, quarter = TRUE)
+dathidro.camp64(
+  camp,
+  zona,
+  dns = c("local", "serv"),
+  year = TRUE,
+  quarter = TRUE
+)
 }
 \arguments{
 \item{camp}{Campaña de la que se extraen los datos: año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
@@ -24,7 +30,7 @@ Devuelve un data.frame con datos de cada estación hidrográfica y la correspond
 Datos hidrográficos de una campaña
 }
 \examples{
-  print(dathidro.camp64("N25","cant"))
+  print(dathidro.camp64("N25",zona="cant",dns=c("local")))
 }
 \seealso{
 {\link{MapLansGPS}}

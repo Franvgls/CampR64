@@ -27,7 +27,7 @@
 #' maphist(1,50,As2[15:18],"Arsa",layout=c(2,2),years=TRUE,sub="ARSA 2nd quarter")
 #' @family mapas
 #' @export
-maphist64<-function(gr,esp,camps,zona="cant",dns="local",cor.time=TRUE,incl2=TRUE,bw=TRUE,ti=TRUE,sub=NULL,plot=TRUE,out.dat=FALSE,ind="p",idi="l",
+maphist64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),cor.time=TRUE,incl2=TRUE,bw=TRUE,ti=TRUE,sub=NULL,plot=TRUE,out.dat=FALSE,ind="p",idi="l",
   layout=NA,leg=TRUE,pts=FALSE,ceros=TRUE,escmult=.25,cexleg=1,years=TRUE) {
   if (all(!pts & !leg & length(camps)>1)) {stop("Solo estaciones se usa para sólo una campaña, ha incluido más de una")}
   options(scipen=2)

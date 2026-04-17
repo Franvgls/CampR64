@@ -4,7 +4,7 @@
 \alias{buscacod64}
 \title{Función de búsqueda del código del grupo y la familia}
 \usage{
-buscacod64(nomb, zona = "cant", dns = "local")
+buscacod64(nomb, zona = "cant", dns = c("local", "serv"))
 }
 \arguments{
 \item{nomb}{Nombre científico de la especie o fragmento del nombre entre ""}

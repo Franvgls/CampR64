@@ -4,7 +4,7 @@
 #'   (y con redux=TRUE: lat, long, prof)
 #' Requisitos (en Area): ICESNAME, Area
 #' @export
-getICESarea64 <- function(camp, zona, dns = "local",
+getICESarea64 <- function(camp, zona, dns = c("local","serv"),
                           incl2 = TRUE, incl0 = FALSE,
                           verbose = FALSE) {
   

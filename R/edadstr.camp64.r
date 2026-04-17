@@ -12,7 +12,7 @@
 #' @examples edadstr.camp(1,45,"P01","Porc",8)
 #' @family edades
 #' @export
-edadstr.camp64<-function(gr,esp,camp,zona="cant",dns="local",plus=8,cor.time=TRUE,AltAlk=NA,n.ots=F) {
+edadstr.camp64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,cor.time=TRUE,AltAlk=NA,n.ots=F) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
   if (length(esp)>1) {stop("Sólo se puede incluir una especie en esta función")}
   ntalls<-readCampDBF("ntall",zona,camp,dns)   #,grupo==as.character(gr) & esp==as.character(esp))  #[,c("lance","peso_gr","peso_m","talla","sexo","numer")]

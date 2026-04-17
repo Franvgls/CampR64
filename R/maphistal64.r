@@ -29,7 +29,7 @@
 #' @family mapas
 #' @family tallas
 #' @export
-maphistal64<-function(gr,esp,camps,zona="cant",dns="local",tmin=0,tmax=999,cor.time=TRUE,incl2=TRUE,ind="n",sex=NA,bw=TRUE,ti=TRUE,sub=NULL,
+maphistal64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),tmin=0,tmax=999,cor.time=TRUE,incl2=TRUE,ind="n",sex=NA,bw=TRUE,ti=TRUE,sub=NULL,
   plot=TRUE,out.dat=FALSE,idi="l",layout=NA,leg=TRUE,ceros=TRUE,escmult=.25,cexleg=1,years=TRUE) {
   options(scipen=2)
 #	if (plot) 

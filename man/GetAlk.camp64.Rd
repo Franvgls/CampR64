@@ -11,7 +11,7 @@ GetAlk.camp64(
   esp,
   camp,
   zona = "cant",
-  dns = "local",
+  dns = c("local", "serv"),
   plus = 8,
   n.ots = FALSE,
   AltAlk = FALSE,

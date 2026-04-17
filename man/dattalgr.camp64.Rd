@@ -9,7 +9,7 @@ dattalgr.camp64(
   esp,
   camp,
   zona = "cant",
-  dns = "local",
+  dns = c("local", "serv"),
   tmin = 1,
   tmax = 999,
   cor.time = TRUE,

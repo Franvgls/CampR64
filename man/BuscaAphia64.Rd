@@ -4,7 +4,7 @@
 \alias{BuscaAphia64}
 \title{Recupera los AphiaId de las especies sin Aphiaid en el fichero especies.dbf}
 \usage{
-BuscaAphia64(gr = 1, zona = "cant", dns = "local", export = TRUE)
+BuscaAphia64(gr = 1, zona = "cant", dns = c("local", "serv"), export = TRUE)
 }
 \arguments{
 \item{gr}{Grupo del que se desea buscar el AphiaID: 1 peces, 2 crustáceos, 3 moluscos, 4 equinodermos, 5 otros invertebrados}

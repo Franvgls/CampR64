@@ -4,7 +4,15 @@
 \alias{datgr.camp64}
 \title{Datos de biomasa y abundancia para una especie y campaña}
 \usage{
-datgr.camp64(gr, esp, camp, zona, dns = "local", cor.time = TRUE, incl2 = TRUE)
+datgr.camp64(
+  gr,
+  esp,
+  camp,
+  zona,
+  dns = c("local", "serv"),
+  cor.time = TRUE,
+  incl2 = TRUE
+)
 }
 \arguments{
 \item{gr}{Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados 6 para deshechos y otros. 9 incluye todos los grupos a excepción del 6}
@@ -27,5 +35,5 @@ Función de acceso a datos:
 Extrae los datos de peso y número de una especie o conjunto de especies a partir de las faunísticas de una campaña
 }
 \examples{
-datgr.camp(1,50,"P10","Porc",cor.time=TRUE,incl2=FALSE)
+datgr.camp(1,50,"P10",zona="porc",dns="local",cor.time=TRUE,incl2=FALSE)
 }

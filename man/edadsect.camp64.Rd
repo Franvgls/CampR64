@@ -9,7 +9,7 @@ edadsect.camp64(
   esp,
   camp,
   zona = "cant",
-  dns = "local",
+  dns = c("local", "serv"),
   plus = 8,
   excl.sect = NA,
   cor.time = TRUE,

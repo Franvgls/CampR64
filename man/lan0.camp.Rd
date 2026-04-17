@@ -4,7 +4,7 @@
 \alias{lan0.camp}
 \title{Lances nulos en una campaña}
 \usage{
-lan0.camp(camp, zona = "cant", dns = "local")
+lan0.camp(camp, zona = "cant", dns = c("local", "serv"))
 }
 \arguments{
 \item{camp}{Campaña a representar en el mapa de un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
@@ -17,5 +17,5 @@ lan0.camp(camp, zona = "cant", dns = "local")
 Busca y devuelve los lances nulos de una campaña
 }
 \examples{
-lan0.camp("P01","porc","local")
+lan0.camp(camp="P01",zona="porc",serv="local")
 }

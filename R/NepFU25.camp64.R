@@ -29,7 +29,7 @@
 #' @return Produce un gráfico con los lances en los que ha habido cigala en el lance en la FU FU25
 #' @family mapas, NEP
 #' @examples
-#'   NepFU25.camp("N21")
+#'   NepFU25.camp64("N21",zona="cant",dns="local")
 #' @export
 NepFU25.camp64<-function(camp="NNNNNNNNN23",zona="cant",dns=c("local","serv"),plot=TRUE,es=FALSE,ti=TRUE,
                          ICESlab=FALSE,ceros=T,ICESrectcol=1,ICESrect=TRUE,                       FU=25,places=TRUE,out.dat=TRUE,ColFU="white",dens=20,leg=T,escmult=.25,cexleg=1,cex0=1) {

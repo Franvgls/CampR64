@@ -24,7 +24,7 @@
 #' @examples grafedtal.camps(1,43,Nsh[22:31],"Cant",plus=7,years=T,es=FALSE)
 #' @family edades
 #' @export
-grafedtal.camps64 <- function(gr,esp,camp,zona="cant",dns="local",plus=8,cor.time=TRUE,excl.sect=NA,ti=FALSE,leg=TRUE,es=TRUE,layout=NA,idi="l",cexleg=1,clms=2,plot=TRUE,ymax=NA,out.dat=FALSE,years=TRUE)  {
+grafedtal.camps64 <- function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,cor.time=TRUE,excl.sect=NA,ti=FALSE,leg=TRUE,es=TRUE,layout=NA,idi="l",cexleg=1,clms=2,plot=TRUE,ymax=NA,out.dat=FALSE,years=TRUE)  {
   if (length(camp)==1) {stop("Ha seleccionado sólo una campaña, utilice grafedtal.camp")}
   ndat=length(camp)
   if (length(esp)>1) {

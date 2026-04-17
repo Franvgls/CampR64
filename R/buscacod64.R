@@ -5,7 +5,7 @@
 #' @family datos_especies
 #' @examples buscacod("sph")
 #' @export
-buscacod64<- function(nomb,zona="cant",dns="local") {
+buscacod64<- function(nomb,zona="cant",dns=c("local","serv")) {
   if (length(nomb)>1) stop("Esta función no permite más de una especie por vez")
   else especies<-readCampDBF("especies",zona,dns)
   print(especies[grep(nomb,especies$especie,ignore.case = T,perl = T),c("grupo","esp","especie","familia","aphia")])

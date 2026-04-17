@@ -24,10 +24,10 @@
 #' @param verbose Si T saca avisos de consistencia en tallas, sino los omite
 #' @return Si plot=T saca el gráfico, pero si out.dat=T puede exportar una matriz talla(filas)xCampañas(columnas)
 #' @seealso {\link{dtallbarplot}} {\link{dtall.lan}}
-#' @examples dtall.camp(1,63,Psh,"Porc",es=F,sex=F,ti=T,years=T) 
-#' @examples dtall.camp(1,50,Psh,"Porc",es=F,ti=T,years=T,out.dat=T)
+#' @examples dtall.camp64(1,63,Psh,zona="porc",dns=c("local","serv"),es=F,sex=F,ti=T,years=T) 
+#' @examples dtall.camp64(1,50,Psh,zona="porc",dns=c("local","serv"),es=F,ti=T,years=T,out.dat=T)
 #' @export
-dtall.camp64<- function(gr,esp,camp,zona,dns="local",cor.time=TRUE,ti=FALSE,sub=NA,leg=TRUE,cexleg=1,bw=TRUE,es=TRUE,sex=TRUE,plot=T,idi="l",clms=2,
+dtall.camp64<- function(gr,esp,camp,zona,dns=c("local","serv"),cor.time=TRUE,ti=FALSE,sub=NA,leg=TRUE,cexleg=1,bw=TRUE,es=TRUE,sex=TRUE,plot=T,idi="l",clms=2,
   layout=NA,excl.sect=NA,ymax=NA,out.dat=FALSE,years=TRUE,verbose=TRUE) {
   library(lattice)
   options(scipen=2)
@@ -62,7 +62,7 @@ dtall.camp64<- function(gr,esp,camp,zona,dns="local",cor.time=TRUE,ti=FALSE,sub=
     }
 	ndat<-length(camp)
 	for (i in 1:ndat) {
-		dtall<-dattal.camp64(gr,esp,camp[i],zona,dns="local",cor.time=cor.time,excl.sect=excl.sect,sex=sex,verbose=verbose)
+		dtall<-dattal.camp64(gr,esp,camp[i],zona,dns,cor.time=cor.time,excl.sect=excl.sect,sex=sex,verbose=verbose)
 		names(dtall)<-c("talla",sexn[which(!is.na(match(dtalln,names(dtall)[2:ncol(dtall)])))])
 		sxs<- match(sixn,names(dtall)[2:length(names(dtall))])
 		if (sex) {

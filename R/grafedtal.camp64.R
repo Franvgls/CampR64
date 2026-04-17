@@ -18,10 +18,10 @@
 #' @param out.dat Si T el resultado final de la función es la figura en pantalla, pero los datos en objeto
 #' @return Saca gráfica con distribución de tallas y la distribución de las edades en cada talla. Si out.dat=TRUE saca un data.frame con columnas n(valor del número de la distribución estratifcada para la talla y la edad),talla,edad,camp. Da error si no existe ALK para la especie en la campaña
 #' @seealso {\link{grafedtal.camps}}
-#' @examples grafedtal.camp(1,43,"P09","Porc",es=FALSE,out.dat=TRUE)
+#' @examples grafedtal.camp64(1,43,"P09",zona="porc",dns=c("local","serv"),es=FALSE,out.dat=TRUE)
 #' @family edades
 #' @export
-grafedtal.camp64 <- function(gr,esp,camp,zona="cant",dns="local",plus=8,cor.time=TRUE,excl.sect=NA,AltAlk=NA,ti=FALSE,leg=TRUE,cexleg=1,es=TRUE,plot=TRUE,ymax=NA,out.dat=FALSE) {
+grafedtal.camp64 <- function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,cor.time=TRUE,excl.sect=NA,AltAlk=NA,ti=FALSE,leg=TRUE,cexleg=1,es=TRUE,plot=TRUE,ymax=NA,out.dat=FALSE) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
   if (length(esp)>1) {
     stop("Sólo se puede incluir una especie en esta función")
@@ -38,12 +38,6 @@ grafedtal.camp64 <- function(gr,esp,camp,zona="cant",dns="local",plus=8,cor.time
   }
   dtall<-dattal.camp64(gr,esp,camp,zona,dns,excl.sect=excl.sect,cor.time=cor.time)
   if (ncol(dtall)>2) dtall<-data.frame(talla=dtall[,1],n=rowSums(dtall[,-1])) else names(dtall)<-c("talla","n")
-#  edad<-edad[which(rowSums(edad[5:20],na.rm=TRUE)>0),]
-#  edad<-edad[,-c(1:3,21)]
-#  for (i in 1:nrow(edad)) edad[i,which(is.na(edad[i,]))]<-0
-#  if (plus<15) edad<-data.frame(edad[,1:(plus+1)],plus=rowSums(edad[,(plus+2):length(edad[1,])]))
-#  edad<-data.frame(edad[,1],edad[,-1]/rowSums(edad[,-1]))
-#  names(edad)<-c("talla",paste("E",0:(plus-1),sep=""),paste("E",plus,"+",sep=""))
   tedad<-data.frame(talla=dtall$talla)
   tedad<-merge(tedad,edad,by.x="talla",by.y="talla",all=TRUE)
   a<-dtall$talla[which(dtall$n>0)]

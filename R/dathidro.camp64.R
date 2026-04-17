@@ -8,9 +8,9 @@
 #' @return Devuelve un data.frame con datos de cada estación hidrográfica y la correspondencia a los lances del fichero lance
 #' @seealso {\link{MapLansGPS}}
 #' @examples
-#'   print(dathidro.camp64("N25","cant"))
+#'   print(dathidro.camp64("N25",zona="cant",dns=c("local")))
 #' @export
-dathidro.camp64 <- function(camp, zona, dns = "local", year = TRUE, quarter = TRUE) {
+dathidro.camp64 <- function(camp, zona, dns = c("local","serv"), year = TRUE, quarter = TRUE) {
   if (length(camp) > 1) stop("Seleccionadas más de una campaña, no se pueden sacar resultados de más de una")
   
   dathidro <- readCampDBF("hidro", zona, camp, dns)

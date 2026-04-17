@@ -14,7 +14,7 @@
 #' @seealso {\link{datos.camp}}
 #' @examples dattal.camp("1"," 50",paste("P0",7,sep=""),"Porc",excl.sect=c("B","C"))
 #' @export
-dattal.camp64<- function(gr,esp,camp,zona,dns="local",cor.time=TRUE,excl.sect=NA,sex=TRUE,verbose=TRUE) {
+dattal.camp64<- function(gr,esp,camp,zona,dns=c("local","serv"),cor.time=TRUE,excl.sect=NA,sex=TRUE,verbose=TRUE) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
   abesp<-datos.camp64(gr,esp,camp,zona,dns,cor.time=cor.time)
   ntalls<-readCampDBF("ntall",zona,camp,dns)

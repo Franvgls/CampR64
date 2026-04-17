@@ -75,7 +75,7 @@ Si se detecta este error revisar la estructura de lanceXXX.dbf con la de
 otros ficheros de lances de los últimos años
 }
 \examples{
-  NepFU25.camp("N21")
+  NepFU25.camp64("N21",zona="cant",dns="local")
 }
 \seealso{
 Other mapas, NEP: 

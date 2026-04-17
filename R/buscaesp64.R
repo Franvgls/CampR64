@@ -7,7 +7,7 @@
 #' @family datos_especies
 #' @examples buscaesp(1,50)
 #' @export
-buscaesp64<- function(gr,esp,zona,dns="local",id="l") {
+buscaesp64<- function(gr,esp,zona,dns=c("local","serv"),id="l") {
   esp<-as.character(esp)  #,width=3,justify="r")
   values<-c("i","e","l","a")
   if (!id %in% values) stop("Campo id debe ser l: latín, i: inglés, e: español o a: codigo AphiaID")
@@ -16,7 +16,7 @@ buscaesp64<- function(gr,esp,zona,dns="local",id="l") {
     if (id=="i") { especie<-"Several species" }
   }
   else {
-    especie<-readCampDBF("especies","cant",dns="local")
+    especie<-readCampDBF("especies",zona,dns=dns)
     if (gr!="9" & esp!="999") {
       if (id=="l") {
         especie<-especie[especie$grupo==as.character(gr) & especie$esp==esp,"especie"]         
