@@ -1,96 +1,86 @@
-#' Detalle de tallas por lance (CampR64) con correcciones de tiempo y peso
-#' @param grupo,especie,camp,zona,dns Como en el resto del paquete
-#' @param sexo TRUE → devuelve columna SEXO (1,2,3); FALSE → agrupa sexos
-#' @param excl.sect Excluir sectores (si procede)
-#' @param cor.time TRUE → divide por weight.time (histórico)
-#' @param verbose Mensajes
-#' @return data.frame: 
-#'   - sexo=TRUE  → lance, sector, talla, sexo, n
-#'   - sexo=FALSE → lance, sector, talla, n
+#'Valores absolutos en número por talla
+#'
+#'Da Valores absolutos (totales por lance o grupos de lances) en número por talla y sexo (si lo hay)
+#' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
+#' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo 
+#' @param camp Campaña a representar en el mapa de un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
+#' @param dns Elige el origen de las bases de datos: Porcupine "Pnew", Cantábrico "Cant", Golfo de Cadiz "Arsa" (proporciona los datos para Medits pero no saca mapas)
+#' @param lances Da la opción de escribir un número de lance y saca los valores solo para ese lance o grupo de lances.
+#' @param sex Por defecto (F) suma todos los individuos como indet. T saca los datos por sexo si los hay, no afecta si sólo hay indeterminados (3)
+#' @param muestr Por defecto (T) pondera los datos por el peso total en la captura del lance, si F coge los medidos realmente
+#' @family Distribuciones de tallas
+#' @examples 
+#' dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=108,muestr=T)
+#' dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=108,muestr=F)
+#' dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=NA,muestr=F)
 #' @export
-dtallan.camp64 <- function(grupo, especie, camp, zona,
-                           dns = c("local","serv"),
-                           sexo = TRUE,
-                           excl.sect = NA,
-                           cor.time = TRUE,
-                           verbose = FALSE) {
-  dns  <- tolower(match.arg(dns))
-  zona <- tolower(zona)
-  
-  # 1) Base por lance (sector, weight.time)
-  abesp <- datos.camp64(gr = grupo, esp = especie, camp = camp, zona = zona,
-                        dns = dns, cor.time = FALSE, kg = FALSE,
-                        verbose = verbose, incl2 = FALSE)
-  if (!is.data.frame(abesp) || !nrow(abesp)) {
-    return(if (isTRUE(sexo))
-      data.frame(lance=integer(0), sector=integer(0), talla=numeric(0), sexo=integer(0), n=numeric(0))
-      else
-        data.frame(lance=integer(0), sector=integer(0), talla=numeric(0), n=numeric(0)))
+dtallan.camp64<- function(gr,esp,camp,zona,dns,lances=NA,sex=FALSE,muestr=TRUE) {
+  if (length(camp)>1) stop("Esta función sólo se puede utilizar para una sola campaña")
+  #esp<-format(esp,width=3,justify="r")
+  ntalls<-readCampDBF("ntall",zona,camp,dns)
+  if (length(esp)==1) {
+    if (esp!="999") {ntalls<-ntalls[ntalls$esp==esp & ntalls$grupo==gr,c("lance","peso_gr","peso_m","talla","sexo","numer")]}   
+	  #RODBC::sqlQuery(ch1,paste("select lance,peso_gr,peso_m,talla,sexo,numer from NTALL",camp," where grupo='",gr,"' and esp='",esp,"'",sep=""))}
+    if (esp=="999") {ntalls<-ntalls[ntalls$grupo==gr,c("lance","peso_gr","peso_m","talla","sexo","numer")]}   
+      #ntalls<-RODBC::sqlQuery(ch1,paste("select lance,peso_gr,peso_m,talla,sexo,numer from NTALL",camp," where grupo='",gr,"'",sep=""))
+      if (sex==TRUE) {
+        warning("Con varias especies no se puede separar por sexos, resultados sin sexos")
+        sex=F
+        ntalls$sexo<-3
+      }
+    }
+  if (length(esp)>1) {
+    ntalls<-{ntalls<-ntalls[ntalls$esp %in% esp & ntalls$grupo==gr,
+                            c("lance","peso_gr","peso_m","talla","sexo","numer")]}
+	#RODBC::sqlQuery(ch1,paste("select lance,peso_gr,peso_m,talla,sexo,numer from NTALL",camp," where grupo='",gr,"' and esp='",esp[1],"'",sep=""))
+    # for (i in 2:length(esp)) {
+      # ntalls<-rbind(ntalls,RODBC::sqlQuery(ch1,paste("select lance,peso_gr,peso_m,talla,sexo,numer from NTALL",camp,
+                                              # " where grupo='",gr,"' and esp='",esp[i],"'",sep="")))
+    # }
+    if (sex==TRUE) {
+      warning("Con varias especies no se puede separar por sexos, resultados sin sexos")
+      sex=F
+    }
+    ntalls$sexo<-3
   }
-  if (!all(is.na(excl.sect))) abesp <- abesp[!(abesp$sector %in% excl.sect), , drop = FALSE]
-  if (!nrow(abesp)) {
-    return(if (isTRUE(sexo))
-      data.frame(lance=integer(0), sector=integer(0), talla=numeric(0), sexo=integer(0), n=numeric(0))
-      else
-        data.frame(lance=integer(0), sector=integer(0), talla=numeric(0), n=numeric(0)))
+  names(ntalls)<-gsub("_", ".",names(ntalls))
+  ntalls$lance<-as.numeric(as.character(ntalls$lance))
+  if (muestr) ntalls$numer<-ntalls$numer*ntalls$peso.gr/ntalls$peso.m
+  if (any(!is.na(lances))) {
+    ntalls<-ntalls[ntalls$lance %in% lances,]
   }
-  wt_tbl <- abesp[, c("lance","sector","weight.time")]
-  names(wt_tbl) <- c("LANCE","SECTOR","WEIGHT.TIME")
-  
-  # 2) NTALL con corrección por peso
-  nt <- readCampDBF("ntall", zona = zona, camp = camp, dns = dns)
-  names(nt) <- toupper(trimws(names(nt)))
-  req <- c("LANCE","GRUPO","ESP","SEXO","PESO_M","PESO_GR","TALLA","NUMER")
-  miss <- setdiff(req, names(nt))
-  if (length(miss)) stop("NTALL no contiene: ", paste(miss, collapse = ", "))
-  
-  esp_num <- suppressWarnings(as.integer(especie))
-  nt$ESP_NUM   <- suppressWarnings(as.integer(nt$ESP))
-  nt$GRUPO_NUM <- suppressWarnings(as.integer(nt$GRUPO))
-  sel <- (!is.na(nt$ESP_NUM) & nt$ESP_NUM == esp_num)
-  if (!is.null(grupo)) sel <- sel & (!is.na(nt$GRUPO_NUM) & nt$GRUPO_NUM == suppressWarnings(as.integer(grupo)))
-  nt <- nt[sel, c("LANCE","SEXO","PESO_M","PESO_GR","TALLA","NUMER"), drop = FALSE]
-  
-  if (!nrow(nt)) {
-    # sin tallas: fila neutra por coherencia
-    nt <- data.frame(LANCE = abesp$lance[1], SEXO = 3, PESO_M = 0.1, PESO_GR = 0,
-                     TALLA = 1, NUMER = 0)
+  if (nrow(ntalls)==0) ntalls<-data.frame(lance=0,peso.gr=0,peso.m=0,talla=0,sexo=3,numer=0)
+  dtalln<-c("machos","hembras","indet")
+  dumb<-ntalls
+  dumb$lance<-as.numeric(dumb$lance)
+  dumb$sexo<-factor(dumb$sexo,exclude=0)
+  dumb1<-tapply(dumb$numer,dumb[,c(4,5)],sum,na.rm=TRUE)
+  dumb1[which(is.na(dumb1))]<-0
+  sxs<- match(c(1:3),dimnames(dumb1)$sexo)
+  if (dim(dumb1)[2]>1) {
+    dtall<-as.data.frame(dumb1)  
   }
-  
-  nt$PESO_M  <- suppressWarnings(as.numeric(nt$PESO_M))
-  nt$PESO_GR <- suppressWarnings(as.numeric(nt$PESO_GR))
-  nt$NUMER   <- suppressWarnings(as.numeric(nt$NUMER))
-  nt$TALLA   <- suppressWarnings(as.numeric(nt$TALLA))
-  nt$SEXO    <- suppressWarnings(as.integer(nt$SEXO))
-  
-  # Fallback global: si TODO PESO_M es 0/NA, fuerza una fila (legacy)
-  if (all(is.na(nt$PESO_M) | nt$PESO_M == 0)) nt$PESO_M[1] <- 0.1
-  
-  nt$n_corr <- nt$NUMER * (nt$PESO_GR / nt$PESO_M)
-  nt$n_corr[!is.finite(nt$n_corr)] <- NA_real_
-  
-  nt$LANCE    <- suppressWarnings(as.integer(trimws(as.character(nt$LANCE))))
-  wt_tbl$LANCE <- as.integer(wt_tbl$LANCE)
-  d <- merge(nt[, c("LANCE","SEXO","TALLA","n_corr")], wt_tbl, by="LANCE", all.x=TRUE)
-  d$WEIGHT.TIME[is.na(d$WEIGHT.TIME) | d$WEIGHT.TIME <= 0] <- 0.1
-  if (isTRUE(cor.time)) d$n <- d$n / d$WEIGHT.TIME
-  
-  # Filtrado de sectores si procede (doble seguridad)
-  if (!all(is.na(excl.sect))) d <- d[!(d$SECTOR %in% excl.sect), , drop = FALSE]
-  d <- d[!is.na(d$n), , drop = FALSE]
-  
-  # Salida
-  d$LANCE  <- as.integer(d$LANCE)
-  d$SECTOR <- as.integer(d$SECTOR)
-  d <- d[order(d$LANCE, d$TALLA, d$SECTOR), ]
-  
-  if (isTRUE(sexo)) {
-    names(d) <- tolower(names(d))
-    return(d[, c("lance","sector","talla","sexo","n")])
-  } else {
-    agg <- aggregate(n ~ LANCE + SECTOR + TALLA, d, sum, na.rm = TRUE)
-    names(agg) <- tolower(names(agg))
-    agg <- agg[order(agg$lance, agg$talla, agg$sector), ]
-    return(agg[, c("lance","sector","talla","n")])
+  else dtall<-as.data.frame(dumb1)
+  dtall<-as.data.frame(cbind(as.numeric(dimnames(dtall)[[1]]),dtall))
+  names(dtall)<-c("V1",dtalln[which(!is.na(sxs))])
+  dumb<-as.data.frame(c(1:(trunc(max(dtall[,1])/10)*10+10)))
+  names(dumb)<-"talla"
+  dtall<-merge(dumb,dtall,by.x="talla",by.y="V1",all.x=TRUE)
+  for (i in 2:ncol(dtall)) {
+    if (!identical(as.numeric(which(is.na(dtall[,i]))),numeric(0))) {
+      dtall[which(is.na(dtall[,i])),i]<-0
+    }
   }
+  if (length(esp)>1 | any(esp=="999")) {
+    print("Distintas especies pueden estar medidas en distintas unidades (mm y cm) o a la aleta anal")
+  }
+  if (!sex & ncol(dtall)>2) {
+    dtall<-data.frame(talla=dtall[,1],numero=rowSums(dtall[,2:ncol(dtall)]))
+  }
+  if (!sex) {names(dtall)<-c("talla","numero")}
+  if (sum(dtall[,-1])==0) {
+    dtall<-dtall[1,]
+    print(paste("Sin captura de",buscaesp(gr,esp),ifelse(length(lances)>1,"en estos lances","en este lance")))
+  }
+  as.data.frame(dtall)
 }

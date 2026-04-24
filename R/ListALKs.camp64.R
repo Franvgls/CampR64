@@ -102,11 +102,16 @@ ListALKs.camp64 <- function(zona = "cant",
   
   # 4) Añadir nombre con buscaesp64 (pez = grupo 1 por defecto de tu flujo)
   if (isTRUE(with_names)) {
+    # Traducir el name_field semántico al `id` que entiende buscaesp64
+    name_field <- match.arg(name_field)
+    id_map <- c(scientific = "l", spanish = "nombree", english = "nombrei")
+    id_val <- id_map[[name_field]]
+    
     out$especie <- vapply(
       out$ESP,
       function(code) {
         nm <- tryCatch(
-          buscaesp64(grupo = 1, especie = code, zona = zona, dns = dns, name_field = name_field),
+          buscaesp64(gr = 1, esp = code, zona = zona, dns = dns, id = id_val),
           error = function(e) NA_character_
         )
         if (is.na(nm) || !nzchar(nm)) sprintf("%03d", code) else nm

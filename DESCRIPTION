@@ -1,10 +1,12 @@
 Package: CampR64
 Type: Package
 Title: CampR Modernizado para R 4.4.0
-Version: 0.1.4
-Author: Fran Velasco
-Maintainer: Fran Velasco <franvgls@gmail.com>
-Description: Version modernizada de CampR sin ODBC, con lectura directa de DBF y estructura modular.
+Version: 0.1.5
+Authors@R:
+       person("Francisco", "Velasco", , "franvgls@gmail.com",
+              role = c("aut", "cre"),
+              comment = c(ORCID = "0000-0002-6420-9474"))
+Description: Version modernizada de CampR sin ODBC, con lectura directa de DBF y estructura modular funciones para mapear datos de campañas de arrastre de fondo y sacar resultados a partir de datos en base de datos CAMP.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -22,15 +24,17 @@ Imports:
     stringr,
     tidyr,
     vegan,
-    worrms
+    worrms,
+    sp,
+    vioplot,
+    mapdata
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 VignetteBuilder: knitr 
 Suggests: 
-    mapdata,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Depends: 
-    R (>= 3.5)
+    R (>= 4.1)

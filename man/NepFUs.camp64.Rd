@@ -7,6 +7,7 @@
 NepFUs.camp64(
   camp = Nsh[length(Nsh)],
   zona = "cant",
+  dns = c("local", "serv"),
   plot = TRUE,
   plotnep = TRUE,
   es = FALSE,
@@ -16,12 +17,15 @@ NepFUs.camp64(
   ICESrect = TRUE,
   FU = NA,
   places = TRUE,
-  country = TRUE,
   out.dat = TRUE
 )
 }
 \arguments{
 \item{camp}{Campaña de la que se extraen los datos: año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
+
+\item{zona}{Sólo disponible para el Cantábrico "cant", Golfo de Cádiz "arsa", combinados con "dnsred" busca los datos en el servidor de Santander si se han creado las odbcs}
+
+\item{dns}{de dónde se toman los datos "local" del propio ordenador, "serv" del servidor}
 
 \item{plot}{Saca el gráfico (T) o lo omite para dejar sólo los datos (F)}
 
@@ -37,11 +41,7 @@ NepFUs.camp64(
 
 \item{places}{Si T saca etiquetas de principales ciudades en el mapa, si F se omiten los letreros}
 
-\item{country}{si T saca el país}
-
 \item{out.dat}{Si T el resultado final de la función es la figura en pantalla, pero los datos de abundancia de cigala en cada FU con datos de biomasa, numero, desviaciones estándar y número de lances en cada FU.}
-
-\item{dns}{Sólo disponible para el Cantábrico "Cant", Golfo de Cádiz "Arsa", combinados con "dnsred" busca los datos en el servidor de Santander si se han creado las odbcs}
 
 \item{year}{si T incluye una columna con el año al final de los datos}
 
@@ -65,7 +65,7 @@ Si se detecta este error revisar la estructura de lanceXXX.dbf con la de
 otros ficheros de lances de los últimos años
 }
 \examples{
-  NepFUs.camp(camp="N20",dns="Cant",plot=T,plotnep=T)
+  NepFUs.camp64(camp="N20",zona="cant",dns="local",plot=T,plotnep=T)
 }
 \seealso{
 Other mapas: 

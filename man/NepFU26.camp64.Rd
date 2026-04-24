@@ -29,7 +29,9 @@ NepFU26.camp64(
 \arguments{
 \item{camp}{Campaña de la que se extraen los datos: año concreto (XX): Demersales "NXX"}
 
-\item{dns}{Sólo disponible para el Cantábrico "Cant", combinados con "dnsred" busca los datos en el servidor de Santander si se han creado las odbcs}
+\item{zona}{Sólo disponible para el Cantábrico "cant", combinados con "dnsred" busca los datos en el servidor de Santander si se han creado las odbcs}
+
+\item{dns}{dice si los datos se toman del ordeandor ("local") o del servidor ("serv")}
 
 \item{plot}{Saca el gráfico (T) o lo omite para dejar sólo los datos (F)}
 
@@ -73,7 +75,7 @@ Si se detecta este error revisar la estructura de lanceXXX.dbf con la de
 otros ficheros de lances de los últimos años
 }
 \examples{
-  NepFU26.camp("N21",ColFU=)
+  NepFU26.camp64("N21","cant","local",ColFU=)
 }
 \seealso{
 Other mapas, NEP: 

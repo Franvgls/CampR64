@@ -5,17 +5,18 @@
 \title{Configurar rutas de CampR64}
 \usage{
 configurarCampR64(
-  env = "local",
+  env = c("local", "serv"),
   especies = NULL,
   cant = NULL,
   porc = NULL,
   arsa = NULL,
   medi = NULL,
-  base = NULL
+  base = NULL,
+  overwrite = TRUE
 )
 }
 \arguments{
-\item{env}{"local" o "server"}
+\item{env}{"local" o "serv"}
 
 \item{especies}{Ruta al fichero ESPECIES.DBF (puede ser NULL)}
 
@@ -28,10 +29,18 @@ configurarCampR64(
 \item{medi}{Ruta a los datos de MEDITS (puede ser NULL)}
 
 \item{base}{Ruta al directorio raiz de datos. Si NULL se deduce de especies.}
+
+\item{overwrite}{Si TRUE (defecto), reescribe el archivo por completo.
+Si FALSE, conserva las lineas de otros entornos que ya estuvieran
+configuradas. Util para configurar "local" y "serv" en llamadas separadas.}
 }
 \description{
 Establece las rutas locales o de servidor para los datos de campanas
 y el fichero ESPECIES.DBF. La configuracion se guarda en
 \code{~/.CampR64/configRoots_user.R} y es leida automaticamente
 al cargar el paquete.
+}
+\details{
+Puede llamarse dos veces (una con env="local", otra con env="serv")
+preservando la configuracion previa si se usa overwrite = FALSE.
 }

@@ -64,7 +64,7 @@ maphist64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),cor.time=TRUE
 		leyenda<-signif(max(dumb$numero)*.9,1)
 		escala<-signif(max(dumb$numero),1)*escmult }
 	if (is.logical(ti)) {
-		if (ti) {titulo<-list(label=buscaesp64(gr,esp,zona,local,id=idi),font=ifelse((idi=="l" & gr!="9" & esp!="999"),4,2))}
+		if (ti) {titulo<-list(label=buscaesp64(gr,esp,zona,dns,id=idi),font=ifelse((idi=="l" & gr!="9" & esp!="999"),4,2))}
 		else {titulo<-NULL}
 		}
 	else {
@@ -169,7 +169,7 @@ maphist64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),cor.time=TRUE
     dumb$peso<-round(dumb$peso,3)
     if (years) dumb<-dumbcamp
     if (!ceros) dumb<-dumb[dumb$numero>0,]
-    print(dumb)
+    return(dumb)
     }
 	else {
     if (!plot) mapdist

@@ -11,7 +11,8 @@
 #' otros ficheros de lances de los últimos años
 #'
 #' @param camp Campaña de la que se extraen los datos: año concreto (XX): Demersales "NXX"
-#' @param dns Sólo disponible para el Cantábrico "Cant", combinados con "dnsred" busca los datos en el servidor de Santander si se han creado las odbcs
+#' @param zona Sólo disponible para el Cantábrico "cant", combinados con "dnsred" busca los datos en el servidor de Santander si se han creado las odbcs
+#' @param dns dice si los datos se toman del ordeandor ("local") o del servidor ("serv")
 #' @param year si T incluye una columna con el año al final de los datos
 #' @param plot Saca el gráfico (T) o lo omite para dejar sólo los datos (F)
 #' @param es si T letreros en español, si F en inglés (F por defecto)
@@ -28,7 +29,7 @@
 #' @return Produce un gráfico con los lances en los que ha habido cigala en el lance y especialmente los lances en cada FU dentro de Demersales FU25,FU26 y FU31
 #' @family mapas, NEP
 #' @examples
-#'   NepFU26.camp("N21",ColFU=)
+#'   NepFU26.camp64("N21","cant","local",ColFU=)
 #' @export
 NepFU26.camp64<-function(camp=camp,zona="cant",dns=c("local","serv"),plot=TRUE,es=FALSE,ti=TRUE,ICESlab=FALSE,ceros=T,leg=T,escmult=.25,cexleg=1,
                       ICESrectcol=1,ICESrect=TRUE,FU=31,places=TRUE,out.dat=TRUE,bw=FALSE,ColFU="white",dens=20) {
@@ -43,7 +44,7 @@ NepFU26.camp64<-function(camp=camp,zona="cant",dns=c("local","serv"),plot=TRUE,e
   if (dev.cur() != 1) graphics.off()
   dev.new(width=15, height=15*asp, noRStudioGD=TRUE)
   # ---------------------------------------------------------------------------
-  Nep<-maphist(2,19,camp,zona,dns,plot=F,out.dat=T)
+  Nep<-maphist64(2,19,camp,zona,dns,plot=F,out.dat=T)
   Nep_26<-subset(Nep,c(long>c(-10) & long<c(-8.5) & lat<c(43.005) & lat>42.005))
   leyenda<-signif(max(Nep$numero)*.9,1)
   leyenda<-signif(c(1,.5,.25)*leyenda,1)

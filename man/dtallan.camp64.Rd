@@ -2,38 +2,45 @@
 % Please edit documentation in R/dtallan.camp64.R
 \name{dtallan.camp64}
 \alias{dtallan.camp64}
-\title{Detalle de tallas por lance (CampR64) con correcciones de tiempo y peso}
+\title{Valores absolutos en número por talla}
 \usage{
 dtallan.camp64(
-  grupo,
-  especie,
+  gr,
+  esp,
   camp,
   zona,
-  dns = c("local", "serv"),
-  sexo = TRUE,
-  excl.sect = NA,
-  cor.time = TRUE,
-  verbose = FALSE
+  dns,
+  lances = NA,
+  sex = FALSE,
+  muestr = TRUE
 )
 }
 \arguments{
-\item{grupo, especie, camp, zona, dns}{Como en el resto del paquete}
+\item{gr}{Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados}
 
-\item{sexo}{TRUE → devuelve columna SEXO (1,2,3); FALSE → agrupa sexos}
+\item{esp}{Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo}
 
-\item{excl.sect}{Excluir sectores (si procede)}
+\item{camp}{Campaña a representar en el mapa de un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
 
-\item{cor.time}{TRUE → divide por weight.time (histórico)}
+\item{dns}{Elige el origen de las bases de datos: Porcupine "Pnew", Cantábrico "Cant", Golfo de Cadiz "Arsa" (proporciona los datos para Medits pero no saca mapas)}
 
-\item{verbose}{Mensajes}
-}
-\value{
-data.frame:
-\itemize{
-\item sexo=TRUE  → lance, sector, talla, sexo, n
-\item sexo=FALSE → lance, sector, talla, n
-}
+\item{lances}{Da la opción de escribir un número de lance y saca los valores solo para ese lance o grupo de lances.}
+
+\item{sex}{Por defecto (F) suma todos los individuos como indet. T saca los datos por sexo si los hay, no afecta si sólo hay indeterminados (3)}
+
+\item{muestr}{Por defecto (T) pondera los datos por el peso total en la captura del lance, si F coge los medidos realmente}
 }
 \description{
-Detalle de tallas por lance (CampR64) con correcciones de tiempo y peso
+Da Valores absolutos (totales por lance o grupos de lances) en número por talla y sexo (si lo hay)
 }
+\examples{
+dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=108,muestr=T)
+dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=108,muestr=F)
+dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=NA,muestr=F)
+}
+\seealso{
+Other Distribuciones de tallas: 
+\code{\link{denstall.camp64}()},
+\code{\link{dtalldens.camp64}()}
+}
+\concept{Distribuciones de tallas}

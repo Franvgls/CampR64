@@ -97,6 +97,7 @@ dtalldens.camp64(gr=1, esp=42, camp=Nsh[25:29], zona="cant",
 \code{\link[=dtall.camp64]{dtall.camp64()}}, \code{\link[=denstall.camp64]{denstall.camp64()}}
 
 Other Distribuciones de tallas: 
-\code{\link{denstall.camp64}()}
+\code{\link{denstall.camp64}()},
+\code{\link{dtallan.camp64}()}
 }
 \concept{Distribuciones de tallas}

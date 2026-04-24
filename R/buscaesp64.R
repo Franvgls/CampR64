@@ -25,7 +25,7 @@ buscaesp64<- function(gr,esp,zona,dns=c("local","serv"),id="l") {
         especie<-especie[especie$grupo==as.character(gr) & especie$esp==esp,"nombrei"]         
         }
       if (id=="e") {
-        especie<-especie[especie$grupo==as.character(gr) & especie$esp==esp,"nombrei"]         
+        especie<-especie[especie$grupo==as.character(gr) & especie$esp==esp,"nombree"]         
         }
       if (id=="a") {
         especie<-especie[especie$grupo==as.character(gr) & especie$esp==esp,"aphia"]         

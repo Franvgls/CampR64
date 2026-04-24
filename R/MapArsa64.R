@@ -8,6 +8,9 @@ MapArsa64 <- function(xlims = c(-8.149, -5.52),
                       cuadr = FALSE,
                       cuadrMSFD = FALSE,
                       ICESrect  = FALSE,
+                      ICESrectcol = gray(.2),
+                      ICESlab     = FALSE,
+                      ICESlabcex  = .7,
                       FU   = NA, ColFU = "chartreuse", dens = NA, FUsLab = FALSE,
                       ax   = TRUE,
                       bw   = FALSE,
@@ -47,8 +50,13 @@ MapArsa64 <- function(xlims = c(-8.149, -5.52),
   
   # rejillas
   if (cuadr)     abline(h = seq(31,45,by=1/12), v = seq(-12,0,by=0.089),       col = gray(.6), lwd = .6)
-  if (ICESrect)  abline(h = seq(36,37,by=.5),    v = seq(-8,-5,by=1),          col = gray(.2), lwd = .6)
+  if (ICESrect)  abline(h = seq(36,37,by=.5),    v = seq(-8,-5,by=1),          col = ICESrectcol, lwd = .6)
   if (cuadrMSFD) abline(h = seq(31,45,by=1/6),   v = seq(-12,0,by=0.2174213),  col = gray(.4), lwd = .5)
+  # ── 7. ICES LABELS ────────────────────────────────────────────────────────
+  if (ICESlab && exists("Area")) {
+    text(Area$stat_x, Area$stat_y + 0.22,
+         labels = Area$ICESNAME, cex = ICESlabcex, font = 2)
+  }
   
   # --- necesitas Arsa.map / Arsa.str en memoria ---
   if (!exists("Arsa.map", inherits = TRUE))

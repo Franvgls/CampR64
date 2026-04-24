@@ -29,7 +29,6 @@
 #' @export
 dtall.camp64<- function(gr,esp,camp,zona,dns=c("local","serv"),cor.time=TRUE,ti=FALSE,sub=NA,leg=TRUE,cexleg=1,bw=TRUE,es=TRUE,sex=TRUE,plot=T,idi="l",clms=2,
   layout=NA,excl.sect=NA,ymax=NA,out.dat=FALSE,years=TRUE,verbose=TRUE) {
-  library(lattice)
   options(scipen=2)
   if (length(esp)>1 | any(esp=="999")) {
     if (verbose) print("Distintas especies pueden estar medidas en distintas unidades (mm y cm o .5 cm) o a la aleta anal")

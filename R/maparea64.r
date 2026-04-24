@@ -10,7 +10,6 @@
 #' @export
 maparea64<-function(es=TRUE,leg=TRUE,bw=FALSE,dens=0,strat=FALSE,places=TRUE,
                     xlims=c(-15.5,-8.2),ylims=c(50.5,54.5)) {
-  library(mapdata)
   maps::map("worldHires",c("ireland","UK:Northern Ireland"),ylim=ylims,xlim=xlims,
 		fill=TRUE,col="saddlebrown",type="n")
 	box()
