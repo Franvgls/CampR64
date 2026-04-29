@@ -14,7 +14,7 @@ grafhistbox64(
   cor.time = TRUE,
   kg = TRUE,
   ci.lev = 0.8,
-  DLS = F,
+  DLS = FALSE,
   DLSrat = c(2, 5),
   idi = "l",
   SE = TRUE,
@@ -39,7 +39,9 @@ grafhistbox64(
 
 \item{camps}{campañas de la serie de datos a representar en el gráfico de abundancias Demersales Nsh, Porcupine Psh, Arsa primavera As1 y Arsa otoño As2}
 
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Pnew" o "Porc", Cantábrico "Cant" o "Cnew", Golfo de Cádiz "Arsa" y Mediterráneo "Medi" P}
+\item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa"}
+
+\item{dns}{elige si se trabaja con archivos del ordenador ("local") o del servidor ("serv")}
 
 \item{ind}{Parámetro a representar saca los datos en "p"eso o "n"úmero}
 
@@ -51,7 +53,7 @@ grafhistbox64(
 
 \item{DLS}{si T muestra las medias de los dos últimos años y de los cinco precedentes}
 
-\item{DLSrat}{ratio Elige el numero de años para el enfoque DLS 3/2 short life, 5/2 long life, vector con dos números, intervalo reciente intervalo histórico}
+\item{DLSrat}{ratio Elige el numero de años para el enfoque DLS 3/2 short life, 5/2 long life, vector con dos números}
 
 \item{idi}{Nombre científico de la especie ("l") o nombre común ("e")}
 
@@ -63,36 +65,33 @@ grafhistbox64(
 
 \item{sector}{Alternativa a excl.sect para un sólo sector. Si especificado como carácter solo toma el sector elegido}
 
-\item{ti}{Si T muestra el título con el nombre de la especie (y el sector si se elige sect o excl.sect si falso no muestra nada. También se puede dar un valor y aparece el texto incluido o dar un list(label=(título), font, cex)}
+\item{ti}{Si T muestra el título con el nombre de la especie. También se puede dar un valor de texto o un list(label, font, cex)}
 
-\item{Nas}{Si F no representa las cajas en los sectores/estratos en los que algún sector o estrato tiene un sólo lance. Si T utiliza el valor del estrato y evita los NAs}
+\item{Nas}{Si F no representa las cajas en los sectores/estratos con un sólo lance. Si T utiliza el valor del estrato y evita los NAs}
 
 \item{ymax}{Valor máximo del eje y}
 
-\item{mar}{Sirve para definir los margenes de la figura alrededor del gráfico mismo. Por defecto es NA y deja los definicos por defecto por R. Si se definen tiene que ser un vector con cuatro valores numéricos en líneas: c(bottom,left,upper,right)}
+\item{mar}{Márgenes de la figura. NA deja los definidos por defecto. Vector c(bottom,left,upper,right)}
 
-\item{tline}{Si T dibuja una línea de tendencia a traves de un glm con los datos de abundancia. gráficos evaluación MSFD.}
+\item{tline}{Si T dibuja una línea de tendencia a través de un glm. Gráficos evaluación MSFD.}
 
-\item{years}{Si T saca los años como nombre de campaña en el eje de las equis en vez de de campañas}
+\item{years}{Si T saca los años como nombre de campaña en el eje x en vez del nombre de campaña}
 
-\item{sub}{Añade un subtítulo con el valor que se le ponga si no F}
+\item{sub}{Añade un subtítulo con el valor que se le ponga, si F no aparece}
 
-\item{cex.leg}{Sirve para modificar los tamaños de letra del gráfico, funciona con ejes y títulos. Por defecto en 1.1}
+\item{cex.leg}{Tamaño de letra del gráfico. Por defecto 1.1}
 
 \item{nboot}{Número de réplicas bootstrap. Reducir (ej. 200) para exploración rápida, 1000 para resultados finales.}
-
-\item{las}{Sirve para modificar la dirección de las etiquetas en el eje de las equis, por defecto F pero se cambia cuando se elige years=T, si no se cambia salen paralelas}
 }
 \value{
-Crea una gráfica de evolución de las abundancias en biomasa o número y devuelve en consola un data.frame con columnas: avg,SE (error estándar),camp
+Crea una gráfica de evolución de las abundancias en biomasa o número y devuelve un data.frame con columnas: avg, SE, camp
 }
 \description{
 Gráfico de cajas con la evolución en biomasa o abundancia en la serie histórica
 }
 \examples{
-grafhistbox(1,45,Nsh[7:27],"Cant",es=FALSE,years=TRUE,tline=TRUE,DLS=FALSE,ti=TRUE,sub=TRUE)
-grafhistbox(1,45,Nsh[1:31],"Cant",es=FALSE,years=TRUE,tline=FALSE,DLS=TRUE,ti=TRUE,sub=TRUE)
+grafhistbox64(1,45,Nsh[7:27],"cant","local",es=FALSE,years=TRUE,tline=TRUE,DLS=FALSE,ti=TRUE,sub=TRUE)
 }
 \seealso{
-{\link{grafhistbox.comp}}
+\code{\link{grafhistbox64.comp}}
 }

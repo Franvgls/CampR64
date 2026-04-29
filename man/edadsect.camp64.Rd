@@ -23,7 +23,9 @@ edadsect.camp64(
 
 \item{camp}{Campaña de la que se extraen los datos un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
 
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Porc" o "Pnew", Cantábrico "Cant", Golfo de Cádiz "Arsa" (proporciona los datos para Medits pero no saca mapas)}
+\item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (proporciona los datos para Medits pero no saca mapas)}
+
+\item{dns}{Elige de dónde toma los datos, del ordenador "local" o del servidor "serv"}
 
 \item{plus}{Edad plus: Edad considerada como plus, todas las edades mayores se suman como edad +}
 
@@ -37,7 +39,7 @@ edadsect.camp64(
 Función de resultados: abundancias estratificadas por edad para cada sector geográfico a partir de los datos del camp.
 }
 \examples{
-edadsect.camp("1"," 45","P01","Porc",8)
+edadsect.camp64(1,43,"P01","porc","local",plus=8)
 
 }
 \seealso{

@@ -12,7 +12,7 @@ configurarCampR64(
   arsa = NULL,
   medi = NULL,
   base = NULL,
-  overwrite = TRUE
+  overwrite = FALSE
 )
 }
 \arguments{
@@ -30,9 +30,9 @@ configurarCampR64(
 
 \item{base}{Ruta al directorio raiz de datos. Si NULL se deduce de especies.}
 
-\item{overwrite}{Si TRUE (defecto), reescribe el archivo por completo.
-Si FALSE, conserva las lineas de otros entornos que ya estuvieran
-configuradas. Util para configurar "local" y "serv" en llamadas separadas.}
+\item{overwrite}{Si FALSE (defecto), conserva las lineas de otros entornos
+que ya estuvieran configuradas. Util para configurar "local" y "serv" en
+llamadas separadas. Si TRUE, reescribe el archivo por completo.}
 }
 \description{
 Establece las rutas locales o de servidor para los datos de campanas

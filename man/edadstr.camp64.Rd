@@ -41,7 +41,7 @@ Calcula las abundancias estratificadas por edad
 Función de resultados: abundancias estratificadas por edad para cada estrato batimétrico a partir de los datos del camp.
 }
 \examples{
-edadstr.camp(1,45,"P01","Porc",8)
+edadstr.camp64(1,43,"P01","porc","local",8)
 }
 \seealso{
 Other edades: 

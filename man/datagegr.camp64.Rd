@@ -11,6 +11,7 @@ datagegr.camp64(
   zona = "cant",
   dns = c("local", "serv"),
   plus = 8,
+  excl.sect = NA,
   cor.time = TRUE,
   n.ots = FALSE,
   AltAlk = NA,
@@ -30,6 +31,8 @@ datagegr.camp64(
 \item{dns}{elige si se trabja con archivos del ordenador ("local") o del servidor ("serv")}
 
 \item{plus}{Edad plus: incluir la edad considerada como plus, solo afecta si se pide la edad solicitada que une todas las edades mayores}
+
+\item{excl.sect}{Sectores a excluir como carácter, se pueden elegir tanto los sectores como estratos, NA no excluye ninguno}
 
 \item{cor.time}{Si T corrige las abundancias en función de la duración del lance}
 

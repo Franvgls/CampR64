@@ -15,9 +15,9 @@
 #' @param arsa Ruta a los datos de ARSA (puede ser NULL)
 #' @param medi Ruta a los datos de MEDITS (puede ser NULL)
 #' @param base Ruta al directorio raiz de datos. Si NULL se deduce de especies.
-#' @param overwrite Si TRUE (defecto), reescribe el archivo por completo.
-#'   Si FALSE, conserva las lineas de otros entornos que ya estuvieran
-#'   configuradas. Util para configurar "local" y "serv" en llamadas separadas.
+#' @param overwrite Si FALSE (defecto), conserva las lineas de otros entornos
+#'   que ya estuvieran configuradas. Util para configurar "local" y "serv" en
+#'   llamadas separadas. Si TRUE, reescribe el archivo por completo.
 #'
 #' @export
 configurarCampR64 <- function(env       = c("local", "serv"),
@@ -27,7 +27,7 @@ configurarCampR64 <- function(env       = c("local", "serv"),
                               arsa      = NULL,
                               medi      = NULL,
                               base      = NULL,
-                              overwrite = TRUE) {
+                              overwrite = FALSE) {
   
   env <- match.arg(env)
   
