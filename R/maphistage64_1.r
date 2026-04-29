@@ -1,12 +1,12 @@
 #' Mapa distribución por edad en la campaña
-#'
+#' 
 #' Mapa de la distribución geográfica por edad de la especie en las campañas solicitadas
-#' @param gr Grupo de la especie: Solo hay dados de edad para algunos peces y cigala ?
-#' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo
+#' @param gr Grupo de la especie: Solo hay dados de edad para algunos peces y cigala ? 
+#' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo 
 #' @param camp Campaña o campañas a representar en el mapa de un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa".
+#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa". 
 #' @param dns elige si se trabaja con archivos del ordenador ("local") o del servidor ("serv")
-#' @param age Edad solicitada
+#' @param age Edad solicitada 
 #' @param plus Edad plus: incluir la edad considerada como plus, solo afecta si se pide como plus la edad solicitada que suma todas las edades mayores
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param n.ots Interno para decir que en la clave no se saca el número de otolitos sino proporciones
@@ -23,23 +23,29 @@
 #' @param ceros Añade puntos para los datos igual a 0 si T, si F no incluye x en los valores 0
 #' @param years Si T permite sacar los años como nombre de campaña en los paneles lattice de campañas
 #' @param mediahora Valor para obtener abundancias por hora si media hora es mayor
-#' @param lances Vector de números de lance a incluir. NULL (por defecto) incluye todos.
-#'   Útil para limitar el cálculo a una división (ej. 9a o 8c) cuando se usa
-#'   una clave talla-edad alternativa (AltAlk) específica de esa división.
+#' @param excl.sect Sectores a excluir como carácter (ej. c("8C","8B") para quedarse solo con 9a).
+#'   NA por defecto no excluye ninguno. Se pasa directamente a datagegr.camp64 y datlan.camp64,
+#'   por lo que actúa sobre los lances antes del cálculo de abundancias por edad.
+#'   Combinado con AltAlk permite usar claves talla-edad específicas de cada división ICES.
+#' @param lances Vector de números de lance a incluir tras el cálculo. NULL (por defecto) incluye todos.
+#'   Filtro post-hoc alternativo a excl.sect cuando se prefiere filtrar por número de lance.
 #' @return Si out.dat=TRUE devuelve un data.frame con columnas: lan,lat,long,0,1,2,...,Age+,camp.
 #'   Si out.dat=FALSE saca el gráfico en pantalla (plot=TRUE) o como objeto trellis (plot=FALSE)
 #'   para combinar con otros gráficos con print.trellis.
 #' @examples maphistage64(1,42,c("N24","N25"),"cant","local",age=2)
-#' @examples maphistage64(1,42,"N25","cant","local",age=2,lances=45:67,AltAlk="edad942",out.dat=TRUE)
-#' @family mapas
-#' @family edades
+#' @examples # Solo división 9a con clave específica:
+#' @examples maphistage64(1,42,"N25","cant","local",age=2,excl.sect=c("8C","8B"),AltAlk="edad942",out.dat=TRUE)
+#' @examples # Equivalente directo sin mapa:
+#' @examples datagegr.camp64(1,42,"N25","cant","local",excl.sect=c("8C","8B"),AltAlk="edad942")
+#' @family mapas 
+#' @family edades 
 #' @export
 maphistage64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
                          age, plus=8, cor.time=TRUE, n.ots=FALSE, AltAlk=NA,
                          incl2=TRUE, bw=TRUE, ti=TRUE, plot=TRUE,
                          out.dat=FALSE, ind="n", idi="l", es=TRUE,
                          layout=NA, ceros=FALSE, years=TRUE, mediahora=1,
-                         lances=NULL) {
+                         lances=NULL, excl.sect=NA) {
   options(scipen=2)
   dns <- match.arg(dns)
   if (plot) lattice::trellis.par.set(lattice::col.whitebg())
@@ -50,6 +56,7 @@ maphistage64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
   dumb  <- NULL
   for (i in 1:ndat) {
     dat_i <- datagegr.camp64(gr, esp, camp[i], zona, dns, plus,
+                             excl.sect=excl.sect,
                              cor.time=cor.time, n.ots=n.ots,
                              AltAlk=AltAlk, incl2=incl2,
                              mediahora=mediahora)

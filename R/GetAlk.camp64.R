@@ -27,7 +27,7 @@ GetAlk.camp64 <- function(gr, esp, camp, zona = "cant", dns = c("local","serv"),
     edad <- edad[edad$grupo == gr & edad$esp == esp, ]
     if (nrow(edad) == 0)
       stop(paste("no existe clave talla edad para la especie",
-                 buscaesp64(gr, esp), "en la campaña", camp))
+                 buscaesp64(gr, esp,zona,dns), "en la campaña", camp))
   } else {
     edad <- readCampDBF("edad", zona, AltAlk, dns)
     edad <- edad[edad$grupo == gr & edad$esp == esp, ]

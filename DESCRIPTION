@@ -6,7 +6,7 @@ Authors@R:
        person("Francisco", "Velasco", , "franvgls@gmail.com",
               role = c("aut", "cre"),
               comment = c(ORCID = "0000-0002-6420-9474"))
-Description: Version modernizada de CampR sin ODBC, con lectura directa de DBF y estructura modular funciones para mapear datos de campañas de arrastre de fondo y sacar resultados a partir de datos en base de datos CAMP.
+Description: Version modernizada de CampR sin ODBC, con lectura directa de DBF y estructura modular.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

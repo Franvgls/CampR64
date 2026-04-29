@@ -7,6 +7,7 @@
 #' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa". 
 #' @param dns elige si se trabja con archivos del ordenador ("local") o del servidor ("serv")
 #' @param plus Edad plus: incluir la edad considerada como plus, solo afecta si se pide la edad solicitada que une todas las edades mayores
+#' @param excl.sect Sectores a excluir como carácter, se pueden elegir tanto los sectores como estratos, NA no excluye ninguno
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param n.ots Valor interno para decir que no se saque el número de otolitos en la clave sino las proporciones
 #' @param AltAlk Clave talla edad alternativa sin ruta ni extensión, NA por defecto usa la clave de la campaña edadXYY.dbf
@@ -15,7 +16,7 @@
 #' @return Devuelve un data.frame con campos lance, lat, long y abundancia por edad 0,1,2...Plus de edad, lance, peso número subestrato...
 #' @family edades
 #' @export
-datagegr.camp64<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,cor.time=TRUE,n.ots=FALSE,AltAlk=NA,incl2=TRUE,mediahora=1) {
+datagegr.camp64<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,excl.sect=NA,cor.time=TRUE,n.ots=FALSE,AltAlk=NA,incl2=TRUE,mediahora=1) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de m?s de una")}
   if (length(esp)>1) {
     stop("Sólo se puede incluir una especie en esta función")
@@ -25,7 +26,7 @@ datagegr.camp64<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,
   names(ntalls)<-gsub("_", ".",names(ntalls))
   ntalls$lance<-as.numeric(as.character(ntalls$lance))
   ntalls$numer<-ntalls$numer*ntalls$peso.gr/ntalls$peso.m
-  lan<-datlan.camp64(camp,zona,dns,redux=TRUE,incl2=incl2)
+  lan<-datlan.camp64(camp,zona,dns,redux=TRUE,excl.sect=excl.sect,incl2=incl2==incl2,incl0=FALSE)
   lan<-lan[,c("lance","sector","weight.time")]
   ntalls<-ntalls[ntalls$lance %in% lan$lance,]
   if (any(cor.time,camp=="N83",camp=="N84")) {

@@ -9,7 +9,7 @@
 #' @param plus Edad plus: Edad considerada como plus, todas las edades mayores se suman como edad +
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param AltAlk ALK alternativa tomada de un fichero de edad del Camp edadXYY.dbf sin ruta ni extensión
-#' @examples edadstr.camp(1,45,"P01","Porc",8)
+#' @examples edadstr.camp64(1,43,"P01","porc","local",8)
 #' @family edades
 #' @export
 edadstr.camp64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,cor.time=TRUE,AltAlk=NA,n.ots=F) {

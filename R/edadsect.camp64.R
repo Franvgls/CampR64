@@ -5,13 +5,14 @@
 #' @param gr Grupo de la especie: 1 peces sólo hay claves de talla para peces y cigala?
 #' @param esp Código de la especie numérico o carácter con tres espacios. Sólo admite una especie por gráfica
 #' @param camp Campaña de la que se extraen los datos un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param dns Elige el origen de las bases de datos: Porcupine "Porc" o "Pnew", Cantábrico "Cant", Golfo de Cádiz "Arsa" (proporciona los datos para Medits pero no saca mapas)
+#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (proporciona los datos para Medits pero no saca mapas)
+#' @param dns Elige de dónde toma los datos, del ordenador "local" o del servidor "serv" 
 #' @param plus Edad plus: Edad considerada como plus, todas las edades mayores se suman como edad +
 #' @param excl.sect excluye sectores para calcular el resultado por lo sectores individualmente o en conjunto.
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param AltAlk ALK alternativa tomada de un fichero de edad del Camp edadXYY.dbf sin ruta ni extensión
 #' 
-#' @examples edadsect.camp("1"," 45","P01","Porc",8)
+#' @examples edadsect.camp64(1,43,"P01","porc","local",plus=8)
 #' 
 #' @family edades
 #' @export
@@ -22,7 +23,7 @@ edadsect.camp64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,e
     stop("Sólo se puede incluir una especie en esta función")
   }
  # esp<-format(esp,width=3,justify="r")
-  ntalls<-readCampDBF("ntall",zona,camp,serv)
+  ntalls<-readCampDBF("ntall",zona,camp,dns)
   names(ntalls)<-gsub("_", ".",names(ntalls))
   ntalls<-ntalls[ntalls$grupo==gr & ntalls$esp==esp,c("lance","peso.gr","peso.m","talla","sexo","numer")]
   ntalls$lance<-as.numeric(as.character(ntalls$lance))
