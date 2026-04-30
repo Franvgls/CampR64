@@ -27,10 +27,10 @@ datagegr.camp64<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,
   ntalls$lance<-as.numeric(as.character(ntalls$lance))
   ntalls$numer<-ntalls$numer*ntalls$peso.gr/ntalls$peso.m
   lan<-datlan.camp64(camp,zona,dns,redux=TRUE,excl.sect=excl.sect,incl2=incl2==incl2,incl0=FALSE)
-  lan<-lan[,c("lance","sector","weight.time")]
+  #lan<-lan[,c("lance","sector","weight.time")]
   ntalls<-ntalls[ntalls$lance %in% lan$lance,]
   if (any(cor.time,camp=="N83",camp=="N84")) {
-    ntalls<-merge(ntalls,lan,by.x="lance",by.y="lance")
+    ntalls<-merge(ntalls,lan[,c("lance","sector","weight.time")],by.x="lance",by.y="lance")
     ntalls$numer<-ntalls$numer/ntalls$weight.time
     ntalls<-ntalls[,1:6]
   }
@@ -77,7 +77,7 @@ datagegr.camp64<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,
   else {
     sonedad<-which(substr(names(edad),1,1)=="E",T)
     for (i in sonedad) {edad[,i]<-edad[,i]/rowSums(edad[,sonedad])}
-    lan<-datlan.camp64(camp,zona,dns,incl2=incl2,redux=FALSE)[,c("lance","latitud_l","latitud_v","longitud_l","longitud_v","sector","estrato","ewl","ewv","weight.time")] 
+    lan<-datlan.camp64(camp,zona,dns,incl2=incl2,redux=TRUE)[,c("lance","lat","long","sector","estrato","weight.time","StatRec")] 
     if (all(lan==-1)) {
       lanedad<-data.frame(lan=0,lat=0,long=0,weight.time=0,numero=0,peso.gr=0)
     }
@@ -128,10 +128,8 @@ datagegr.camp64<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,
       #lan$longitud_l<-sapply(lan$longitud_l,gradec)*ifelse(lan$ewl=="W",-1,1)
       #lan$latitud_v<-sapply(lan$latitud_v,gradec)
       #lan$longitud_v<-sapply(lan$longitud_v,gradec)*ifelse(lan$ewv=="W",-1,1)
-      lan[,"lat"]<-(lan[,"latitud_l"]+lan[,"latitud_v"])/2
-      lan[,"long"]<-(lan[,"longitud_l"]+lan[,"longitud_v"])/2
-      lan<-lan[,c("lance","lat","long","weight.time")]
-      names(lan)<-c("lan","lat","long","weight.time")
+      lan<-lan[,c("lance","lat","long","weight.time","StatRec")]
+      names(lan)<-c("lan","lat","long","weight.time","StatRec")
       lanedad<-merge(lan,lanedad,by.x="lan",by.y="lance",all.x=TRUE)
       for (i in 1:ncol(lanedad)) {
         if (!identical(as.numeric(which(is.na(lanedad[,i]))),numeric(0))) {lanedad[which(is.na(lanedad[,i])),i]<-0}

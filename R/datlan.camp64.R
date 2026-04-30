@@ -155,7 +155,7 @@ datlan.camp64<-function(camp,zona,dns=c("local","serv"),incl2=TRUE,incl0=FALSE,e
   dplyr::arrange(datos,year,lance)
   if (redux) {
     datos<-dplyr::select(datos,-c("longitud_v","longitud_l","latitud_v","latitud_l","prof_v","prof_l"))
-    datos<-dplyr::relocate(datos,c("camp","lance","validez","lat","long","prof"))
+    datos<-dplyr::relocate(datos,c("camp","lance","validez","lat","long","prof","StatRec"))
   }
   if (!redux & !bio) {
     datos<-dplyr::relocate(datos,c("camp","lance","validez"))
