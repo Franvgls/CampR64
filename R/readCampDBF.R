@@ -45,8 +45,10 @@ readCampDBF <- function(tipo,
   # ---- clave: mapear serv/, local→'local'
   dns_key <- if (dns == "serv") "serv" else "local"
   
-  if (!exists("CampR64_paths"))
+  if (!exists("CampR64_paths", envir = .GlobalEnv))
     stop("CampR64_paths no está definido. ¿Se cargó configRoots_user.R?")
+  
+  CampR64_paths <- get("CampR64_paths", envir = .GlobalEnv)
   
   verbose <- isTRUE(getOption("CampR64.verbose", FALSE))
   
