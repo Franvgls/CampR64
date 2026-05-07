@@ -5,7 +5,10 @@
 #' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo
 #' @param id Salida como: "l" Nombre científico en latín, "e" nombre en español, "i" nombre en inglés "a" código APHIA
 #' @family datos_especies
-#' @examples buscaesp(1,50)
+#' @examples 
+#' \dontrun{
+#' buscaesp64(1,50,"cant","local")
+#' }
 #' @export
 buscaesp64<- function(gr,esp,zona,dns=c("local","serv"),id="l") {
   esp<-as.character(esp)  #,width=3,justify="r")

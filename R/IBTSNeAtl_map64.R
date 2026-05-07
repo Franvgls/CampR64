@@ -70,24 +70,11 @@ IBTSNeAtl_map64 <- function(xlims = NULL, ylims = NULL,
   stopifnot(requireNamespace("sf",      quietly = TRUE))
   stopifnot(requireNamespace("maps",    quietly = TRUE))
   stopifnot(requireNamespace("sp",      quietly = TRUE))
-  has_mapdata <- requireNamespace("mapdata", quietly = TRUE)
 
-  # worldHires via data() en entorno local
-  # worldHires: asignar temporalmente al globalenv donde maps::map() lo encuentra
-  if (has_mapdata) {
-    .e <- new.env(parent = emptyenv())
-    utils::data("worldHiresMapEnv", package = "mapdata", envir = .e)
-    assign("worldHiresMapEnv", .e$worldHiresMapEnv, envir = globalenv())
-    on.exit(suppressWarnings(rm("worldHiresMapEnv", envir = globalenv())),
-            add = TRUE)
-    world_db <- "worldHires"
-  } else {
-    warning("mapdata no disponible, usando maps::world")
-    world_db <- "world"
-  }
-
+  world_db <- load_worldHires64()
+  on.exit(unload_worldHires64(), add = TRUE)
+  
   shpdir <- normalizePath(shpdir, mustWork = FALSE)
-
   # --- Funcion interna de lectura ---
   read_shp <- function(base, layer = NULL) {
     # Intenta .shp, .gpkg y .dbf en ese orden

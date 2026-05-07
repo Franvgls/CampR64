@@ -65,7 +65,9 @@ Si se detecta este error revisar la estructura de lanceXXX.dbf con la de
 otros ficheros de lances de los últimos años
 }
 \examples{
+\dontrun{
   NepFUs.camp64(camp="N20",zona="cant",dns="local",plot=T,plotnep=T)
+  }
 }
 \seealso{
 Other mapas: 
@@ -73,8 +75,7 @@ Other mapas:
 \code{\link{MapEcol.camp64}()},
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
-\code{\link{armap.tot64}()},
-\code{\link{armap64}()},
+\code{\link{armap.camp64}()},
 \code{\link{maparea64}()},
 \code{\link{maphist64}()},
 \code{\link{maphistage64}()},

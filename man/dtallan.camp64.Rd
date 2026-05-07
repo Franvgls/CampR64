@@ -34,9 +34,11 @@ dtallan.camp64(
 Da Valores absolutos (totales por lance o grupos de lances) en número por talla y sexo (si lo hay)
 }
 \examples{
+\dontrun{ 
 dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=108,muestr=T)
 dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=108,muestr=F)
 dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=NA,muestr=F)
+}
 }
 \seealso{
 Other Distribuciones de tallas: 

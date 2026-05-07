@@ -55,7 +55,9 @@ denstall.camp64(
 Crea gráfico con la función de densidad de la distribución de tallas estratificada para la especie y las campañas seleccionadas
 }
 \examples{
-denstall.camp(gr=1,esp=50,camp=Psh,dns="Porc",years=TRUE)
+\dontrun{
+denstall.camp(gr=1,esp=50,camp=Psh,zona="porc","local!",years=TRUE)
+}
 }
 \seealso{
 Other Distribuciones de tallas: 

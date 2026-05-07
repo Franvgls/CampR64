@@ -37,5 +37,7 @@ Función de Salida de datos a DATRAS:
 Extrae las características de las capturas por lance para una campaña desde el fichero NTALLxxx.DBF y los transforma en formato DATRAS HL. De momento sólo funciona con peces y en el SPNGFS y SPPORC (Para completar crustáceos y moluscos hay que añadir los AphiaID, y para ARSA añadirlos al especies de ARSA)
 }
 \examples{
-# CAMPtoHLnw("P14","porc","local")
+\dontrun{
+CAMPtoHLnw64("P14","porc","local")
+}
 }

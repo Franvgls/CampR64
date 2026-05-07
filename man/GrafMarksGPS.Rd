@@ -56,7 +56,9 @@ Grafica todas las dragas o CTDs de una campaña siempre que se hayan marcado con
 Requiere que los ficheros de marcas del PescaWin estén en los directorios "C:/GPS/mrk/porcupine/" para Porcupine o "C:/GPS/mrk/Norte/" para Demersales y "C:/GPS/mrk/arsa/" para el Golfo de Cádiz
 }
 \examples{
+\dontrun{
 GrafMarksGPS64("N14","Cant")
+}
 }
 \seealso{
 Other mapas: 
@@ -64,8 +66,7 @@ Other mapas:
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},
-\code{\link{armap.tot64}()},
-\code{\link{armap64}()},
+\code{\link{armap.camp64}()},
 \code{\link{maparea64}()},
 \code{\link{maphist64}()},
 \code{\link{maphistage64}()},

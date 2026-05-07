@@ -23,8 +23,10 @@
 #' @param years Si T saca los años como nombre de campaña en los paneles lattice de campañas
 #' @return Si out.dat=TRUE devuelve un data.frame con columnas: lan,lat,long,prof,peso.gr,numero (de individuos entre tmin y tmax),camp, si out.dat=F saca el gráfico en pantalla o como objeto para combinar con otros gráficos con print.trellis
 #' @examples 
-#' maphist(1,50,Nsh[7:27],"Cant",layout=c(3,7),years=TRUE)
-#' maphist(1,50,As2[15:18],"Arsa",layout=c(2,2),years=TRUE,sub="ARSA 2nd quarter")
+#' \dontrun{
+#' maphist64(1,50,Nsh[7:27],"cant","local",layout=c(3,7),years=TRUE)
+#' maphist64(1,50,As2[15:18],"arsa","local",layout=c(2,2),years=TRUE,sub="ARSA 2nd quarter")
+#' }
 #' @family mapas
 #' @export
 maphist64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),cor.time=TRUE,incl2=TRUE,bw=TRUE,ti=TRUE,sub=NULL,plot=TRUE,out.dat=FALSE,ind="p",idi="l",

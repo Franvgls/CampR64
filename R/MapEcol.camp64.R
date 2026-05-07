@@ -18,10 +18,12 @@
 #' @param years Si T saca los años como nombre de campaña en los paneles lattice de campañas
 #' @return Saca el mapa de diversidad en la campaña seleccionada.
 #' @examples
-#' dumbecol<-MapEcol.camp(1,999,Nsh[25:30],"Cant",ind="n",bw=TRUE,indec="simp",out.dat=TRUE,layout=c(2,3))
+#' \dontrun{
+#' dumbecol<-MapEcol.camp64(1,999,Nsh[25:30],"cant","local",ind="n",bw=TRUE,indec="simp",out.dat=TRUE,layout=c(2,3))
 #' dumbecol$estrato<-cut(dumbecol$prof,c(0,70,120,200,500,900),c("A1","A","B","C","D"))
 #' lattice::bwplot(numbesp~estrato|camp,dumbecol,horizontal=FALSE,main="Número de especies",xlab="Estrato")
 #' lattice::bwplot(div~estrato|camp,dumbecol,horizontal=FALSE,main="Shannon Wiener",xlab="Estrato")
+#' }
 #' @family mapas
 #' @family ecologia
 #' @export

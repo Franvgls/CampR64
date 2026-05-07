@@ -13,7 +13,10 @@
 #' @param bw Si T gráfico en blanco y negro por default, si F gráfico en color
 #' @return Devuelve un data.frame con datos de cada lance, las variables dependen de la selección de hidro y redux
 #' @seealso {\link{datlan.camp}}, {\link{qcdistlan.camp}}
-#' @examples MapLansGPS64("12C","cant")
+#' @examples 
+#' \dontrun{
+#' MapLansGPS64("12C","cant")
+#' }
 #' @family mapas
 #' @family PescaWin
 #' @export

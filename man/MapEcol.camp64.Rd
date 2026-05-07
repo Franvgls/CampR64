@@ -61,10 +61,12 @@ Saca el mapa de diversidad en la campaña seleccionada.
 Utiliza los datos del Camp representar la variación geográfica de los índices ecológicos
 }
 \examples{
-dumbecol<-MapEcol.camp(1,999,Nsh[25:30],"Cant",ind="n",bw=TRUE,indec="simp",out.dat=TRUE,layout=c(2,3))
+\dontrun{
+dumbecol<-MapEcol.camp64(1,999,Nsh[25:30],"cant","local",ind="n",bw=TRUE,indec="simp",out.dat=TRUE,layout=c(2,3))
 dumbecol$estrato<-cut(dumbecol$prof,c(0,70,120,200,500,900),c("A1","A","B","C","D"))
 lattice::bwplot(numbesp~estrato|camp,dumbecol,horizontal=FALSE,main="Número de especies",xlab="Estrato")
 lattice::bwplot(div~estrato|camp,dumbecol,horizontal=FALSE,main="Shannon Wiener",xlab="Estrato")
+}
 }
 \seealso{
 Other mapas: 
@@ -72,8 +74,7 @@ Other mapas:
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},
-\code{\link{armap.tot64}()},
-\code{\link{armap64}()},
+\code{\link{armap.camp64}()},
 \code{\link{maparea64}()},
 \code{\link{maphist64}()},
 \code{\link{maphistage64}()},

@@ -9,7 +9,10 @@
 #' @param excl.sect Sectores a excluir como carácter, se pueden elegir tanto los sectores como estratos, NA no excluye ninguno
 #' @param incl2 Si T incluye los lances especiales "2"
 #' @return Devuelve un data.frame con las capturas medias por lance de cada especie capturada del grupo gr. Columnas: gr,esp,especie,peso(kg),número,nlan (nº de lances en que ha aparecido esp) Los valores NaN en las abundancias corresponden a especies que sólo han aparecido en los lances especiales, y que no puede calcularse la abundancia estratificada al no contar con áreas para los estratos en que aparecen
-#' @examples ListFauna.camp64(gr=1,camp="N12",zona="cant",dns="local",excl.sect=FALSE,incl2=FALSE)
+#' @examples 
+#' \dontrun{
+#' ListFauna.camp64(gr=1,camp="N12",zona="cant",dns="local",excl.sect=FALSE,incl2=FALSE)
+#' }
 #' @family ListadosFauna
 #' @export
 ListFauna.camp64<- function(gr="1",camp,zona,dns=c("local","serv"),cor.time=TRUE,excl.sect=NA,incl2=FALSE,kg=TRUE) {

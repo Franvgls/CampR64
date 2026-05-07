@@ -11,7 +11,10 @@
 #' @param codes Si T da los códigos de las especies, si F el nombre científico
 #' @return Devuelve un data.frame con columnas lan, una con el peso o número de cada especie del grupo solicitado, lat, long, prof
 #' @seealso {\link{MapEcol.camp}}, {\link{ecolgr.camp}}
-#' @examples ecolmatrix.camp(1,999,"P01","Porc",ind="p")
+#' @examples 
+#' \dontrun{
+#' ecolmatrix.camp(1,999,"P01","porc","local",ind="p")
+#' }
 #' @family ecologia
 #' @export
 ecolmatrix.camp64<- function(gr,esp=999,camp,zona="cant",dns=c("local","serv"),ind="p",incl6=FALSE,incl2=1,codes=TRUE) {

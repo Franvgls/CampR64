@@ -12,7 +12,10 @@
 #' @param incl2 Si T se incluyen los lances extra no incluidos para las abundancias o biomasas estratificadas
 #' @param AltAlk ALK alternativa tomada de un fichero de edad del camp edadxyy.dbf sin ruta ni extensión
 #' @return A data.table con el formato de datos de SEFOS para la evaluación de caballa
-#' @examples sefos64.camp(1,74,"N23","cant","local",plus=3)
+#' @examples 
+#' \dontrun{
+#' sefos64.camp(1,74,"N23","cant","local",plus=3)
+#' }
 #' @export
 sefos64.camp<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,cor.time=TRUE,AltAlk=NA,incl2=FALSE,mediahora=2) {
   datesp<-maphistage64(gr,esp,camp,zona,dns,0,plus,cor.time=cor.time,AltAlk=AltAlk,incl2=incl2,plot=FALSE,out.dat=T,mediahora = mediahora)

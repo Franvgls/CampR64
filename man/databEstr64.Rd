@@ -36,7 +36,9 @@ Devuelve un número con nombres organizado en dos líneas (biomasa y número) en
 Salida de datos a csv para rellenar los informes de grupo de trabajo por estrato, filas con datos ab estratificada (Biomasa y N) y error estándar por estrato. Da la abundancia y error estándar en cada estrato de profundidad (definido en el Camp)
 }
 \examples{
-databEstr(1,51,"N05","Cant")
+\dontrun{
+databEstr(1,51,"N05","cant","local")
+}
 }
 \seealso{
 {\link{databICES64} \link{databICESdiv64} \link{datab64}}

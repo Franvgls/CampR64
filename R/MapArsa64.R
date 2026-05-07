@@ -40,13 +40,22 @@ MapArsa64 <- function(xlims = c(-8.149, -5.52),
   }
   
   # marco
+  # Limpia solo si no estamos en un layout multipanel
+  if (all(par("mfrow") == c(1,1))) plot.new()
   par(mar = c(2, 2.5, 2, 2.5) + 0.3)
   maps::map("world", xlim = xlims, ylim = ylims, type = "n")
   plot.window(xlim = xlims, ylim = ylims, xaxs = "i", yaxs = "i")
+  
+  # Tierra de fondo (cubre todo usr; Arsa.map se pinta luego encima con detalle)
+  maps::map("world", xlim = xlims, ylim = ylims,
+            fill = TRUE, col = if (bw) "gray85" else land_col,
+            border = "gray50", lwd = 0.3, add = TRUE)
 
     # mar
   rect(par("usr")[1], par("usr")[3], par("usr")[2], par("usr")[4],
        col = if (bw) "white" else sea_col, border = NA)
+  # Recorte para que polígonos posteriores no se salgan del bbox
+  clip(par("usr")[1], par("usr")[2], par("usr")[3], par("usr")[4])
   
   # rejillas
   if (cuadr)     abline(h = seq(31,45,by=1/12), v = seq(-12,0,by=0.089),       col = gray(.6), lwd = .6)
@@ -163,17 +172,29 @@ MapArsa64 <- function(xlims = c(-8.149, -5.52),
   }
   
   # --- ejes en grados ---
+  # --- ejes en grados (dinámicos según xlims/ylims) ---
   if (ax) {
-    degsX <- seq(-8, -5, ifelse(abs(diff(xlims)) > 1, 1, .5))
-    labX  <- sapply(degsX, function(x) bquote(.(abs(x))*degree ~ W))
-    axis(1, at=degsX, lab=do.call(expression, labX), font.axis=2, cex.axis=.8, tck=-.01, mgp=c(1,.2,0))
-    axis(3, at=degsX, lab=do.call(expression, labX), font.axis=2, cex.axis=.8, tck=-.01, mgp=c(1,.2,0))
-    degsY <- seq(35, 38, ifelse(abs(diff(ylims)) > 1, 1, .5))
-    labY  <- sapply(degsY, function(y) bquote(.(y)*degree ~ N))
-    axis(2, at=degsY, lab=do.call(expression, labY), font.axis=2, cex.axis=.8, tck=-.01, las=2, mgp=c(1,.5,0))
-    axis(4, at=degsY, lab=do.call(expression, labY), font.axis=2, cex.axis=.8, tck=-.01, las=2, mgp=c(1,.5,0))
-  }
-  
+    usr <- par("usr")
+    stepX <- ifelse(abs(diff(xlims)) > 1, 1, .5)
+    degsX <- seq(ceiling(usr[1] / stepX) * stepX,
+                 floor(usr[2]   / stepX) * stepX,
+                 by = stepX)
+    labX  <- sapply(degsX, function(x) bquote(.(abs(x)) * degree ~ W))
+    axis(1, at = degsX, lab = do.call(expression, labX),
+         font.axis = 2, cex.axis = .8, tck = -.01, mgp = c(1, .2, 0))
+    axis(3, at = degsX, lab = do.call(expression, labX),
+         font.axis = 2, cex.axis = .8, tck = -.01, mgp = c(1, .2, 0))
+    
+    stepY <- ifelse(abs(diff(ylims)) > 1, 1, .5)
+    degsY <- seq(ceiling(usr[3] / stepY) * stepY,
+                 floor(usr[4]   / stepY) * stepY,
+                 by = stepY)
+    labY  <- sapply(degsY, function(y) bquote(.(y) * degree ~ N))
+    axis(2, at = degsY, lab = do.call(expression, labY),
+         font.axis = 2, cex.axis = .8, tck = -.01, las = 2, mgp = c(1, .5, 0))
+    axis(4, at = degsY, lab = do.call(expression, labY),
+         font.axis = 2, cex.axis = .8, tck = -.01, las = 2, mgp = c(1, .5, 0))
+  }  
   box(lwd = lwdl)
   invisible(NULL)
 }

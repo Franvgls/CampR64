@@ -60,7 +60,9 @@ Devuelve un vector con nombre con el número estratificado del rango de tallas d
 Extrae los datos de abundancia de una especie o conjunto de especies con un rango de tallas determinado a partir de las distribuciones de talla.También puede mostrar los datos de biomasa a partir de la relación talla-peso
 }
 \examples{
-talbox.camps(2,19,Psh,"Porc",varwidth=T,notch=T)
+\dontrun{
+talbox64.camps(2,19,Psh,"porc","local",varwidth=T,notch=T)
+}
 }
 \seealso{
 {\link{dattal.camp64}}

@@ -65,20 +65,16 @@ Histograma de distribución de tallas con edades
 Función gráfica a partir de los ficheros del camp. Histograma distribución de tallas estratificada por edad
 }
 \examples{
+\dontrun{
 grafedtal.camp64(1,43,"P09",zona="porc",dns=c("local","serv"),es=FALSE,out.dat=TRUE)
 }
-\seealso{
-{\link{grafedtal.camps}}
-
-Other edades: 
-\code{\link{AbAgStatRec.camp64}()},
-\code{\link{GetAlk.camp64}()},
-\code{\link{bubbage.camp64}()},
-\code{\link{datagegr.camp64}()},
-\code{\link{edadsect.camp64}()},
-\code{\link{edadstr.camp64}()},
-\code{\link{grafedtal.camps64}()},
-\code{\link{logabage.camp64}()},
-\code{\link{maphistage64}()}
 }
-\concept{edades}
+\seealso{
+\code{\link{grafalk.camp64}} para la composición proporcional
+por edad (ALK gráfica), \code{\link{GetAlk.camp64}} para los datos
+numéricos.
+
+Other ALK: 
+\code{\link{GrafAlk64.camp}()}
+}
+\concept{ALK}

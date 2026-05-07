@@ -30,7 +30,9 @@ Imprime en consola las discordancias encontradas lance por lance
 Recorre todos los lances de una campaña llamando a \code{\link{qcTalPez.lan64}} en cada uno.
 }
 \examples{
+\dontrun{
 qcTalPez64.camp("N25", zona="cant", dns="local", gr=1)
+}
 }
 \seealso{
 \code{\link{qcTalPez.lan64}}

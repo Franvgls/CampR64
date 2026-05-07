@@ -76,7 +76,9 @@ Si se detecta este error revisar la estructura de lanceXXX.dbf con la de
 otros ficheros de lances de los últimos años
 }
 \examples{
+\dontrun{
   NepFU31.camp("N21")
+  }
 }
 \seealso{
 Other mapas, NEP: 

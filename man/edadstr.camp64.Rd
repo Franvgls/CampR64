@@ -41,7 +41,9 @@ Calcula las abundancias estratificadas por edad
 Función de resultados: abundancias estratificadas por edad para cada estrato batimétrico a partir de los datos del camp.
 }
 \examples{
+\dontrun{
 edadstr.camp64(1,43,"P01","porc","local",8)
+}
 }
 \seealso{
 Other edades: 
@@ -50,7 +52,6 @@ Other edades:
 \code{\link{bubbage.camp64}()},
 \code{\link{datagegr.camp64}()},
 \code{\link{edadsect.camp64}()},
-\code{\link{grafedtal.camp64}()},
 \code{\link{grafedtal.camps64}()},
 \code{\link{logabage.camp64}()},
 \code{\link{maphistage64}()}

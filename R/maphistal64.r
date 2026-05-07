@@ -25,7 +25,10 @@
 #' @param cexleg Varía el tamaño de letra de los ejes y del número de la leyenda
 #' @param years Si T saca los años como nombre de campaña en los paneles lattice de campañas
 #' @return Si out.dat=TRUE devuelve un data.frame con columnas: lan,lat,long,prof,numero (de individuos entre tmin y tmax),camp, si out.dat=F saca el gráfico en pantalla o como objeto para combinar con otros gráficos con print.trellis
-#' @examples maphistal(1,50,Psh[1:12],"Porc",1,23,layout=c(4,3),out.dat=TRUE)
+#' @examples 
+#' \dontrun{
+#' maphistal64(1,50,Psh[1:12],"porc","local",1,23,layout=c(4,3),out.dat=TRUE)
+#' }
 #' @family mapas
 #' @family tallas
 #' @export

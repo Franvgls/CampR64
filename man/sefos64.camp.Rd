@@ -45,5 +45,7 @@ A data.table con el formato de datos de SEFOS para la evaluación de caballa
 Function to complete HH with ICESrect and area
 }
 \examples{
+\dontrun{
 sefos64.camp(1,74,"N23","cant","local",plus=3)
+}
 }

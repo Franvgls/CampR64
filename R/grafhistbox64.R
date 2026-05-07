@@ -28,7 +28,10 @@
 #' @param nboot Número de réplicas bootstrap. Reducir (ej. 200) para exploración rápida, 1000 para resultados finales.
 #' @return Crea una gráfica de evolución de las abundancias en biomasa o número y devuelve un data.frame con columnas: avg, SE, camp
 #' @seealso \code{\link{grafhistbox64.comp}}
-#' @examples grafhistbox64(1,45,Nsh[7:27],"cant","local",es=FALSE,years=TRUE,tline=TRUE,DLS=FALSE,ti=TRUE,sub=TRUE)
+#' @examples 
+#' \dontrun{
+#' grafhistbox64(1,45,Nsh[7:27],"cant","local",es=FALSE,years=TRUE,tline=TRUE,DLS=FALSE,ti=TRUE,sub=TRUE)
+#' }
 #' @export
 grafhistbox64 <- function(gr, esp, camps, zona="porc", dns=c("local","serv"),
                           ind="p", cor.time=TRUE, kg=TRUE, ci.lev=.8,
@@ -43,15 +46,15 @@ grafhistbox64 <- function(gr, esp, camps, zona="porc", dns=c("local","serv"),
   if (tline & DLS)
     stop("Elija línea de tendencia tline=T o cambios últimos 2 años frente a 3 previos DLS=T")
 
-  # --- Guardar TODOS los par antes de tocar nada (igual que el original) ---
-  op <- par(no.readonly = TRUE)
+  # --- Guardar SOLO los pars que vamos a tocar (no mfrow/mfg, para no romper layouts externos) ---
+  op <- par(mar = par("mar"), mgp = par("mgp"))
+  on.exit(par(op), add = TRUE)
   if (any(is.na(mar))) {
-    par(mar=c(4, 4.5, 2.5, 2.5) + 0.1)
+    par(mar = c(4, 4.5, 2.5, 2.5) + 0.1)
   } else {
-    par(mar=mar, mgp=c(2.8, .8, 0))
+    par(mar = mar, mgp = c(2.8, .8, 0))
   }
-  on.exit(par(op), add=TRUE)
-
+  
   # --- Construcción de datos ---
   ndat       <- length(camps)
   dumb       <- NULL
@@ -96,12 +99,13 @@ grafhistbox64 <- function(gr, esp, camps, zona="porc", dns=c("local","serv"),
       if (length(grep(excl.sect[i], as.character(dumb$sector))) > 0)
         dumb <- dumb[-grep(excl.sect[i], as.character(dumb$sector)), ]
     }
-    dumb$sector <- factor(as.character(dumb$sector))
   }
-
-  dumb$camp      <- factor(dumb$camp,      levels=camps)
-  dumbSETot$camp <- factor(dumbSETot$camp, levels=camps)
-
+  
+  # Forzar factor SIEMPRE: boot::boot(strata=) y strmean.camps64() lo necesitan
+  dumb$sector   <- factor(as.character(dumb$sector))
+  dumb$camp     <- factor(dumb$camp,      levels = camps)
+  dumbSETot$camp <- factor(dumbSETot$camp, levels = camps)
+  
   # --- Bootstrap (sin parallel para garantizar orden correcto de resultados) ---
   if (ind == "p") {
     if (any(is.na(sector))) {
@@ -160,11 +164,16 @@ grafhistbox64 <- function(gr, esp, camps, zona="porc", dns=c("local","serv"),
                     ifelse(years, "Year", "Survey"))
   especie <- buscaesp64(gr, esp, zona, dns, idi)
 
-  if (is.na(ymax))
-    ymax <- max(.5, ifelse(ci.lev > 0,
-                           max(dumb.env$point[1, ]),
-                           max(dumbSETot$SE + dumbSETot$avg, na.rm=TRUE)) * 1.05)
-
+  if (is.na(ymax)) {
+    top <- if (ci.lev > 0) suppressWarnings(max(dumb.env$point[1, ], na.rm = TRUE))
+    else            max(dumbSETot$SE + dumbSETot$avg, na.rm = TRUE)
+    if (!is.finite(top)) {
+      warning("Envelope/SE no finitos; usando max(avg+SE) como ymax")
+      top <- max(dumbSETot$avg + dumbSETot$SE, na.rm = TRUE)
+    }
+    ymax <- max(.5, top * 1.05)
+  }
+  
   plot(dumb.mean, xlab=xetiq, ylab=yetiq, ylim=c(0, ymax),
        axes=FALSE, cex.lab=cex.leg * .9)
   rect(-1000, -1000, 10^5, 10^5, col="white")

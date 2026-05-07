@@ -24,7 +24,9 @@ Devuelve un data.frame con columnas grupo,esp,especie,peso,numero
 Muestra un listado de las especies capturadas en peso y número en un lance concreto. Se pueden seleccionar grupos de especies
 }
 \examples{
+\dontrun{
 ListFauna.lan64("12C","cant","local",1,gr=c(1,2))
+}
 }
 \seealso{
 {\link{ListFauna.camps}}, {\link{ListFaunaTals.camps}}

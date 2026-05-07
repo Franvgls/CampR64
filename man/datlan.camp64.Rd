@@ -56,8 +56,10 @@ Si se detecta este error revisar la estructura de lanceXXX.dbf con la de
 otros ficheros de lances de los últimos años
 }
 \examples{
-  print(datlan.camp64(Nsh[24:28],"cant","local",hidro=FALSE,excl.sect=c("A")))
-  print(datlan.camp64("P16","porc","local",bio=T))
+\dontrun{
+datlan.camp64(Nsh[24:28],"cant","local",hidro=FALSE,excl.sect=c("A"))
+datlan.camp64("P16","porc","local",bio=T)
+}
 }
 \seealso{
 {\link{MapLansGPS}}

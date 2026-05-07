@@ -14,7 +14,7 @@
 #' @param places Si T saca ciudades y puntos geográficos de referencia
 #' @param escmult =1 aumenta o disminuye el tamaño de las etiquetas y textos menos de 1 lo disminuye, m?s de uno lo aumenta
 #' @return Saca en pantalla el mapa y es utilizada por otras funciones
-#' @examples MapIberia()
+#' @examples MapIberia64()
 #' @family mapas base
 #' @family Medits
 #' @export

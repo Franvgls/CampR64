@@ -9,8 +9,11 @@
 #' @param ind Elige el valor sobre el que se calculan los índices de diversidad, dominancia....
 #' @return Devuelve un data.frame con campos lan,lat,long,prof,div (Diversidad de Shanon),numbesp (riqueza: número de especies),simp (diversidad de simpson),domsimp (indice de dominancia de simpson). 
 #' @seealso {\link{MapEcol.camp}}
-#' @examples ecolgr.camp(1,999,"P08","Porc",ind="n")
-#' @examples ecolgr.camp(1,999,"M08","Medi",ind="n")
+#' @examples 
+#' \dontrun{
+#' ecolgr.camp(1,999,"P08","porc","local",ind="n")
+#' ecolgr.camp(1,999,"N08","cant","local",ind="n")
+#' }
 #' @family ecologia
 #' @export
 ecolgr.camp64 <-function(gr,esp=999,camp,zona="cant",dns=c("local","serv"),ind="n") {

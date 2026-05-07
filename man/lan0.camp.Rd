@@ -17,5 +17,7 @@ lan0.camp(camp, zona = "cant", dns = c("local", "serv"))
 Busca y devuelve los lances nulos de una campaña
 }
 \examples{
+\dontrun{
 lan0.camp(camp="P01",zona="porc",serv="local")
+}
 }

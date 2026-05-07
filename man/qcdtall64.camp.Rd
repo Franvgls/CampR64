@@ -48,7 +48,9 @@ el número total de individuos medidos y el número ideal de individuos a medir
 (10 por talla: Gerritsen & McGrath 2007)
 }
 \examples{
+\dontrun{
 qcdtall.camp64(1, 43, "P08", zona="porc", dns="local", lance=35)
+}
 }
 \references{
 Gerritsen & McGrath (2007). Precision estimates and suggested sample sizes for

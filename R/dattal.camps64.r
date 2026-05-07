@@ -16,7 +16,10 @@
 #' @param plot Saca el gráfico (T) o lo guarda como objeto para componer con otros gráficos (F)
 #' @param es Si T gráfico en castellano, si F gráfico en inglés
 #' @return Devuelve un vector con nombre con el número estratificado del rango de tallas deseados por campaña/año. Si se solicita plot=TRUE saca un gráfico de barras que muestra la abundancia por año. En peso sólo saca los resultados para una especie.
-#' @examples dattal.camps(1,36,Psh,"Porc",1,15,ind="n",plot=TRUE)
+#' @examples 
+#' \dontrun{
+#' dattal.camps64(1,36,Psh,"porc"."local",0,15,ind="n",plot=TRUE)
+#' }
 #' @seealso {\link{dattal.camp}}
 #' @export
 dattal.camps64<- function(gr,esp,camps,zona,dns,tmin=0,tmax=999,cor.time=TRUE,excl.sect=NA,years=TRUE,ind="n",ti=TRUE,las=2,plot=FALSE,es=FALSE) {

@@ -102,11 +102,13 @@ resultados pueden depender mucho del número de lances sin captura y dar resulta
 examples ambas opciones
 }
 \examples{
-histboxplot(1,50,Nsh[7:27],"Cant",years=TRUE)
-histboxplot(1,50,Nsh[7:27],"Cant",years=TRUE,ind="n")
-histboxplot(1,50,Nsh[7:27],"Cant",years=TRUE,ind="n",ceros=FALSE)
-histboxplot(1,50,Nsh[21:40],"Cant",years=T,ind="p",latrange=c(42,43))
-histboxplot(1,50,Nsh,"Cant",latrange = c(42,43),graf="Graf")
+\dontrun{
+histboxplot(1,50,Nsh[7:27],"cant","local",years=TRUE)
+histboxplot(1,50,Nsh[7:27],"cant","local",years=TRUE,ind="n")
+histboxplot(1,50,Nsh[7:27],"cant","local",years=TRUE,ind="n",ceros=FALSE)
+histboxplot(1,50,Nsh[21:40],"cant","local",years=T,ind="p",latrange=c(42,43))
+histboxplot(1,50,Nsh,"cant","local",latrange = c(42,43),graf="Graf")
+}
 }
 \seealso{
 Other abunds: 

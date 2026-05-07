@@ -75,8 +75,10 @@ Si out.dat=TRUE devuelve un data.frame con columnas: lan,lat,long,prof,peso.gr,n
 Crea gráficos del comportamiento del arte en los lances de una campaña con la profundidad
 }
 \examples{
+\dontrun{
 ArtePars64("N23","cant",Nlans = F,ti=T)
 ArtePars64("N23","cant",Nlans = T,ti=T,lan.cex=2)
+}
 }
 \seealso{
 Other gear: 

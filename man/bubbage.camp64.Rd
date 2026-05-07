@@ -80,7 +80,6 @@ Other edades:
 \code{\link{datagegr.camp64}()},
 \code{\link{edadsect.camp64}()},
 \code{\link{edadstr.camp64}()},
-\code{\link{grafedtal.camp64}()},
 \code{\link{grafedtal.camps64}()},
 \code{\link{logabage.camp64}()},
 \code{\link{maphistage64}()}

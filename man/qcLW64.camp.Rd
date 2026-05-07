@@ -47,7 +47,9 @@ muestreadas. El tamaño de los círculos refleja el número de peces medidos y l
 colores marcan las distintas categorías si existe muestreo por categorías.
 }
 \examples{
+\dontrun{
 qcLW.camp64(1, 50, "N25", zona="porc", dns="local")
+}
 }
 \seealso{
 Other Control de calidad: 

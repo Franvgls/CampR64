@@ -24,7 +24,9 @@
 #' @return Crea una gráfica doble de boxplots en biomasa y número
 #' @seealso \link{histboxplot64}
 #' @examples
+#' \dontrun{
 #' histboxplot64.comp(1,50,Nsh[7:27],"cant",years=TRUE)
+#' }
 #' @family abunds
 #' @export
 histboxplot64.comp <- function(gr, esp, camps, zona="cant", dns=c("local","serv"), cor.time=TRUE,

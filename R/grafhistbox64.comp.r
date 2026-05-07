@@ -25,7 +25,10 @@
 #' @param nboot Número de réplicas bootstrap. Reducir (ej. 200) para exploración rápida, 1000 para resultados finales.
 #' @return Crea una gráfica doble de evolución de las abundancias en biomasa y número. 
 #' @seealso {\link{grafhistbox64}}, {\link{grafhistbox64.comp}}
-#' @examples grafhistbox64(1,45,Nsh[7:27],"Cant",DLS=T,es=FALSE,years=TRUE,tline=TRUE,ti=TRUE,sub=TRUE)
+#' @examples 
+#' \dontrun{
+#' grafhistbox64.comp(1,45,Nsh[7:27],"cant","local",DLS=T,es=FALSE,years=TRUE,tline=TRUE,ti=TRUE,sub=TRUE)
+#' }
 #' @export
 grafhistbox64.comp<-function(gr,esp,camps,zona="porc",dns=c("local","serv"),cor.time=TRUE,kg=TRUE,ci.lev=.8,DLS=F,idi="l",SE=TRUE,es=TRUE,sector=NA,
 	Nas=FALSE,excl.sect=NA,ymax=c(NA,NA),tline=FALSE,years=TRUE,ti=TRUE,mar=NA,nboot=1000) {

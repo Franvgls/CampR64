@@ -8,7 +8,9 @@
 #' @param nlans Mínimo de lances en que ha aparecido la especie para mostrarla (default 2)
 #' @seealso \code{\link{qcdtall.camp64}}
 #' @examples
+#' \dontrun{
 #' qcdtallrev64.camp(camp="N25", zona="cant", dns="local", nlans=2)
+#' }
 #' @family Control de calidad
 #' @export
 qcdtallrev64.camp <- function(camp = "N12", zona = "cant",

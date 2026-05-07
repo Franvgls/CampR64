@@ -84,7 +84,9 @@ Si out.dat=TRUE devuelve un data.frame con columnas: lan,lat,long,prof,numero (d
 Saca mapas de distribución de una especie entre tallas tmin y tmax para varias campañas
 }
 \examples{
-maphistal(1,50,Psh[1:12],"Porc",1,23,layout=c(4,3),out.dat=TRUE)
+\dontrun{
+maphistal64(1,50,Psh[1:12],"porc","local",1,23,layout=c(4,3),out.dat=TRUE)
+}
 }
 \seealso{
 Other mapas: 
@@ -93,8 +95,7 @@ Other mapas:
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},
-\code{\link{armap.tot64}()},
-\code{\link{armap64}()},
+\code{\link{armap.camp64}()},
 \code{\link{maparea64}()},
 \code{\link{maphist64}()},
 \code{\link{maphistage64}()}

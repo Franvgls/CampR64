@@ -4,20 +4,36 @@
 \alias{CampsDNS.camp64}
 \title{Listado de campañas presentes en el directorio e información sobre ellas}
 \usage{
-CampsDNS.camp64(dns)
+CampsDNS.camp64(zona, dns = c("local", "serv"))
 }
 \arguments{
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant, Golfo de Cádiz "Arsa", Mediterráneo "Medi"}
+\item{zona}{Zona de trabajo: \code{"cant"}, \code{"porc"}, \code{"arsa"}
+o \code{"medi"}.}
+
+\item{dns}{Origen de los datos: \code{"local"} (disco local) o
+\code{"serv"} (red). Las rutas se resuelven a través de
+\code{CampR64_paths}, configurado en
+\code{~/.CampR64/configRoots_user.R}.}
 }
 \value{
-Un data.frame alineado con la lista de archivos presentes y el año
+Un \code{data.frame} (invisible) con una fila por campaña y
+columnas \code{NomCamp}, \code{Year}, \code{CAMP}, \code{LANCE},
+\code{FAUNA}, \code{NTALL}, \code{EDAD}, \code{HIDRO}. Se imprime por
+consola.
 }
 \description{
 Función ROBUSTA de acceso a datos sin ODBC:
-Alinea correctamente los archivos (CAMP, LANCE, FAUNA, ETC) usando el código de campaña (últimos 3 caracteres)
-como clave única. Si falta un archivo (ej. no hay HIDRO), deja el hueco con un punto en lugar de descolocar la lista.
+lista todos los DBF presentes en el directorio de la zona/dns indicada y
+los alinea por código de campaña (últimos 3 caracteres) como clave única.
+Si falta un archivo (ej. no hay HIDRO), deja el hueco con un punto en
+lugar de descolocar la lista. Adicionalmente extrae el año desde el
+archivo LANCE y el nombre interno de la campaña desde CAMP.
 }
 \examples{
-CampsDNS.camp("Cant")
+\dontrun{
+CampsDNS.camp64("cant", "local")
+CampsDNS.camp64("porc", "serv")
+CampsDNS.camp64("arsa", "local")
+}
 }
 \concept{Series datos}

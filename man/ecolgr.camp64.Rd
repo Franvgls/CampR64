@@ -31,8 +31,10 @@ Devuelve un data.frame con campos lan,lat,long,prof,div (Diversidad de Shanon),n
 Utiliza los datos del Camp para calcular la riqueza, diversidad y dominancia
 }
 \examples{
-ecolgr.camp(1,999,"P08","Porc",ind="n")
-ecolgr.camp(1,999,"M08","Medi",ind="n")
+\dontrun{
+ecolgr.camp(1,999,"P08","porc","local",ind="n")
+ecolgr.camp(1,999,"N08","cant","local",ind="n")
+}
 }
 \seealso{
 {\link{MapEcol.camp}}

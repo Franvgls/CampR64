@@ -16,13 +16,19 @@ maparea64(
 )
 }
 \arguments{
-\item{es}{Textos en español, si F en inglés}
+\item{es}{Textos en español (TRUE) o inglés (FALSE)}
 
-\item{leg}{incluye la leyenda con los colores/patrones de los estratos}
+\item{leg}{Incluye leyenda con los colores/patrones de los estratos}
 
-\item{bw}{Si T mapa en blanco y negro, si F colorea los estratos y sectores}
+\item{bw}{Si TRUE mapa en blanco y negro; si FALSE colorea estratos y sectores}
 
-\item{dens}{si mayor de 0 las superficies de los estratos tienen patrones de líneas}
+\item{dens}{Si > 0 las superficies de los estratos llevan patrón de líneas}
+
+\item{strat}{Si TRUE dibuja contorno de estratos}
+
+\item{places}{Si TRUE añade Galway y etiqueta IRLANDA/IRELAND}
+
+\item{xlims, ylims}{Límites del mapa}
 }
 \description{
 Mapa con la estratificación y el área general del banco de Porcupine incluyendo parte de Irlanda
@@ -34,11 +40,26 @@ Other mapas:
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},
-\code{\link{armap.tot64}()},
-\code{\link{armap64}()},
+\code{\link{armap.camp64}()},
+\code{\link{maphist64}()},
+\code{\link{maphistage64}()},
+\code{\link{maphistal64}()}
+
+Other mapas: 
+\code{\link{GrafMarksGPS}()},
+\code{\link{MapEcol.camp64}()},
+\code{\link{MapLansGPS64}()},
+\code{\link{MatchHidro.ctd64}()},
+\code{\link{NepFUs.camp64}()},
+\code{\link{armap.camp64}()},
 \code{\link{maphist64}()},
 \code{\link{maphistage64}()},
 \code{\link{maphistal64}()}
 }
 \concept{Porcupine}
+\concept{Porcupine
+Mapa general del banco de Porcupine
+
+Mapa con la estratificación y el área general del banco de Porcupine
+incluyendo parte de Irlanda.}
 \concept{mapas}

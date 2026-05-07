@@ -8,7 +8,10 @@
 #' @param getaphia si T busca en internet (debe estar disponible) los códigos AphiaID de las especies en cuestión
 #' @param verbose si T saca en pantalla, si F no salen en pantalla
 #' @return Devuelve un data.frame con el listado de taxones (especies) del grupo gr encontradas en la campaña
-#' @examples Fauna.camp(gr=1,camp="N12",dns="Cant",excl.sect=NA,getaphia=TRUE)
+#' @examples 
+#' \dontrun{
+#' Fauna.camp(gr=1,camp="N12",dns="Cant",excl.sect=NA,getaphia=TRUE)
+#' }
 #' @family ListadosFauna
 #' @export
 Fauna.camp<- function(gr="1",camp,zona="cant",dns=c("local","serv"),excl.sect=NA,incl2=TRUE,verbose=FALSE,getaphia=FALSE) {

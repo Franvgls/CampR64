@@ -31,7 +31,9 @@ Función de Salida de datos a DATRAS:
 Extrae las características de los lances para una campaña y los transforma en formato DATRAS HH.
 }
 \examples{
-# CAMPtoHHnw64("P01","porc","local")
+\dontrun{
+CAMPtoHHnw64("P01","porc","local")
+}
 }
 \seealso{
 {\code{CAMPtoHL}}

@@ -30,7 +30,9 @@ Devuelve un data.frame con datos de cada estación hidrográfica y la correspond
 Datos hidrográficos de una campaña
 }
 \examples{
-  print(dathidro.camp64("N25",zona="cant",dns=c("local")))
+\dontrun{
+ print(dathidro.camp64("N25",zona="cant",dns="local"))
+}
 }
 \seealso{
 {\link{MapLansGPS}}

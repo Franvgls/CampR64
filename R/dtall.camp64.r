@@ -24,8 +24,11 @@
 #' @param verbose Si T saca avisos de consistencia en tallas, sino los omite
 #' @return Si plot=T saca el gráfico, pero si out.dat=T puede exportar una matriz talla(filas)xCampañas(columnas)
 #' @seealso {\link{dtallbarplot}} {\link{dtall.lan}}
-#' @examples dtall.camp64(1,63,Psh,zona="porc",dns=c("local","serv"),es=F,sex=F,ti=T,years=T) 
-#' @examples dtall.camp64(1,50,Psh,zona="porc",dns=c("local","serv"),es=F,ti=T,years=T,out.dat=T)
+#' @examples 
+#' \dontrun{
+#' dtall.camp64(1,63,Psh,zona="porc",dns=c("local","serv"),es=F,sex=F,ti=T,years=T) 
+#' dtall.camp64(1,50,Psh,zona="porc",dns=c("local","serv"),es=F,ti=T,years=T,out.dat=T)
+#' }
 #' @export
 dtall.camp64<- function(gr,esp,camp,zona,dns=c("local","serv"),cor.time=TRUE,ti=FALSE,sub=NA,leg=TRUE,cexleg=1,bw=TRUE,es=TRUE,sex=TRUE,plot=T,idi="l",clms=2,
   layout=NA,excl.sect=NA,ymax=NA,out.dat=FALSE,years=TRUE,verbose=TRUE) {

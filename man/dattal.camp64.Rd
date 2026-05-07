@@ -41,7 +41,9 @@ Función de acceso a datos:
 Extrae los datos de abundancia por talla y sexo de una especie o conjunto de especies a partir de las distribuciones de talla
 }
 \examples{
-dattal.camp("1"," 50",paste("P0",7,sep=""),"Porc",excl.sect=c("B","C"))
+\dontrun{
+dattal.camp(1,50,"P07","porc","local",excl.sect=c("B","C"))
+}
 }
 \seealso{
 {\link{datos.camp}}

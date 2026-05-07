@@ -5,8 +5,11 @@
 #' @param zona Origen de bases de datos: "cant" cantábrico, "porc" Porcupine, "arsa" para el Golfo de Cádiz y "medit" para MEDITS
 #' @param plots si T abre una pantalla con cuatro gráficos de comparacion entre camp y DATRAS
 #' @return Devuelve un gráfico con cuatro plots puertas~prof, calones~prof, vertical~prof y lances en área
-#' @examples qclandatr.camp("N23","Cant")
-#' @examples qclandatr.camp("216","Arsa")
+#' @examples 
+#' \dontrun{
+#' qclandatr.camp64("N23","cant","local")
+#' qclandatr.camp64("216","arsa","local")
+#' }
 #' @seealso {\link{MapLansGPS}}
 #' @family Control de calidad
 #' @export

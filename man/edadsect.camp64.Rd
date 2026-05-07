@@ -39,7 +39,9 @@ edadsect.camp64(
 Función de resultados: abundancias estratificadas por edad para cada sector geográfico a partir de los datos del camp.
 }
 \examples{
+\dontrun{
 edadsect.camp64(1,43,"P01","porc","local",plus=8)
+}
 
 }
 \seealso{
@@ -49,7 +51,6 @@ Other edades:
 \code{\link{bubbage.camp64}()},
 \code{\link{datagegr.camp64}()},
 \code{\link{edadstr.camp64}()},
-\code{\link{grafedtal.camp64}()},
 \code{\link{grafedtal.camps64}()},
 \code{\link{logabage.camp64}()},
 \code{\link{maphistage64}()}

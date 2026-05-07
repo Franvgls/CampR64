@@ -25,9 +25,11 @@
 #' @param ppng Pointsize del PNG (default 15)
 #' @return Si out.dat=TRUE devuelve un data.frame con los datos CAMP e IEO fusionados por lance
 #' @examples
+#' \dontrun{
 #' ArteParComp64("N23", zona="cant", var="calones", Nlans=FALSE)
 #' ArteParComp64("N23", zona="cant", var="puertas", Nlans=TRUE, lan.cex=2)
 #' ArteParComp64("P25", zona="porc", var="vertical")
+#' }
 #' @family gear
 #' @export
 ArteParComp64 <- function(camp, zona = "cant", dns = c("local","serv"),

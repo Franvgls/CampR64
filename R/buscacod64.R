@@ -3,7 +3,10 @@
 #' Busca el código del grupo, especie y la familia a partir del nombre o fragmento de la especie. Es independiente de mayúsculas y minúsculas y puede sacar más de una especie si una parte de sus nombres coincide.
 #' @param nomb Nombre científico de la especie o fragmento del nombre entre ""
 #' @family datos_especies
-#' @examples buscacod("sph")
+#' @examples 
+#' \dontrun{
+#' buscacod64("sph","cant","local")
+#' }
 #' @export
 buscacod64<- function(nomb,zona="cant",dns=c("local","serv")) {
   if (length(nomb)>1) stop("Esta función no permite más de una especie por vez")

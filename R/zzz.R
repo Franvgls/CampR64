@@ -1,4 +1,4 @@
-.onLoad <- function(libname, pkgname) {
+.onAttach <- function(libname, pkgname) {
   paths_default <- list(
     local = list(base="", cant="", porc="", arsa="", medi=""),
     serv  = list(base="", cant="", porc="", arsa="", medi="")

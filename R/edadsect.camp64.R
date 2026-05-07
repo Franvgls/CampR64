@@ -12,7 +12,10 @@
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param AltAlk ALK alternativa tomada de un fichero de edad del Camp edadXYY.dbf sin ruta ni extensión
 #' 
-#' @examples edadsect.camp64(1,43,"P01","porc","local",plus=8)
+#' @examples 
+#' \dontrun{
+#' edadsect.camp64(1,43,"P01","porc","local",plus=8)
+#' }
 #' 
 #' @family edades
 #' @export

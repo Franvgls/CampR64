@@ -10,8 +10,11 @@
 #' @param sex si T incluye la información por sexos, si F no tiene en cuenta la información por sexos y lo trata todo como indeterminados
 #' @param incl2 Si T se incluyen los lances extra no incluidos para las abundancias o biomasas estratificadas
 #' @return A data.table con el formato de datos para otras especies con formato de geográfico por lances
-#' @examples # datCatches.camp64(1,18,"N23","Cant")
-#' @examples # datCatches.camp64(1,18,"P23","Porc")
+#' @examples 
+#' \dontrun{
+#' datCatches.camp64(1,18,"N23","cant","local")
+#' datCatches.camp64(1,18,"P23","porc","local")
+#' }
 #' @export
 datTalCatch64.camp<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),sex=TRUE,cor.time=TRUE,incl2=FALSE) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}

@@ -75,7 +75,9 @@ Si se detecta este error revisar la estructura de lanceXXX.dbf con la de
 otros ficheros de lances de los últimos años
 }
 \examples{
+\dontrun{
   NepFU26.camp64("N21","cant","local",ColFU=)
+  }
 }
 \seealso{
 Other mapas, NEP: 

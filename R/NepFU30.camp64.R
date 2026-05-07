@@ -28,7 +28,9 @@
 #' @return Produce un gráfico con los lances en los que ha habido cigala en el lance y especialmente los lances en cada FU dentro de Demersales FU25,FU30 y FU31
 #' @family mapas, NEP
 #' @examples
+#' \dontrun{
 #'   NepFU30.camp(camp="121",dns="Arsa")
+#'   }
 #' @export
 NepFU30.camp64<-function(camp,zona="arsa",dns=c("local","serv"),trimes=4,plot=TRUE,es=FALSE,ti=TRUE,ICESlab=FALSE,ceros=T,leg=T,escmult=.25,cexleg=1,
                       ICESrectcol=1,ICESrect=TRUE,places=TRUE,FU="FU30",ColFU="white",dens=20,out.dat=TRUE,bw=FALSE) {

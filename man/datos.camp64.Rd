@@ -43,5 +43,7 @@ Funciones para obtener data.frame de especies concretas a partir de los ficheros
 Saca los datos de los lances estratificados, por ello se produce un error si encuentra un lance con validez 1 y estrato o sector sin información.
 }
 \examples{
-datos.camp(1,50,"P10","Porc",kg=FALSE, cor.time=TRUE)
+\dontrun{
+datos.camp64(1,50,"P10","porc"."local",kg=FALSE, cor.time=TRUE)
+}
 }

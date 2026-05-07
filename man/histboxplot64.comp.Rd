@@ -68,7 +68,9 @@ para distintas zonas: Porcupine (zona="porc"), el Cantábrico (zona="cant"),
 Cádiz (zona="arsa"), y el Mediterráneo (zona="medi").
 }
 \examples{
+\dontrun{
 histboxplot64.comp(1,50,Nsh[7:27],"cant",years=TRUE)
+}
 }
 \seealso{
 \link{histboxplot64}

@@ -80,7 +80,9 @@ Crea una gráfica doble de evolución de las abundancias en biomasa y número.
 Ver documentación grafhistbox
 }
 \examples{
-grafhistbox64(1,45,Nsh[7:27],"Cant",DLS=T,es=FALSE,years=TRUE,tline=TRUE,ti=TRUE,sub=TRUE)
+\dontrun{
+grafhistbox64.comp(1,45,Nsh[7:27],"cant","local",DLS=T,es=FALSE,years=TRUE,tline=TRUE,ti=TRUE,sub=TRUE)
+}
 }
 \seealso{
 {\link{grafhistbox64}}, {\link{grafhistbox64.comp}}

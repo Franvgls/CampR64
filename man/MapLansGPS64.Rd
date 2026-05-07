@@ -46,7 +46,9 @@ Devuelve un data.frame con datos de cada lance, las variables dependen de la sel
 gráfica todos los lances de una campaña con las distancias recorridas en cada uno de ellos
 }
 \examples{
+\dontrun{
 MapLansGPS64("12C","cant")
+}
 }
 \seealso{
 {\link{datlan.camp}}, {\link{qcdistlan.camp}}
@@ -56,8 +58,7 @@ Other mapas:
 \code{\link{MapEcol.camp64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},
-\code{\link{armap.tot64}()},
-\code{\link{armap64}()},
+\code{\link{armap.camp64}()},
 \code{\link{maparea64}()},
 \code{\link{maphist64}()},
 \code{\link{maphistage64}()},

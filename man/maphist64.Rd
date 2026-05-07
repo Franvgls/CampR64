@@ -76,8 +76,10 @@ Si out.dat=TRUE devuelve un data.frame con columnas: lan,lat,long,prof,peso.gr,n
 Crea mapas con la distribución en biomasa o numero para distintas zonas: Porcupine (dns="Pnew"), el Cantábrico (dns=Cant), Cádiz= (dns=Arsa), y el Mediterráneo (dns=Medi)
 }
 \examples{
-maphist(1,50,Nsh[7:27],"Cant",layout=c(3,7),years=TRUE)
-maphist(1,50,As2[15:18],"Arsa",layout=c(2,2),years=TRUE,sub="ARSA 2nd quarter")
+\dontrun{
+maphist64(1,50,Nsh[7:27],"cant","local",layout=c(3,7),years=TRUE)
+maphist64(1,50,As2[15:18],"arsa","local",layout=c(2,2),years=TRUE,sub="ARSA 2nd quarter")
+}
 }
 \seealso{
 Other mapas: 
@@ -86,8 +88,7 @@ Other mapas:
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},
-\code{\link{armap.tot64}()},
-\code{\link{armap64}()},
+\code{\link{armap.camp64}()},
 \code{\link{maparea64}()},
 \code{\link{maphistage64}()},
 \code{\link{maphistal64}()}

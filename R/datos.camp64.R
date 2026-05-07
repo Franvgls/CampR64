@@ -12,7 +12,10 @@
 #' @param verbose si T avisa de que hay más de una especie y los datos mezclados pueden ser engañosos
 #' @return Devuelve un data.frame con los datos de la especie por lance: sector,lance,peso,numero,arsect (área del sector al que pertence el lance)
 #' @details Saca los datos de los lances estratificados, por ello se produce un error si encuentra un lance con validez 1 y estrato o sector sin información.
-#' @examples datos.camp(1,50,"P10","Porc",kg=FALSE, cor.time=TRUE)
+#' @examples 
+#' \dontrun{
+#' datos.camp64(1,50,"P10","porc"."local",kg=FALSE, cor.time=TRUE)
+#' }
 #' @export
 datos.camp64 <- function(gr, esp, camp, zona, dns=c("local","serv"), 
                          cor.time=TRUE, kg=TRUE, verbose=TRUE,

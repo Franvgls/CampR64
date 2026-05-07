@@ -9,7 +9,10 @@
 #' @param incl2 Si F deja fuera los lances especiales que actualmente no se transmiten a DATRAS, si T los incluye
 #' @return Devuelve un data.table con datos de cada lance en el formato HH de DATRAS. DATRAS requiere que los datos no tengan cabecera y el trimestre sea el que corresponde a la campaña, además de no tener "". Por ello se debe pasar a fichero con la orden: write.table(CAMPtoHH(Xyy,dns),"nombrearchivo.csv",sep=",",quote=F,col.names=F,row.names=F))
 #' @seealso {\code{CAMPtoHL}}
-#' @examples # CAMPtoHHnw64("P01","porc","local")
+#' @examples 
+#' \dontrun{
+#' CAMPtoHHnw64("P01","porc","local")
+#' }
 #' @export
 CAMPtoHHnw64<-function(camp,zona="cant",dns=c("local","serv"),quart=T,incl2=F) {
     if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}

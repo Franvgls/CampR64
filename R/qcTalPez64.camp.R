@@ -8,7 +8,9 @@
 #' @param verbose Si TRUE muestra también los lances sin errores (default FALSE)
 #' @return Imprime en consola las discordancias encontradas lance por lance
 #' @examples
+#' \dontrun{
 #' qcTalPez64.camp("N25", zona="cant", dns="local", gr=1)
+#' }
 #' @seealso \code{\link{qcTalPez.lan64}}
 #' @family Control de calidad
 #' @export

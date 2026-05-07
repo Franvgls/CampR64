@@ -9,10 +9,12 @@
 #' @param sex Por defecto (F) suma todos los individuos como indet. T saca los datos por sexo si los hay, no afecta si sólo hay indeterminados (3)
 #' @param muestr Por defecto (T) pondera los datos por el peso total en la captura del lance, si F coge los medidos realmente
 #' @family Distribuciones de tallas
-#' @examples 
+#' @examples
+#' \dontrun{ 
 #' dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=108,muestr=T)
 #' dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=108,muestr=F)
 #' dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=NA,muestr=F)
+#' }
 #' @export
 dtallan.camp64<- function(gr,esp,camp,zona,dns,lances=NA,sex=FALSE,muestr=TRUE) {
   if (length(camp)>1) stop("Esta función sólo se puede utilizar para una sola campaña")

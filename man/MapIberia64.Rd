@@ -52,7 +52,7 @@ Saca en pantalla el mapa y es utilizada por otras funciones
 Función auxiliar para sacar mapas de la campaña MEDITS
 }
 \examples{
-MapIberia()
+MapIberia64()
 }
 \seealso{
 Other mapas base: 

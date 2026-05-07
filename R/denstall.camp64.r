@@ -16,7 +16,10 @@
 #' @param years Si T saca los años como nombre de campaña en los paneles lattice de campañas
 #' @param cexleg Varía el tamaño de letra de los ejes y del número de la leyenda
 #' @family Distribuciones de tallas
-#' @examples denstall.camp(gr=1,esp=50,camp=Psh,dns="Porc",years=TRUE)
+#' @examples 
+#' \dontrun{
+#' denstall.camp(gr=1,esp=50,camp=Psh,zona="porc","local!",years=TRUE)
+#' }
 #' @export
 denstall.camp64<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),cor.time=TRUE,ti=FALSE,bw=TRUE,es=TRUE,plot=TRUE,idi="l",
   layout=NA,years=TRUE,cexleg=1,verbose=FALSE) {

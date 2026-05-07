@@ -28,9 +28,11 @@
 #' @param graf Si FALSE el gráfico va a pantalla; si es un string guarda como PNG con ese nombre
 #' @param xpng Anchura del PNG en píxeles (default 800); la altura se calcula automáticamente por asp
 #' @examples
+#' \dontrun{
 #' armap64("P25", zona="porc", arrows=TRUE, leg=TRUE)
 #' armap64("N24", zona="cant", Nlans=TRUE, strat=FALSE)
 #' armap64("224", zona="arsa", bw=FALSE, leg=TRUE)
+#' }
 #' @family mapas
 #' @export
 armap64 <- function(camp, zona = "cant",
@@ -67,6 +69,7 @@ armap64 <- function(camp, zona = "cant",
 
   dns  <- tolower(match.arg(dns))
   zona <- tolower(zona)
+  legpos <- ifelse(zona=="arsa","topright","bottomright")
 
   # ── 1. LANCES ──────────────────────────────────────────────────────────────
   ln <- datlan.camp64(camp = camp, zona = zona, dns = dns,
@@ -81,25 +84,32 @@ armap64 <- function(camp, zona = "cant",
   ln <- ln[ord, , drop = FALSE]
 
   # Rangos automáticos
+  # ── Rangos del mapa ────────────────────────────────────────────────────────
+  # Prioridad: 1º lo que pase el usuario, 2º defaults por zona, 3º auto desde lances
   if (is.null(xlims)) {
-    xr    <- range(ln$lon, na.rm = TRUE)
-    pad   <- max(diff(xr) * 0.05, 0.1)
+    xlims <- switch(zona,
+                    porc = c(-15.5, -8.5),
+                    arsa = c(-8.15, -5.5),
+                    NULL)
+  }
+  if (is.null(ylims)) {
+    ylims <- switch(zona,
+                    porc = c(50.9, 54.5),
+                    arsa = c(35.96, 37.334),
+                    NULL)
+  }
+  # Si seguimos sin xlims/ylims (ej. cant), calcular desde los lances
+  if (is.null(xlims)) {
+    xr   <- range(ln$long, na.rm = TRUE)
+    pad  <- max(diff(xr) * 0.05, 0.1)
     xlims <- c(xr[1] - pad, xr[2] + pad)
   }
   if (is.null(ylims)) {
-    yr    <- range(ln$lat, na.rm = TRUE)
-    pad   <- max(diff(yr) * 0.05, 0.1)
+    yr   <- range(ln$lat, na.rm = TRUE)
+    pad  <- max(diff(yr) * 0.05, 0.1)
     ylims <- c(yr[1] - pad, yr[2] + pad)
   }
-  if (zona=="porc") {
-    xlims <- c(-15.5,-7.8)
-    ylims <- c(50.5,54.5)
-  }
-  if (zona=="arsa") {
-    xlims = c(-8.15, -5.5)
-    ylims = c(35.96, 37.334)
-  }
-   
+  
   # ── asp y apertura PNG ────────────────────────────────────────────────────
   asp <- diff(ylims) / (diff(xlims) * cos(mean(ylims) * pi / 180))
   if (!is.logical(graf)) {
@@ -159,8 +169,8 @@ armap64 <- function(camp, zona = "cant",
 
   # ── 6. FLECHAS DE RECORRIDO ────────────────────────────────────────────────
   if (isTRUE(arrows) && nrow(ln) > 1) {
-    x1 <- ln$lon[-nrow(ln)]; y1 <- ln$lat[-nrow(ln)]
-    x2 <- ln$lon[-1];        y2 <- ln$lat[-1]
+    x1 <- ln$long[-nrow(ln)]; y1 <- ln$lat[-nrow(ln)]
+    x2 <- ln$long[-1];        y2 <- ln$lat[-1]
     arrows(x1, y1, x2, y2,
            length = 0.05,
            lwd    = lwdl,
@@ -175,25 +185,25 @@ armap64 <- function(camp, zona = "cant",
   if (isTRUE(Nlans)) {
     # Solo números, sin puntos
     if (any(val,  na.rm = TRUE))
-      text(ln$lon[val],  ln$lat[val],
+      text(ln$long[val],  ln$lat[val],
            labels = ln$lance[val],  cex = 0.8, font = 2, col = col_val)
     if (any(esp,  na.rm = TRUE))
-      text(ln$lon[esp],  ln$lat[esp],
+      text(ln$long[esp],  ln$lat[esp],
            labels = ln$lance[esp],  cex = 0.8, font = 2, col = col_esp)
     if (isTRUE(lan0) && any(nuls, na.rm = TRUE))
-      text(ln$lon[nuls], ln$lat[nuls],
+      text(ln$long[nuls], ln$lat[nuls],
            labels = ln$lance[nuls], cex = 0.8, font = 2, col = col_nul)
 
   } else if (isTRUE(lans)) {
     # Puntos
     if (any(val,  na.rm = TRUE))
-      points(ln$lon[val],  ln$lat[val],
+      points(ln$long[val],  ln$lat[val],
              pch = 21, cex = 1.0, bg = col_val)
     if (any(esp,  na.rm = TRUE))
-      points(ln$lon[esp],  ln$lat[esp],
+      points(ln$long[esp],  ln$lat[esp],
              pch = 21, cex = 1.0, bg = col_esp)
     if (isTRUE(lan0) && any(nuls, na.rm = TRUE))
-      points(ln$lon[nuls], ln$lat[nuls],
+      points(ln$long[nuls], ln$lat[nuls],
              pch = 13, cex = 1.1)
   }
 
@@ -201,7 +211,7 @@ armap64 <- function(camp, zona = "cant",
   if (isTRUE(Dates)) {
     dt <- try(as.Date(ln$fecha), silent = TRUE)
     if (!inherits(dt, "try-error"))
-      text(ln$lon, ln$lat, labels = format(dt, "%d-%m"), cex = 0.7, pos = 1)
+      text(ln$long, ln$lat, labels = format(dt, "%d-%m"), cex = 0.7, pos = 1)
   }
 
   # ── 9. CTDs ────────────────────────────────────────────────────────────────
@@ -228,7 +238,7 @@ armap64 <- function(camp, zona = "cant",
       leg_col  <- c(col_val, col_esp)
       if (isTRUE(lan0)) { leg_txt <- c(leg_txt, l_nul); leg_col <- c(leg_col, col_nul) }
       if (!is.null(hid) && isTRUE(CTDs)) { leg_txt <- c(leg_txt, l_ctd) }
-      legend("bottomright", legend = leg_txt, text.col = leg_col,
+      legend(legpos, legend = leg_txt, text.col = leg_col,
              bg = "white", inset = 0.05, cex = 0.9)
     } else {
       leg_pch  <- c(21, 21)
@@ -244,7 +254,7 @@ armap64 <- function(camp, zona = "cant",
         leg_bg  <- c(leg_bg,  if (bw) "white" else "lightblue")
         leg_cex <- c(leg_cex, 1.0)
       }
-      legend("bottomright", legend = leg_txt,
+      legend(legpos, legend = leg_txt,
              pch    = leg_pch,
              pt.bg  = leg_bg,
              pt.cex = leg_cex,

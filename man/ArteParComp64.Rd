@@ -71,9 +71,11 @@ con la profundidad, entre los datos del CAMP IEO y los datos de DATRAS.
 Sustituye a ArteParCompC, ArteParCompD y ArteParCompV.
 }
 \examples{
+\dontrun{
 ArteParComp64("N23", zona="cant", var="calones", Nlans=FALSE)
 ArteParComp64("N23", zona="cant", var="puertas", Nlans=TRUE, lan.cex=2)
 ArteParComp64("P25", zona="porc", var="vertical")
+}
 }
 \seealso{
 Other gear: 

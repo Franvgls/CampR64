@@ -47,8 +47,10 @@ AbAgStatRec.camp64(
 Función de resultados: abundancias estratificadas por edad en cada rectángulo ICES dentro del área de la cqampaña a partir de los datos del camp.
 }
 \examples{
+\dontrun{
 AbAgStatRec.camp64(1,74,"N21","cant","local",plus=3,DatGraf = FALSE)
 AbAgStatRec.camp64(1,43,"P10","porc","local",DatGraf = T)
+}
 }
 \seealso{
 Other edades: 
@@ -57,7 +59,6 @@ Other edades:
 \code{\link{datagegr.camp64}()},
 \code{\link{edadsect.camp64}()},
 \code{\link{edadstr.camp64}()},
-\code{\link{grafedtal.camp64}()},
 \code{\link{grafedtal.camps64}()},
 \code{\link{logabage.camp64}()},
 \code{\link{maphistage64}()}

@@ -37,7 +37,9 @@ Devuelve un data.frame con las capturas medias por lance de cada especie captura
 Muestra un listado de la biomasa y número medio de todas las especies capturadas del grupo gr
 }
 \examples{
+\dontrun{
 ListFauna.camp64(gr=1,camp="N12",zona="cant",dns="local",excl.sect=FALSE,incl2=FALSE)
+}
 }
 \seealso{
 Other ListadosFauna: 

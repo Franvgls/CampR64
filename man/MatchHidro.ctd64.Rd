@@ -69,7 +69,9 @@ Saca el mapa de diversidad en la campaña seleccionada.
 Utiliza los datos del Camp representar la variación geográfica de los datos hidrologicos, temperatura y salinidad
 }
 \examples{
-MatchHidro.ctd("N24","Cant",ind="t",ti=T)
+\dontrun{
+MatchHidro.ctd64("N24","cant","local",ti=T)
+}
 }
 \seealso{
 Other mapas: 
@@ -77,8 +79,7 @@ Other mapas:
 \code{\link{MapEcol.camp64}()},
 \code{\link{MapLansGPS64}()},
 \code{\link{NepFUs.camp64}()},
-\code{\link{armap.tot64}()},
-\code{\link{armap64}()},
+\code{\link{armap.camp64}()},
 \code{\link{maparea64}()},
 \code{\link{maphist64}()},
 \code{\link{maphistage64}()},

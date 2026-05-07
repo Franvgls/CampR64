@@ -19,7 +19,10 @@
 #' @param ypng height archivo png si graf es el nombre del fichero
 #' @param ppng points png archivo si graf es el nombre del fichero
 #' @return Saca el mapa de diversidad en la campaña seleccionada.
-#' @examples MatchHidro.ctd("N24","Cant",ind="t",ti=T)
+#' @examples 
+#' \dontrun{
+#' MatchHidro.ctd64("N24","cant","local",ti=T)
+#' }
 #' @family mapas
 #' @family hidrología
 #' @export

@@ -43,8 +43,10 @@ Extrae ALK para una especie de los ficheros del camp
 Función de acceso a datos: recupera la clave talla edad de una especie y campaña determinadas
 }
 \examples{
-GetAlk.camp(1,43,"N93","Cant",8) 
-GetAlk.camp(1,45,"P03","Porc",AltAlk="edadXYY") 
+\dontrun{
+GetAlk.camp(1,43,"N93","cant","local",8) 
+GetAlk.camp(1,45,"P03","porc","local",AltAlk="edadXYY") 
+}
 }
 \seealso{
 Other edades: 
@@ -53,7 +55,6 @@ Other edades:
 \code{\link{datagegr.camp64}()},
 \code{\link{edadsect.camp64}()},
 \code{\link{edadstr.camp64}()},
-\code{\link{grafedtal.camp64}()},
 \code{\link{grafedtal.camps64}()},
 \code{\link{logabage.camp64}()},
 \code{\link{maphistage64}()}

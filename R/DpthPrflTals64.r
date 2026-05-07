@@ -31,8 +31,11 @@
 #'   informando de esta situación.#' @param tabres Muestra una tabla resumen de la media, total de biomasa o número y frecuencia de la especie por estación según el brks especificado
 #' @param tit2 Añade un segundo título al gráfico especificando el rango de tallas
 #' @seealso {\link{DpthPrfl64}}
-#' @examples DpthPrflTals64(1, 50, "N08", "cant","local",10,20,brks = "norte",tabres=TRUE,ind="p")
-#' @examples DpthPrflTals64(1,50,"P08","porc","local",10,20,brks="porcupine")
+#' @examples 
+#' \dontrun{
+#' DpthPrflTals64(1, 50, "N08", "cant","local",10,20,brks = "norte",tabres=TRUE,ind="p")
+#' DpthPrflTals64(1,50,"P08","porc","local",10,20,brks="porcupine")
+#' }
 #' @export
 DpthPrflTals64<-function(gr,esp,camps,zona="porc",dns=c("local","serv"),tmin=0,tmax=999,cor.time=TRUE,incl2=T,ind="n",sex=NA,es=TRUE,ti=TRUE,idi="l",xmax=NA,
                        nlans=TRUE,spl=FALSE,brks="Sturges",tabres=TRUE,tit2=TRUE) {

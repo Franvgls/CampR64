@@ -25,7 +25,9 @@ Revisa la distribución de tallas de todas las especies de peces que hayan apare
 en una campaña, una por una en pantalla. Se puede salir cerrando el gráfico.
 }
 \examples{
+\dontrun{
 qcdtallrev64.camp(camp="N25", zona="cant", dns="local", nlans=2)
+}
 }
 \seealso{
 \code{\link{qcdtall.camp64}}

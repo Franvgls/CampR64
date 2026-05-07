@@ -35,5 +35,7 @@ Función de acceso a datos:
 Extrae los datos de peso y número de una especie o conjunto de especies a partir de las faunísticas de una campaña
 }
 \examples{
+\dontrun{
 datgr.camp(1,50,"P10",zona="porc",dns="local",cor.time=TRUE,incl2=FALSE)
+}
 }

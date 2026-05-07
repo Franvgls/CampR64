@@ -80,8 +80,10 @@ observada en lugar de generar un error. Se emite un aviso (\code{warning})
 informando de esta situación.#' @param tabres Muestra una tabla resumen de la media, total de biomasa o número y frecuencia de la especie por estación según el brks especificado
 }
 \examples{
+\dontrun{
 DpthPrflTals64(1, 50, "N08", "cant","local",10,20,brks = "norte",tabres=TRUE,ind="p")
 DpthPrflTals64(1,50,"P08","porc","local",10,20,brks="porcupine")
+}
 }
 \seealso{
 {\link{DpthPrfl64}}

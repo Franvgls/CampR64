@@ -9,7 +9,10 @@
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param Nas permite calcular los errores estándar aunque sólo haya un lance en algún estrato (haciendo varianza =0 en ese estrato, incorrecto pero da una idea cuando sólo un estrato entre varios tiene sólo un lance)
 #' @return Devuelve un número con nombres organizado en dos líneas (biomasa y número) en columnas por estratos de profundidad segun definidos en el Camp e información por columnas abundancia estratificada media por estrato (avgestr) y error estándar (SEestr) y totales (avgsect, SEsect). Preparado para pegarlo de año en año en los ficheros excel de abundancia en grupo de trabajo
-#' @examples databEstr(1,51,"N05","Cant")
+#' @examples 
+#' \dontrun{
+#' databEstr(1,51,"N05","cant","local")
+#' }
 #' @seealso {\link{databICES64} \link{databICESdiv64} \link{datab64}}
 #' @export
 #' 

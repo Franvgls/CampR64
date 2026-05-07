@@ -45,7 +45,9 @@ dattalgr.camp64(
 Muestra los datos de abundancia de una especie o conjunto de especies de un rango de tallas determinado a partir de las distribuciones de tallas. También puede mostrar los datos de biomasa a partir de la relación talla-peso
 }
 \examples{
+\dontrun{
 dattalgr.camp64("1",c(44:45),"N94","cant","local",0,45,ind="p")
+}
 }
 \seealso{
 {\link{datgr.camp}}

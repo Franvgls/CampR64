@@ -12,7 +12,10 @@
 #' @param verbose Si T muestra avisos problemas de tallas entre distintas especies
 #' @return Devuelve un data.frame con variables: talla, machos, hembras e indet(erminados) si existen todos y si sex=TRUE
 #' @seealso {\link{datos.camp}}
-#' @examples dattal.camp("1"," 50",paste("P0",7,sep=""),"Porc",excl.sect=c("B","C"))
+#' @examples 
+#' \dontrun{
+#' dattal.camp(1,50,"P07","porc","local",excl.sect=c("B","C"))
+#' }
 #' @export
 dattal.camp64<- function(gr,esp,camp,zona,dns=c("local","serv"),cor.time=TRUE,excl.sect=NA,sex=TRUE,verbose=TRUE) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}

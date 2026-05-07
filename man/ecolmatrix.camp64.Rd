@@ -40,7 +40,9 @@ Devuelve un data.frame con columnas lan, una con el peso o número de cada espec
 Crea un data frame con campos lance, peso, numero, subestrato (en doble cifra), área subestrato  y posición geográfica. Usando códigos "9" "999" extrae los datos para el conjunto de todas las especies y grupos
 }
 \examples{
-ecolmatrix.camp(1,999,"P01","Porc",ind="p")
+\dontrun{
+ecolmatrix.camp(1,999,"P01","porc","local",ind="p")
+}
 }
 \seealso{
 {\link{MapEcol.camp}}, {\link{ecolgr.camp}}

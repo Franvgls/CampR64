@@ -90,7 +90,9 @@ Crea una gráfica de evolución de las abundancias en biomasa o número y devuel
 Gráfico de cajas con la evolución en biomasa o abundancia en la serie histórica
 }
 \examples{
+\dontrun{
 grafhistbox64(1,45,Nsh[7:27],"cant","local",es=FALSE,years=TRUE,tline=TRUE,DLS=FALSE,ti=TRUE,sub=TRUE)
+}
 }
 \seealso{
 \code{\link{grafhistbox64.comp}}

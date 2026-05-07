@@ -40,11 +40,13 @@
 #' @param psize Tamaño del punto del archivo png, en este gráfico por defecto 15
 #' @return Si out.dat=TRUE devuelve un data.frame con columnas: lan,lat,long,prof,peso.gr,numero (de individuos entre tmin y tmax),camp, si out.dat=F saca el gráfico en pantalla o como objeto para combinar con otros gráficos con print.trellis
 #' @examples
-#' histboxplot(1,50,Nsh[7:27],"Cant",years=TRUE)
-#' histboxplot(1,50,Nsh[7:27],"Cant",years=TRUE,ind="n")
-#' histboxplot(1,50,Nsh[7:27],"Cant",years=TRUE,ind="n",ceros=FALSE)
-#' histboxplot(1,50,Nsh[21:40],"Cant",years=T,ind="p",latrange=c(42,43))
-#' histboxplot(1,50,Nsh,"Cant",latrange = c(42,43),graf="Graf")
+#' \dontrun{
+#' histboxplot(1,50,Nsh[7:27],"cant","local",years=TRUE)
+#' histboxplot(1,50,Nsh[7:27],"cant","local",years=TRUE,ind="n")
+#' histboxplot(1,50,Nsh[7:27],"cant","local",years=TRUE,ind="n",ceros=FALSE)
+#' histboxplot(1,50,Nsh[21:40],"cant","local",years=T,ind="p",latrange=c(42,43))
+#' histboxplot(1,50,Nsh,"cant","local",latrange = c(42,43),graf="Graf")
+#' }
 #' @family abunds
 #' @export
 histboxplot64<-function(gr,esp,camps,zona="porc",dns=c("local","serv"),cor.time=TRUE,incl2=TRUE,es=T,bw=TRUE,ti=TRUE,sub=NULL,out.dat=FALSE,ind="p",idi="l",

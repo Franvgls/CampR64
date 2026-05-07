@@ -74,7 +74,9 @@ Histograma de distribución de tallas con edades para varias campañas
 Función gráfica a partir de los ficheros del camp. Histograma distribución de tallas estratificada por edad en varias campañas
 }
 \examples{
+\dontrun{
 grafedtal.camps(1,43,Nsh[22:31],"Cant",plus=7,years=T,es=FALSE)
+}
 }
 \seealso{
 {\link{grafedtal.camp}}
@@ -86,7 +88,6 @@ Other edades:
 \code{\link{datagegr.camp64}()},
 \code{\link{edadsect.camp64}()},
 \code{\link{edadstr.camp64}()},
-\code{\link{grafedtal.camp64}()},
 \code{\link{logabage.camp64}()},
 \code{\link{maphistage64}()}
 }

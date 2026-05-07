@@ -10,7 +10,10 @@
 #' @param incl2 Si F deja fuera los lances especiales que actualmente no se transmiten a DATRAS, si T los incluye
 #' @param export Si T crea un fichero csv con todos los datos corregidos (APHIAs) en el directorio CAMP donde está el especies.dbf este es importable al especies.dbf con un append from deli with, quitando todos los peces grupo="1"
 #' @return Devuelve un data.table con datos de cada especie en el formato HL de DATRAS. DATRAS requiere que los datos no tengan cabecera y el trimestre sea el que corresponde a la campaña, además de no tener "". Por ello se debe pasar a fichero con la orden: write.table(CAMPtoHH(Xyy,dns),"nombrearchivo.csv",sep=",",quote=F,col.names=F,row.names=F))
-#' @examples # CAMPtoHLnw("P14","porc","local")
+#' @examples 
+#' \dontrun{
+#' CAMPtoHLnw64("P14","porc","local")
+#' }
 #' @import data.table
 #' @importFrom dplyr %>% arrange filter mutate across where
 #' @importFrom worrms wm_name2id

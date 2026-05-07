@@ -39,6 +39,8 @@ A data.table con el formato de datos para otras especies con formato de geográf
 Function to create geographical - bayesian models
 }
 \examples{
-# datCatches.camp64(1,18,"N23","Cant")
-# datCatches.camp64(1,18,"P23","Porc")
+\dontrun{
+datCatches.camp64(1,18,"N23","cant","local")
+datCatches.camp64(1,18,"P23","porc","local")
+}
 }

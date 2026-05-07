@@ -13,7 +13,10 @@
 #' @param sex Permite elegir entre machos(1), hembras(2) o indeterminados(3), NA escoge sin tener en cuenta el sexo
 #' @param ind Parámetro a representar saca los datos en "p"eso o "n"úmero
 #' @seealso {\link{datgr.camp}}
-#' @examples dattalgr.camp64("1",c(44:45),"N94","cant","local",0,45,ind="p")
+#' @examples 
+#' \dontrun{
+#' dattalgr.camp64("1",c(44:45),"N94","cant","local",0,45,ind="p")
+#' }
 #' @export
 dattalgr.camp64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),
                            tmin=1,tmax=999,cor.time=TRUE,incl2=TRUE,sex=NA,ind="n") {

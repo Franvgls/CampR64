@@ -17,7 +17,9 @@ buscaesp64(gr, esp, zona, dns = c("local", "serv"), id = "l")
 Busca el nombre de una especie a partir del código del grupo y especie.Puede dar el nombre científico, común o en inglés
 }
 \examples{
-buscaesp(1,50)
+\dontrun{
+buscaesp64(1,50,"cant","local")
+}
 }
 \seealso{
 Other datos_especies: 

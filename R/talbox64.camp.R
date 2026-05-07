@@ -15,7 +15,10 @@
 #' @param plot Saca el gráfico (T) o lo guarda como objeto para componer con otros gráficos (F)
 #' @param es Si T gráfico en castellano, si F gráfico en inglés
 #' @return Devuelve un vector con nombre con el número estratificado del rango de tallas deseados por campaña/año. Si se solicita plot=TRUE saca un gráfico de barras que muestra la abundancia por año. En peso sólo saca los resultados para una especie.
-#' @examples talbox.camps(2,19,Psh,"Porc",varwidth=T,notch=T)
+#' @examples 
+#' \dontrun{
+#' talbox64.camps(2,19,Psh,"porc","local",varwidth=T,notch=T)
+#' }
 #' @seealso {\link{dattal.camp64}}
 #' @export
 talbox64.camps<- function(gr,esp,camps,zona="cant",dns=c("local","Serv"),notch=TRUE,outline=FALSE,varwidth=T,cor.time=TRUE,boxplot=T,excl.sect=NA,years=TRUE,mult=100,ti=TRUE,las=2,es=FALSE,bw=TRUE,idi="l",cexleg=1) {

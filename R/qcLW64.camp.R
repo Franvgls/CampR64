@@ -15,7 +15,9 @@
 #' @param breg Coeficiente "b" alternativo de la regresión talla-peso (NA = usar el del CAMP)
 #' @return Gráfico de errores por lance y tabla con los lances fuera del margen de error
 #' @examples
+#' \dontrun{
 #' qcLW.camp64(1, 50, "N25", zona="porc", dns="local")
+#' }
 #' @family Control de calidad
 #' @export
 qcLW64.camp <- function(gr, esp, camp = "P11", zona = "porc",

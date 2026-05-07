@@ -19,7 +19,9 @@
 #'   length-frequency data. Fish. Bull. 106: 116-120.
 #' @seealso \code{\link{dtall.camp64}}
 #' @examples
+#' \dontrun{
 #' qcdtall.camp64(1, 43, "P08", zona="porc", dns="local", lance=35)
+#' }
 #' @family Control de calidad
 #' @export
 qcdtall64.camp <- function(gr, esp, camp = "P12", zona = "cant",

@@ -35,7 +35,9 @@ especies capturadas sin medir, especies medidas sin captura, y discordancias
 entre pesos y números del fauna vs los calculados desde las tallas.
 }
 \examples{
+\dontrun{
 qcTalPez64.lan("N25", zona="cant", dns="local", lan=23, gr=1)
+}
 }
 \seealso{
 \code{\link{qcTalPez.camp64}}

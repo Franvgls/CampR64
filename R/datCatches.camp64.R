@@ -8,8 +8,11 @@
 #' @param cor.time Corrección del tiempo de arrastre al calcular las abundancias (mantener en T, *da datos por media hora de lance*)
 #' @param incl2 Si T se incluyen los lances extra no incluidos para las abundancias o biomasas estratificadas
 #' @return A data.table con el formato de datos para otras especies con formato de geográfico por lances
-#' @examples # datCatches.camp(1,18,"N23","Cant")
-#' @examples # datCatches.camp(1,18,"P23","Porc")
+#' @examples 
+#' \dontrun{
+#' datCatches.camp(1,18,"N23","Cant")
+#' datCatches.camp(1,18,"P23","Porc")
+#' }
 #' @export
 datCatches.camp64<-function(gr,esp,camp,zona="cant",dns="local",cor.time=TRUE,incl2=FALSE) {
   datesp<-datgr.camp64(gr,esp,camp,zona,dns,cor.time=cor.time,incl2=incl2)

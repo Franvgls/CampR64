@@ -16,7 +16,10 @@
 #' @param places si T por defecto, incluye las etiquetas de países y ciudad en tierra, no funciona en Porcupine
 #' @param es Si T por defecto los carteles salen en español, en caso contrario en inglés
 #' @param bw Si T gráfico en blanco y negro por default, si F gráfico en color
-#' @examples GrafMarksGPS64("N14","Cant")
+#' @examples 
+#' \dontrun{
+#' GrafMarksGPS64("N14","Cant")
+#' }
 #' @family mapas
 #' @family PescaWin
 #' @export

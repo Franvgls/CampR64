@@ -27,7 +27,9 @@
 #' @return Produce un gráfico con los lances en los que ha habido cigala en el lance y especialmente los lances en cada FU dentro de Demersales FU25,FU26 y FU31
 #' @family mapas
 #' @examples
+#' \dontrun{
 #'   NepFUs.camp64(camp="N20",zona="cant",dns="local",plot=T,plotnep=T)
+#'   }
 #' @export
 NepFUs.camp64<-function(camp=Nsh[length(Nsh)],zona="cant",dns=c("local","serv"),plot=TRUE,plotnep=TRUE,es=FALSE,ti=TRUE,ICESlab=TRUE,
                       ICESrectcol=2,ICESrect=TRUE,FU=NA,places=TRUE,out.dat=TRUE) {

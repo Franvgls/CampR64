@@ -10,8 +10,11 @@
 #' @param n.ots Número de otolitos o proporción? Si T da el número de otolitos  
 #' @param AltAlk ALK alternativa tomada de un fichero edadXYY.dbf sin ruta ni extensión
 #' @param keep_sexo nantiene la columna de sexo para claves talla edad que usan el sexo por defecto =FALSE
-#' @examples GetAlk.camp(1,43,"N93","Cant",8) 
-#' @examples GetAlk.camp(1,45,"P03","Porc",AltAlk="edadXYY") 
+#' @examples 
+#' \dontrun{
+#' GetAlk.camp(1,43,"N93","cant","local",8) 
+#' GetAlk.camp(1,45,"P03","porc","local",AltAlk="edadXYY") 
+#' }
 #' @family edades
 #' @export
 GetAlk.camp64 <- function(gr, esp, camp, zona = "cant", dns = c("local","serv"),

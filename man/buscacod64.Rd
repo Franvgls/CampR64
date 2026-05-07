@@ -13,7 +13,9 @@ buscacod64(nomb, zona = "cant", dns = c("local", "serv"))
 Busca el código del grupo, especie y la familia a partir del nombre o fragmento de la especie. Es independiente de mayúsculas y minúsculas y puede sacar más de una especie si una parte de sus nombres coincide.
 }
 \examples{
-buscacod("sph")
+\dontrun{
+buscacod64("sph","cant","local")
+}
 }
 \seealso{
 Other datos_especies: 

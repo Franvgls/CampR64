@@ -17,9 +17,14 @@
 #' @param ymax Valor máximo del eje y
 #' @param out.dat Si T el resultado final de la función es la figura en pantalla, pero los datos en objeto
 #' @return Saca gráfica con distribución de tallas y la distribución de las edades en cada talla. Si out.dat=TRUE saca un data.frame con columnas n(valor del número de la distribución estratifcada para la talla y la edad),talla,edad,camp. Da error si no existe ALK para la especie en la campaña
-#' @seealso {\link{grafedtal.camps}}
-#' @examples grafedtal.camp64(1,43,"P09",zona="porc",dns=c("local","serv"),es=FALSE,out.dat=TRUE)
-#' @family edades
+#' @seealso \code{\link{grafalk.camp64}} para la composición proporcional
+#'   por edad (ALK gráfica), \code{\link{GetAlk.camp64}} para los datos
+#'   numéricos.
+#' @examples 
+#' \dontrun{
+#' grafedtal.camp64(1,43,"P09",zona="porc",dns=c("local","serv"),es=FALSE,out.dat=TRUE)
+#' }
+#' @family ALK
 #' @export
 grafedtal.camp64 <- function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,cor.time=TRUE,excl.sect=NA,AltAlk=NA,ti=FALSE,leg=TRUE,cexleg=1,es=TRUE,plot=TRUE,ymax=NA,out.dat=FALSE) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}

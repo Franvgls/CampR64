@@ -24,8 +24,10 @@
 #' @return Devuelve un data.frame con datos de cada lance, las variables dependen de la selección de hidro y redux. En cualquier caso incluye variables weight.time con el factor de calibración para lances con menos tiempo del estándar y arsect: el área del sector al que corresponde el lance dentro del muestreo
 #' @seealso {\link{MapLansGPS}}
 #' @examples
-#'   print(datlan.camp64(Nsh[24:28],"cant","local",hidro=FALSE,excl.sect=c("A")))
-#'   print(datlan.camp64("P16","porc","local",bio=T))
+#' \dontrun{
+#' datlan.camp64(Nsh[24:28],"cant","local",hidro=FALSE,excl.sect=c("A"))
+#' datlan.camp64("P16","porc","local",bio=T)
+#' }
 #' @export
 datlan.camp64<-function(camp,zona,dns=c("local","serv"),incl2=TRUE,incl0=FALSE,excl.sect=NA,redux=FALSE,year=TRUE,quarter=TRUE,bio=FALSE) {
   lan<-readCampDBF("lance",zona,camp[1],dns)

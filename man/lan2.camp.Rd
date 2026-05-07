@@ -17,5 +17,7 @@ lan2.camp(camp, zona = "cant", dns = c("local", "serv"))
 Busca y devuelve los lances especiales de una campaña
 }
 \examples{
+\dontrun{
 lan2.camp(camp="P01",zona="porc",serv="local")
+}
 }

@@ -25,8 +25,10 @@
 #' @param ppng points png archivo si graf es el nombre del fichero
 #' @return Si out.dat=TRUE devuelve un data.frame con columnas: lan,lat,long,prof,peso.gr,numero (de individuos entre tmin y tmax),camp, si out.dat=F saca el gráfico en pantalla o como objeto para combinar con otros gráficos con print.trellis
 #' @examples
+#' \dontrun{
 #' ArtePars64("N23","cant",Nlans = F,ti=T)
 #' ArtePars64("N23","cant",Nlans = T,ti=T,lan.cex=2)
+#' }
 #' @family gear
 #' @export
 ArtePars64<-function(camp,zona="cant",dns=c("local","serv"),incl2=TRUE,es=T,bw=TRUE,ti=TRUE,sub=NULL,out.dat=FALSE,ceros=TRUE,cex.leg=1.1,

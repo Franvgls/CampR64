@@ -38,7 +38,9 @@ Listado de especies por campaña sin  datos de las especies del grupo, sólo nom
 Muestra un listado de todas las especies capturadas del grupo gr. se puede utilizar para sacar listado de todos los lances o sólo de los estándares. Si hay especies con código desonocido aparecen al final del listado#' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados 6 para deshechos y otros.
 }
 \examples{
+\dontrun{
 Fauna.camp(gr=1,camp="N12",dns="Cant",excl.sect=NA,getaphia=TRUE)
+}
 }
 \seealso{
 Other ListadosFauna: 
