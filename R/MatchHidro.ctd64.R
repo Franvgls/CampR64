@@ -27,9 +27,11 @@
 #' @family hidrología
 #' @export
 MatchHidro.ctd64<-function(camp,zona="porc",dns=c("local","serv"),plot=TRUE,subtit=TRUE,bw=FALSE,ti=TRUE,es=TRUE,out.dat=FALSE,cex.pt=1,
-                       cexleg=1,years=TRUE,observ=FALSE,estn=FALSE,lanctd=FALSE,graf=FALSE,xpng=1200,ypng=800,ppng=15,cuts=4) {
-    op <- par(no.readonly = TRUE)
-    on.exit(par(op), add = TRUE)
+                       cexleg=1,years=TRUE,observ=FALSE,estn=FALSE,lanctd=FALSE,graf=FALSE,xpng=1200,ypng=800,ppng=15,cuts=4,restore.par=TRUE) {
+    if (restore.par) {
+      op <- par(no.readonly = TRUE)
+      on.exit(par(op), add = TRUE)               # add para no pisar el dev.off()
+    }
     lnkk<-datlan.camp64(camp,zona,dns,redux=T)
     hdkk<-dathidro.camp64(camp,zona,dns)
     if (zona=="cant") MapNort64()

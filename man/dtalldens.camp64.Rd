@@ -98,6 +98,7 @@ dtalldens.camp64(gr=1, esp=42, camp=Nsh[25:29], zona="cant",
 
 Other Distribuciones de tallas: 
 \code{\link{denstall.camp64}()},
-\code{\link{dtallan.camp64}()}
+\code{\link{dtallan.camp64}()},
+\code{\link{dtallbarplot64}()}
 }
 \concept{Distribuciones de tallas}

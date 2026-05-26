@@ -95,6 +95,7 @@ Other mapas:
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},
+\code{\link{arMapLansGPS64}()},
 \code{\link{armap.camp64}()},
 \code{\link{maparea64}()},
 \code{\link{maphist64}()},

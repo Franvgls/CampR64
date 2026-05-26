@@ -45,9 +45,6 @@ denstall.camp64<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),cor.tim
     if (is.list(ti)) tit<-ti
     else tit<-list(label=ti)
   }
-  #	if (ti) tit<-list(label=buscaesp(gr,esp,id=id),font=4,cex=1.2)
-  #	else tit<-NULL
-  # if (!plot) tit<-list(label=ifelse(es,"Distribución de tallas","Length distribution"),font=2,cex=.9) 
   ndat<-length(camp)
   for (i in 1:ndat) {
     tmp <- dattal.camp64(gr, esp, camp[i], zona, dns, cor.time=cor.time)

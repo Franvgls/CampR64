@@ -19,6 +19,7 @@ buscacod64("sph","cant","local")
 }
 \seealso{
 Other datos_especies: 
+\code{\link{AbrvEsp64}()},
 \code{\link{BuscaAphia64}()},
 \code{\link{buscaesp64}()},
 \code{\link{camptoyear}()}

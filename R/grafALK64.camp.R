@@ -54,6 +54,7 @@
 #' @param out.dat Si \code{TRUE} devuelve invisible una lista con la
 #'   matriz de proporciones, los \emph{n} reales por talla y un vector
 #'   lógico de tallas imputadas.
+#' @param restore.par si TRUE restaura párametros gráficos, FALSE si se quieren componer gráficos
 #' @return Invisible: \code{NULL}, o una \code{list(prop, n, imputed)}
 #'   si \code{out.dat = TRUE}.
 #' @seealso \code{\link{grafedtal.camp64}}, \code{\link{GetAlk.camp64}}
@@ -75,7 +76,8 @@ GrafAlk64.camp <- function(gr, esp, camp, zona = "cant",
                            cols = NULL,
                            imp.flag = 99,
                            imp.detect = c("auto", "cell", "sum", "none"),
-                           out.dat = FALSE) {
+                           out.dat = FALSE,
+                           restore.par=TRUE) {
   
   if (length(camp) > 1) stop("Sólo una campaña por llamada.")
   if (length(esp)  > 1) stop("Sólo una especie por llamada.")
@@ -132,9 +134,11 @@ GrafAlk64.camp <- function(gr, esp, camp, zona = "cant",
   
   # ── Plot ─────────────────────────────────────────────────────────────────
   top_mar <- if (leg) 6.0 else 3.5
-  op <- par(mar = c(4.2, 4.5, top_mar, 1.0), mgp = c(2.6, .7, 0))
-  on.exit(par(op), add = TRUE)
-  
+  if (restore.par) {
+    op <- par(mar = c(4.2, 4.5, top_mar, 1.0), mgp = c(2.6, .7, 0))
+    on.exit(par(op), add = TRUE)               # add para no pisar el dev.off()
+  }
+
   mp <- barplot(t(prop), col = cols, border = "gray30",
                 ylim = c(0, 1.08),
                 xlab = ifelse(es, "talla (cm)", "length (cm)"),

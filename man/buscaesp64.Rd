@@ -23,6 +23,7 @@ buscaesp64(1,50,"cant","local")
 }
 \seealso{
 Other datos_especies: 
+\code{\link{AbrvEsp64}()},
 \code{\link{BuscaAphia64}()},
 \code{\link{buscacod64}()},
 \code{\link{camptoyear}()}

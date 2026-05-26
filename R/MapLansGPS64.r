@@ -26,7 +26,7 @@ MapLansGPS64<-function(camp,zona="cant",dns=c("local","serv"),Nlans=FALSE,incl0=
   lannul<-lan[lan$validez==0,c("longitud_l","latitud_l","prof_l","longitud_v","latitud_v","prof_v")]
   lan<-lan[lan$validez!=0,c("lance","longitud_l","latitud_l","prof_l","longitud_v","latitud_v","prof_v")]
   if (substr(zona,1,4)=="porc") {
-    if (any(!is.na(xlims))) {mapporco64(xlims=xlims,ylims=ylims,ax=ax)} else mapporco64()
+    if (any(!is.na(xlims))) {MapPorc64(xlims=xlims,ylims=ylims,ax=ax)} else MapPorc64()
     }
   if (substr(zona,1,4)=="cant") {
     if (any(!is.na(xlims))) {MapNort64(xlims=xlims,ylims=ylims,places=places,es=es,bw=bw,ax=ax)} else MapNort64()

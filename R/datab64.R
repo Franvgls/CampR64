@@ -4,7 +4,8 @@
 #' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
 #' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo
 #' @param camp Campaña de la que se extraen los datos: un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param dns Elige el origen de las bases de datos: Porcupine "Porc" o "Pnew", Cantábrico "Cant, Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param zona Elige el origen de las bases de datos: Porcupine "Porc" o "Pnew", Cantábrico "Cant, Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param dns elige de dónde se toman los datos, "local" del ordenador, "serv" del servidor
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param Nas Permite calcular los errores estándar aunque sólo haya un lance en algún estrato (haciendo varianza =0 en ese estrato, incorrecto pero da una idea cuando sólo un estrato entre varios tiene sólo un lance)
 #' @return Devuelve un número con nombres organizado en dos líneas (biomasa y número) en columnas por sectores geográficos segun los definidos en el Camp e información por columnas abundancia estratificada media por estrato (avgestr) y error estándar (SEestr) y totales (avgsect, SEsect). Preparado para pegarlo de año en año en los ficheros excel de abundancia en grupo de trabajo
@@ -21,7 +22,7 @@ datab64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),cor.time=TRUE,Na
   dumb5<-rbind(c(dumb1,dumb2),
                c(dumb3,dumb4))
   rownames(dumb5)<-c(paste(buscaesp64(gr,esp,zona,dns),camp,"p",sep="_"),paste(buscaesp64(gr,esp,zona,dns),camp,"n",sep="_"))
-  colnames(dumb5)<-c(names1,names2)
+  colnames(dumb5)<-c("S1_Avg","S1_SE","S2_Avg","S2_SE","Tot_Avg","Tot_SE")        #c(names1,names2)
   dumb5
 }
 #datab("1"," 36","N05","Cant")

@@ -24,7 +24,8 @@ MatchHidro.ctd64(
   xpng = 1200,
   ypng = 800,
   ppng = 15,
-  cuts = 4
+  cuts = 4,
+  restore.par = TRUE
 )
 }
 \arguments{
@@ -79,6 +80,7 @@ Other mapas:
 \code{\link{MapEcol.camp64}()},
 \code{\link{MapLansGPS64}()},
 \code{\link{NepFUs.camp64}()},
+\code{\link{arMapLansGPS64}()},
 \code{\link{armap.camp64}()},
 \code{\link{maparea64}()},
 \code{\link{maphist64}()},

@@ -20,7 +20,8 @@ GrafAlk64.camp(
   cols = NULL,
   imp.flag = 99,
   imp.detect = c("auto", "cell", "sum", "none"),
-  out.dat = FALSE
+  out.dat = FALSE,
+  restore.par = TRUE
 )
 }
 \arguments{
@@ -62,6 +63,8 @@ valor.}
 \item{out.dat}{Si \code{TRUE} devuelve invisible una lista con la
 matriz de proporciones, los \emph{n} reales por talla y un vector
 lógico de tallas imputadas.}
+
+\item{restore.par}{si TRUE restaura párametros gráficos, FALSE si se quieren componer gráficos}
 }
 \value{
 Invisible: \code{NULL}, o una \code{list(prop, n, imputed)}

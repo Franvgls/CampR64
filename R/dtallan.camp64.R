@@ -82,7 +82,7 @@ dtallan.camp64<- function(gr,esp,camp,zona,dns,lances=NA,sex=FALSE,muestr=TRUE) 
   if (!sex) {names(dtall)<-c("talla","numero")}
   if (sum(dtall[,-1])==0) {
     dtall<-dtall[1,]
-    print(paste("Sin captura de",buscaesp(gr,esp),ifelse(length(lances)>1,"en estos lances","en este lance")))
+    print(paste("Sin captura de",buscaesp64(gr,esp,zona,dns),ifelse(length(lances)>1,"en estos lances","en este lance")))
   }
   as.data.frame(dtall)
 }

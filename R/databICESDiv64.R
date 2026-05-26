@@ -11,7 +11,7 @@
 #' @return Devuelve un número con nombres organizado en dos líneas (biomasa y número) en columnas por subdivisiones ICES por columnas abundancia estratificada media por XIa, 8.cE, 8.cW
 #' @seealso {\link{databICES} \link{databEstr} \link{datab}}
 #' @export
-databICESdiv<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),cor.time=TRUE,Nas=FALSE) {
+databICESdiv64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),cor.time=TRUE,Nas=FALSE) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
   if (all(substr(zona,1,4)!="cant")) {stop("Función sólo disponible para Demersales Costa Norte divisiones 9.a, 8.c Este y 8.c Oeste")}
   dumb1<-sapply(CV.camp64(gr,esp,camp,zona,dns,cor.time=cor.time,excl.sect=c(2:5),Nas=Nas)$sectores[1:2,],t)

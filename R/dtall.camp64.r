@@ -99,7 +99,10 @@ dtall.camp64<- function(gr,esp,camp,zona,dns=c("local","serv"),cor.time=TRUE,ti=
 	a$camp<-factor(as.character(a$camp),levels=camp)
 	a$talla<-as.numeric(as.character(a$talla))
 	a$n<-as.numeric(as.character(a$n))
-	if (sum(a$n)==0) stop(paste0(ifelse(es,"No hay capturas de la especie ","No catches of species "),buscaesp(gr,esp),ifelse(es," en las campañas seleccionadas"," in surveys selected")))
+	if (sum(a$n)==0) {
+	  message(paste0(ifelse(es,"No hay capturas de la especie ","No catches of species "),buscaesp64(gr,esp,zona,dns),ifelse(es," en las campañas seleccionadas"," in surveys selected")))
+    return(invisible(NULL))
+	}
 	a$sex<-factor(as.character(a$sex),levels=c(1:3))
 	maxy<-tapply(a$n,a[,c(1,2)],sum)
 	maxy[which(is.na(maxy))]<-0
