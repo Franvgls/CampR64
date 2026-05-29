@@ -55,7 +55,7 @@ dtall.camp64<- function(gr,esp,camp,zona,dns=c("local","serv"),cor.time=TRUE,ti=
 	sixn<-c("1","2","3")
 	dtalln<-c("machos","hembras","indet")
 	if (is.logical(ti)) {
-		if (ti) {tit<-list(label=buscaesp64(gr,esp,zona,id=idi),font=ifelse(idi=="l",4,2),cex=1*cexleg)}
+		if (ti) {tit<-list(label=buscaesp64(gr,esp,zona,dns,id=idi),font=ifelse(idi=="l",4,2),cex=1*cexleg)}
 		else {tit<-NULL}
 		}
 	else {

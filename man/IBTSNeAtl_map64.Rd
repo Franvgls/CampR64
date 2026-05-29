@@ -26,7 +26,7 @@ IBTSNeAtl_map64(
   lwdl = 0.1,
   shpdir = system.file("shapes", package = "NeAtlIBTS64"),
   places = FALSE,
-  minpop = 2e+05,
+  minpop = 200000,
   newdev = TRUE,
   graf = FALSE,
   xpng = 1200,
