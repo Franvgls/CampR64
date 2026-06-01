@@ -9,6 +9,10 @@ unid.camp64<-function(gr,esp,zona="cant",dns=c("local","serv")) {
     stop("Esta función no permite más de una especie por vez")
   }
   else {especie<-readCampDBF("especies",zona,camp=NULL,dns)}
+  faltan<-setdiff(c("grupo","esp","med","increm"),names(especie))
+  if (length(faltan))
+    stop("especies.dbf en zona '",zona,"': falta(n) columna(s) ",
+         paste(faltan,collapse=", ")," (¿esquema distinto? revisa GRUPOTAXO).")
   especie<-especie[especie$grupo==gr & especie$esp==as.character(esp),c("med","increm")] 
   especie
 }

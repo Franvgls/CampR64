@@ -61,14 +61,19 @@ readCampDBF <- function(tipo,
   if (identical(tolower(tipo), "especies")) {
     if (zona %in% c("cant","porc","medi")) {
       base <- CampR64_paths[[dns_key]]$base
-      path <- file.path(base, "especies.dbf")
     } else if (zona == "arsa") {
       base <- CampR64_paths[[dns_key]][["arsa"]]
-      path <- file.path(base, "especies.dbf")
     } else {
       stop("Zona no soportada para especies: ", zona)
     }
-    
+
+    if (is.null(base) || !nzchar(base))
+      stop("Ruta de especies no configurada para dns='", dns,
+           "' (dns_key='", dns_key, "') zona='", zona,
+           "' en CampR64_paths. ¿Ejecutaste configurarCampR64()?")
+
+    path <- file.path(base, "especies.dbf")
+
     if (verbose) message("readCampDBF[especies]: dns=", dns, " → dns_key=", dns_key,
                          " | zona=", zona, " | path=", path)
     

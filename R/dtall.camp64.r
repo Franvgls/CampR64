@@ -38,8 +38,8 @@ dtall.camp64<- function(gr,esp,camp,zona,dns=c("local","serv"),cor.time=TRUE,ti=
     increm<-unid.camp64(gr,esp,zona)[2] 
     medida<-ifelse(unid.camp64(gr,esp,zona)[1]==1,"cm",ifelse(increm==5,"x5 mm","mm")) }
   else { 
-    increm<-unid.camp64(gr,esp,zona)[2] 
-    medida<-ifelse(unid.camp64(gr,esp,zona)[1]==1,"cm",ifelse(increm==5,"x5 mm","mm"))
+    increm<-unid.camp64(gr,esp,zona,dns)[2] 
+    medida<-ifelse(unid.camp64(gr,esp,zona,dns)[1]==1,"cm",ifelse(increm==5,"x5 mm","mm"))
   }
   if (bw) {
     colbars<-c(gray(.2),gray(.6),"white")
