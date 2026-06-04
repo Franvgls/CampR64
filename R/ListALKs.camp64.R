@@ -66,7 +66,7 @@ ListALKs.camp64 <- function(zona = "cant",
     keep    <- !is.na(ESP_NUM)
     if (!any(keep)) next
     
-    # nº de otolitos: prioriza NL; si no hay, suma por fila de E0..E*
+    # nª de otolitos: prioriza NL; si no hay, suma por fila de E0..E*
     if ("NL" %in% names(df)) {
       NL <- suppressWarnings(as.integer(df$NL)); NL[is.na(NL)] <- 0L
       n_por_esp <- tapply(NL[keep], INDEX = ESP_NUM[keep], FUN = sum, na.rm = TRUE)

@@ -23,7 +23,11 @@
 #' @param cexleg Factor de escala para tamaño del título
 #' @param ymax Tope eje Y (NA → automático, múltiplo de 50 m por encima del máx)
 #' @param invert.y Si TRUE invierte el eje Y (mayor profundidad abajo)
+#' @param maxsymb símbolo de profuncidad máxima, si NA no aparece la máxima
+#' @param minsymb símbolo de prof min. Si NA no aparece
+#' @param trend si T incluye una línea de tendencia del CoG a lo largo del tiempo
 #' @param col Color para puntos y segmentos
+#' @param out.dat Si T da como salida los datos del CoGlat
 #' @param restore.par Si TRUE (defecto) restaura par() al salir. FALSE para componer
 #' @return data.frame con columnas: \code{camp, mindpth, cog, maxdpth, year}
 #' @family Distribuciones batimétricas
@@ -33,14 +37,15 @@
 #'   cog.sp64.camp(1, 98, Nsh, "cant", invert.y = TRUE)   # más profundo abajo
 #' }
 #' @export
-CoG.sp64.camp <- function(gr, esp, camps, zona = "cant",
+CoGDpth.sp64.camp <- function(gr, esp, camps, zona = "cant",
                           dns = c("local","serv"),
                           cor.time = TRUE, incl2 = FALSE,
-                          plot = TRUE,
+                          plot = TRUE,legend=TRUE,trend=TRUE,
                           ti = TRUE, sub = TRUE, years = TRUE,
                           es = FALSE, idi = "l",
                           cexleg = 1, ymax = NA,
-                          invert.y = FALSE, col = "blue",
+                          invert.y = FALSE, col = "blue",maxsymb=24,
+                          minsymb=25,out.dat=TRUE,
                           restore.par = TRUE) {
   dns <- match.arg(dns)
   
@@ -72,6 +77,10 @@ CoG.sp64.camp <- function(gr, esp, camps, zona = "cant",
   }
   result      <- do.call(rbind, rows)
   result$year <- camptoyear(result$camp)
+  
+  # ---- modelo tendencia
+  
+  modelo<-lm(cog~year,data=result)
   
   # ---- Plot ----
   if (plot) {
@@ -120,21 +129,25 @@ CoG.sp64.camp <- function(gr, esp, camps, zona = "cant",
              x_axis[ok], result$maxdpth[ok], col = col)
     
     # Puntos
-    points(x_axis, result$maxdpth, pch = 24, bg = col, col = col)
-    points(x_axis, result$mindpth, pch = 25, bg = col, col = col)
-    points(x_axis, result$cog,     pch = 21, bg = col, col = col, type = "p")
+    points(x_axis, result$maxdpth, pch = maxsymb, bg = col, col = col)
+    points(x_axis, result$mindpth, pch = minsymb, bg = col, col = col)
+    points(x_axis, result$cog,     pch = 21, cex=1.5,bg=col, col = col, type = "p")
     
     if (!is.null(tit))    title(main = tit$label,font.main=4,cex=tit$cex, line = 1.8)
     if (!is.null(subtit)) title(line = .6, cex.main = .9 * cexleg, subtit)
     
-    leg <- if (es) c("Prof. máx.", "CoG", "Prof. mín.")
-    else    c("Max depth", "CoG", "Min depth")
-    legend(if (invert.y) "bottomright" else "topright",
-           legend = leg, pch = c(24, 21, 25),
-           bty = "n", pt.bg = col, col = col, inset = .02)
+    if (trend) abline(modelo,col="red",lty=2,lwd=2)
     
+    if (legend) {leg <- if (es) c("Prof. max.","CoG", "Prof. min.")
+    else    c("Max depth", "CoG","Min depth")
+    legend(if (invert.y) "bottomright" else "topright",
+           legend = leg, pch = c(maxsymb, 21, minsymb),
+           bty = "n", pt.bg = col, col = col, inset = .02)
+    }
     box()
   }
   
+  if (out.dat) return(result)
+    
   invisible(result)
 }
