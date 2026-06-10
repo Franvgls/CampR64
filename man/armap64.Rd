@@ -98,7 +98,7 @@ armap64("224", zona="arsa", bw=FALSE, leg=TRUE)
 \seealso{
 Other mapas: 
 \code{\link{GrafMarksGPS}()},
-\code{\link{MapEcol.camp64}()},
+\code{\link{MapEcol64.camp}()},
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},

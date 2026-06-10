@@ -2,7 +2,7 @@
 #'
 #' Combina en una sola figura el histograma de distribución de tallas por
 #' sexos (`dtall.camp64()`) y la función de densidad con la mediana
-#' (`denstall.camp64()`), usando el sistema `split` de lattice.
+#' (`denstall64.camp()`), usando el sistema `split` de lattice.
 #'
 #' @param gr Grupo taxonómico: 1 peces, 2 crustáceos, 3 moluscos.
 #' @param esp Código numérico de especie.
@@ -29,7 +29,7 @@
 #' @returns Invisiblemente, si `out.dat = TRUE`, lista con
 #'   `$hist` (trellis histograma) y `$dens` (trellis densidad).
 #'
-#' @seealso [dtall.camp64()], [denstall.camp64()]
+#' @seealso [dtall.camp64()], [denstall64.camp()]
 #' @family Distribuciones de tallas
 #'
 #' @examples
@@ -47,7 +47,7 @@
 #' }
 #'
 #' @export
-dtalldens.camp64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
+dtalldens64.camp <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
                              cor.time=TRUE, ti=FALSE, idi="l",
                              bw=TRUE, es=TRUE, sex=TRUE, leg=TRUE,
                              cexleg=1, layout=NA, years=TRUE,
@@ -63,7 +63,7 @@ dtalldens.camp64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
                          years=years, ymax=ymax, excl.sect=excl.sect,
                          verbose=verbose, plot=FALSE)
   
-  p_dens <- denstall.camp64(gr=gr, esp=esp, camp=camp, zona=zona, dns=dns,
+  p_dens <- denstall64.camp(gr=gr, esp=esp, camp=camp, zona=zona, dns=dns,
                             cor.time=cor.time, ti=FALSE,  # título solo en hist
                             bw=bw, es=es, idi=idi, layout=layout,
                             years=years, cexleg=cexleg, plot=FALSE)

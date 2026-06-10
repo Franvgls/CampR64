@@ -13,7 +13,7 @@
 #' \dontrun{
 #' databEstr(1,51,"N05","cant","local")
 #' }
-#' @seealso {\link{databICES64} \link{databICESdiv64} \link{datab64}}
+#' @seealso \link{databICES64} \link{databICESdiv64} \link{datab64}
 #' @export
 #' 
 databEstr64<-function(gr,esp,camp,zona=c("cant"),dns=c("local","serv"),cor.time=TRUE,Nas=FALSE) {

@@ -11,13 +11,14 @@
 #' otros ficheros de lances de los últimos años
 #'
 #' @param camp Campaña de la que se extraen los datos: año concreto (XX): Arsa "1XX"
-#' @param dns Sólo disponible para el Golfo de Cádiz "Cant" combinados con "dnsred" busca los datos en el servidor de Santander si se han creado las odbcs
+#' @param zona Sólo disponible para el Golfo de Cádiz "arsa" 
+#' @param dns elige datos de ordenador "local" o del servidor "serv"
 #' @param year si T incluye una columna con el año al final de los datos
 #' @param plot Saca el gráfico (T) o lo omite para dejar sólo los datos (F)
 #' @param es si T letreros en español, si F en inglés (F por defecto)
 #' @param plotnep si T presenta todos los lances en los que ha habido cigala en la campaña, además de los lances en cada FU, con o sín captura. Si F sólo saca los lances en cada FU sin marcar si ha habido cigala o no.
 #' @param ICESrect Si T saca los rectangulos ices de 1 grado de latitud por medio de longitud
-#' @param icesrectcol Color para los rectángulos ICES
+#' @param ICESrectcol Color para los rectángulos ICES
 #' @param places Si T saca etiquetas de principales ciudades en el mapa, si F se omiten los letreros
 #' @param ICESlab Si T incluye las etiquetas de los rectángulos ICES
 #' @param ICESlabcex tamaño del ICESlab en cex, .5 por defecto subirlo si se quiere más grande
@@ -34,13 +35,13 @@
 #' @export
 NepFU30.camp64<-function(camp,zona="arsa",dns=c("local","serv"),trimes=4,plot=TRUE,es=FALSE,ti=TRUE,ICESlab=FALSE,ceros=T,leg=T,escmult=.25,cexleg=1,
                       ICESrectcol=1,ICESrect=TRUE,places=TRUE,FU="FU30",ColFU="white",dens=20,out.dat=TRUE,bw=FALSE) {
+  if (zona!="arsa") stop("esta funcion solo es operativa para el Golfo de Cadiz con zona arsa")
   Nep<-maphist64(2,19,camp,zona,dns,plot=F,out.dat=T)
   Nep_30<-subset(Nep,c(long>c(-7.5) & long<c(-6) & lat<c(37.501) & lat>36.005))
   leyenda<-signif(max(Nep$numero)*.9,1)
   leyenda<-signif(c(1,.5,.25)*leyenda,1)
   escala<-signif(max(Nep$numero),1)*escmult
   lans_FU30<-datlan.camp64(camp,zona,dns,redux=T,incl2=T,incl0 = F)
-  #lans_FU30<-rbind(lans_FU30,dplyr::filter(datlan.camp(Nsh,"Arsa",redux=T,incl2=T),c(long>c(-3) & long<c(-2) & lat >c(43) & lat<(44))))
   MapArsa64(ICESrect = ICESrect,bw=bw,ICESlab = ICESlab,ICESrectcol = ICESrectcol,FU="FU30",ColFU=ColFU,dens=dens,
           xlims = c(-7.7,-6),ylims = c(36,37.3))
   title(main=paste(camptoyear(camp),ifelse(substr(camp,1,1)==1,"Q1","Q4")),line=1.5,sub=paste("FU 30 Nep Catch (n)= ",

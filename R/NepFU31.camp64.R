@@ -11,14 +11,15 @@
 #' otros ficheros de lances de los últimos años
 #'
 #' @param camp Campaña de la que se extraen los datos: año comcreto (XX): Demersales "NXX"
-#' @param dns Sólo disponible para el Cantábrico "Cant", combinados con "dnsred" busca los datos en el servidor de Santander si se han creado las odbcs
+#' @param zona Sólo disponible para el el cantábrioco "cant" 
+#' @param dns elige datos de ordenador "local" o del servidor "serv"
 #' @param year si T incluye una columna con el año al final de los datos
 #' @param plot Saca el gráfico (T) o lo omite para dejar sólo los datos (F)
 #' @param es si T letreros en español, si F en inglés (F por defecto)
 #' @param plotnep si T presenta todos los lances en los que ha habido cigala en la campaña, además de los lances en cada FU, con o sín captura. Si F sólo saca los lances en cada FU sin marcar si ha habido cigala o no.
 #' @param ICESrect Si T saca los rectangulos ices de 1 grado de latitud por medio de longitud
 #' @param ceros si T saca los puntos sin captura de cigala como puntos negros, si F no se representan los ceros
-#' @param icesrectcol Color para los rectángulos ICES
+#' @param ICESrectcol Color para los rectángulos ICES
 #' @param places Si T saca etiquetas de principales ciudades en el mapa, si F se omiten los letreros
 #' @param ICESlab Si T incluye las etiquetas de los rectángulos ICES
 #' @param ICESlabcex tamaño del ICESlab en cex, .5 por defecto subirlo si se quiere más grande
@@ -52,7 +53,6 @@ NepFU31.camp64<-function(camp,zona="cant",dns=c("local","serv"),plot=TRUE,es=FAL
   Nep_31  <- subset(Nep, long > -8 & long < -2 & lat < 44.5 & lat > 43)
   Nep<-maphist64(2,19,camp,zona,dns,plot=F,cor.time=cor.time,out.dat=T)
   Nep_31<-subset(Nep,c(long>c(-8) & long<c(-2) & lat <c(44.5) & lat>43))
-  #lans_FU31<-dplyr::filter(datlan.camp(Nsh,"Cant",redux=T,incl2=T),c(long>c(-8) & long<c(-2) & lat >c(43) & lat<(44.5)))
   lans_FU31<-dplyr::filter(datlan.camp64(camp,zona,dns,redux=T,incl2=T,incl0 = F),c(long>c(-8) & long<c(-2) & lat >c(43) & lat<(44.5)))
   lans_FU31<-lans_FU31[,c("camp","lance","lat","long","prof","sector","StatRec","zona")]
   leyenda<-signif(max(Nep_31$numero)*.9,1)

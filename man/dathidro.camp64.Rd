@@ -35,5 +35,5 @@ Datos hidrográficos de una campaña
 }
 }
 \seealso{
-{\link{MapLansGPS}}
+\link{MapLansGPS64}
 }

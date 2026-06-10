@@ -1,10 +1,11 @@
 #' Crea datos de capturas en formato para evaluaciones tipo Capros o modelos bayesianos (completar con datTalCatch.camp)
 #'
 #' Function para geographical - bayesian models
-#' @param gr Grupo, 1 peces, 2 crustaceos...
+#' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
 #' @param esp Código de especie
 #' @param camp Campaña de la que se extraen los datos: año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param dns Elige el origen de las bases de datos: Porcupine "Pnew", Cantábrico "Cant, Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
+#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param dns Elige origen datos ordenador "local" o del servidor "serv"
 #' @param cor.time Corrección del tiempo de arrastre al calcular las abundancias (mantener en T, *da datos por media hora de lance*)
 #' @param incl2 Si T se incluyen los lances extra no incluidos para las abundancias o biomasas estratificadas
 #' @return A data.table con el formato de datos para otras especies con formato de geográfico por lances

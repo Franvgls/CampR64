@@ -20,7 +20,9 @@ ecolgr.camp64(
 
 \item{camp}{Campaña de la que se extraen los datos: un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
 
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant, Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)}
+\item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)}
+
+\item{dns}{Elige origen datos ordenador "local" o del servidor "serv"}
 
 \item{ind}{Elige el valor sobre el que se calculan los índices de diversidad, dominancia....}
 }
@@ -32,15 +34,15 @@ Utiliza los datos del Camp para calcular la riqueza, diversidad y dominancia
 }
 \examples{
 \dontrun{
-ecolgr.camp(1,999,"P08","porc","local",ind="n")
-ecolgr.camp(1,999,"N08","cant","local",ind="n")
+ecolgr.camp64(1,999,"P08","porc","local",ind="n")
+ecolgr.camp64(1,999,"N08","cant","local",ind="n")
 }
 }
 \seealso{
-{\link{MapEcol.camp}}
+\link{MapEcol64.camp}
 
 Other ecologia: 
-\code{\link{MapEcol.camp64}()},
+\code{\link{MapEcol64.camp}()},
 \code{\link{ecolmatrix.camp64}()}
 }
 \concept{ecologia}

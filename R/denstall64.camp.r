@@ -18,10 +18,10 @@
 #' @family Distribuciones de tallas
 #' @examples 
 #' \dontrun{
-#' denstall.camp(gr=1,esp=50,camp=Psh,zona="porc","local!",years=TRUE)
+#' denstall64.camp(gr=1,esp=50,camp=Psh,zona="porc","local!",years=TRUE)
 #' }
 #' @export
-denstall.camp64<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),cor.time=TRUE,ti=FALSE,bw=TRUE,es=TRUE,plot=TRUE,idi="l",
+denstall64.camp<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),cor.time=TRUE,ti=FALSE,bw=TRUE,es=TRUE,plot=TRUE,idi="l",
   layout=NA,years=TRUE,cexleg=1,verbose=FALSE) {
   options(scipen=2)
   if (plot) lattice::trellis.par.set(lattice::col.whitebg())
@@ -29,7 +29,7 @@ denstall.camp64<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),cor.tim
     print("Distintas especies pueden estar medidas en distintas unidades (mm y cm) o a la aleta anal")
     medida<-c("cm")
   }
-  else { medida<-ifelse(unid.camp64(gr,esp,zona,dns)[1]==1,"cm","mm") }
+  else { medida<-ifelse(unid64.camp(gr,esp,zona,dns)[1]==1,"cm","mm") }
   if (bw) {
     colbars<-c("black",gray(.5),"white")
     lattice::trellis.par.set("strip.background",list(col=c(gray(.80))))
@@ -84,7 +84,7 @@ denstall.camp64<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),cor.tim
   else {
     if (ndat>2 & (ndat/2-trunc(ndat/2))==0 & any(is.na(layout))) layouti<- c(2,ndat/2)
     else layouti<- c(1,ndat)
-    foo<-densityplot(~rep(talla,a$n*ylim[1])|rep(camp,a$n*ylim[1]),a,subscripts=TRUE,xlim=xlimi,plot.points=FALSE,nint=15,
+    foo<-lattice::densityplot(~rep(talla,a$n*ylim[1])|rep(camp,a$n*ylim[1]),a,subscripts=TRUE,xlim=xlimi,plot.points=FALSE,nint=15,
                      scales=list(alternating=FALSE,tck=c(1,0),cex=.7,x=list(tick.number=10)),main=tit,xlab=list(label=ax[1],cex=.9),
                      ylab=list(label="density",cex=cexleg*.9),layout=layouti,par.strip.text=list(cex=cexleg*.8,font=2),as.table=TRUE,
                      panel=function(x,...) {
@@ -93,7 +93,7 @@ denstall.camp64<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),cor.tim
                        if (verbose) print(quantile(x,c(.5),na.rm=TRUE))
                        lattice::panel.abline(v=quantile(x,c(.5),na.rm=TRUE)+.5,lty=1,col="blue",lwd=1)
                        lattice::panel.densityplot(x,...)},
-                     strip = function(...) strip.default(style=1,...))
+                     strip = function(...) lattice::strip.default(style=1,...))
   }
   if (plot) {print(foo)}
   else foo

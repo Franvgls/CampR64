@@ -42,5 +42,5 @@ mapsorteo64(
 Mapa del resultado de un sorteo de cuadrículas de Porcupine
 }
 \seealso{
-{\link{sorteo64}}
+\link{sorteo64}
 }

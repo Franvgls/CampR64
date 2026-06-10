@@ -101,7 +101,7 @@ grafhistbox64 <- function(gr, esp, camps, zona="porc", dns=c("local","serv"),
     }
   }
   
-  # Forzar factor SIEMPRE: boot::boot(strata=) y strmean.camps64() lo necesitan
+  # Forzar factor SIEMPRE: boot::boot(strata=) y strmean64.camps() lo necesitan
   dumb$sector   <- factor(as.character(dumb$sector))
   dumb$camp     <- factor(dumb$camp,      levels = camps)
   dumbSETot$camp <- factor(dumbSETot$camp, levels = camps)
@@ -111,22 +111,22 @@ grafhistbox64 <- function(gr, esp, camps, zona="porc", dns=c("local","serv"),
     if (any(is.na(sector))) {
       if (ci.lev > 0)
         dumb.env <- boot::envelope(
-          boot::boot(dumb$peso, strmean.camps64, nboot, stype="f",
+          boot::boot(dumb$peso, strmean64.camps, nboot, stype="f",
                      strata=dumb$sector,
                      sector=dumb$sector, area=dumb$arsect, camps=dumb$camp),
           level=ci.lev)
-      dumb.mean <- strmean.camps64(dumb$peso, dumb$sector, dumb$arsect,
+      dumb.mean <- strmean64.camps(dumb$peso, dumb$sector, dumb$arsect,
                                    camps=dumb$camp)
     } else {
       idx <- grep(sector, as.character(dumb$sector))
       if (ci.lev > 0)
         dumb.env <- boot::envelope(
-          boot::boot(dumb$peso[idx], strmean.camps64, nboot, stype="f",
+          boot::boot(dumb$peso[idx], strmean64.camps, nboot, stype="f",
                      strata=dumb$sector[idx],
                      sector=dumb$sector[idx], area=dumb$arsect[idx],
                      camps=dumb$camp[idx]),
           level=ci.lev)
-      dumb.mean <- strmean.camps64(dumb$peso[idx], dumb$sector[idx],
+      dumb.mean <- strmean64.camps(dumb$peso[idx], dumb$sector[idx],
                                    dumb$arsect[idx], camps=dumb$camp[idx])
     }
     yetiq <- ifelse(es,
@@ -136,22 +136,22 @@ grafhistbox64 <- function(gr, esp, camps, zona="porc", dns=c("local","serv"),
     if (is.na(sector)) {
       if (ci.lev > 0)
         dumb.env <- boot::envelope(
-          boot::boot(dumb$num, strmean.camps64, nboot, stype="f",
+          boot::boot(dumb$num, strmean64.camps, nboot, stype="f",
                      strata=dumb$sector,
                      sector=dumb$sector, area=dumb$arsect, camps=dumb$camp),
           level=ci.lev)
-      dumb.mean <- strmean.camps64(dumb$num, dumb$sector, dumb$arsect,
+      dumb.mean <- strmean64.camps(dumb$num, dumb$sector, dumb$arsect,
                                    camps=dumb$camp)
     } else {
       idx <- grep(sector, as.character(dumb$sector))
       if (ci.lev > 0)
         dumb.env <- boot::envelope(
-          boot::boot(dumb$num[idx], strmean.camps64, nboot, stype="f",
+          boot::boot(dumb$num[idx], strmean64.camps, nboot, stype="f",
                      strata=dumb$sector[idx],
                      sector=dumb$sector[idx], area=dumb$arsect[idx],
                      camps=dumb$camp[idx]),
           level=ci.lev)
-      dumb.mean <- strmean.camps64(dumb$num[idx], dumb$sector[idx],
+      dumb.mean <- strmean64.camps(dumb$num[idx], dumb$sector[idx],
                                    dumb$arsect[idx], camps=dumb$camp[idx])
     }
     yetiq <- ifelse(es,

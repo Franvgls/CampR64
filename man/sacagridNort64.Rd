@@ -20,5 +20,5 @@ Data.frame con columnas x, y, pt, strat
 Crea el grid de cuadrículas del Cantábrico/Galicia (5x5 millas náuticas)
 }
 \seealso{
-{\link{sacagrid64}}
+\link{sacagrid64}
 }

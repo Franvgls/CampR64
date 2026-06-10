@@ -30,7 +30,9 @@ NepFU31.camp64(
 \arguments{
 \item{camp}{Campaña de la que se extraen los datos: año comcreto (XX): Demersales "NXX"}
 
-\item{dns}{Sólo disponible para el Cantábrico "Cant", combinados con "dnsred" busca los datos en el servidor de Santander si se han creado las odbcs}
+\item{zona}{Sólo disponible para el el cantábrioco "cant"}
+
+\item{dns}{elige datos de ordenador "local" o del servidor "serv"}
 
 \item{plot}{Saca el gráfico (T) o lo omite para dejar sólo los datos (F)}
 
@@ -39,6 +41,8 @@ NepFU31.camp64(
 \item{ICESlab}{Si T incluye las etiquetas de los rectángulos ICES}
 
 \item{ceros}{si T saca los puntos sin captura de cigala como puntos negros, si F no se representan los ceros}
+
+\item{ICESrectcol}{Color para los rectángulos ICES}
 
 \item{ICESrect}{Si T saca los rectangulos ices de 1 grado de latitud por medio de longitud}
 
@@ -55,8 +59,6 @@ NepFU31.camp64(
 \item{year}{si T incluye una columna con el año al final de los datos}
 
 \item{plotnep}{si T presenta todos los lances en los que ha habido cigala en la campaña, además de los lances en cada FU, con o sín captura. Si F sólo saca los lances en cada FU sin marcar si ha habido cigala o no.}
-
-\item{icesrectcol}{Color para los rectángulos ICES}
 
 \item{ICESlabcex}{tamaño del ICESlab en cex, .5 por defecto subirlo si se quiere más grande}
 }

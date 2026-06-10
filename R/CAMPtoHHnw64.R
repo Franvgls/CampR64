@@ -8,7 +8,7 @@
 #' @param quart si F deja en cada lance el valor del trimestre en que se realizó el lance, si T se deja el que tiene la campaña por defecto, 1 para Arsa 1Q, 3 para Porcupine y 4 para Arsa 4Q y Demersales Northern Shelf
 #' @param incl2 Si F deja fuera los lances especiales que actualmente no se transmiten a DATRAS, si T los incluye
 #' @return Devuelve un data.table con datos de cada lance en el formato HH de DATRAS. DATRAS requiere que los datos no tengan cabecera y el trimestre sea el que corresponde a la campaña, además de no tener "". Por ello se debe pasar a fichero con la orden: write.table(CAMPtoHH(Xyy,dns),"nombrearchivo.csv",sep=",",quote=F,col.names=F,row.names=F))
-#' @seealso {\code{CAMPtoHL}}
+#' @seealso \code{CAMPtoHL}
 #' @examples 
 #' \dontrun{
 #' CAMPtoHHnw64("P01","porc","local")

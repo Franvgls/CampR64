@@ -47,13 +47,14 @@ edadstr.camp64(1,43,"P01","porc","local",8)
 }
 \seealso{
 Other edades: 
+\code{\link{ALKs64.dns.camp}()},
 \code{\link{AbAgStatRec.camp64}()},
 \code{\link{GetAlk.camp64}()},
-\code{\link{bubbage.camp64}()},
+\code{\link{bubbage64.camp}()},
 \code{\link{datagegr.camp64}()},
 \code{\link{edadsect.camp64}()},
 \code{\link{grafedtal.camps64}()},
-\code{\link{logabage.camp64}()},
+\code{\link{logabage64.camp}()},
 \code{\link{maphistage64}()}
 }
 \concept{edades}

@@ -20,10 +20,10 @@
 #' @param ymax Valor máximo del eje y
 #' @param out.dat Si T el resultado final de la función es la figura en pantalla, pero los datos en objeto
 #' @return Saca gráfica con distribución de tallas y la distribución de las edades en cada talla. Si out.dat=TRUE saca un data.frame con columnas n(valor del número de la distribución estratifcada para la talla y la edad),talla,edad,camp. Da error si no existe ALK para la especie en la campaña
-#' @seealso {\link{grafedtal.camp}}
+#' @seealso \link{grafedtal.camp64}
 #' @examples 
 #' \dontrun{
-#' grafedtal.camps(1,43,Nsh[22:31],"Cant",plus=7,years=T,es=FALSE)
+#' grafedtal.camps64(1,43,Nsh[22:31],"Cant",plus=7,years=T,es=FALSE)
 #' }
 #' @family edades
 #' @export

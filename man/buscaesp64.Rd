@@ -11,6 +11,10 @@ buscaesp64(gr, esp, zona, dns = c("local", "serv"), id = "l")
 
 \item{esp}{Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo}
 
+\item{zona}{Zona de la que se leen las especies. Determina la estructura de la tabla de especies, que difiere entre ARSA y el resto (Porcupine/Cantábrico): "cant", "porc", "arsa", "medi"}
+
+\item{dns}{Origen de las bases de datos: "local" en el ordenador, "serv" en el servidor}
+
 \item{id}{Salida como: "l" Nombre científico en latín, "e" nombre en español, "i" nombre en inglés "a" código APHIA}
 }
 \description{
@@ -23,7 +27,6 @@ buscaesp64(1,50,"cant","local")
 }
 \seealso{
 Other datos_especies: 
-\code{\link{AbrvEsp64}()},
 \code{\link{BuscaAphia64}()},
 \code{\link{buscacod64}()},
 \code{\link{camptoyear}()}

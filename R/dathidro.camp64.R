@@ -6,7 +6,7 @@
 #' @param year si TRUE incluye una columna con el año al final de los datos
 #' @param quarter si TRUE incluye una columna con el trimestre de los datos teniendo en cuenta la fecha del lance
 #' @return Devuelve un data.frame con datos de cada estación hidrográfica y la correspondencia a los lances del fichero lance
-#' @seealso {\link{MapLansGPS}}
+#' @seealso \link{MapLansGPS64}
 #' @examples
 #' \dontrun{
 #'  print(dathidro.camp64("N25",zona="cant",dns="local"))

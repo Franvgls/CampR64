@@ -4,15 +4,15 @@
 #' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados 6 para deshechos y otros. 9 incluye todos los grupos a excepción del 6
 #' @param esp ha de ser 999 cuando se quiere incluir todas las especies del grupo, o elegir todas las especies deseadas con los codigos de las especies
 #' @param camp Campaña de la que se extraen los datos: un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param camp Campaña de la que se extraen los datos: un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param dns Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant, Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param dns Elige origen datos ordenador "local" o del servidor "serv"
 #' @param ind Elige el valor sobre el que se calculan los índices de diversidad, dominancia....
 #' @return Devuelve un data.frame con campos lan,lat,long,prof,div (Diversidad de Shanon),numbesp (riqueza: número de especies),simp (diversidad de simpson),domsimp (indice de dominancia de simpson). 
-#' @seealso {\link{MapEcol.camp}}
+#' @seealso \link{MapEcol64.camp}
 #' @examples 
 #' \dontrun{
-#' ecolgr.camp(1,999,"P08","porc","local",ind="n")
-#' ecolgr.camp(1,999,"N08","cant","local",ind="n")
+#' ecolgr.camp64(1,999,"P08","porc","local",ind="n")
+#' ecolgr.camp64(1,999,"N08","cant","local",ind="n")
 #' }
 #' @family ecologia
 #' @export

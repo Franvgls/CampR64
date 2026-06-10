@@ -36,5 +36,5 @@ CAMPtoHHnw64("P01","porc","local")
 }
 }
 \seealso{
-{\code{CAMPtoHL}}
+\code{CAMPtoHL}
 }

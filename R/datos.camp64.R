@@ -6,7 +6,8 @@
 #' @param gr grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados 6 para deshechos y otros. 9 incluye todos los grupos a excepción del 6
 #' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo
 #' @param camp Campaña de la que se extraen los datos: un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param dns Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant, Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param dns Elige origen datos ordenador "local" o del servidor "serv"
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param kg Si T datos en kgs, si F en gramos 
 #' @param verbose si T avisa de que hay más de una especie y los datos mezclados pueden ser engañosos
@@ -14,7 +15,7 @@
 #' @details Saca los datos de los lances estratificados, por ello se produce un error si encuentra un lance con validez 1 y estrato o sector sin información.
 #' @examples 
 #' \dontrun{
-#' datos.camp64(1,50,"P10","porc"."local",kg=FALSE, cor.time=TRUE)
+#' datos.camp64(1,50,"P10","porc","local",kg=FALSE, cor.time=TRUE)
 #' }
 #' @export
 datos.camp64 <- function(gr, esp, camp, zona, dns=c("local","serv"), 

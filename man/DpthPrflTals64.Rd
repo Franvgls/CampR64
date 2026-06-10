@@ -86,5 +86,5 @@ DpthPrflTals64(1,50,"P08","porc","local",10,20,brks="porcupine")
 }
 }
 \seealso{
-{\link{DpthPrfl64}}
+\link{DpthPrfl64}
 }

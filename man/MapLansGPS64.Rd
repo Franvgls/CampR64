@@ -51,11 +51,11 @@ MapLansGPS64("12C","cant")
 }
 }
 \seealso{
-{\link{datlan.camp}}, {\link{qcdistlan.camp}}
+\link{datlan.camp64}, \link{qcdistlan.camp64}
 
 Other mapas: 
 \code{\link{GrafMarksGPS}()},
-\code{\link{MapEcol.camp64}()},
+\code{\link{MapEcol64.camp}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},
 \code{\link{arMapLansGPS64}()},

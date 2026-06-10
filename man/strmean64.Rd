@@ -23,7 +23,7 @@ Función interna para cálculos y aplicación de bootstrap
 }
 \seealso{
 Other Calculos internos no mostrado: 
-\code{\link{strmean.camps64}()},
-\code{\link{strmean.dtt64}()}
+\code{\link{strmean.dtt64}()},
+\code{\link{strmean64.camps}()}
 }
 \concept{Calculos internos no mostrado}

@@ -39,6 +39,8 @@ NepFU25.camp64(
 
 \item{ICESlab}{Si T incluye las etiquetas de los rectángulos ICES}
 
+\item{ICESrectcol}{Color para los rectángulos ICES}
+
 \item{ICESrect}{Si T saca los rectangulos ices de 1 grado de latitud por medio de longitud}
 
 \item{FU}{pinta los límites de la FU25 en color rojo}
@@ -54,8 +56,6 @@ NepFU25.camp64(
 \item{year}{si T incluye una columna con el año al final de los datos}
 
 \item{plotnep}{si T presenta todos los lances en los que ha habido cigala en la campaña, además de los lances en cada FU, con o sín captura. Si F sólo saca los lances en cada FU sin marcar si ha habido cigala o no.}
-
-\item{icesrectcol}{Color para los rectángulos ICES}
 
 \item{ICESlabcex}{tamaño del ICESlab en cex, .5 por defecto subirlo si se quiere más grande}
 }

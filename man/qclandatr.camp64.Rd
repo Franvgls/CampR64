@@ -26,7 +26,7 @@ qclandatr.camp64("216","arsa","local")
 }
 }
 \seealso{
-{\link{MapLansGPS}}
+\link{MapLansGPS64}
 
 Other Control de calidad: 
 \code{\link{qcLW64.camp}()},

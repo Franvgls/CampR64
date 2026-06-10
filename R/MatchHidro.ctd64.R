@@ -35,7 +35,7 @@ MatchHidro.ctd64<-function(camp,zona="porc",dns=c("local","serv"),plot=TRUE,subt
     lnkk<-datlan.camp64(camp,zona,dns,redux=T)
     hdkk<-dathidro.camp64(camp,zona,dns)
     if (zona=="cant") MapNort64()
-    if (zona=="porc") mapporco64()
+    if (zona=="porc") MapPorc64()
     if (zona=="arsa") MapArsa64()
     title(camp)
     text(lat~long,lnkk,lance,cex=.8,font=2)

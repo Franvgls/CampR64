@@ -4,7 +4,8 @@
 #' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
 #' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo
 #' @param camp Campaña a representar en el mapa de un año comcreto (xx): Demersales "Nxx", Porcupine "Pxx", Arsa primavera "1XX", Arsa otoño "2xx" Medits "Mxx"
-#' @param dns Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant", Golfo de Cádiz "Arsa" y Mediterráneo "Medi", gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
+#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param dns Elige origen datos ordenador "local" o del servidor "serv"
 #' @param cor.time Si T corrige abundancias con la duración del lance para llevarlo a 30 minutos
 #' @param ti Si T añade título al gráfico, el nombre de la especie en latín
 #' @param restore.par TRUE por defecto, si F hace que no se restauren los parámetros gráficos para poder componer gráficos
@@ -13,9 +14,12 @@
 #' @param ypng height archivo png si graf es el nombre del fichero
 #' @param ppng points png archivo si graf es el nombre del fichero
 #' @return Devuelve un data.frame con campos: camp,mean.size
-#' @seealso {\link{dattal.camp64}}
-#' @examples dtallmean64.camp(gr=1,esp=50,camps=Nsh,zona="cant",dns="local")
-#' @examples dtallmean64.camp(gr=2,esp=19,camps=Psh,zona="porc",dns="local",graf="miratu")
+#' @seealso \link{dattal.camp64}
+#' @examples 
+#' \dontrun{
+#' dtallmean64.camp(gr=1,esp=50,camps=Nsh,zona="cant",dns="local")
+#' dtallmean64.camp(gr=2,esp=19,camps=Psh,zona="porc",dns="local",graf="miratu")
+#' }
 #' @export
 dtallmean64.camp <- function(gr, esp, camps, zona = "cant",
                              dns = c("local","serv"),
@@ -63,8 +67,8 @@ dtallmean64.camp <- function(gr, esp, camps, zona = "cant",
   result$year <- camptoyear(result$camp)
   
   # ---- Etiquetas ----
-  increm <- unid.camp64(gr, esp, zona, dns)["increm"]   # minúsculas
-  medida <- ifelse(unid.camp64(gr, esp, zona, dns)["med"] == 1, "cm",
+  increm <- unid64.camp(gr, esp, zona, dns)["increm"]   # minúsculas
+  medida <- ifelse(unid64.camp(gr, esp, zona, dns)["med"] == 1, "cm",
                    ifelse(increm == 5, "x5 mm", "mm"))
   ax <- if (es) c(paste0("Talla media (", medida, ")"), "Año")
   else    c(paste0("Mean length (", medida, ")"), "Year")
@@ -98,6 +102,5 @@ dtallmean64.camp <- function(gr, esp, camps, zona = "cant",
     }
     if (!is.logical(graf)) par(mar = c(3.1, 3.1, 4, 3.1) + 0.1)
   }
-  
   result
 }

@@ -56,14 +56,16 @@ Devuelve un mapa, pero no objetos de datos.
 Muestra un mapa con el número de lance en el punto del lance y debajo o al lado mapa de los lances en segmentos
 }
 \examples{
+\dontrun{
 arMapLansGPS64("N20","cant","local",xlims=c(-9.8,-7.8),ylims=c(43.5,44.2))
 }
+}
 \seealso{
-{\link{datlan.camp}}, {\link{qcdistlan.camp}}
+\link{datlan.camp64}, \link{qcdistlan.camp64}
 
 Other mapas: 
 \code{\link{GrafMarksGPS}()},
-\code{\link{MapEcol.camp64}()},
+\code{\link{MapEcol64.camp}()},
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},

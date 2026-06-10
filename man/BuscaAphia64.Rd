@@ -29,7 +29,6 @@ BuscaAphia64(1,"cant","local")
 }
 \seealso{
 Other datos_especies: 
-\code{\link{AbrvEsp64}()},
 \code{\link{buscacod64}()},
 \code{\link{buscaesp64}()},
 \code{\link{camptoyear}()}

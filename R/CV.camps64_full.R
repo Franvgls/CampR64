@@ -2,7 +2,7 @@
 #'
 #' Calcula media, error estándar (SE) y coeficiente de variación (CV)
 #' estratificados por campaña, tanto para peso como para número,
-#' usando \code{datos.camp64} y \code{str.mean.dt64}.
+#' usando \code{datos.camp64} y \code{strmean.dt64}.
 #'
 #' @param gr Grupo de la especie.
 #' @param esp Código de la especie.
@@ -70,7 +70,7 @@ CV.camps64_full <- function(gr, esp, camps, zona,
     }
     
     # --- Peso ---
-    res_w <- str.mean.dt(
+    res_w <- strmean.dt64(
       x      = mm$peso,
       sector = mm$sector,
       area   = mm$arsect,
@@ -78,7 +78,7 @@ CV.camps64_full <- function(gr, esp, camps, zona,
     )$total
     
     # --- Número ---
-    res_n <- str.mean.dt(
+    res_n <- strmean.dt64(
       x      = mm$numero,
       sector = mm$sector,
       area   = mm$arsect,

@@ -5,7 +5,7 @@
 #' una distancia mínima entre lances contiguos
 #' @param buffer Distancia mínima entre cuadrículas contiguas
 #' @param srv.dsg Diseño del muestreo: data.frame con columnas strat y stations
-#' @seealso {\link{mapsorteo64}}, {\link{sacagrid64}}
+#' @seealso \link{mapsorteo64}, \link{sacagrid64}
 #' @return Data.frame con columnas x, y, pt, strat
 #' @export
 sorteo64 <- function(buffer = .1177, srv.dsg = Porc.dsg) {

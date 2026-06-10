@@ -28,13 +28,8 @@ Avisa si hay códigos duplicados en el resultado de los códigos solicitados, pa
 }
 \examples{
 AbrvEsp64(c("Merluccius merluccius","Merlangius merlangus"))
+\dontrun{
 AbrvEsp64(buscaesp64(1,50,"cant"),1,8,".")
 }
-\seealso{
-Other datos_especies: 
-\code{\link{BuscaAphia64}()},
-\code{\link{buscacod64}()},
-\code{\link{buscaesp64}()},
-\code{\link{camptoyear}()}
 }
-\concept{datos_especies}
+\concept{datos_especies#'}

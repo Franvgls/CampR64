@@ -5,7 +5,7 @@
 #' @param color Color de las etiquetas (default 2)
 #' @param cexlab Tamaño de las etiquetas (default 0.7)
 #' @param etiq Si TRUE muestra etiquetas de número de cuadrícula
-#' @seealso {\link{sorteo64}}, {\link{mapsorteo64}}
+#' @seealso \link{sorteo64}, \link{mapsorteo64}
 #' @return Data.frame con columnas x, y, pt, strat
 #' @export
 sacagrid64 <- function(color = 2, cexlab = .7, etiq = TRUE) {

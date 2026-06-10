@@ -36,5 +36,5 @@ Devuelve un número con nombres organizado en dos líneas (biomasa y número) en
 Salida de datos a csv para rellenar los informes de grupo de trabajo, filas con datos ab estratificada (Biomasa y N) y error estándar por subdivisión ICES función para el Demersales Norte (saca 9.a, 8.c Este y Oeste)
 }
 \seealso{
-{\link{databICESdiv} \link{databEstr} \link{datab}}
+\link{databICESdiv} \link{databEstr} \link{datab}
 }

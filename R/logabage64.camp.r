@@ -27,7 +27,7 @@
 #' @returns Invisiblemente, imprime la matriz edad × campaña. El gráfico
 #'   lattice se produce como efecto lateral.
 #'
-#' @seealso [bubbage.camp64()] para burbujas de abundancia,
+#' @seealso [bubbage64.camp()] para burbujas de abundancia,
 #'   [edadstr.camp64()] para abundancias a la edad por estrato
 #'
 #' @family edades
@@ -35,16 +35,16 @@
 #' @examples
 #' \dontrun{
 #' # Jurel (esp=90) — Cantábrico
-#' logabage.camp64(gr=1, esp=90, camps=Nsh, zona="cant", dns="local")
+#' logabage64.camp(gr=1, esp=90, camps=Nsh, zona="cant", dns="local")
 #'
 #' # Caballa (esp=74) — Cantábrico
-#' logabage.camp64(gr=1, esp=74, camps=Nsh, zona="cant", dns="local")
+#' logabage64.camp(gr=1, esp=74, camps=Nsh, zona="cant", dns="local")
 #'
 #' # Gallo whiff (esp=43) — Porcupine
-#' logabage.camp64(gr=1, esp=43, camps=Psh, zona="porc", dns="local")
+#' logabage64.camp(gr=1, esp=43, camps=Psh, zona="porc", dns="local")
 #' }#' @export
 #'  
-logabage.camp64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),plus=8,cor.time=TRUE,clms=2,layout=NA) {
+logabage64.camp<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),plus=8,cor.time=TRUE,clms=2,layout=NA) {
   if (length(esp)>1) {
     stop("Sólo se puede incluir una especie en esta función")
   }

@@ -71,8 +71,8 @@ histboxplot64<-function(gr,esp,camps,zona="porc",dns=c("local","serv"),cor.time=
 	if (any(!is.na(profrange))) {
 	  dumb<-dplyr::filter(dumb,prof>min(profrange) & prof<max(profrange))
 	    titrang<-ifelse(es,"Rango profs:","Depth range:")
-	    if (min(profrange)==0) prang<-bquote(.(tirang) <=.(format(paste0(max(profrange),"m")))) #list(label=bquote(" "<=.(format(paste0(max(profrange),"m")))),font.sub=2,cex=cex.leg*.9)
-	    if (max(profrange)==999) prang<-bquote(.(tirang) >=.(format(paste0(min(profrange),"m"))))
+	    if (min(profrange)==0) prang<-bquote(.(titrang) <=.(format(paste0(max(profrange),"m")))) #list(label=bquote(" "<=.(format(paste0(max(profrange),"m")))),font.sub=2,cex=cex.leg*.9)
+	    if (max(profrange)==999) prang<-bquote(.(titrang) >=.(format(paste0(min(profrange),"m"))))
 	    if (min(profrange)!=0 & max(profrange)!=999) prang<-paste(ifelse(es,"Rango profs:","Depth range:"),min(profrange),"-",max(profrange),"m")
 	    if (min(profrange)==0 & max(profrange)==999) prang<-paste(ifelse(es,"Rango profs:","Depth range:"),min(profrange),"-",max(profrange),"m")
 	}

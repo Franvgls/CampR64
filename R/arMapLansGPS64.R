@@ -15,8 +15,11 @@
 #' @param rumbo si T incluye un punto al final del lance, en el punto de la virada, sólo en el segundo mapa
 #' @param bw Si T gráfico en blanco y negro por default, si F gráfico en color
 #' @return Devuelve un mapa, pero no objetos de datos.
-#' @seealso {\link{datlan.camp}}, {\link{qcdistlan.camp}}
-#' @examples arMapLansGPS64("N20","cant","local",xlims=c(-9.8,-7.8),ylims=c(43.5,44.2))
+#' @seealso \link{datlan.camp64}, \link{qcdistlan.camp64}
+#' @examples 
+#' \dontrun{
+#' arMapLansGPS64("N20","cant","local",xlims=c(-9.8,-7.8),ylims=c(43.5,44.2))
+#' }
 #' @family mapas
 #' @family PescaWin
 #' @export

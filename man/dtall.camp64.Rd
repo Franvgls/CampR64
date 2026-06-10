@@ -36,7 +36,9 @@ dtall.camp64(
 
 \item{camp}{Campaña a representar en el mapa de un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
 
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Pnew", Cantábrico "Cant", Golfo de Cádiz "Arsa" (proporciona los datos para Medits pero no saca mapas)}
+\item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)}
+
+\item{dns}{Elige origen datos ordenador "local" o del servidor "serv"}
 
 \item{cor.time}{Si T corrige las abundancias en función de la duración del lance}
 
@@ -85,5 +87,5 @@ dtall.camp64(1,50,Psh,zona="porc",dns=c("local","serv"),es=F,ti=T,years=T,out.da
 }
 }
 \seealso{
-{\link{dtallbarplot}} {\link{dtall.lan}}
+\link{dtallbarplot} \link{dtall.lan}
 }

@@ -48,5 +48,5 @@ Devuelve el valor medio por bootstrap de la media, el error est?ndar y el CV
 Función de resultados a partir de bootstrap con Rbt iteraciones conservando el diseño de muestreo
 }
 \seealso{
-{\link{grafhistbox64}}
+\link{grafhistbox64}
 }

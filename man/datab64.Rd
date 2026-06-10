@@ -36,5 +36,5 @@ Devuelve un número con nombres organizado en dos líneas (biomasa y número) en
 Salida de datos estratificados por sector a csv para rellenar los informes de grupo de trabajo, filas con datos ab estratificada (Biomasa y N) y error estándar por sector. Da la abundancia y error estándar en cada sector (geográfico definido en el Camp)
 }
 \seealso{
-{\link{databICES} \link{databICESdiv} \link{databEstr}}
+\link{databICES} \link{databICESdiv} \link{databEstr}
 }

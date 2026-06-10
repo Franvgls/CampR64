@@ -9,7 +9,7 @@
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param Nas Permite calcular los errores estándar aunque sólo haya un lance en algún estrato (haciendo varianza =0 en ese estrato, incorrecto pero da una idea cuando sólo un estrato entre varios tiene sólo un lance)
 #' @return Devuelve un número con nombres organizado en dos líneas (biomasa y número) en columnas por subdivisiones ICES por columnas abundancia estratificada media por XIa, 8.cE, 8.cW
-#' @seealso {\link{databICES} \link{databEstr} \link{datab}}
+#' @seealso \link{databICES} \link{databEstr} \link{datab}
 #' @export
 databICESdiv64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),cor.time=TRUE,Nas=FALSE) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}

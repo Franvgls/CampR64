@@ -18,7 +18,7 @@
 #' @param es si T letreros en español, si F en inglés (F por defecto)
 #' @param plotnep si T presenta todos los lances en los que ha habido cigala en la campaña, además de los lances en cada FU, con o sín captura. Si F sólo saca los lances en cada FU sin marcar si ha habido cigala o no.
 #' @param ICESrect Si T saca los rectangulos ices de 1 grado de latitud por medio de longitud
-#' @param icesrectcol Color para los rectángulos ICES
+#' @param ICESrectcol Color para los rectángulos ICES
 #' @param places Si T saca etiquetas de principales ciudades en el mapa, si F se omiten los letreros
 #' @param ICESlab Si T incluye las etiquetas de los rectángulos ICES
 #' @param ICESlabcex tamaño del ICESlab en cex, .5 por defecto subirlo si se quiere más grande

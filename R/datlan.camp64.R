@@ -22,7 +22,7 @@
 #' @param quarter si T incluye una columna con el trimestre de los datos teniendo en cuenta la fecha del lance, puede cambiar a mitad de la campaña, cuidado con campañas IBTS adscritas a un trimestre particular.
 #' @param bio reduce el data.frame a los datos para los proyectos de biología, con datos en formato decimal y hexadecimal y las zonas ICES
 #' @return Devuelve un data.frame con datos de cada lance, las variables dependen de la selección de hidro y redux. En cualquier caso incluye variables weight.time con el factor de calibración para lances con menos tiempo del estándar y arsect: el área del sector al que corresponde el lance dentro del muestreo
-#' @seealso {\link{MapLansGPS}}
+#' @seealso \link{MapLansGPS64}
 #' @examples
 #' \dontrun{
 #' datlan.camp64(Nsh[24:28],"cant","local",hidro=FALSE,excl.sect=c("A"))

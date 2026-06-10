@@ -77,7 +77,7 @@ MatchHidro.ctd64("N24","cant","local",ti=T)
 \seealso{
 Other mapas: 
 \code{\link{GrafMarksGPS}()},
-\code{\link{MapEcol.camp64}()},
+\code{\link{MapEcol64.camp}()},
 \code{\link{MapLansGPS64}()},
 \code{\link{NepFUs.camp64}()},
 \code{\link{arMapLansGPS64}()},

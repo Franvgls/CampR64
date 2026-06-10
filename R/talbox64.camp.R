@@ -19,7 +19,7 @@
 #' \dontrun{
 #' talbox64.camps(2,19,Psh,"porc","local",varwidth=T,notch=T)
 #' }
-#' @seealso {\link{dattal.camp64}}
+#' @seealso \link{dattal.camp64}
 #' @export
 talbox64.camps<- function(gr,esp,camps,zona="cant",dns=c("local","Serv"),notch=TRUE,outline=FALSE,varwidth=T,cor.time=TRUE,boxplot=T,excl.sect=NA,years=TRUE,mult=100,ti=TRUE,las=2,es=FALSE,bw=TRUE,idi="l",cexleg=1) {
   options(scipen=2)
@@ -32,8 +32,8 @@ talbox64.camps<- function(gr,esp,camps,zona="cant",dns=c("local","Serv"),notch=T
     }
   }
   if (years) dumb$camp<-camptoyear(dumb$camp)
-  increm<-unid.camp64(gr,esp,zona,dns)["increm"]
-  medida<-ifelse(unid.camp64(gr,esp,zona,dns)["med"]==1,"cm",ifelse(increm==5,"x5 mm","mm"))
+  increm<-unid64.camp(gr,esp,zona,dns)["increm"]
+  medida<-ifelse(unid64.camp(gr,esp,zona,dns)["med"]==1,"cm",ifelse(increm==5,"x5 mm","mm"))
   if (es) {ax<-c(paste0("Talla (",medida,")"),expression("Ind"%*%"lan"^-1))}
   else {ax<-c(paste0("Length (",medida,")"),expression("Ind"%*%"haul"^-1))}
   if (is.logical(ti)) {

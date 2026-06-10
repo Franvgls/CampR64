@@ -2,6 +2,8 @@
 #'
 #' Busca el código del grupo, especie y la familia a partir del nombre o fragmento de la especie. Es independiente de mayúsculas y minúsculas y puede sacar más de una especie si una parte de sus nombres coincide.
 #' @param nomb Nombre científico de la especie o fragmento del nombre entre ""
+#' @param zona Zona de la que se leen las especies. Determina la estructura de la tabla de especies, que difiere entre ARSA y el resto (Porcupine/Cantábrico): "cant", "porc", "arsa", "medi"
+#' @param dns Origen de las bases de datos: "local" en el ordenador, "serv" en el servidor
 #' @family datos_especies
 #' @examples 
 #' \dontrun{

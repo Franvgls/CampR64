@@ -4,7 +4,8 @@
 #' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados 6 para deshechos y otros. 9 incluye todos los grupos a excepción del 6
 #' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo 
 #' @param camp Campaña de la que sacar los dato un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param dns Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant", Golfo de Cadiz "Arsa" (proporciona los datos para Medits pero no saca mapas)
+#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cadiz "arsa"
+#' @param dns datos del ordeandor "local" o del servidor "serv"
 #' @param ind Dato a procesar, si (p)eso o (n)umero
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param kg Si T saca los resultados en Kg, si F en gramos
@@ -12,7 +13,7 @@
 #' @param excl.sect Excluye los sectores o subsectores dados como caracteres
 #' @param verbose si T avisa de que distintas especies pueden pertenecer a grupos distintos y hay que valorar el sendio que tiene mezclarlas
 #' @return Devuelve una lista con valorees de media, SE y CV para los subestratos, estratos y total de la campaña
-#' @seealso {\link{CV.camps}}, {\link{CV.bt.camp}}
+#' @seealso \link{CV.camps64}, \link{CV.bt.camp64}
 #' @export
 CV.camp64<- function(gr,esp,camp,zona,dns="local",ind="p",cor.time=TRUE,kg=TRUE,Nas=FALSE,excl.sect=NA,verbose=TRUE) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}

@@ -29,5 +29,5 @@ ListFauna.lan64("12C","cant","local",1,gr=c(1,2))
 }
 }
 \seealso{
-{\link{ListFauna.camps}}, {\link{ListFaunaTals.camps}}
+\link{ListFauna.camps}, \link{ListFaunaTals.camps}
 }

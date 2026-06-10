@@ -16,11 +16,11 @@
 #' @param wmf Si T saca a fichero metafile Meditconc.emf
 #' @param places Si T saca ciudades y puntos geográficos de referencia
 #' @return Saca en pantalla el mapa y es utilizada por otras funciones
-#' @examples MapMedit()
+#' @examples MapMedit64()
 #' @family mapas base
 #' @family Medits
 #' @export
-MapMedit<-function(xlims=c(-5.7,5),ylims=c(35,43),lwdl=1,cuadr=FALSE,cuadrMSFD=FALSE,ICESrect=FALSE,ICESrectcol=gray(.2),ICESlab=FALSE,ICESlabcex=.5,bw=F,ax=TRUE,wmf=FALSE,es=TRUE,places=TRUE) {
+MapMedit64<-function(xlims=c(-5.7,5),ylims=c(35,43),lwdl=1,cuadr=FALSE,cuadrMSFD=FALSE,ICESrect=FALSE,ICESrectcol=gray(.2),ICESlab=FALSE,ICESlabcex=.5,bw=F,ax=TRUE,wmf=FALSE,es=TRUE,places=TRUE) {
   asp<-diff(c(35,43))/(diff(c(-5.7,5))*cos(mean(c(35,43))*pi/180))
   if (wmf) win.metafile(filename = "Meditconc.emf", width = 10, height = 10*asp+.63, pointsize = 10)
   if (!wmf) par(mar=c(2,2.5,2, 2.5) + 0.3)

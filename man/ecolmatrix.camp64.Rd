@@ -41,14 +41,14 @@ Crea un data frame con campos lance, peso, numero, subestrato (en doble cifra), 
 }
 \examples{
 \dontrun{
-ecolmatrix.camp(1,999,"P01","porc","local",ind="p")
+ecolmatrix.camp64(1,999,"P01","porc","local",ind="p")
 }
 }
 \seealso{
-{\link{MapEcol.camp}}, {\link{ecolgr.camp}}
+\link{MapEcol.camp}, \link{ecolgr.camp}
 
 Other ecologia: 
-\code{\link{MapEcol.camp64}()},
+\code{\link{MapEcol64.camp}()},
 \code{\link{ecolgr.camp64}()}
 }
 \concept{ecologia}

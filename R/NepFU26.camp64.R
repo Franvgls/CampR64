@@ -18,7 +18,7 @@
 #' @param es si T letreros en español, si F en inglés (F por defecto)
 #' @param plotnep si T presenta todos los lances en los que ha habido cigala en la campaña, además de los lances en cada FU, con o sín captura. Si F sólo saca los lances en cada FU sin marcar si ha habido cigala o no.
 #' @param ICESrect Si T saca los rectangulos ices de 1 grado de latitud por medio de longitud
-#' @param icesrectcol Color para los rectángulos ICES
+#' @param ICESrectcol Color para los rectángulos ICES
 #' @param places Si T saca etiquetas de principales ciudades en el mapa, si F se omiten los letreros
 #' @param ICESlab Si T incluye las etiquetas de los rectángulos ICES
 #' @param ICESlabcex tamaño del ICESlab en cex, .5 por defecto subirlo si se quiere más grande
@@ -52,7 +52,6 @@ NepFU26.camp64<-function(camp=camp,zona="cant",dns=c("local","serv"),plot=TRUE,e
   leyenda<-signif(c(1,.5,.25)*leyenda,1)
   escala<-signif(max(Nep$numero),1)*escmult
   lans_FU26<-dplyr::filter(datlan.camp64(camp,zona,dns,redux=T,incl2=T,incl0 = F),c(long<c(-8.5) & lat <c(43.005) & lat>(42.005)))
-  #lans_FU31<-rbind(lans_FU31,dplyr::filter(datlan.camp(Nsh,"Cant",redux=T,incl2=T),c(long>c(-3) & long<c(-2) & lat >c(43) & lat<(44))))
   MapNort64(ICESrect = ICESrect,ylims=c(42.005,43.005),xlims=c(-10.05,-8.45),bw=bw,ICESlab = ICESlab,ICESrectcol = ICESrectcol,FU="FU26",ColFU = ColFU,dens=dens,places=places)
   title(main=camptoyear(camp),line=1.5,sub=paste("FU 26 Nep Catch (n)= ",
                                                    sum(Nep_26[Nep_26$camp==camp,"numero"])),cex.sub=1.2,cex.main=2)

@@ -2,7 +2,7 @@
 #' 
 #' Función interna para cálculos y aplicación de bootstrap
 #' @param x Es el vector de abundancias en peso o número
-#' @param sector Es la asignación al sector de cada muestra igual que en strmean {\link{strmean}} pero ha de tener dos caracteres, primero el sector geográfico y segundo el estrato batimétrico
+#' @param sector Es la asignación al sector de cada muestra igual que en strmean64 \link{strmean64} pero ha de tener dos caracteres, primero el sector geográfico y segundo el estrato batimétrico
 #' @param area El área del sector
 #' @param w Es un factor de ponderación para cada uno de los valores de x. Sirve para la función de la librería boot boot::boot(x,strmean,R,stype="f",Porc.map=sector,sector=sector,area=area) 
 #' @family Calculos internos no mostrado

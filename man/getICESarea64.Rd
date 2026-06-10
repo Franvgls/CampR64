@@ -17,6 +17,17 @@ getICESarea64(
   verbose = FALSE
 )
 }
+\arguments{
+\item{camp}{Campaña de la que se extraen los datos: un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
+
+\item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)}
+
+\item{dns}{Elige origen datos ordenador "local" o del servidor "serv"}
+
+\item{incl2}{Si TRUE incluye los datos de los lances especiales (2 o mayor)}
+
+\item{incl0}{Si no es TRUE excluye los lances nulos (0)}
+}
 \description{
 StatRec y División ICES (Area) para una campaña — versión estricta sin helpers
 Requisitos (en lances, todo en minúsculas):

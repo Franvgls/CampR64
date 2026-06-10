@@ -9,7 +9,7 @@
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param Nas Permite calcular los errores estándar aunque sólo haya un lance en algún estrato (haciendo varianza =0 en ese estrato, incorrecto pero da una idea cuando sólo un estrato entre varios tiene sólo un lance)
 #' @return Devuelve un número con nombres organizado en dos líneas (biomasa y número) en columnas por sectores geográficos segun los definidos en el Camp e información por columnas abundancia estratificada media por estrato (avgestr) y error estándar (SEestr) y totales (avgsect, SEsect). Preparado para pegarlo de año en año en los ficheros excel de abundancia en grupo de trabajo
-#' @seealso {\link{databICES} \link{databICESdiv} \link{databEstr}}
+#' @seealso \link{databICES} \link{databICESdiv} \link{databEstr}
 #' @export
 datab64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),cor.time=TRUE,Nas=FALSE) {
   if (length(camp)>1) {stop("Seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}

@@ -5,7 +5,8 @@
 #' @param gr Grupo SIEMPRE 3 da error si no
 #' @param esp especie, se pueden incluir varias especies y da la suma de los datos de varias especies, es útil para sacar los datos de un género o una familia.
 #' @param camp Campaña de la que se extraen los datos: año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param dns Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant, Golfo de Cádiz "Arsa"
+#' @param zona elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" 
+#' @param dns elige datos de ordenador "local" o del servidor "serv"
 #' @param quarter si F deja en cada lance el valor del trimestre en que se realizó el lance, si T se deja el que tiene la campaña por defecto, 1 para Arsa 1Q, 3 para Porcupine y 4 para Arsa 4Q y Demersales Northern Shelf
 #' @param incl2 Si F deja fuera los lances especiales que actualmente no se transmiten a DATRAS, si T los incluye
 #' @param incl0 si T se incluyen los lances sin captura de la especie, si F sólo salen los lances con capturas

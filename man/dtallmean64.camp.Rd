@@ -31,7 +31,9 @@ dtallmean64.camp(
 
 \item{esp}{Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo}
 
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant", Golfo de Cádiz "Arsa" y Mediterráneo "Medi", gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados}
+\item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)}
+
+\item{dns}{Elige origen datos ordenador "local" o del servidor "serv"}
 
 \item{cor.time}{Si T corrige abundancias con la duración del lance para llevarlo a 30 minutos}
 
@@ -56,9 +58,11 @@ Devuelve un data.frame con campos: camp,mean.size
 Muestra la talla media de la distribución de tallas de la especie \emph{esp} el conjunto de la campaña seleccionada
 }
 \examples{
+\dontrun{
 dtallmean64.camp(gr=1,esp=50,camps=Nsh,zona="cant",dns="local")
 dtallmean64.camp(gr=2,esp=19,camps=Psh,zona="porc",dns="local",graf="miratu")
 }
+}
 \seealso{
-{\link{dattal.camp64}}
+\link{dattal.camp64}
 }

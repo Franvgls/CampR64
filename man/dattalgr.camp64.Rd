@@ -50,5 +50,5 @@ dattalgr.camp64("1",c(44:45),"N94","cant","local",0,45,ind="p")
 }
 }
 \seealso{
-{\link{datgr.camp}}
+\link{datgr.camp64}
 }

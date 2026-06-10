@@ -21,5 +21,5 @@ Crea el grid de cuadrículas de Porcupine con los puntos centrales de cada
 una de las cuadrículas (5x5 millas náuticas) disponibles en la campaña
 }
 \seealso{
-{\link{sorteo64}}, {\link{mapsorteo64}}
+\link{sorteo64}, \link{mapsorteo64}
 }

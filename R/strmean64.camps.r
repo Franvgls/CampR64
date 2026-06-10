@@ -9,7 +9,7 @@
 #' @family Calculos internos no mostrado
 #' @return Devuelve la media estratificadda ponderada al área para cada una de las campañas solicitadas
 #' @export              
-strmean.camps64<-function(x,sector,area,w=rep(1,length(x)),camps) {
+strmean64.camps<-function(x,sector,area,w=rep(1,length(x)),camps) {
   dummy<-tapply(x*w,data.frame(sector,camps),mean,na.rm=TRUE)
   area.dumb<-tapply(area,data.frame(sector,camps),mean,na.rm=TRUE)
   mean.dumb<-colSums(dummy*area.dumb,na.rm=TRUE)/colSums(area.dumb,na.rm=TRUE)

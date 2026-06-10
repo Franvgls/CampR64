@@ -65,5 +65,5 @@ talbox64.camps(2,19,Psh,"porc","local",varwidth=T,notch=T)
 }
 }
 \seealso{
-{\link{dattal.camp64}}
+\link{dattal.camp64}
 }

@@ -15,13 +15,16 @@
 #'
 #' @returns Vector numérico en formato GGG.MMmm (grados + minutos decimales).
 #'
-#' @seealso [gradec()], [gradms()]
+#' @seealso [gradec()]
+#' @seealso [gradms()] 
 #'
 #' @family Conversión de unidades
 #'
 #' @examples
+#' \dontrun{
 #' agradec(43.968)   # → 43.5808
 #' agradec(c(43.968, -8.5))
+#' }
 #'
 #' @export
 agradec <- function(x) {

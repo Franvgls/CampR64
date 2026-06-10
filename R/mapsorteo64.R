@@ -12,7 +12,7 @@
 #' @param labs Si TRUE muestra números de cuadrícula, si FALSE muestra puntos
 #' @param col Color de los puntos/etiquetas
 #' @param cex Tamaño de etiquetas si labs=TRUE
-#' @seealso {\link{sorteo64}}
+#' @seealso \link{sorteo64}
 #' @export
 mapsorteo64 <- function(x, wmf = FALSE, ax = TRUE, nomfic = "porco.emf",
                         lwdl = .5, colo = NA, add = FALSE, labs = FALSE,

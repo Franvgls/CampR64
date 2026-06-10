@@ -35,7 +35,9 @@ maphist64(
 
 \item{camps}{Campaña a representar en el mapa de un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
 
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Porc" o  "Pnew", Cantábrico "Cant", Golfo de Cadiz "Arsa" (proporciona los datos para Medits pero no saca mapas)}
+\item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)}
+
+\item{dns}{Elige origen datos ordenador "local" o del servidor "serv"}
 
 \item{cor.time}{Si T corrige las abundancias en función de la duración del lance}
 
@@ -84,7 +86,7 @@ maphist64(1,50,As2[15:18],"arsa","local",layout=c(2,2),years=TRUE,sub="ARSA 2nd 
 \seealso{
 Other mapas: 
 \code{\link{GrafMarksGPS}()},
-\code{\link{MapEcol.camp64}()},
+\code{\link{MapEcol64.camp}()},
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},

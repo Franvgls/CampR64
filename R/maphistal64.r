@@ -46,7 +46,7 @@ maphistal64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),tmin=0,tmax
       }
     medida<-c("cm")
     }
-  else { medida<-ifelse(unid.camp64(gr,esp,zona,dns)[1]==1,"cm","mm") }
+  else { medida<-ifelse(unid64.camp(gr,esp,zona,dns)[1]==1,"cm","mm") }
 	ndat<-length(camps)
 	dumb<-NULL
 	for (i in 1:ndat) {

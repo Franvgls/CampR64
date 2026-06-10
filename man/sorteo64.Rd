@@ -20,5 +20,5 @@ con el número correspondiente de estaciones por sector y estrato y aplicando
 una distancia mínima entre lances contiguos
 }
 \seealso{
-{\link{mapsorteo64}}, {\link{sacagrid64}}
+\link{mapsorteo64}, \link{sacagrid64}
 }

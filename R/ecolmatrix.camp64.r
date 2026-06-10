@@ -10,10 +10,10 @@
 #' @param incl6 Si F se excluye el grupo 6 de otros (en general material antropogénico o no orgánico). Si T lo incluye dentro del grupo de "especies"
 #' @param codes Si T da los códigos de las especies, si F el nombre científico
 #' @return Devuelve un data.frame con columnas lan, una con el peso o número de cada especie del grupo solicitado, lat, long, prof
-#' @seealso {\link{MapEcol.camp}}, {\link{ecolgr.camp}}
+#' @seealso \link{MapEcol.camp}, \link{ecolgr.camp}
 #' @examples 
 #' \dontrun{
-#' ecolmatrix.camp(1,999,"P01","porc","local",ind="p")
+#' ecolmatrix.camp64(1,999,"P01","porc","local",ind="p")
 #' }
 #' @family ecologia
 #' @export

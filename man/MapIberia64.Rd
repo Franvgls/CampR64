@@ -56,10 +56,10 @@ MapIberia64()
 }
 \seealso{
 Other mapas base: 
-\code{\link{MapMedit}()}
+\code{\link{MapMedit64}()}
 
 Other Medits: 
-\code{\link{MapMedit}()}
+\code{\link{MapMedit64}()}
 }
 \concept{Medits}
 \concept{mapas base}

@@ -37,7 +37,7 @@ qcdistlan.camp64("216","arsa","local",pc.error=.01)
 distHaversine function gives the haversine calculation of distance between two geographic points \code{\link[geosphere]{distHaversine}}
 }
 \seealso{
-{\link{MapLansGPS}}
+\link{MapLansGPS64}
 
 Other Control de calidad: 
 \code{\link{qcLW64.camp}()},

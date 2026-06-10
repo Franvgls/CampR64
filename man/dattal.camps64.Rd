@@ -29,7 +29,9 @@ dattal.camps64(
 
 \item{camps}{campañas (años) a representar en el mapa: Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
 
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Porc" o "Pnew", Cantábrico "Cant, Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados}
+\item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)}
+
+\item{dns}{Elige origen datos ordenador "local" o del servidor "serv"}
 
 \item{tmin}{Talla mínima}
 
@@ -59,9 +61,9 @@ Extrae los datos de abundancia de una especie o conjunto de especies con un rang
 }
 \examples{
 \dontrun{
-dattal.camps64(1,36,Psh,"porc"."local",0,15,ind="n",plot=TRUE)
+dattal.camps64(1,36,Psh,"porc","local",0,15,ind="n",plot=TRUE)
 }
 }
 \seealso{
-{\link{dattal.camp}}
+\link{dattal.camp64}
 }

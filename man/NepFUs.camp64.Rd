@@ -35,6 +35,8 @@ NepFUs.camp64(
 
 \item{ICESlab}{Si T incluye las etiquetas de los rectángulos ICES}
 
+\item{ICESrectcol}{Color para los rectángulos ICES}
+
 \item{ICESrect}{Si T saca los rectangulos ices de 1 grado de latitud por medio de longitud}
 
 \item{FU}{pinta una o varias unidades funcionales, a elegir FU26, FU25 o FU31 con grueso lwd=2 y color rojo}
@@ -44,8 +46,6 @@ NepFUs.camp64(
 \item{out.dat}{Si T el resultado final de la función es la figura en pantalla, pero los datos de abundancia de cigala en cada FU con datos de biomasa, numero, desviaciones estándar y número de lances en cada FU.}
 
 \item{year}{si T incluye una columna con el año al final de los datos}
-
-\item{icesrectcol}{Color para los rectángulos ICES}
 
 \item{ICESlabcex}{tamaño del ICESlab en cex, .5 por defecto subirlo si se quiere más grande}
 }
@@ -72,7 +72,7 @@ otros ficheros de lances de los últimos años
 \seealso{
 Other mapas: 
 \code{\link{GrafMarksGPS}()},
-\code{\link{MapEcol.camp64}()},
+\code{\link{MapEcol64.camp}()},
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{arMapLansGPS64}()},

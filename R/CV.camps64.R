@@ -34,8 +34,8 @@ CV.camps64<-function(gr,esp,camps,zona,dns=c("local","serv"),cor.time=TRUE,kg=TR
   }
   dumb$camp<-factor(dumb$camp,levels=camps,ordered=TRUE)
   campa=as.character(camps)
-  dumb.weight<-round(strmean.camps64(dumb$peso,dumb$sector,dumb$arsect,camps=dumb$camp),dec)
-  dumb.number<-round(strmean.camps64(dumb$num,dumb$sector,dumb$arsect,camps=dumb$camp),dec)
+  dumb.weight<-round(strmean64.camps(dumb$peso,dumb$sector,dumb$arsect,camps=dumb$camp),dec)
+  dumb.number<-round(strmean64.camps(dumb$num,dumb$sector,dumb$arsect,camps=dumb$camp),dec)
   dumb<-data.frame(camp=campa,weight=dumb.weight,number=dumb.number)
   dumb
 }

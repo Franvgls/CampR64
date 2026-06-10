@@ -14,7 +14,7 @@
 #' @param excl.sect Excluye los sectores o subsectores dados como caracteres
 #' @param verbose si T avisa distintas especies pueden ser de distintas caracter?sticas
 #' @return Devuelve el valor medio por bootstrap de la media, el error est?ndar y el CV
-#' @seealso {\link{grafhistbox64}}
+#' @seealso \link{grafhistbox64}
 #' @export
 CV.bt.camp64<- function(gr,esp,camp,zona,dns,ind="p",cor.time=TRUE,kg=TRUE,Rbt=1000,excl.sect=NA,verbose=TRUE) {
   if (length(camp)>1) {stop("seleccionadas m?s de una campa?a, no se pueden sacar resultados de más de una")}

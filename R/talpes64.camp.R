@@ -6,7 +6,7 @@
 #' @param dns     "local" (default) o "serv".
 #' @return numeric length 2: c(a, b)
 #' @export
-talpes.camp64 <- function(grupo, especie, zona = "cant",
+talpes64.camp <- function(grupo, especie, zona = "cant",
                           dns = c("local","serv")) {
   dns  <- tolower(match.arg(dns))
   zona <- tolower(zona)

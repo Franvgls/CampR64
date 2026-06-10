@@ -48,5 +48,5 @@ camp, mean_w, se_w, cv_w, mean_n, se_n, cv_n
 \description{
 Calcula media, error estándar (SE) y coeficiente de variación (CV)
 estratificados por campaña, tanto para peso como para número,
-usando \code{datos.camp64} y \code{str.mean.dt64}.
+usando \code{datos.camp64} y \code{strmean.dt64}.
 }

@@ -17,7 +17,6 @@ camptoyear(Nsh)
 }
 \seealso{
 Other datos_especies: 
-\code{\link{AbrvEsp64}()},
 \code{\link{BuscaAphia64}()},
 \code{\link{buscacod64}()},
 \code{\link{buscaesp64}()}

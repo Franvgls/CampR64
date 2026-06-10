@@ -30,7 +30,7 @@
 #'   observada en lugar de generar un error. Se emite un aviso (\code{warning}) 
 #'   informando de esta situación.#' @param tabres Muestra una tabla resumen de la media, total de biomasa o número y frecuencia de la especie por estación según el brks especificado
 #' @param tit2 Añade un segundo título al gráfico especificando el rango de tallas
-#' @seealso {\link{DpthPrfl64}}
+#' @seealso \link{DpthPrfl64}
 #' @examples 
 #' \dontrun{
 #' DpthPrflTals64(1, 50, "N08", "cant","local",10,20,brks = "norte",tabres=TRUE,ind="p")
@@ -51,7 +51,7 @@ DpthPrflTals64<-function(gr,esp,camps,zona="porc",dns=c("local","serv"),tmin=0,t
     print("Distintas especies pueden estar medidas en distintas unidades (mm y cm) o a la aleta anal")
     medida<-c("cm")
   }
-  else { medida<-ifelse(unid.camp64(gr,esp,zona,dns)[1]==1,"cm","mm") }
+  else { medida<-ifelse(unid64.camp(gr,esp,zona,dns)[1]==1,"cm","mm") }
   dumb<-maphistal64(gr,esp,camps,zona=zona,dns=dns,tmin,tmax,cor.time=cor.time,incl2=incl2,sex=sex,plot=FALSE,out.dat=TRUE,ind=ind)
   if (ind=="n") {
     if (sum(dumb$numero)==0) {

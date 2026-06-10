@@ -50,13 +50,14 @@ GetAlk.camp(1,45,"P03","porc","local",AltAlk="edadXYY")
 }
 \seealso{
 Other edades: 
+\code{\link{ALKs64.dns.camp}()},
 \code{\link{AbAgStatRec.camp64}()},
-\code{\link{bubbage.camp64}()},
+\code{\link{bubbage64.camp}()},
 \code{\link{datagegr.camp64}()},
 \code{\link{edadsect.camp64}()},
 \code{\link{edadstr.camp64}()},
 \code{\link{grafedtal.camps64}()},
-\code{\link{logabage.camp64}()},
+\code{\link{logabage64.camp}()},
 \code{\link{maphistage64}()}
 }
 \concept{edades}

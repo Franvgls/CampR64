@@ -39,7 +39,7 @@ GrafMarksGPS<-function(camp,zona="cant",dns="local",event="Draga",add=FALSE,ti=T
     di<-"Porcupine"    
     fil<-paste0("Porcupin_",camp,".mrk")
     if (!add) {
-      if (any(!is.na(xlims))) {mapporco64(xlims=xlims,ylims=ylims,cuadr=cuadr)} else mapporco64(cuadr=cuadr)
+      if (any(!is.na(xlims))) {MapPorc64(xlims=xlims,ylims=ylims,cuadr=cuadr)} else MapPorc64(cuadr=cuadr)
     }
     legend("bottomright",paste0(event,"s ",camp),pch=ifelse(is.na(pch),25,pch),pt.bg=ptbg,inset=ifelse(add,c(.1,.15),c(.15,.15)),bty="o",bg="white")
     }
@@ -48,7 +48,7 @@ GrafMarksGPS<-function(camp,zona="cant",dns="local",event="Draga",add=FALSE,ti=T
       di<-"arsa"
       fil<-paste0("cadiz_",camp,".mrk")
       if (!add) {
-        if (any(!is.na(xlims))) {MapArsa64(xlims=xlims,ylims=ylims,places=places,cuadr=cuadr,bw=bw)} else MapArsa()
+        if (any(!is.na(xlims))) {MapArsa64(xlims=xlims,ylims=ylims,places=places,cuadr=cuadr,bw=bw)} else MapArsa64()
       }
       legend("topright",paste0(event,"s ",camp),pch=ifelse(is.na(pch),25,pch),pt.bg=ptbg,inset=ifelse(add,c(.3,.05),c(.3,.15)),bty="o",bg="white")
     }

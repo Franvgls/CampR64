@@ -8,7 +8,7 @@ dattal.camp64(
   gr,
   esp,
   camp,
-  zona,
+  zona = "cant",
   dns = c("local", "serv"),
   cor.time = TRUE,
   excl.sect = NA,
@@ -23,7 +23,9 @@ dattal.camp64(
 
 \item{camp}{Campaña de la que se extraen los datos: un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
 
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Porc" o "Pnew", Cantábrico "Cant, Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)}
+\item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)}
+
+\item{dns}{Elige origen datos ordenador "local" o del servidor "serv"}
 
 \item{cor.time}{Si T corrige las abundancias en función de la duración del lance}
 
@@ -42,9 +44,9 @@ Extrae los datos de abundancia por talla y sexo de una especie o conjunto de esp
 }
 \examples{
 \dontrun{
-dattal.camp(1,50,"P07","porc","local",excl.sect=c("B","C"))
+dattal.camp64(1,50,camp="P07",zona="porc",dns="local",excl.sect=c("B","C"))
 }
 }
 \seealso{
-{\link{datos.camp}}
+\link{datos.camp64}
 }

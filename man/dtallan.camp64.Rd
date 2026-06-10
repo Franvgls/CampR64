@@ -9,7 +9,7 @@ dtallan.camp64(
   esp,
   camp,
   zona,
-  dns,
+  dns = c("local", "serv"),
   lances = NA,
   sex = FALSE,
   muestr = TRUE
@@ -22,7 +22,9 @@ dtallan.camp64(
 
 \item{camp}{Campaña a representar en el mapa de un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
 
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Pnew", Cantábrico "Cant", Golfo de Cadiz "Arsa" (proporciona los datos para Medits pero no saca mapas)}
+\item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)}
+
+\item{dns}{Elige origen datos ordenador "local" o del servidor "serv"}
 
 \item{lances}{Da la opción de escribir un número de lance y saca los valores solo para ese lance o grupo de lances.}
 
@@ -42,8 +44,8 @@ dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=NA,muestr=F
 }
 \seealso{
 Other Distribuciones de tallas: 
-\code{\link{denstall.camp64}()},
+\code{\link{denstall64.camp}()},
 \code{\link{dtallbarplot64}()},
-\code{\link{dtalldens.camp64}()}
+\code{\link{dtalldens64.camp}()}
 }
 \concept{Distribuciones de tallas}

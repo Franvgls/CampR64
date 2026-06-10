@@ -25,11 +25,15 @@ La función inversa es \code{\link[=gradec]{gradec()}}, que convierte de GGG.MMm
 decimales.
 }
 \examples{
+\dontrun{
 agradec(43.968)   # → 43.5808
 agradec(c(43.968, -8.5))
+}
 
 }
 \seealso{
-\code{\link[=gradec]{gradec()}}, \code{\link[=gradms]{gradms()}}
+\code{\link[=gradec]{gradec()}}
+
+\code{\link[=gradms]{gradms()}}
 }
 \concept{Conversión de unidades}

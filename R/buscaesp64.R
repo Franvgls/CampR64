@@ -3,6 +3,8 @@
 #' Busca el nombre de una especie a partir del código del grupo y especie.Puede dar el nombre científico, común o en inglés
 #' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
 #' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo
+#' @param zona Zona de la que se leen las especies. Determina la estructura de la tabla de especies, que difiere entre ARSA y el resto (Porcupine/Cantábrico): "cant", "porc", "arsa", "medi"
+#' @param dns Origen de las bases de datos: "local" en el ordenador, "serv" en el servidor
 #' @param id Salida como: "l" Nombre científico en latín, "e" nombre en español, "i" nombre en inglés "a" código APHIA
 #' @family datos_especies
 #' @examples 

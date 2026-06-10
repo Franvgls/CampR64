@@ -30,7 +30,7 @@
 #'   edad (filas) × campaña (columnas). El gráfico principal se produce
 #'   como efecto lateral.
 #'
-#' @seealso [logabage.camp64()] para descenso logarítmico por cohorte,
+#' @seealso [logabage64.camp()] para descenso logarítmico por cohorte,
 #'   [edadstr.camp64()] para los datos de abundancia a la edad
 #'
 #' @family edades
@@ -38,19 +38,19 @@
 #' @examples
 #' \dontrun{
 #' # Gallo (Lepidorhombus whiffiagonis, esp=43) — Cantábrico
-#' bubbage.camp64(gr=1, esp=43, camps=Nsh, zona="cant", dns="local",
+#' bubbage64.camp(gr=1, esp=43, camps=Nsh, zona="cant", dns="local",
 #'               plus=8, recr=0)
 #'
 #' # Bacaladilla (esp=51) — Cantábrico, reclutamiento edad 1
-#' bubbage.camp64(gr=1, esp=51, camps=Nsh, zona="cant", dns="local",
+#' bubbage64.camp(gr=1, esp=51, camps=Nsh, zona="cant", dns="local",
 #'               plus=8, recr=1)
 #'
 #' # Gallo whiff (esp=43) — Porcupine
-#' bubbage.camp64(gr=1, esp=43, camps=Psh, zona="porc", dns="local",
+#' bubbage64.camp(gr=1, esp=43, camps=Psh, zona="porc", dns="local",
 #'               plus=8, recr=0)
 #' }
 #' @export
-bubbage.camp64 <-function(gr,esp,camps,zona="porc",dns=c("local","server"),plus=8,recr=0,cor.time=TRUE) {
+bubbage64.camp <-function(gr,esp,camps,zona="porc",dns=c("local","server"),plus=8,recr=0,cor.time=TRUE) {
   if (length(esp)>1) {
     stop("Sólo se puede incluir una especie en esta función")
   }

@@ -4,7 +4,8 @@
 #' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
 #' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo
 #' @param camps campañas (años) a representar en el mapa: Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param dns Elige el origen de las bases de datos: Porcupine "Porc" o "Pnew", Cantábrico "Cant, Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
+#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param dns Elige origen datos ordenador "local" o del servidor "serv"
 #' @param tmin Talla mínima
 #' @param tmax Talla máxima
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
@@ -18,13 +19,12 @@
 #' @return Devuelve un vector con nombre con el número estratificado del rango de tallas deseados por campaña/año. Si se solicita plot=TRUE saca un gráfico de barras que muestra la abundancia por año. En peso sólo saca los resultados para una especie.
 #' @examples 
 #' \dontrun{
-#' dattal.camps64(1,36,Psh,"porc"."local",0,15,ind="n",plot=TRUE)
+#' dattal.camps64(1,36,Psh,"porc","local",0,15,ind="n",plot=TRUE)
 #' }
-#' @seealso {\link{dattal.camp}}
+#' @seealso \link{dattal.camp64}
 #' @export
 dattal.camps64<- function(gr,esp,camps,zona,dns,tmin=0,tmax=999,cor.time=TRUE,excl.sect=NA,years=TRUE,ind="n",ti=TRUE,las=2,plot=FALSE,es=FALSE) {
   options(scipen=2)
-  #esp<-format(esp,width=3,justify="r")
   if (length(esp)>1 & ind=="p") stop("No se pueden calcular las regresiones talla peso de más de una especie, considera usar calculos espec?ficos y sumarlos")
   if (length(esp)>1) warning("Seguro que tiene sentido mezclar más de una especie para sacar el rango de talla")
   dumb<-data.frame(dattal.camp64(gr,esp,camps[1],zona,dns,cor.time=cor.time,excl.sect=excl.sect,sex=FALSE),camp=camps[1])
@@ -37,7 +37,7 @@ dattal.camps64<- function(gr,esp,camps,zona,dns,tmin=0,tmax=999,cor.time=TRUE,ex
   #dumbtal<-dtall.camp(gr,esp,camps,dns,excl.sect,years,out.dat=TRUE,plot=FALSE)
   talla<-as.numeric(rownames(dumbtal))
   if (ind=="p") {
-    ab<-talpes.camp64(gr,esp,zona,dns)
+    ab<-talpes64.camp(gr,esp,zona,dns)
     peso<-(ab[1]*(talla+.5)^ab[2])
     dumbtal<-data.frame(talla=talla,as.data.frame(dumbtal)*peso)
   }
@@ -46,12 +46,12 @@ dattal.camps64<- function(gr,esp,camps,zona,dns,tmin=0,tmax=999,cor.time=TRUE,ex
   if (years) colnames(dumbtal)<-c("talla",camptoyear(colnames(dumbtal[,2:ncol(dumbtal)])))
   #  browser()
   if (es){
-    if (ind=="p") print(paste("Peso medio estratificado en gramos por lance de",buscaesp64(gr,esp,zona),"entre",tmin,"y",tmax,ifelse(unid.camp64(gr,esp)[1]==1,"cm","mm")))
-    else print(paste("número medio estratificado de individuos por lance de",buscaesp64(gr,esp,zona),"entre",tmin,"y",tmax,ifelse(unid.camp64(gr,esp)[1]==1,"cm","mm")))
+    if (ind=="p") print(paste("Peso medio estratificado en gramos por lance de",buscaesp64(gr,esp,zona),"entre",tmin,"y",tmax,ifelse(unid64.camp(gr,esp)[1]==1,"cm","mm")))
+    else print(paste("número medio estratificado de individuos por lance de",buscaesp64(gr,esp,zona),"entre",tmin,"y",tmax,ifelse(unid64.camp(gr,esp)[1]==1,"cm","mm")))
   }
   else {
-    if (ind=="p") print(paste(buscaesp64(gr,esp,zona),"between",tmin,"and",tmax,ifelse(unid.camp64(gr,esp)[1]==1,"cm","mm"),"mean stratified weight in grams per haul"))
-    else print(paste(buscaesp64(gr,esp,zona),"between",tmin,"and",tmax,ifelse(unid.camp64(gr,esp)[1]==1,"cm","mm"),"mean stratified number of individuals per haul"))
+    if (ind=="p") print(paste(buscaesp64(gr,esp,zona),"between",tmin,"and",tmax,ifelse(unid64.camp(gr,esp)[1]==1,"cm","mm"),"mean stratified weight in grams per haul"))
+    else print(paste(buscaesp64(gr,esp,zona),"between",tmin,"and",tmax,ifelse(unid64.camp(gr,esp)[1]==1,"cm","mm"),"mean stratified number of individuals per haul"))
   }
     if (plot) {
 #    op<-par(no.readonly=TRUE)
@@ -62,7 +62,7 @@ dattal.camps64<- function(gr,esp,camps,zona,dns,tmin=0,tmax=999,cor.time=TRUE,ex
     box()
     if (ti) {
        title(main=buscaesp64(gr,esp,zona),font.main=4,line=2)
-       title(main=paste(tmin,"-",tmax,ifelse(unid.camp64(gr,esp)[1]==1,"cm","mm")),font.main=2,cex.main=.9,line=.9)
+       title(main=paste(tmin,"-",tmax,ifelse(unid64.camp(gr,esp)[1]==1,"cm","mm")),font.main=2,cex.main=.9,line=.9)
        }
 #    par(op)
   }

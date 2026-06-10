@@ -85,5 +85,5 @@ grafhistbox64.comp(1,45,Nsh[7:27],"cant","local",DLS=T,es=FALSE,years=TRUE,tline
 }
 }
 \seealso{
-{\link{grafhistbox64}}, {\link{grafhistbox64.comp}}
+\link{grafhistbox64}, \link{grafhistbox64.comp}
 }

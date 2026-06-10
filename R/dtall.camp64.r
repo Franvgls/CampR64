@@ -4,7 +4,8 @@
 #' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
 #' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo 
 #' @param camp Campaña a representar en el mapa de un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param dns Elige el origen de las bases de datos: Porcupine "Pnew", Cantábrico "Cant", Golfo de Cádiz "Arsa" (proporciona los datos para Medits pero no saca mapas)
+#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param dns Elige origen datos ordenador "local" o del servidor "serv"
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param ti Si T añade título al gráfico, el nombre de la especie en latín
 #' @param sub Si caracter lo añade como subtítulo en el gráfico
@@ -23,7 +24,7 @@
 #' @param years Si T saca los años como nombre de campaña en los paneles lattice de campañas
 #' @param verbose Si T saca avisos de consistencia en tallas, sino los omite
 #' @return Si plot=T saca el gráfico, pero si out.dat=T puede exportar una matriz talla(filas)xCampañas(columnas)
-#' @seealso {\link{dtallbarplot}} {\link{dtall.lan}}
+#' @seealso \link{dtallbarplot} \link{dtall.lan}
 #' @examples 
 #' \dontrun{
 #' dtall.camp64(1,63,Psh,zona="porc",dns=c("local","serv"),es=F,sex=F,ti=T,years=T) 
@@ -35,11 +36,11 @@ dtall.camp64<- function(gr,esp,camp,zona,dns=c("local","serv"),cor.time=TRUE,ti=
   options(scipen=2)
   if (length(esp)>1 | any(esp=="999")) {
     if (verbose) print("Distintas especies pueden estar medidas en distintas unidades (mm y cm o .5 cm) o a la aleta anal")
-    increm<-unid.camp64(gr,esp,zona)[2] 
-    medida<-ifelse(unid.camp64(gr,esp,zona)[1]==1,"cm",ifelse(increm==5,"x5 mm","mm")) }
+    increm<-unid64.camp(gr,esp,zona,dns)[2] 
+    medida<-ifelse(unid64.camp(gr,esp,zona,dns)[1]==1,"cm",ifelse(increm==5,"x5 mm","mm")) }
   else { 
-    increm<-unid.camp64(gr,esp,zona,dns)[2] 
-    medida<-ifelse(unid.camp64(gr,esp,zona,dns)[1]==1,"cm",ifelse(increm==5,"x5 mm","mm"))
+    increm<-unid64.camp(gr,esp,zona,dns)[2] 
+    medida<-ifelse(unid64.camp(gr,esp,zona,dns)[1]==1,"cm",ifelse(increm==5,"x5 mm","mm"))
   }
   if (bw) {
     colbars<-c(gray(.2),gray(.6),"white")

@@ -7,7 +7,7 @@
 #' @param lan Lance del que se extrae la faunística
 #' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados. Si NA, muestra todos los grupos a excepción de 6 desechos y otros no orgánicos
 #' @return Devuelve un data.frame con columnas grupo,esp,especie,peso,numero
-#' @seealso {\link{ListFauna.camps}}, {\link{ListFaunaTals.camps}}
+#' @seealso \link{ListFauna.camps}, \link{ListFaunaTals.camps}
 #' @examples 
 #' \dontrun{
 #' ListFauna.lan64("12C","cant","local",1,gr=c(1,2))

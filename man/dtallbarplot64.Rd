@@ -86,8 +86,8 @@ llamándola varias veces dentro de un \code{par(mfrow=...)} o
 \code{\link{dtallmean64.serie}}, \code{\link{dtallmean64.camp}}
 
 Other Distribuciones de tallas: 
-\code{\link{denstall.camp64}()},
+\code{\link{denstall64.camp}()},
 \code{\link{dtallan.camp64}()},
-\code{\link{dtalldens.camp64}()}
+\code{\link{dtalldens64.camp}()}
 }
 \concept{Distribuciones de tallas}

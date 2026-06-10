@@ -12,7 +12,7 @@
 #' @param incl2 Si F no tiene en cuenta los lances especiales, si T si los tiene en cuenta, pero da problemas por que no puede calcular las abundancias estratificadas
 #' @param sex Permite elegir entre machos(1), hembras(2) o indeterminados(3), NA escoge sin tener en cuenta el sexo
 #' @param ind Parámetro a representar saca los datos en "p"eso o "n"úmero
-#' @seealso {\link{datgr.camp}}
+#' @seealso \link{datgr.camp64}
 #' @examples 
 #' \dontrun{
 #' dattalgr.camp64("1",c(44:45),"N94","cant","local",0,45,ind="p")
@@ -53,7 +53,7 @@ dattalgr.camp64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),
     ntalls$lance<-as.numeric(as.character(ntalls$lance))
     ntalls$numer<-ntalls$numer*ntalls$peso.gr/ntalls$peso.m
     if (ind=="p") {
-      ab<-talpes.camp64(gr,esp,zona,dns)
+      ab<-talpes64.camp(gr,esp,zona,dns)
       ntalls$peso<-(ntalls$numer*ab[1]*(ntalls$talla+.5)^ab[2])/1000
       ntalls.tot<-tapply(ntalls$peso,ntalls[,c("lance","cate")],sum)
       ntalls.capts<-tapply(ntalls$peso.gr/1000,ntalls[,c("lance","cate")],mean)

@@ -25,7 +25,9 @@ CV.camp64(
 
 \item{camp}{Campaña de la que sacar los dato un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
 
-\item{dns}{Elige el origen de las bases de datos: Porcupine "Porc", Cantábrico "Cant", Golfo de Cadiz "Arsa" (proporciona los datos para Medits pero no saca mapas)}
+\item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cadiz "arsa"}
+
+\item{dns}{datos del ordeandor "local" o del servidor "serv"}
 
 \item{ind}{Dato a procesar, si (p)eso o (n)umero}
 
@@ -46,5 +48,5 @@ Devuelve una lista con valorees de media, SE y CV para los subestratos, estratos
 Función de resultados
 }
 \seealso{
-{\link{CV.camps}}, {\link{CV.bt.camp}}
+\link{CV.camps64}, \link{CV.bt.camp64}
 }

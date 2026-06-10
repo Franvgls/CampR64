@@ -91,7 +91,7 @@ maphistal64(1,50,Psh[1:12],"porc","local",1,23,layout=c(4,3),out.dat=TRUE)
 \seealso{
 Other mapas: 
 \code{\link{GrafMarksGPS}()},
-\code{\link{MapEcol.camp64}()},
+\code{\link{MapEcol64.camp}()},
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},

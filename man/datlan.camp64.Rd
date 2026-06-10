@@ -62,5 +62,5 @@ datlan.camp64("P16","porc","local",bio=T)
 }
 }
 \seealso{
-{\link{MapLansGPS}}
+\link{MapLansGPS64}
 }

@@ -1,6 +1,21 @@
+#' Medias, SE y CV intraestrato y estratificados por estrato geográfico y batimétrico
+#'
+#' Versión de cálculo directo (no bootstrap): calcula medias ponderadas al área,
+#' error estándar y coeficiente de variación a tres niveles —sector detallado,
+#' estrato batimétrico y sector geográfico— más el total del área. A diferencia de
+#' \link{strmean.dtt64} (motor interno para bootstrap), valida las entradas y
+#' devuelve un resultado estructurado y legible.
+#' @param x Vector numérico de abundancias en peso o número
+#' @param sector Asignación al sector de cada muestra; debe tener dos caracteres, el primero el sector geográfico y el segundo el estrato batimétrico
+#' @param area Vector numérico con el área correspondiente a cada muestra
+#' @param Nas Si \code{TRUE} sustituye por 0 los SE no calculables (estratos con un solo dato) y aplica \code{na.rm} en las sumas de varianzas
+#' @return Una lista con cuatro matrices (\code{media}, \code{SE}, \code{CV} en filas):
+#'   \code{locales} por sector detallado, \code{estratos} por estrato batimétrico,
+#'   \code{sectores} por sector geográfico y \code{total} para el conjunto del área
+#' @seealso \link{strmean.dtt64}, \link{strmean64}
+#' @family Calculos bootstraps
 #' @export
-strmean.dt64 <- function(x, sector, area, Nas = FALSE) {
-  if (length(x) != length(sector) || length(x) != length(area)) {
+strmean.dt64 <- function(x, sector, area, Nas = FALSE) {  if (length(x) != length(sector) || length(x) != length(area)) {
     stop("x, sector y area deben tener la misma longitud.")
   }
   if (!is.numeric(x)) stop("x debe ser numérico.")
@@ -12,7 +27,7 @@ strmean.dt64 <- function(x, sector, area, Nas = FALSE) {
   # Agregados básicos por sector detallado
   n_loc       <- tapply(x, sector, length)
   mean_loc    <- tapply(x, sector, mean)
-  var_loc     <- tapply(x, sector, var)
+  var_loc     <- tapply(x, sector, stats::var)
   area_sector <- tapply(area, sector, mean)
   
   # SE local

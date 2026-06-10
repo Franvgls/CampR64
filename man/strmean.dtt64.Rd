@@ -9,7 +9,7 @@ strmean.dtt64(x, sector, area, w = rep(1, length(x)))
 \arguments{
 \item{x}{Es el vector de abundancias en peso o número}
 
-\item{sector}{Es la asignación al sector de cada muestra igual que en strmean {\link{strmean}} pero ha de tener dos caracteres, primero el sector geográfico y segundo el estrato batimétrico}
+\item{sector}{Es la asignación al sector de cada muestra igual que en strmean64 \link{strmean64} pero ha de tener dos caracteres, primero el sector geográfico y segundo el estrato batimétrico}
 
 \item{area}{El área del sector}
 
@@ -23,7 +23,7 @@ Función interna para cálculos y aplicación de bootstrap
 }
 \seealso{
 Other Calculos internos no mostrado: 
-\code{\link{strmean.camps64}()},
-\code{\link{strmean64}()}
+\code{\link{strmean64}()},
+\code{\link{strmean64.camps}()}
 }
 \concept{Calculos internos no mostrado}

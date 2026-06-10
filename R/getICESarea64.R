@@ -3,6 +3,11 @@
 #'   latitud_l, latitud_v, longitud_l, longitud_v, prof_l, prof_v, validez
 #'   (y con redux=TRUE: lat, long, prof)
 #' Requisitos (en Area): ICESNAME, Area
+#' @param camp Campaña de la que se extraen los datos: un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
+#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param dns Elige origen datos ordenador "local" o del servidor "serv"
+#' @param incl2 Si TRUE incluye los datos de los lances especiales (2 o mayor)
+#' @param incl0 Si no es TRUE excluye los lances nulos (0)
 #' @export
 getICESarea64 <- function(camp, zona, dns = c("local","serv"),
                           incl2 = TRUE, incl0 = FALSE,

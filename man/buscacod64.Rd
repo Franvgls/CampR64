@@ -8,6 +8,10 @@ buscacod64(nomb, zona = "cant", dns = c("local", "serv"))
 }
 \arguments{
 \item{nomb}{Nombre científico de la especie o fragmento del nombre entre ""}
+
+\item{zona}{Zona de la que se leen las especies. Determina la estructura de la tabla de especies, que difiere entre ARSA y el resto (Porcupine/Cantábrico): "cant", "porc", "arsa", "medi"}
+
+\item{dns}{Origen de las bases de datos: "local" en el ordenador, "serv" en el servidor}
 }
 \description{
 Busca el código del grupo, especie y la familia a partir del nombre o fragmento de la especie. Es independiente de mayúsculas y minúsculas y puede sacar más de una especie si una parte de sus nombres coincide.
@@ -19,7 +23,6 @@ buscacod64("sph","cant","local")
 }
 \seealso{
 Other datos_especies: 
-\code{\link{AbrvEsp64}()},
 \code{\link{BuscaAphia64}()},
 \code{\link{buscaesp64}()},
 \code{\link{camptoyear}()}

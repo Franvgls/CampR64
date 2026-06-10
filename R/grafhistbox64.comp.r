@@ -24,7 +24,7 @@
 #' @param years Si T saca los años como nombre de campaña en el eje de las equis en vez del nombre de campaña
 #' @param nboot Número de réplicas bootstrap. Reducir (ej. 200) para exploración rápida, 1000 para resultados finales.
 #' @return Crea una gráfica doble de evolución de las abundancias en biomasa y número. 
-#' @seealso {\link{grafhistbox64}}, {\link{grafhistbox64.comp}}
+#' @seealso \link{grafhistbox64}, \link{grafhistbox64.comp}
 #' @examples 
 #' \dontrun{
 #' grafhistbox64.comp(1,45,Nsh[7:27],"cant","local",DLS=T,es=FALSE,years=TRUE,tline=TRUE,ti=TRUE,sub=TRUE)

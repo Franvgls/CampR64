@@ -41,5 +41,5 @@ databEstr(1,51,"N05","cant","local")
 }
 }
 \seealso{
-{\link{databICES64} \link{databICESdiv64} \link{datab64}}
+\link{databICES64} \link{databICESdiv64} \link{datab64}
 }

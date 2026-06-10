@@ -45,7 +45,7 @@ datTalCatch64.camp<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),sex=T
   ntalls$num<-ntalls$numer*ntalls$peso.gr/ntalls$peso.m
   ntaltal<-aggregate(ntalls$num,FUN=sum,by=list(camp=ntalls$camp,lance=ntalls$lance,talla=ntalls$talla,sexo=ntalls$sexo))
   ntaltal$lance<-as.numeric(ntaltal$lance)
-  ntaltal$Unit<-paste("TL",ifelse(unid.camp64(gr,esp,zona,dns)$MED==1,"cm","mm"))
+  ntaltal$Unit<-paste("TL",ifelse(unid64.camp(gr,esp,zona,dns)$MED==1,"cm","mm"))
   names(ntaltal)[5]<-"number"
   ntaltal<-merge(ntaltal,abesp[,c("lan","lat","long","prof")],by.x = "lance",by.y="lan")
   resulttal<-merge(ntaltal,result1[,c("Survey","HaulNb","DateYr","Quarter","SubDiv","StatRec")],by.x="lance",by.y = "HaulNb")

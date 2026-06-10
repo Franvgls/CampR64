@@ -10,7 +10,7 @@
 #' qclandatr.camp64("N23","cant","local")
 #' qclandatr.camp64("216","arsa","local")
 #' }
-#' @seealso {\link{MapLansGPS}}
+#' @seealso \link{MapLansGPS64}
 #' @family Control de calidad
 #' @export
 qclandatr.camp64<-function(camp,zona="cant",dns="local") {
@@ -22,7 +22,7 @@ qclandatr.camp64<-function(camp,zona="cant",dns="local") {
     legend("bottomright",c("Camp hauls","DATRAS hauls"),pch=21,pt.cex = c(1,1.2),pt.bg=c("yellow",NA),col=c(1,"red"),pt.lwd = c(1,2),inset = c(.02),bg="white")
   }
   if (zona=="porc") {
-    mapporco64()
+    MapPorc64()
     datdatr<-icesDatras::getDATRAS("HH","SP-PORC",camptoyear(camp),3)
     legend("bottomright",c("Camp hauls","DATRAS hauls"),pch=21,pt.cex = c(1,1.2),pt.bg=c("yellow",NA),col=c(1,"red"),pt.lwd = c(1,2),inset = c(.02),bg="white")
   }

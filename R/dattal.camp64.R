@@ -5,19 +5,20 @@
 #' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados
 #' @param esp Código de la especie numérico o carácter con tres espacios. 999 para todas las especies del grupo
 #' @param camp Campaña de la que se extraen los datos: un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"
-#' @param dns Elige el origen de las bases de datos: Porcupine "Porc" o "Pnew", Cantábrico "Cant, Golfo de Cádiz "Arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa" (únicamente para sacar datos al IBTS, no gráficos)
+#' @param dns Elige origen datos ordenador "local" o del servidor "serv"
 #' @param cor.time Si T corrige las abundancias en función de la duración del lance
 #' @param excl.sect Sectores a excluir como carácter, se pueden elegir tanto los sectores como estratos
 #' @param sex Si T muestra los datos por sexo
 #' @param verbose Si T muestra avisos problemas de tallas entre distintas especies
 #' @return Devuelve un data.frame con variables: talla, machos, hembras e indet(erminados) si existen todos y si sex=TRUE
-#' @seealso {\link{datos.camp}}
+#' @seealso \link{datos.camp64}
 #' @examples 
 #' \dontrun{
-#' dattal.camp(1,50,"P07","porc","local",excl.sect=c("B","C"))
+#' dattal.camp64(1,50,camp="P07",zona="porc",dns="local",excl.sect=c("B","C"))
 #' }
 #' @export
-dattal.camp64<- function(gr,esp,camp,zona,dns=c("local","serv"),cor.time=TRUE,excl.sect=NA,sex=TRUE,verbose=TRUE) {
+dattal.camp64<- function(gr,esp,camp,zona="cant",dns=c("local","serv"),cor.time=TRUE,excl.sect=NA,sex=TRUE,verbose=TRUE) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
   abesp<-datos.camp64(gr,esp,camp,zona,dns,cor.time=cor.time)
   ntalls<-readCampDBF("ntall",zona,camp,dns)

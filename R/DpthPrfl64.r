@@ -31,7 +31,7 @@
 #' DpthPrfl64(1, 50, "N08", "cant","local",brks = "norte",tabres=TRUE,ind="p")
 #' DpthPrfl64(1,50,"P08","porc","local",brks="porcupine",ti=TRUE)
 #' }
-#' @seealso {\link{DpthPrflTals64}}
+#' @seealso \link{DpthPrflTals64}
 #' @export
 DpthPrfl64 <-function(gr,esp,camps,zona="porc",dns="local",cor.time=TRUE,ind="p",es=TRUE,ti=TRUE,idi="l",xmax=NA,nlans=TRUE,spl=FALSE,brks="Sturges",tabres=TRUE) {
     if (length(gr)>1) stop("No se pueden mezclar datos de grupos distintos, se pueden mezclar todos menos 6, utilizando 9 como grupo")
