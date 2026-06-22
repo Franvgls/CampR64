@@ -33,9 +33,12 @@ dattal.camps64<- function(gr,esp,camps,zona,dns,tmin=0,tmax=999,cor.time=TRUE,ex
       dumb<-rbind(dumb,data.frame(dattal.camp64(gr,esp,i,zona,dns,cor.time=cor.time,excl.sect=excl.sect,sex=FALSE),camp=i))
     }
   }
-  dumbtal<-tapply(dumb$numero,dumb[,c("talla","camp")],sum,na.rm=TRUE)  
+  dumbtal <- tapply(dumb$numero, dumb[,c("talla","camp")], sum, na.rm=TRUE)
+  camp_years <- as.numeric(camptoyear(colnames(dumbtal)))
+  dumbtal    <- dumbtal[, order(camp_years), drop = FALSE]
+  talla <- as.numeric(rownames(dumbtal))
   #dumbtal<-dtall.camp(gr,esp,camps,dns,excl.sect,years,out.dat=TRUE,plot=FALSE)
-  talla<-as.numeric(rownames(dumbtal))
+  #talla<-as.numeric(rownames(dumbtal))
   if (ind=="p") {
     ab<-talpes64.camp(gr,esp,zona,dns)
     peso<-(ab[1]*(talla+.5)^ab[2])
@@ -43,7 +46,7 @@ dattal.camps64<- function(gr,esp,camps,zona,dns,tmin=0,tmax=999,cor.time=TRUE,ex
   }
   else dumbtal<-data.frame(talla=talla,as.data.frame(dumbtal))
   dumbtal<-dumbtal[dumbtal$talla>=tmin & dumbtal$talla<=tmax,]
-  if (years) colnames(dumbtal)<-c("talla",camptoyear(colnames(dumbtal[,2:ncol(dumbtal)])))
+  if (years) colnames(dumbtal)<-c("talla",camptoyear(colnames(dumbtal[,2:ncol(dumbtal),drop=FALSE])))
   #  browser()
   if (es){
     if (ind=="p") print(paste("Peso medio estratificado en gramos por lance de",buscaesp64(gr,esp,zona),"entre",tmin,"y",tmax,ifelse(unid64.camp(gr,esp)[1]==1,"cm","mm")))
@@ -57,7 +60,7 @@ dattal.camps64<- function(gr,esp,camps,zona,dns,tmin=0,tmax=999,cor.time=TRUE,ex
 #    op<-par(no.readonly=TRUE)
     par(mgp=c(2,.6,0))
     yetiq<-ifelse(es,expression("Ind"%*%"lan"^-1),expression("Ind"%*%"haul"^-1))
-    datos<-colSums(dumbtal[,2:ncol(dumbtal)],na.rm=TRUE)
+    datos<-colSums(dumbtal[,2:ncol(dumbtal),drop=FALSE],na.rm=TRUE)
     barplot(datos,ylim=c(0,max(datos)*1.1),names.arg=colnames(datos),space=0,ylab=yetiq,las=las)
     box()
     if (ti) {
@@ -66,7 +69,7 @@ dattal.camps64<- function(gr,esp,camps,zona,dns,tmin=0,tmax=999,cor.time=TRUE,ex
        }
 #    par(op)
   }
-  colSums(dumbtal[,2:ncol(dumbtal)],na.rm=TRUE)
+  colSums(dumbtal[,2:ncol(dumbtal),drop=FALSE],na.rm=TRUE)
 }
 
 #hkeCantPequeños<-dattal.camps(1,50,Nsh[7:27],"Cnew",1,20,years=TRUE)
