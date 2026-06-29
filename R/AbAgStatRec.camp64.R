@@ -22,17 +22,26 @@
 AbAgStatRec.camp64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=8,mediahora=2,cor.time=TRUE,AltAlk=NA,incl2=FALSE,DatGraf=FALSE,plotrix=TRUE,es=TRUE) {
   if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
   if (length(esp)>1) {stop("Sólo se puede incluir una especie en esta función")}
-  AbAgeHaul<-maphistage64(gr=gr,esp=esp,camp=camp,zona=zona,dns=dns,age=0,plus = plus,cor.time = cor.time,out.dat = TRUE,AltAlk = AltAlk,incl2 = incl2,plot = FALSE,mediahora = mediahora)
-  datlanICES<-CAMPtoHH64(camp = camp,zona=zona,dns = dns,incl2 = incl2)[,c("HaulNo","StatRec")]
-  datlanICES$HaulNo<-as.numeric(datlanICES$HaulNo)
-  AbAgeHaulICES<-merge(AbAgeHaul,datlanICES,by.x="lan",by.y = "HaulNo")
-  Results<-tapply(AbAgeHaulICES[,5],AbAgeHaulICES$StatRec,mean)
-  nLans<-tapply(AbAgeHaulICES[,5],AbAgeHaulICES$StatRec,length)
-  for (i in 1:plus) {
-    Results<-rbind(Results,tapply(AbAgeHaulICES[,5+i],AbAgeHaulICES$StatRec,mean))
+  # ceros=TRUE: incluir TODOS los lances muestreados (con y sin captura).
+  # Sin esto, maphistage64 filtra los lances vacíos y se pierden rectángulos
+  # enteros; además sesga al alza las medias (denominador sólo con positivos).
+  AbAgeHaul<-maphistage64(gr=gr,esp=esp,camp=camp,zona=zona,dns=dns,age=0,plus = plus,cor.time = cor.time,out.dat = TRUE,AltAlk = AltAlk,incl2 = incl2,plot = FALSE,mediahora = mediahora,ceros = TRUE)
+  # maphistage64() ya devuelve la columna StatRec (vía datagegr.camp64),
+  # por lo que NO hace falta el merge con CAMPtoHH64 (generaba StatRec.x/.y
+  # y rompía el tapply). Trabajamos directamente sobre AbAgeHaul.
+  AbAgeHaulICES<-AbAgeHaul
+  # Columnas de edad por nombre (robusto ante cambios de posición):
+  noedad<-c("lan","lat","long","weight.time","StatRec","camp","numero")
+  edades<-setdiff(names(AbAgeHaulICES),noedad)
+  Results<-tapply(AbAgeHaulICES[,edades[1]],AbAgeHaulICES$StatRec,mean)
+  nLans<-tapply(AbAgeHaulICES[,edades[1]],AbAgeHaulICES$StatRec,length)
+  for (i in 2:length(edades)) {
+    Results<-rbind(Results,tapply(AbAgeHaulICES[,edades[i]],AbAgeHaulICES$StatRec,mean))
   }
   row.names(Results)<-c(paste0(ifelse(es,"Ed","Ag"),0:c(plus-1)),paste0(ifelse(es,"Ed","Ag"),plus,"+"))
-  colnames(Results)<-paste0("#",colnames(Results),"#")
+  # gsub() previo: el StatRec ya viene con "#" delante (p.ej. "#15E6"), así que
+  # sin limpiar quedaba doble almohadilla ("##15E6#"). Normalizamos a un solo #.
+  colnames(Results)<-paste0("#",gsub("#","",colnames(Results)),"#")
   if(!DatGraf) return(t(Results))
   if (DatGraf) {
     Results1<-data.frame(ICESrect=gsub("#","",colnames(Results)),t(Results))
@@ -55,6 +64,5 @@ AbAgStatRec.camp64<-function(gr,esp,camp,zona="cant",dns=c("local","serv"),plus=
     }
     Result3<-data.frame(nLans=unname(nLans),Result3)
     Result3}
-    if (plotrix) return(Results1) else return(Result3)
-  }
-
+  if (plotrix) return(Results1) else return(Result3)
+}

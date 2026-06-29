@@ -47,3 +47,20 @@
   `@seealso` y `@family ALK`.
 * Ejemplos protegidos con `\dontrun{}` en todas las funciones que
   requieren acceso a DBFs locales.
+
+# CampR64 0.1.13
+
+## Correcciones
+
+* `AbAgStatRec.camp64()`: ahora incluye todos los rectángulos ICES muestreados
+  (con ceros donde no hubo captura) al pasar `ceros=TRUE` a la llamada interna
+  de `maphistage64()`. Antes se perdían rectángulos sin captura y las medias
+  quedaban sesgadas al alza (denominador solo con lances positivos).
+* `AbAgStatRec.camp64()`: eliminado el `merge` redundante con `CAMPtoHH64()`
+  que duplicaba la columna `StatRec` (`.x`/`.y`) y rompía el `tapply()`. Se usa
+  directamente la `StatRec` que ya devuelve `maphistage64()`.
+* `AbAgStatRec.camp64()`: corregida la doble almohadilla en los nombres de
+  rectángulo (`##12E0#` → `#12E0#`).
+* `maphistage64()`: protegido el cálculo de escala ante edades sin datos
+  (todo-NA), que devolvía `-Inf` y reventaba el gráfico/salida. Selección de
+  columnas de edad por nombre en lugar de posición fija.
