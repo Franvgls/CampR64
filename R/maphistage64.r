@@ -53,7 +53,7 @@ maphistage64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
   dns <- match.arg(dns)
   if (plot) lattice::trellis.par.set(lattice::col.whitebg())
   if (length(esp) > 1) stop("Esta función sólo admite una especie")
-
+  
   # --- Construcción del data.frame con todas las campañas ---
   ndat  <- length(camp)
   dumb  <- NULL
@@ -67,10 +67,10 @@ maphistage64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
       dumb <- rbind(dumb, cbind(dat_i, camp=camp[i]))
     }
   }
-
+  
   if (is.null(dumb) || !nrow(dumb))
     stop("No hay datos para la combinación especie/campaña/zona solicitada")
-
+  
   # --- Filtro opcional de lances ---
   # Útil para limitar a una división cuando AltAlk es específica de esa zona
   if (!is.null(lances)) {
@@ -78,7 +78,7 @@ maphistage64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
     if (!nrow(dumb))
       stop("Ningún lance encontrado con los valores de 'lances' indicados")
   }
-
+  
   # --- Año como etiqueta de panel (se guarda dumbcamp antes de sobrescribir camp) ---
   if (years) {
     dumbcamp <- dumb
@@ -86,11 +86,24 @@ maphistage64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
   }
   dumb$camp   <- factor(dumb$camp)
   dumb$numero <- dumb[, age + 5]   # columna de la edad solicitada
-
-  # --- Escala de leyenda ---
-  leyenda <- signif(max(dumb$numero, na.rm=TRUE) * .9, 1)
-  escala  <- signif(max(dumb$numero, na.rm=TRUE), 1) * 35 / 100
-
+  
+  # --- Escala de leyenda (sólo se usa para dibujar) ---
+  # Protegido contra el caso en que la edad solicitada no tenga ningún valor:
+  # max(., na.rm=TRUE) sobre todo-NA devuelve -Inf y reventaba xyplot aguas abajo.
+  maxnum <- max(dumb$numero, na.rm = TRUE)
+  if (!is.finite(maxnum)) {
+    if (!out.dat) {
+      stop("No hay individuos de edad ", age, " para ", esp,
+           " en ", paste(camp, collapse = ", "),
+           ". Prueba otra edad o revisa la ALK (AltAlk).")
+    }
+    leyenda <- NA
+    escala  <- NA
+  } else {
+    leyenda <- signif(maxnum * .9, 1)
+    escala  <- signif(maxnum, 1) * 35 / 100
+  }
+  
   # --- Título ---
   if (is.logical(ti)) {
     if (ti) {
@@ -106,7 +119,7 @@ maphistage64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
   } else {
     titulo <- list(label=ti)
   }
-
+  
   # --- Color ---
   if (bw && plot) {
     colo <- gray(.1)
@@ -114,133 +127,139 @@ maphistage64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
   } else {
     colo <- 4
   }
-
+  
   # --- Layout automático ---
   if (any(is.na(layout))) {
     layout <- if (ndat != 4) c(1, ndat) else c(2, 2)
   }
-
+  
   # --- Mapa según zona ---
   if (substr(zona, 1, 4) == "porc") {
     asp <- diff(c(50.5, 54.5)) / (diff(c(-15.5, -10.5)) * cos(mean(c(50.5, 54.5)) * pi/180))
     mapdist <- lattice::xyplot(lat~long|camp, dumb, layout=layout,
-      xlim=c(-15.5,-10.5), main=titulo, xlab=NULL, ylab=NULL,
-      ylim=c(50.5,54.5), aspect=asp,
-      par.strip.text=list(cex=.7, font=2),
-      scales=list(alternating=FALSE, tck=c(1,0), cex=.7,
-        x=list(at=c(-15:-11), labels=as.character(abs(-15:-11))),
-        y=list(at=(51:54), rot=90)),
-      as.table=TRUE,
-      panel=function(x, y, subscripts=subscripts) {
-        lattice::panel.xyplot(Porc.map$x, Porc.map$y, type="l", lty=3, col=gray(.2))
-        grid::grid.polygon(
-          maps::map(Porc.map, "narr", plot=FALSE)[[1]],
-          maps::map(Porc.map, "narr", plot=FALSE)[[2]],
-          default.units="native", gp=grid::gpar(fill=gray(.7)))
-        if (max(dumb$numero[subscripts], na.rm=TRUE) > 0) {
-          lattice::panel.xyplot(-12.5, 51.2, cex=sqrt(leyenda/escala), pch=16, col=colo)
-          lattice::ltext(-12.5, 51.2,
-            labels=paste(leyenda, ifelse(ind=="p","kg","ind.")),
-            pos=4, offset=1.1, cex=.8)
-        }
-        if (ind=="p") {
-          lattice::panel.xyplot(x, y,
-            cex=ifelse(dumb$peso[subscripts]>0, sqrt(dumb$peso[subscripts]/escala), .35),
-            pch=ifelse(dumb$peso[subscripts]>0, 16, ifelse(ceros,4,NA)), col=colo)
-        } else {
-          lattice::panel.xyplot(x, y,
-            cex=ifelse(dumb$numero[subscripts]>0, sqrt(dumb$numero[subscripts]/escala), .35),
-            pch=ifelse(dumb$numero[subscripts]>0, 16, ifelse(ceros,4,NA)), col=colo)
-        }
-      })
+                               xlim=c(-15.5,-10.5), main=titulo, xlab=NULL, ylab=NULL,
+                               ylim=c(50.5,54.5), aspect=asp,
+                               par.strip.text=list(cex=.7, font=2),
+                               scales=list(alternating=FALSE, tck=c(1,0), cex=.7,
+                                           x=list(at=c(-15:-11), labels=as.character(abs(-15:-11))),
+                                           y=list(at=(51:54), rot=90)),
+                               as.table=TRUE,
+                               panel=function(x, y, subscripts=subscripts) {
+                                 lattice::panel.xyplot(Porc.map$x, Porc.map$y, type="l", lty=3, col=gray(.2))
+                                 grid::grid.polygon(
+                                   maps::map(Porc.map, "narr", plot=FALSE)[[1]],
+                                   maps::map(Porc.map, "narr", plot=FALSE)[[2]],
+                                   default.units="native", gp=grid::gpar(fill=gray(.7)))
+                                 if (max(dumb$numero[subscripts], na.rm=TRUE) > 0) {
+                                   lattice::panel.xyplot(-12.5, 51.2, cex=sqrt(leyenda/escala), pch=16, col=colo)
+                                   lattice::ltext(-12.5, 51.2,
+                                                  labels=paste(leyenda, ifelse(ind=="p","kg","ind.")),
+                                                  pos=4, offset=1.1, cex=.8)
+                                 }
+                                 if (ind=="p") {
+                                   lattice::panel.xyplot(x, y,
+                                                         cex=ifelse(dumb$peso[subscripts]>0, sqrt(dumb$peso[subscripts]/escala), .35),
+                                                         pch=ifelse(dumb$peso[subscripts]>0, 16, ifelse(ceros,4,NA)), col=colo)
+                                 } else {
+                                   lattice::panel.xyplot(x, y,
+                                                         cex=ifelse(dumb$numero[subscripts]>0, sqrt(dumb$numero[subscripts]/escala), .35),
+                                                         pch=ifelse(dumb$numero[subscripts]>0, 16, ifelse(ceros,4,NA)), col=colo)
+                                 }
+                               })
   }
-
+  
   if (substr(zona, 1, 4) == "cant") {
     asp     <- diff(c(41.82, 44.3)) / (diff(c(-10.25, -1.4)) * cos(mean(c(41.82, 44.3)) * pi/180))
     leyenda <- signif(c(1, .5, .25) * leyenda, 1)
     mapdist <- lattice::xyplot(lat~long|camp, dumb, layout=layout,
-      xlim=c(-10.25,-1.4), main=titulo, xlab=NULL, ylab=NULL, subscripts=TRUE,
-      ylim=c(41.82,44.3), aspect=asp,
-      par.strip.text=list(cex=.8, font=2),
-      scales=list(alternating=FALSE, tck=c(1,0), cex=.7,
-        x=list(at=c(-10:-2), labels=as.character(abs(-10:-2))),
-        y=list(at=seq(42,44,by=1), rot=90)),
-      as.table=TRUE,
-      panel=function(x, y, subscripts=subscripts) {
-        lattice::panel.xyplot(Nort.str$x, Nort.str$y, type="l", lty=3, col=gray(.4))
-        grid::grid.polygon(
-          maps::map(Nort.map, "Costa", plot=FALSE)[[1]],
-          maps::map(Nort.map, "Costa", plot=FALSE)[[2]],
-          default.units="native", gp=grid::gpar(fill=gray(.8)))
-        if (max(dumb$numero[subscripts], na.rm=TRUE) > 0) {
-          lattice::panel.xyplot(rep(-7,3), c(43., 42.60, 42.20),
-            cex=sqrt(leyenda/escala), pch=16, col=colo)
-          lattice::ltext(rep(-7,3), c(43., 42.60, 42.20),
-            labels=paste(leyenda, ifelse(ind=="p","kg","ind.")),
-            pos=4, offset=1.1, cex=.7)
-        }
-        if (ind=="p") {
-          lattice::panel.xyplot(x, y,
-            cex=ifelse(dumb$peso[subscripts]>0, sqrt(dumb$peso[subscripts]/escala), .4),
-            pch=ifelse(dumb$peso[subscripts]>0, 16, 19), col=colo)
-        } else {
-          lattice::panel.xyplot(x, y,
-            cex=ifelse(dumb$numero[subscripts]>0, sqrt(dumb$numero[subscripts]/escala), .35),
-            pch=ifelse(dumb$numero[subscripts]>0, 16, ifelse(ceros,4,NA)), col=colo)
-        }
-      })
+                               xlim=c(-10.25,-1.4), main=titulo, xlab=NULL, ylab=NULL, subscripts=TRUE,
+                               ylim=c(41.82,44.3), aspect=asp,
+                               par.strip.text=list(cex=.8, font=2),
+                               scales=list(alternating=FALSE, tck=c(1,0), cex=.7,
+                                           x=list(at=c(-10:-2), labels=as.character(abs(-10:-2))),
+                                           y=list(at=seq(42,44,by=1), rot=90)),
+                               as.table=TRUE,
+                               panel=function(x, y, subscripts=subscripts) {
+                                 lattice::panel.xyplot(Nort.str$x, Nort.str$y, type="l", lty=3, col=gray(.4))
+                                 grid::grid.polygon(
+                                   maps::map(Nort.map, "Costa", plot=FALSE)[[1]],
+                                   maps::map(Nort.map, "Costa", plot=FALSE)[[2]],
+                                   default.units="native", gp=grid::gpar(fill=gray(.8)))
+                                 if (max(dumb$numero[subscripts], na.rm=TRUE) > 0) {
+                                   lattice::panel.xyplot(rep(-7,3), c(43., 42.60, 42.20),
+                                                         cex=sqrt(leyenda/escala), pch=16, col=colo)
+                                   lattice::ltext(rep(-7,3), c(43., 42.60, 42.20),
+                                                  labels=paste(leyenda, ifelse(ind=="p","kg","ind.")),
+                                                  pos=4, offset=1.1, cex=.7)
+                                 }
+                                 if (ind=="p") {
+                                   lattice::panel.xyplot(x, y,
+                                                         cex=ifelse(dumb$peso[subscripts]>0, sqrt(dumb$peso[subscripts]/escala), .4),
+                                                         pch=ifelse(dumb$peso[subscripts]>0, 16, 19), col=colo)
+                                 } else {
+                                   lattice::panel.xyplot(x, y,
+                                                         cex=ifelse(dumb$numero[subscripts]>0, sqrt(dumb$numero[subscripts]/escala), .35),
+                                                         pch=ifelse(dumb$numero[subscripts]>0, 16, ifelse(ceros,4,NA)), col=colo)
+                                 }
+                               })
   }
-
+  
   if (zona == "arsa") {
     asp     <- diff(c(35.95, 37.30)) / (diff(c(-8.1, -5.5)) * cos(mean(c(35.95, 37.30)) * pi/180))
     leyenda <- signif(c(1, .5, .25) * leyenda, 1)
     mapdist <- lattice::xyplot(lat~long|camp, dumb, layout=layout,
-      xlim=c(-8.1,-5.5), main=titulo, xlab=NULL, ylab=NULL, subscripts=TRUE,
-      ylim=c(35.95,37.30), aspect=asp,
-      par.strip.text=list(cex=.8, font=2),
-      par.strip.background=list(col=c(gray(.8))),
-      scales=list(alternating=FALSE, tck=c(1,0), cex=.8,
-        x=list(at=c(-8:-6), labels=as.character(abs(-8:-6))),
-        y=list(at=seq(36,37,by=1), rot=90)),
-      as.table=TRUE,
-      panel=function(x, y, subscripts=subscripts) {
-        lattice::panel.xyplot(Arsa.str$x, Arsa.str$y, type="l", lty=3, col=gray(.4))
-        grid::grid.polygon(
-          maps::map(Arsa.map, c("Portugal","Costa"), plot=FALSE)[[1]],
-          maps::map(Arsa.map, c("Portugal","Costa"), plot=FALSE)[[2]],
-          default.units="native", gp=grid::gpar(fill=gray(.8)))
-        if (max(dumb$numero[subscripts], na.rm=TRUE) > 0) {
-          lattice::panel.xyplot(rep(-6,3), c(36.3, 36.4, 36.5),
-            cex=sqrt(leyenda/escala), pch=16, col=colo)
-          lattice::ltext(rep(-6,3), c(36.3, 36.4, 36.5),
-            labels=paste(leyenda, ifelse(ind=="p","kg","ind.")),
-            pos=4, offset=.8, cex=.7)
-        }
-        if (ind=="p") {
-          lattice::panel.xyplot(x, y,
-            pch=ifelse(dumb$peso[subscripts]>0, 16, ifelse(ceros,4,NA)),
-            cex=ifelse(dumb$peso[subscripts]>0, sqrt(dumb$peso[subscripts]/escala), .35),
-            col=colo)
-        } else {
-          lattice::panel.xyplot(x, y,
-            cex=ifelse(dumb$numero[subscripts]>0, sqrt(dumb$numero[subscripts]/escala), .35),
-            pch=ifelse(dumb$numero[subscripts]>0, 16, ifelse(ceros,4,NA)), col=colo)
-        }
-      })
+                               xlim=c(-8.1,-5.5), main=titulo, xlab=NULL, ylab=NULL, subscripts=TRUE,
+                               ylim=c(35.95,37.30), aspect=asp,
+                               par.strip.text=list(cex=.8, font=2),
+                               par.strip.background=list(col=c(gray(.8))),
+                               scales=list(alternating=FALSE, tck=c(1,0), cex=.8,
+                                           x=list(at=c(-8:-6), labels=as.character(abs(-8:-6))),
+                                           y=list(at=seq(36,37,by=1), rot=90)),
+                               as.table=TRUE,
+                               panel=function(x, y, subscripts=subscripts) {
+                                 lattice::panel.xyplot(Arsa.str$x, Arsa.str$y, type="l", lty=3, col=gray(.4))
+                                 grid::grid.polygon(
+                                   maps::map(Arsa.map, c("Portugal","Costa"), plot=FALSE)[[1]],
+                                   maps::map(Arsa.map, c("Portugal","Costa"), plot=FALSE)[[2]],
+                                   default.units="native", gp=grid::gpar(fill=gray(.8)))
+                                 if (max(dumb$numero[subscripts], na.rm=TRUE) > 0) {
+                                   lattice::panel.xyplot(rep(-6,3), c(36.3, 36.4, 36.5),
+                                                         cex=sqrt(leyenda/escala), pch=16, col=colo)
+                                   lattice::ltext(rep(-6,3), c(36.3, 36.4, 36.5),
+                                                  labels=paste(leyenda, ifelse(ind=="p","kg","ind.")),
+                                                  pos=4, offset=.8, cex=.7)
+                                 }
+                                 if (ind=="p") {
+                                   lattice::panel.xyplot(x, y,
+                                                         pch=ifelse(dumb$peso[subscripts]>0, 16, ifelse(ceros,4,NA)),
+                                                         cex=ifelse(dumb$peso[subscripts]>0, sqrt(dumb$peso[subscripts]/escala), .35),
+                                                         col=colo)
+                                 } else {
+                                   lattice::panel.xyplot(x, y,
+                                                         cex=ifelse(dumb$numero[subscripts]>0, sqrt(dumb$numero[subscripts]/escala), .35),
+                                                         pch=ifelse(dumb$numero[subscripts]>0, 16, ifelse(ceros,4,NA)), col=colo)
+                                 }
+                               })
   }
-
+  
   # --- Salida ---
   # plot=TRUE  → pinta en pantalla (pero no impide devolver datos si out.dat=TRUE)
   # plot=FALSE → devuelve objeto trellis para componer con print.trellis + more=TRUE
   # out.dat=TRUE → devuelve data.frame (compatible con cualquier valor de plot)
-
+  
   if (plot) print(mapdist)
-
+  
   if (out.dat) {
     if (years) dumb <- dumbcamp
-    if (!ceros) dumb <- dumb[rowSums(dumb[, 5:c(ncol(dumb)-2)]) > 0, , drop=FALSE]
-    return(dumb[, 1:c(ncol(dumb)-1)])
+    if (!ceros) {
+      # Columnas de edad por NOMBRE, no por posición fija: el rango 5:(ncol-2)
+      # se rompía al colarse StatRec (chr) en dumb. Sumamos sólo las edades.
+      noedad <- c("lan","lat","long","weight.time","StatRec","camp","numero")
+      edades <- setdiff(names(dumb), noedad)
+      dumb <- dumb[rowSums(dumb[, edades, drop=FALSE]) > 0, , drop=FALSE]
+    }
+    return(dumb[, setdiff(names(dumb), "numero"), drop=FALSE])
   }
-
+  
   if (!plot) return(mapdist)
 }
