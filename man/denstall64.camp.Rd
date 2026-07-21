@@ -45,7 +45,7 @@ denstall64.camp(
 
 \item{idi}{Nombre científico de la especie ("l") o nombre común ("e")}
 
-\item{layout}{Organización de gráficos en filas ó columnas c(r,c)}
+\item{layout}{Organización de gráficos en filas ó columnas c(r,c). NA por defecto usa un layout automático.}
 
 \item{years}{Si T saca los años como nombre de campaña en los paneles lattice de campañas}
 
@@ -57,6 +57,7 @@ Crea gráfico con la función de densidad de la distribución de tallas estratif
 \examples{
 \dontrun{
 denstall64.camp(gr=1,esp=50,camp=Psh,zona="porc","local!",years=TRUE)
+denstall64.camp(1,42,Nsh[25:42],"cant","local",layout=c(3,6))
 }
 }
 \seealso{

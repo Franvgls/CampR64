@@ -29,7 +29,7 @@
 #' ArtePars64("N23","cant",Nlans = F,ti=T)
 #' ArtePars64("N23","cant",Nlans = T,ti=T,lan.cex=2)
 #' }
-#' @family gear
+#' @family Artes de pesca
 #' @export
 ArtePars64<-function(camp,zona="cant",dns=c("local","serv"),incl2=TRUE,es=T,bw=TRUE,ti=TRUE,sub=NULL,out.dat=FALSE,ceros=TRUE,cex.leg=1.1,
   years=TRUE,profrange=NA,proflab=F,Nlans=TRUE,lan.cex=.8,graf=FALSE,xpng=1200,ypng=800,ppng=15) {

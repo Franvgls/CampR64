@@ -30,7 +30,7 @@
 #' ArteParComp64("N23", zona="cant", var="puertas", Nlans=TRUE, lan.cex=2)
 #' ArteParComp64("P25", zona="porc", var="vertical")
 #' }
-#' @family gear
+#' @family Artes de pesca
 #' @export
 ArteParComp64 <- function(camp, zona = "cant", dns = c("local","serv"),
                            var = c("calones","puertas","vertical"),
