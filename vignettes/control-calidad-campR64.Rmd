@@ -1,0 +1,162 @@
+---
+title: "Control de calidad en campañas de arrastre (CampR64)"
+author: "Fran Velasco"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Control de calidad en campañas de arrastre (CampR64)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+> **CampR64 vs CampR:** esta viñeta es la adaptación de la viñeta de control de
+> calidad de CampR (que en el paquete original ni siquiera llegó a compilarse
+> como viñeta, solo vivía en `Inst/ops/CampR_qc_for_survey.Rmd`). Los cambios
+> principales respecto a la versión de CampR son:
+>
+> - Las funciones llevan sufijo `64` (`armap64`, `qcdistlan.camp64`,
+>   `qcLW64.camp`...).
+> - En vez de un `dns` con el nombre del DSN ODBC (`"Cant"`, `"Porc"`...), ahora
+>   se usan dos argumentos separados: `zona` (`"cant"`, `"porc"`, `"arsa"`,
+>   `"medi"`) y `dns` (`"local"` o `"serv"`, el origen físico de los datos
+>   configurado en `CampR64_paths`).
+> - Se añade una sección nueva de control de calidad de **duplicados en la
+>   faunística**, que no existía en CampR.
+> - `qcdistlan.camp64()` recupera, con el argumento `plot`, los gráficos que
+>   existían en la versión original de CampR y que se habían perdido en la
+>   migración (se mantuvieron entre tanto en el shiny de IMBUS).
+
+```{r, echo=FALSE, results='hide', include=FALSE}
+library(CampR64)
+```
+
+Este documento resume y propone un protocolo para realizar la comprobación de
+errores en los datos recogidos y tecleados a lo largo de una campaña de
+arrastre con datos almacenados en las bases de datos de **CAMP 12 Harbour
+Windows 10**.
+
+El protocolo debe incluir la revisión de:
+
+### Pescas: datos en el fichero `lanceXXX.dbf`
+
+Para QC interesa más ver las posiciones de largada y virada de cada lance que
+un mapa general de la campaña (ese uso es más bien para presentar resultados
+en informes, con `armap64()`). `MapLansGPS64()` dibuja los lances como
+segmentos largada→virada, lo que permite detectar de un vistazo lances
+"anómalos" (segmentos que se cruzan, lances desproporcionadamente cortos o
+largos, posiciones fuera de la zona de muestreo...).
+
+```{r MapLansGPS64, fig.width=18, fig.height=8, fig.align='center'}
+MapLansGPS64(camp = "N12", zona = "cant", dns = "local", Nlans = TRUE)
+```
+
+`qcdistlan.camp64()` permite ver errores en la distancia recorrida y la
+velocidad, comparando lo tecleado con lo calculado a partir de las posiciones
+(fórmula de Haversine) y la relación con la duración del lance y el rumbo.
+Además de la tabla, con `plot = "all"` recupera los tres gráficos que existían
+en la versión original de CampR (y que se mantuvieron en el shiny de IMBUS,
+adaptados de `qcHaulsDist()` sobre datos DATRAS), apilados con
+`par(mfrow=c(3,1))`: tamaño de punto proporcional a la magnitud del error,
+color rojo/azul según el signo, y líneas de referencia por cuantiles. También
+se pueden pedir por separado con `plot = "dist"`, `"speed"` o `"course"`. De
+los tres, el de rumbo (`"course"`) es el más espurio: depende mucho de dónde
+termine el barco al final del lance y de cómo lo mueva la corriente.
+
+```{r qcdistlan.camp64}
+qcdistlan.camp64(camp = "N12", zona = "cant", dns = "local",
+                  todos = FALSE, pc.error = 2, plot = "all")
+```
+
+### Funcionamiento del arte (análisis del `log` del ITI, MARPORT, SCANMAR...)
+
+Los datos se pueden tomar directamente del equipo a través de los telegramas
+que se pasan al `PescaWin` y procesarlo: preparar ejemplos a partir de un
+archivo de `log` del MARPORT u otro monitor de funcionamiento del aparejo.
+*(Pendiente de migrar a CampR64 — de momento no hay equivalente `64` de esta
+parte del protocolo.)*
+
+### Revisión de capturas — pesos según relación talla-peso
+
+`qcLW64.camp()` produce un gráfico con los pesos por lance en función de la
+captura y el peso estimado a partir de la distribución de tallas medidas. El
+error respecto a la mediana permite ver qué lances dan error por categoría.
+
+```{r qcLW64.camp, echo=FALSE}
+qcLW64.camp(gr = 1, esp = 51, camp = "N12", zona = "cant", dns = "local",
+            margerr = 14)
+```
+
+### Revisión de tallas y sexos
+
+`qcdtall64.camp()` revisa la distribución de tallas medida para un lance
+concreto junto con las categorías medidas y los factores de ponderación
+`captura/muestra` de cada categoría, comparando con el tamaño de muestra
+recomendado por Gerritsen & McGrath (2007) en función del rango de tallas
+encontrado.
+
+```{r qcdtall64.camp, echo=FALSE}
+qcdtall64.camp(gr = 1, esp = 51, camp = "N12", zona = "cant", dns = "local",
+               lance = 107)
+```
+
+`qcdtallrev64.camp()` recorre las distribuciones de todas las especies de una
+campaña una a una (se puede interrumpir cerrando el gráfico); resulta muy útil
+para revisar posibles datos de sexado en **especies que habitualmente no se
+miden por sexos**.
+
+```{r qcdtallrev64.camp, eval=FALSE}
+qcdtallrev64.camp(camp = "N12", zona = "cant", dns = "local", nlans = 2)
+```
+
+### Revisión de medición de tallas para todos los peces
+
+`qcTalPez64.lan()` revisa que haya datos de tallas en `NTALLxxx.dbf` para
+todas las especies registradas en `FAUNAXXX.dbf` de un lance, y viceversa:
+localiza especies capturadas sin medir, especies medidas sin peso de captura
+registrado, y discordancias entre individuos medidos y los registrados para
+ese lance.
+
+```{r qcTalPez64.lan, echo=TRUE}
+qcTalPez64.lan(camp = "P18", zona = "porc", dns = "local", lan = 16, gr = 1)
+```
+
+`qcTalPez64.camp()` recorre todos los lances de la campaña llamando a
+`qcTalPez64.lan()` en cada uno. A diferencia de la versión de CampR (que hacía
+pausas entre lances y no era muy amigable), esta versión simplemente imprime
+las discordancias encontradas lance por lance sin interacción manual.
+
+```{r qcTalPez64.camp, eval=FALSE}
+qcTalPez64.camp(camp = "P18", zona = "porc", dns = "local", gr = 1)
+```
+
+> **Nota:** en la viñeta original de CampR había aquí un apartado de
+> "revisión de edades" con `grafedtal.camp` y `GetAlk.camp`. Se ha retirado de
+> esta viñeta de QC: son funciones de explotación de resultados (composición
+> por edades, extracción de la ALK para usarla en gráficos), no propiamente de
+> control de calidad de los datos tecleados. Se documentarán en la viñeta de
+> edades/ALK correspondiente.
+
+### Duplicados en la faunística — *(nuevo en CampR64)*
+
+Esta comprobación no existía en CampR. En el fichero `faunaXXX.dbf` cada
+especie debería aparecer una sola vez por lance, identificada por la pareja
+`grupo + esp`. `qcDupFauna64.camp()` localiza las combinaciones
+`lance + grupo + esp` que se repiten dentro de la campaña — habitualmente
+errores de tecleo o registros parciales de la misma especie que debería
+fusionarse sumando `peso_gr` y `numero`.
+
+```{r qcDupFauna64.camp, echo=TRUE}
+qcDupFauna64.camp(zona = "cant", camp = "N15", dns = "local")
+```
+
+> **Pendiente:** la función complementaria `fusionaDupFauna64()` para fusionar
+> automáticamente los duplicados detectados (sumando `peso_gr` y `numero`)
+> está en desarrollo, así como un posible wrapper `qcDupFauna.serie64()` para
+> recorrer toda una serie histórica de campañas de una vez.

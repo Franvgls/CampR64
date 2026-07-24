@@ -1,22 +1,24 @@
+# CampR64 0.1.17
+* `qcdistlan.camp64()`: recupera los gráficos dist/speed/course perdidos en la
+  migración desde CampR (argumento `plot`), portados de `qcHaulsDist()`/IMBUS.
+* Nuevas viñetas: control de calidad (`control-calidad-campR64.Rmd`) y
+  campañas/áreas implementadas (`campanas-areas-campR64.Rmd`).
+* Fix: typo en `@family` de `AbrvEsp64.R` que rompía el `\seealso` cruzado de
+  la familia `datos_especies`.
+* `Imports`: se añaden `stats` y `graphics`.
+
 # CampR64 0.1.16
-
 # CampR64 0.1.15
-
-# CampR64 1.0.8
-
+# CampR64 0.1.14
 ## Funciones nuevas
-
 * `grafalk.camp64()`: representación gráfica de la clave talla-edad como
   barras apiladas de proporciones por edad. Distingue tallas con reparto
   imputado (flag `99` de los DBF originales) mediante tramado diagonal y
   asterisco. Complementaria a `grafedtal.camp64()`.
-
 * `load_worldHires64()` / `unload_worldHires64()` (internas): cargan y
   descargan temporalmente `worldHiresMapEnv` en `globalenv()` para que
   `maps::map()` lo encuentre. Centraliza el patrón antes duplicado.
-
 ## Mejoras
-
 * `armap64()`:
   - Defaults de `xlims`/`ylims` por zona (porc, arsa, cant) que respetan
     los valores que pase el usuario.
@@ -36,26 +38,20 @@
 * `grafhistbox64()`: ahora respeta layouts multipanel externos
   (`mfrow`/`mfcol`/`layout`); permite usar `grafhistbox64.comp()` con
   los dos plots en la misma figura.
-
 ## Limpieza
-
 * Eliminado `R/install_deps.R` (código top-level que se ejecutaba al
   cargar el paquete y disparaba `install.packages()` durante
   `R CMD check`). Las dependencias se gestionan ya desde `DESCRIPTION`.
 * `.onLoad` migrado a `.onAttach` en `R/zzz.R` para que la carga de
   `configRoots_user.R` no se ejecute durante `R CMD check`.
-
 ## Documentación
-
 * `grafedtal.camp64()` y `grafalk.camp64()` enlazadas mutuamente vía
   `@seealso` y `@family ALK`.
 * Ejemplos protegidos con `\dontrun{}` en todas las funciones que
   requieren acceso a DBFs locales.
 
 # CampR64 0.1.13
-
 ## Correcciones
-
 * `AbAgStatRec.camp64()`: ahora incluye todos los rectángulos ICES muestreados
   (con ceros donde no hubo captura) al pasar `ceros=TRUE` a la llamada interna
   de `maphistage64()`. Antes se perdían rectángulos sin captura y las medias

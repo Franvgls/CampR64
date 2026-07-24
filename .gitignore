@@ -29,3 +29,6 @@ inst/config/configRoots_user.R
 *.Rdb
 *.rdx
 *.rda.bak
+inst/doc
+/doc/
+/Meta/

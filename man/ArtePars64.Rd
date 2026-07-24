@@ -81,7 +81,7 @@ ArtePars64("N23","cant",Nlans = T,ti=T,lan.cex=2)
 }
 }
 \seealso{
-Other gear: 
+Other Artes de pesca: 
 \code{\link{ArteParComp64}()}
 }
-\concept{gear}
+\concept{Artes de pesca}

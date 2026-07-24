@@ -78,7 +78,7 @@ ArteParComp64("P25", zona="porc", var="vertical")
 }
 }
 \seealso{
-Other gear: 
+Other Artes de pesca: 
 \code{\link{ArtePars64}()}
 }
-\concept{gear}
+\concept{Artes de pesca}

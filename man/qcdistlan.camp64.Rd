@@ -9,7 +9,9 @@ qcdistlan.camp64(
   zona = "cant",
   dns = c("local", "serv"),
   todos = FALSE,
-  pc.error = 2
+  pc.error = 2,
+  plot = c("none", "dist", "speed", "course", "all"),
+  esc.mult = 1
 )
 }
 \arguments{
@@ -19,18 +21,38 @@ qcdistlan.camp64(
 
 \item{todos}{Por defecto F. Si T lista todos los lances con valores, si no sólo los que pc.error>error}
 
-\item{pc.error}{porcentaje de error aceptable para no mostrar los lances como erróneos}
+\item{pc.error}{porcentaje de error aceptable para no mostrar los lances como erróneos; también determina las líneas de referencia de los gráficos (cuantil pc.error/10 del valor absoluto del error)}
+
+\item{plot}{Qué gráfico(s) sacar: \code{"none"} (por defecto, sin gráfico), \code{"dist"}
+(distancia-puntos), \code{"speed"} (distancia-velocidad), \code{"course"}
+(rumbo vs. puntos de largada/virada) o \code{"all"} (los tres apilados con
+\code{par(mfrow=c(3,1))}, como en la versión original de CampR)}
+
+\item{esc.mult}{factor de escala del texto en los gráficos (cex.lab, cex.axis, cex.main)}
 }
 \value{
-Devuelve un data.frame con campaña, lance, recorrido, recorrido según la fórmula de Haversine, recorrido según la velocidad x el tiempo, velocidad, tiempo, rumbo, rumbo estimado según posiciones,velocidad calculada a partir de la distancia y el tiempo, y los porcentajes de errores de distancia, velocidad y rumbo.
+Devuelve un data.frame con campaña, lance, recorrido, recorrido según la fórmula de Haversine, recorrido según la velocidad x el tiempo, velocidad, tiempo, rumbo, rumbo estimado según posiciones,velocidad calculada a partir de la distancia y el tiempo, y los porcentajes de errores de distancia, velocidad y rumbo. Si \code{plot} no es \code{"none"} además dibuja el gráfico correspondiente como efecto lateral.
 }
 \description{
-Sirve para control de calidad y asegurarse que los datos de distancias y posiciones son correctos
+Sirve para control de calidad y asegurarse que los datos de distancias y posiciones son correctos.
+}
+\details{
+Con \code{plot} distinto de \code{"none"} reproduce los gráficos que existían en la
+versión original de CampR y que se mantuvieron en el shiny de IMBUS (función
+\code{qcHaulsDist()} sobre datos DATRAS): tamaño de punto proporcional a la magnitud
+del error, color rojo/azul según el signo, y líneas de referencia por cuantiles. Se
+habían perdido en la migración a CampR64, donde la función solo devolvía la tabla.
+
+De los tres gráficos, el de rumbo (\code{"course"}) es el más espurio: depende mucho
+de dónde termine el barco al final del lance y de cómo lo mueva la corriente, así que
+hay que interpretarlo con más cautela que los de distancia y velocidad.
 }
 \examples{
 \dontrun{
 qcdistlan.camp64("C14","cant","local",pc.error=.01)
 qcdistlan.camp64("216","arsa","local",pc.error=.01)
+qcdistlan.camp64("N12","cant","local",pc.error=2,plot="speed")
+qcdistlan.camp64("N12","cant","local",pc.error=2,plot="all")
 }
 }
 \references{

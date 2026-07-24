@@ -144,4 +144,4 @@ CampsDNS.camp(path = "c:/camp/cant/")
 | Configuración DSN        | Requerida (panel de control Windows)   | No requerida                                    |
 | Reparación cabecera DBF  | Necesaria siempre                      | Solo si R indica que el fichero no es un DBF válido |
 | Estructura de directorios| c:/camp/ + subcarpetas por zona        | Igual                                           |
-| Zonas implementadas      | Cant, Porc, Arsa, Medi                 | Cant, Porc, Arsa, Medi                          |
+| Zonas implementadas      | Cant, Porc, Arsa, Medi                 | cant, porc, arsa, medi                          |

@@ -37,8 +37,13 @@ PresenciaEsp.camp64 <- function(gr, esp, zona="cant", dns=c("local","serv"),
   dns_key <- if (dns == "serv") "serv" else "local"
   
   # --- Directorio de la zona ---
+  # Primero intenta el path específico de zona; si está vacío o NULL,
+  # construye desde $base + zona (igual que hace readCampDBF)
   base_dir <- CampR64_paths[[dns_key]][[zona]]
-  if (is.null(base_dir) || !nzchar(base_dir) || !dir.exists(base_dir)) {
+  if (is.null(base_dir) || !nzchar(base_dir)) {
+    base_dir <- file.path(CampR64_paths[[dns_key]]$base, zona)
+  }
+  if (!dir.exists(base_dir)) {
     stop("Directorio no encontrado para zona='", zona,
          "' dns='", dns, "': ", base_dir)
   }

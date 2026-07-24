@@ -1,0 +1,185 @@
+---
+title: "Investigar una especie desconocida"
+author: "Fran Velasco"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Investigar una especie desconocida}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment  = "#>",
+  eval     = FALSE   # Los ejemplos requieren acceso a datos locales
+)
+library(CampR64)
+```
+
+## El problema típico
+
+Nos encontramos con una especie sobre la que sabemos poco: no estamos seguros
+de en qué campañas ha aparecido, si hay datos de talla en cantidad suficiente
+para hacer distribuciones, o si merece la pena montar un análisis de serie
+histórica. Antes de invertir tiempo en gráficos o cálculos, conviene explorar
+qué información hay disponible.
+
+Esta viñeta describe un flujo típico de investigación exploratoria para una
+especie, encadenando varias funciones de `CampR64`.
+
+## Paso 1 — ¿En qué campañas aparece la especie?
+
+`PresenciaEsp.camp64` escanea todos los ficheros `FAUNA*.dbf` y `NTALL*.dbf`
+de una zona y devuelve las campañas donde la especie aparece, distinguiendo
+entre presencia (captura) y presencia con datos de talla:
+
+```{r}
+res <- PresenciaEsp.camp64(gr = 1, esp = 220, zona = "porc", dns = "local")
+```
+
+La consola muestra un resumen y `res` contiene los vectores para trabajar
+programáticamente:
+
+```{r}
+res$especie   # nombre científico
+res$capturas  # campañas con captura, ordenadas cronológicamente
+res$tallas    # subconjunto con datos de talla
+```
+
+Si el vector `res$capturas` está vacío, no merece la pena continuar. Si tiene
+muchas campañas pero `res$tallas` está casi vacío, los análisis de talla
+serán limitados.
+
+## Paso 2 — Serie histórica de abundancia
+
+Con las campañas identificadas, la evolución temporal de la biomasa o
+abundancia se saca con `grafhistbox64`, pero limitando el análisis a las
+campañas donde realmente hay capturas:
+
+```{r}
+grafhistbox64(gr = 1, esp = 220, camps = res$capturas,
+              zona = "porc", dns = "local",
+              ind = "p",       # peso; usar "n" para número
+              ci.lev = 0.9)    # intervalos al 90 %
+```
+
+Este enfoque evita las llamadas fallidas o los ceros artificiales que
+saldrían si intentáramos representar toda la serie `Psh` cuando la especie
+solo aparece en algunas campañas concretas.
+
+Para comparar biomasa y número en el mismo gráfico:
+
+```{r}
+grafhistbox64.comp(gr = 1, esp = 220, camps = res$capturas,
+                   zona = "porc", dns = "local")
+```
+
+## Paso 3 — Distribuciones de talla
+
+Si `res$tallas` tiene suficientes campañas, se pueden explorar las
+distribuciones. Dos aproximaciones complementarias:
+
+**Histogramas por sexo** con `dtall.camp64`:
+
+```{r}
+dtall.camp64(gr = 1, esp = 220, camp = res$tallas,
+             zona = "porc", dns = "local",
+             layout = c(3, ceiling(length(res$tallas)/3)))
+```
+
+**Curvas de densidad** con `denstall64.camp`, útiles para comparar
+desplazamientos de moda entre años:
+
+```{r}
+denstall64.camp(gr = 1, esp = 220, camp = res$tallas,
+                zona = "porc", dns = "local",
+                layout = c(3, ceiling(length(res$tallas)/3)))
+```
+
+Ambos objetos son `trellis` de lattice y admiten componerse:
+
+```{r}
+p1 <- dtall.camp64(gr = 1, esp = 220, camp = res$tallas[1:6],
+                   zona = "porc", dns = "local", plot = FALSE)
+p2 <- denstall64.camp(gr = 1, esp = 220, camp = res$tallas[1:6],
+                      zona = "porc", dns = "local", plot = FALSE)
+print(p1, position = c(0, 0, 0.5, 1), more = TRUE)
+print(p2, position = c(0.5, 0, 1, 1), more = FALSE)
+```
+
+## Paso 4 — Distribución geográfica
+
+Para ver dónde se captura la especie a lo largo de la serie:
+
+```{r}
+maphist64(gr = 1, esp = 220, camp = res$capturas,
+          zona = "porc", dns = "local",
+          layout = c(3, ceiling(length(res$capturas)/3)))
+```
+
+O si hay datos de edad (peces con claves talla-edad), la distribución por
+edad concreta:
+
+```{r}
+maphistage64(gr = 1, esp = 220, camp = tail(res$capturas, 4),
+             zona = "porc", dns = "local", age = 2,
+             layout = c(2, 2))
+```
+
+## Análisis condicionado a disponibilidad de datos
+
+El patrón general para automatizar análisis exploratorios sin fallos por
+falta de datos:
+
+```{r}
+res <- PresenciaEsp.camp64(gr = 1, esp = 220, zona = "porc", dns = "local")
+
+if (length(res$capturas) >= 5) {
+  # Serie histórica solo si hay al menos 5 campañas con captura
+  grafhistbox64(1, 220, res$capturas, "porc", "local")
+}
+
+if (length(res$tallas) >= 3) {
+  # Distribuciones solo si hay al menos 3 campañas con tallas
+  dtall.camp64(1, 220, res$tallas, "porc", "local")
+}
+```
+
+Esta protección es especialmente útil en scripts que recorren muchas
+especies:
+
+```{r}
+especies_interes <- c(43, 45, 74, 220, 999)
+resultados <- lapply(especies_interes, function(sp) {
+  PresenciaEsp.camp64(1, sp, "porc", "local")
+})
+names(resultados) <- especies_interes
+
+# Especies con datos suficientes para serie histórica:
+con_serie <- resultados[sapply(resultados, function(r) length(r$capturas) >= 5)]
+names(con_serie)
+```
+
+## Cuándo NO usar este flujo
+
+- **Especies dominantes de la campaña** (merluza, gallo, cigala en Cantábrico)
+  aparecen prácticamente en todas las campañas de la serie. Para estas es más
+  directo pasar `Nsh`, `Psh` o `As1` directamente sin pasar por
+  `PresenciaEsp.camp64`.
+
+- **Análisis de una campaña concreta** para especies conocidas — usar
+  directamente `datos.camp64`, `dattal.camp64` o la función específica.
+
+- **Data-calls a ICES** — los índices oficiales tienen sus propias funciones
+  (`CAMPtoHH64`, `CAMPtoHL64`, `databICES64`) que deben cubrir la serie
+  completa aunque haya ceros.
+
+## Ver también
+
+- `?PresenciaEsp.camp64` — documentación de la función principal
+- `?grafhistbox64` — evolución histórica de biomasa/número
+- `?dtall.camp64`, `?denstall64.camp` — distribuciones de talla
+- `?maphist64`, `?maphistage64` — distribución geográfica
+- `vignette("configuracion-campR64")` — configuración de rutas y DBFs

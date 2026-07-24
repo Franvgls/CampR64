@@ -1,10 +1,12 @@
 ---
 title: "Configuración de rutas en CampR64"
-output:
-  html_document:
-    df_print: paged
-vignette: "%\\VignetteIndexEntry{Configuración de rutas en CampR64} %\\VignetteEngine{knitr::rmarkdown}
-  %\\VignetteEncoding{UTF-8}\n"
+author: "Fran Velasco"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Configuración de rutas en CampR64}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include=FALSE}

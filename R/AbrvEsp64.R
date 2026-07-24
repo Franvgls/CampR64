@@ -10,7 +10,7 @@
 #' @param sep Caracter para separar Género de especie
 #' @param unique Evitar duplicados en los códigos, no tiene mucho sentido pero se puede dejar como falso y tener repetidos los códigos con unique=FALSE
 #' @return Devuelve un data.frame con dos columnas, nombres originales $names y los codigos $codes
-#' @family datos especies 
+#' @family datos_especies 
 #' @examples AbrvEsp64(c("Merluccius merluccius","Merlangius merlangus"))
 #' \dontrun{
 #' AbrvEsp64(buscaesp64(1,50,"cant"),1,8,".")

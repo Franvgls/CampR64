@@ -1,0 +1,91 @@
+---
+title: "Campañas y áreas implementadas en CampR64"
+author: "Fran Velasco"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Campañas y áreas implementadas en CampR64}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+> **CampR64 vs CampR:** esta viñeta sustituye a la de CampR. Los cambios principales:
+>
+> - `armap.camp()` de CampR se sustituye por `armap64()`, que unifica el mapa
+>   de campaña para las tres zonas con base map propia.
+> - El argumento `dns` ya no es el DSN ODBC de la zona (`"Cant"`, `"Porc"`...)
+>   sino el origen físico de los datos (`"local"` o `"serv"`); la zona en sí
+>   va en el argumento `zona` (`"cant"`, `"porc"`, `"arsa"`).
+> - **Mediterráneo, nota aparte:** `armap64()` solo soporta `zona = "cant" |
+>   "porc" | "arsa"` — con `"medi"` da directamente un `stop()` (no hay mapa
+>   base de Mediterráneo enlazado). Esto no es un hueco de migración a
+>   resolver a corto plazo: las campañas MEDITS usan programas y estructuras
+>   de datos completamente distintas al CAMP (Clipper/Harbour) del resto de
+>   zonas, y no existe un repositorio de datos de MEDITS del que tirar de
+>   forma homóloga. Incluir MEDITS en DATRAS/CampR64 de forma real sería un
+>   desarrollo a largo plazo, no una adaptación de función existente.
+
+```{r, echo=FALSE}
+library(CampR64)
+```
+
+En esta versión de CampR64 están implementadas funciones para las siguientes
+zonas:
+
+- Demersales Norte: Galicia y el Cantábrico
+- Banco de Porcupine
+- Golfo de Cádiz
+- Mediterráneo *(en la práctica no se usa: MEDITS corre sobre programas y
+  estructuras de datos distintas al CAMP; ver nota arriba)*
+
+## Mapa Demersales Cantábrico y Galicia
+
+```{r, fig.width=7.2, fig.height=4.1}
+armap64(camp = "N07", zona = "cant", dns = "local", ti = TRUE, es = TRUE)
+```
+
+## Mapa del Banco de Porcupine
+
+```{r, fig.width=7.2, fig.height=5.1}
+par(mfrow = c(1, 2))
+armap64(camp = "P07", zona = "porc", dns = "local", ti = TRUE)
+armap64(camp = "P07", zona = "porc", dns = "local", ti = FALSE,
+        CTDs = TRUE, lans = FALSE)
+```
+
+## Mapa Golfo de Cádiz
+
+```{r, fig.width=7.2, fig.height=6.1}
+armap64(camp = "207", zona = "arsa", dns = "local", ti = TRUE, es = TRUE)
+```
+
+## Mapa del Mediterráneo
+
+*(no se usa en la práctica — ver nota de la introducción: MEDITS corre sobre
+programas y estructuras de datos distintas al CAMP, no hay un repositorio de
+datos equivalente del que tirar, y `armap64()` en consecuencia no tiene mapa
+base para `zona = "medi"`)*
+
+```{r, eval=FALSE}
+# armap64(camp = "M07", zona = "medi", dns = "local", ti = TRUE, es = TRUE)
+# Error: zona debe ser 'cant', 'porc' o 'arsa'.
+```
+
+## Capturas de cigala Porcupine 2015
+
+`maphist64()` sí tiene una rama de código para `zona = "medi"` (panel lattice
+específico, seguramente de cuando se exploró alguna vez con datos de MEDITS),
+aunque en la práctica no se use; aquí se ilustra con el mismo ejemplo de
+Porcupine que tenía la viñeta original de CampR.
+
+```{r, fig.width=6.2, fig.height=6.5}
+maphist64(gr = 2, esp = 19, camps = "P15", zona = "porc", dns = "local",
+          ti = TRUE)
+```
