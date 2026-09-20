@@ -77,13 +77,15 @@ maphistal64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),tmin=0,tmax
     else titulo<-list(label=ti)
     }
 	if (bw) {
-    colo=gray(.2)
+    colo=gray(.3)
     lattice::trellis.par.set(strip.background = list(col = grey(7:1/8)))
     }
 	else {
-    colo=4
+    colo="black"
     lattice::trellis.par.set(lattice::col.whitebg())
     }
+  col_mar<-ifelse(bw,"white","lightblue1")
+  col_tierra<-ifelse(bw,"lightgray","wheat")
   if (any(is.na(layout))) {
 		if (ndat!=4) layout=c(1,ndat)
 		if (ndat==4) layout=c(2,2)
@@ -94,9 +96,10 @@ maphistal64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),tmin=0,tmax
 			ylim=c(50.5,54.5),aspect=asp,par.strip.text=list(cex=cexleg,font=2),scales=list(alternating=FALSE,tck=c(1,0),
       cex=cexleg,x=list(at=c(-15:-11),labels=as.character(abs(-15:11))),y=list(at=(51:54),rot=90)),as.table=TRUE,
 			panel=function(x,y,subscripts=subscripts) {
+				grid::grid.rect(gp=grid::gpar(fill=col_mar,col=NA))
 				lattice::panel.xyplot(Porc.map$x,Porc.map$y,type="l",lty=3,col=gray(.2))
 				grid::grid.polygon(maps::map(Porc.map,"narr",plot=FALSE)[[1]],maps::map(Porc.map,"narr",plot=FALSE)[[2]],
-					default.units = "native",gp=grid::gpar(fill=gray(.7)))
+					default.units = "native",gp=grid::gpar(fill=col_tierra))
           if (ind=="n") {
     				if (leg & max(dumb$numero[subscripts],na.rm=TRUE)>0) {
 		  				lattice::panel.xyplot(-13,51.2,cex=sqrt((leyenda)/escala),pch=16,col=colo)
@@ -122,9 +125,10 @@ maphistal64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),tmin=0,tmax
 			ylim=c(41.82,44.3),aspect=asp,par.strip.text=list(cex=cexleg,font=2),scales=list(alternating=FALSE,tck=c(1,0),cex=cexleg,
 			x=list(at=c(-10:-2),labels=as.character(abs(-10:-2))),y=list(at=seq(42,44,by=1),rot=90)),as.table=TRUE,
 			panel=function(x,y,subscripts=subscripts) {
+				grid::grid.rect(gp=grid::gpar(fill=col_mar,col=NA))
 				lattice::panel.xyplot(Nort.str$x,Nort.str$y,type="l",lty=3,col=gray(.4))
 				grid::grid.polygon(maps::map(Nort.map,"Costa",plot=FALSE)[[1]],maps::map(Nort.map,"Costa",plot=FALSE)[[2]],
-					default.units = "native",gp=grid::gpar(fill=gray(.8)))
+					default.units = "native",gp=grid::gpar(fill=col_tierra))
         if (ind=="n") {
 				  if (leg & max(dumb$numero[subscripts],na.rm=TRUE)>0) {
 				    lattice::panel.xyplot(rep(-7,3),c(43.,42.60,42.20),cex=sqrt(leyenda/escala),pch=16,col=colo)
@@ -150,9 +154,10 @@ maphistal64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),tmin=0,tmax
 	    ylim=c(35.95,37.30),aspect=asp,par.strip.text=list(cex=cexleg,font=2),par.strip.background=list(col=c(gray(.8))),
       scales=list(alternating=FALSE,tck=c(1,0),cex=cexleg,x=list(at=c(-10:-5),labels=as.character(abs(-10:-5))),
       y=list(at=seq(35,36,by=1),rot=90)),as.table=TRUE,panel=function(x,y,subscripts=subscripts) {
+      grid::grid.rect(gp=grid::gpar(fill=col_mar,col=NA))
       lattice::panel.xyplot(Arsa.str$x,Arsa.str$y,type="l",lty=3,col=gray(.4))
 	    grid::grid.polygon(maps::map(Arsa.map,c("Portugal","Costa"),plot=FALSE)[[1]],maps::map(Arsa.map,c("Portugal","Costa"),plot=FALSE)[[2]],
-      default.units = "native",gp=grid::gpar(fill=gray(.8)))
+      default.units = "native",gp=grid::gpar(fill=col_tierra))
 				if (leg & max(dumb$numero[subscripts],na.rm=TRUE)>0) {
           #lrect(-5.98,36.25, -5.54, 36.54,col="white")
 					lattice::panel.xyplot(rep(-6,3),c(36.3,36.4,36.5),cex=sqrt((leyenda)/escala),pch=16,col=colo)
@@ -172,9 +177,10 @@ maphistal64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),tmin=0,tmax
       scales=list(alternating=FALSE,tck=c(1,0),cex=cexleg,x=list(at=c(-5:4),labels=c(paste(as.character(abs(-5:-1)),
       "W",sep=""),0,paste(1:4,"E",sep=""))),y=list(at=seq(36,42,by=1),rot=90)),as.table=TRUE,
       panel=function(x,y,subscripts=subscripts) {
+      grid::grid.rect(gp=grid::gpar(fill=col_mar,col=NA))
       lattice::panel.xyplot(Arsa.str$x,Arsa.str$y,type="l",lty=3,col=gray(.4))
 	    grid::grid.polygon(maps::map(Medits.tot,Medits.tot$names[],plot=FALSE)[[1]],maps::map(Medits.tot,Medits.tot$names[],plot=FALSE)[[2]],
-      default.units = "native",gp=grid::gpar(fill=gray(.8)))
+      default.units = "native",gp=grid::gpar(fill=col_tierra))
 				if (leg & max(dumb$numero[subscripts],na.rm=TRUE)>0) {
           #lrect(-5.98,36.25, -5.54, 36.54,col="white")
 					lattice::panel.xyplot(rep(-4,3),c(39.1,39.6,40.),cex=sqrt((leyenda)/escala),pch=16,col=colo)

@@ -1,3 +1,12 @@
+# CampR64 0.1.18
+* Fix: `maphist64()`, `maphistage64()`, `maphistal64()` y `MapEcol64.camp()`
+  no pintaban el fondo del mar ni variaban el color de la tierra según `bw`
+  en sus paneles lattice (a diferencia de `MapIberia64()` y el resto de mapas
+  base). Ahora `bw=FALSE` pinta mar `lightblue1`, tierra `wheat` y puntos en
+  negro; `bw=TRUE` pinta mar blanco, tierra `lightgray` y puntos en gris.
+  En `MapEcol64.camp()` los puntos mantienen su color por categoría
+  (índice ecológico) independientemente de `bw`.
+
 # CampR64 0.1.17
 * `qcdistlan.camp64()`: recupera los gráficos dist/speed/course perdidos en la
   migración desde CampR (argumento `plot`), portados de `qcHaulsDist()`/IMBUS.

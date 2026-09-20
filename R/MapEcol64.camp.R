@@ -80,12 +80,12 @@ MapEcol64.camp<-function(gr,esp="999",camp,zona="cant",dns=c("local","serv"),ind
   else titulo<-NULL
   if (bw) {
     lattice::trellis.par.set("strip.background",list(col=c(gray(.80))))
-    colo=gray(.1)
   }
   else {
     lattice::trellis.par.set(lattice::col.whitebg())
-    colo=4
   }
+  col_mar<-ifelse(bw,"white","lightblue1")
+  col_tierra<-ifelse(bw,"lightgray","wheat")
   if (any(is.na(layout))) {
     if (ndat!=4) layout=c(1,ndat)
     if (ndat==4) layout=c(2,2)
@@ -97,9 +97,10 @@ MapEcol64.camp<-function(gr,esp="999",camp,zona="cant",dns=c("local","serv"),ind
                     ylim=c(50.5,54.5),aspect=asp,par.strip.text=list(cex=.9,font=2),scales=list(alternating=FALSE,tck=c(1,0),cex=.7,
                                                                                                 x=list(at=c(-15:-11),labels=as.character(abs(-15:11))),y=list(at=(51:54),rot=90)),as.table=TRUE,sub=sub,
                     panel=function(x,y,subscripts) {
+                      grid::grid.rect(gp=grid::gpar(fill=col_mar,col=NA))
                       lattice::panel.xyplot(Porc.map$x,Porc.map$y,type="l",lty=3,col=gray(.2))
                       grid::grid.polygon(maps::map(Porc.map,"narr",plot=FALSE)[[1]],maps::map(Porc.map,"narr",plot=FALSE)[[2]],
-                                   default.units = "native",gp=grid::gpar(fill=gray(.7)))
+                                   default.units = "native",gp=grid::gpar(fill=col_tierra))
                       lattice::panel.xyplot(c(-12.5,-12.5,-12.5,-12.5),c(51.5,51.3,51.1,50.9),cex=1,pch=21,col=1,fill=c("yellow","green","lightsalmon","red"))
                       lattice::ltext(rep(-12.5,4),c(51.5,51.3,51.1,50.9),labels=leyenda,pos=4,offset=1,cex=.8)
                       if (indec=="div") {lattice::panel.xyplot(x,y,cex=1,pch=21,col=1,fill=as.character(dumb$divC))}
@@ -115,9 +116,10 @@ MapEcol64.camp<-function(gr,esp="999",camp,zona="cant",dns=c("local","serv"),ind
                     aspect=asp,par.strip.text=list(cex=.9,font=2),scales=list(alternating=FALSE,tck=c(1,0),cex=.7,
                                                                                                  x=list(at=c(-10:-2),labels=as.character(abs(-10:-2))),y=list(at=(42:44),rot=90)),as.table=TRUE,sub=sub,
                     panel=function(x,y,subscripts) {
+                      grid::grid.rect(gp=grid::gpar(fill=col_mar,col=NA))
                       lattice::panel.xyplot(Nort.str$x,Nort.str$y,type="l",lty=3,col=gray(.2))
                       grid::grid.polygon(maps::map(Nort.map,"Costa",plot=FALSE)[[1]],maps::map(Nort.map,"Costa",plot=FALSE)[[2]],
-                                   default.units = "native",gp=grid::gpar(fill=ifelse(bw,gray(.7),"wheat")))
+                                   default.units = "native",gp=grid::gpar(fill=col_tierra))
                       lattice::panel.xyplot(rep(-7,4),c(43.,42.80,42.60,42.4),cex=1,pch=21,col=1,fill=c("yellow","green","lightsalmon","red"))
                       lattice::ltext(rep(-7,4),c(43.,42.80,42.60,42.4),labels=leyenda,pos=4,offset=1.1,cex=.7)
                       if (indec=="div") {lattice::panel.xyplot(x,y,cex=1,pch=21,col=1,fill=as.character(dumb$divC))}
@@ -139,9 +141,10 @@ MapEcol64.camp<-function(gr,esp="999",camp,zona="cant",dns=c("local","serv"),ind
                     aspect=asp,par.strip.text=list(cex=.9,font=2),scales=list(alternating=FALSE,tck=c(1,0),cex=.7,x=list(at=c(-7:-5),
                     labels=as.character(abs(-7:-5))),y=list(at=(36:37),rot=90)),as.table=TRUE,sub=sub,
                     panel=function(x,y,subscripts) {
+                      grid::grid.rect(gp=grid::gpar(fill=col_mar,col=NA))
                       lattice::panel.xyplot(Arsa.str$x,Arsa.str$y,type="l",lty=3,col=gray(.2))
                       grid::grid.polygon(maps::map(Arsa.map,c("Portugal","Costa"),plot=FALSE)[[1]],maps::map(Arsa.map,c("Portugal","Costa"),plot=FALSE)[[2]],
-                                   default.units = "native",gp=grid::gpar(fill=gray(.7)))
+                                   default.units = "native",gp=grid::gpar(fill=col_tierra))
                       lattice::panel.xyplot(rep(-5.9,4),c(36.4,36.5,36.6,36.7),cex=1,pch=21,col=1,fill=c("yellow","green","lightsalmon","red"))
                       lattice::ltext(rep(-5.9,4),c(36.4,36.5,36.6,36.7),labels=leyenda,pos=4,offset=1.1,cex=.7)
                       if (indec=="div") {lattice::panel.xyplot(x,y,cex=1,pch=21,col=1,fill=as.character(dumb$divC))}
@@ -163,9 +166,10 @@ MapEcol64.camp<-function(gr,esp="999",camp,zona="cant",dns=c("local","serv"),ind
                     ylab=NULL,aspect=asp,par.strip.text=list(cex=.9,font=2),scales=list(alternating=FALSE,tck=c(1,0),cex=.7,
                     x=list(at=c(-5:4),labels=c(paste(as.character(abs(-5:-1)),"W",sep=""),0,paste(1:4,"E",sep=""))),y=list(at=(36:42),rot=90)),as.table=TRUE,sub=sub,
                     panel=function(x,y,subscripts) {
+                      grid::grid.rect(gp=grid::gpar(fill=col_mar,col=NA))
                       lattice::panel.xyplot(Medits.tot$x,Medits.tot$y,type="l",lty=3,col=gray(.2))
                       grid::grid.polygon(maps::map(Medits.tot,Medits.tot$names[],plot=FALSE)[[1]],maps::map(Medits.tot,Medits.tot$names[],plot=FALSE)[[2]],
-                                   default.units = "native",gp=grid::gpar(fill=gray(.8)))
+                                   default.units = "native",gp=grid::gpar(fill=col_tierra))
                       lattice::panel.xyplot(rep(-4,4),c(39.1,39.4,39.7,40.0),cex=1,pch=21,col=1,fill=c("yellow","green","lightsalmon","red"))
                       lattice::ltext(rep(-4,4),c(39.1,39.4,39.7,40.0),labels=leyenda,pos=4,offset=1.1,cex=.7)
                       if (indec=="div") {lattice::panel.xyplot(x,y,cex=1,pch=21,col=1,fill=as.character(dumb$divC))}

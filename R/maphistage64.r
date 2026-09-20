@@ -122,11 +122,13 @@ maphistage64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
   
   # --- Color ---
   if (bw && plot) {
-    colo <- gray(.1)
+    colo <- gray(.3)
     lattice::trellis.par.set("strip.background", list(col=c(gray(.80))))
   } else {
-    colo <- 4
+    colo <- "black"
   }
+  col_mar <- ifelse(bw, "white", "lightblue1")
+  col_tierra <- ifelse(bw, "lightgray", "wheat")
   
   # --- Layout automático ---
   if (any(is.na(layout))) {
@@ -145,11 +147,12 @@ maphistage64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
                                            y=list(at=(51:54), rot=90)),
                                as.table=TRUE,
                                panel=function(x, y, subscripts=subscripts) {
+                                 grid::grid.rect(gp=grid::gpar(fill=col_mar, col=NA))
                                  lattice::panel.xyplot(Porc.map$x, Porc.map$y, type="l", lty=3, col=gray(.2))
                                  grid::grid.polygon(
                                    maps::map(Porc.map, "narr", plot=FALSE)[[1]],
                                    maps::map(Porc.map, "narr", plot=FALSE)[[2]],
-                                   default.units="native", gp=grid::gpar(fill=gray(.7)))
+                                   default.units="native", gp=grid::gpar(fill=col_tierra))
                                  if (max(dumb$numero[subscripts], na.rm=TRUE) > 0) {
                                    lattice::panel.xyplot(-12.5, 51.2, cex=sqrt(leyenda/escala), pch=16, col=colo)
                                    lattice::ltext(-12.5, 51.2,
@@ -180,11 +183,12 @@ maphistage64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
                                            y=list(at=seq(42,44,by=1), rot=90)),
                                as.table=TRUE,
                                panel=function(x, y, subscripts=subscripts) {
+                                 grid::grid.rect(gp=grid::gpar(fill=col_mar, col=NA))
                                  lattice::panel.xyplot(Nort.str$x, Nort.str$y, type="l", lty=3, col=gray(.4))
                                  grid::grid.polygon(
                                    maps::map(Nort.map, "Costa", plot=FALSE)[[1]],
                                    maps::map(Nort.map, "Costa", plot=FALSE)[[2]],
-                                   default.units="native", gp=grid::gpar(fill=gray(.8)))
+                                   default.units="native", gp=grid::gpar(fill=col_tierra))
                                  if (max(dumb$numero[subscripts], na.rm=TRUE) > 0) {
                                    lattice::panel.xyplot(rep(-7,3), c(43., 42.60, 42.20),
                                                          cex=sqrt(leyenda/escala), pch=16, col=colo)
@@ -217,11 +221,12 @@ maphistage64 <- function(gr, esp, camp, zona="cant", dns=c("local","serv"),
                                            y=list(at=seq(36,37,by=1), rot=90)),
                                as.table=TRUE,
                                panel=function(x, y, subscripts=subscripts) {
+                                 grid::grid.rect(gp=grid::gpar(fill=col_mar, col=NA))
                                  lattice::panel.xyplot(Arsa.str$x, Arsa.str$y, type="l", lty=3, col=gray(.4))
                                  grid::grid.polygon(
                                    maps::map(Arsa.map, c("Portugal","Costa"), plot=FALSE)[[1]],
                                    maps::map(Arsa.map, c("Portugal","Costa"), plot=FALSE)[[2]],
-                                   default.units="native", gp=grid::gpar(fill=gray(.8)))
+                                   default.units="native", gp=grid::gpar(fill=col_tierra))
                                  if (max(dumb$numero[subscripts], na.rm=TRUE) > 0) {
                                    lattice::panel.xyplot(rep(-6,3), c(36.3, 36.4, 36.5),
                                                          cex=sqrt(leyenda/escala), pch=16, col=colo)

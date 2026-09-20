@@ -1,8 +1,8 @@
 Package: CampR64
 Type: Package
 Title: CampR Modernizado para R 4.4.0
-Version: 0.1.17
-Date: 2026-05-07
+Version: 0.1.18
+Date: 2026-09-20
 Authors@R:
        person("Francisco", "Velasco", , "franvgls@gmail.com",
               role = c("aut", "cre"),
