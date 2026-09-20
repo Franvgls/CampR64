@@ -13,12 +13,14 @@
 #' @param wmf Si T saca a fichero metafile Iberia.emf
 #' @param places Si T saca ciudades y puntos geográficos de referencia
 #' @param escmult =1 aumenta o disminuye el tamaño de las etiquetas y textos menos de 1 lo disminuye, m?s de uno lo aumenta
+#' @param new.dev Si TRUE abre una ventana externa nueva con las proporciones correctas del mapa.
+#'   Si FALSE (por defecto) usa el device activo (útil para grabar a PNG, PDF, o al panel Plots de RStudio).
 #' @return Saca en pantalla el mapa y es utilizada por otras funciones
 #' @examples MapIberia64()
 #' @family mapas base
 #' @family Medits
 #' @export
-MapIberia64<-function(xlims=c(-9.72,5),ylims=c(35.9,44.5),lwdl=1,cuadr=FALSE,cuadrMSFD=FALSE,ICESrect=FALSE,bw=F,ax=TRUE,wmf=FALSE,es=TRUE,places=TRUE,escmult=1,new.dev=T) {
+MapIberia64<-function(xlims=c(-9.72,5),ylims=c(35.9,44.5),lwdl=1,cuadr=FALSE,cuadrMSFD=FALSE,ICESrect=FALSE,bw=F,ax=TRUE,wmf=FALSE,es=TRUE,places=TRUE,escmult=1,new.dev=F) {
   asp<-diff(c(35,43))/(diff(c(-5.7,5))*cos(mean(c(35,43))*pi/180))
   if (wmf) win.metafile(filename = "Iberia.emf", width = 10, height = 10*asp+.63, pointsize = 10)
   if (!wmf) par(mar=c(2,2.5,2, 2.5) + 0.3)
