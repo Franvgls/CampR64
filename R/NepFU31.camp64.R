@@ -27,27 +27,31 @@
 #' @param ColFU color de relleno de la FU, blanco por defecto, con dens=0 se omite el relleno.
 #' @param dens valores de 20 hace que el color permita ver el fondo con los ICES rects y la batimetría, más lo deja en color sólido, 0 quita el relleno del todo.
 #' @param out.dat Si T el resultado final de la función es la figura en pantalla, pero los datos de abundancia de cigala en cada FU con datos de biomasa, numero, desviaciones estándar y número de lances en cada FU.
+#' @param graf Si FALSE el gráfico va a pantalla; si es un string guarda como PNG con ese nombre
+#' @param xpng Anchura del PNG en píxeles (default 1500)
+#' @param ypng Altura del PNG en píxeles (default 700)
+#' @param ppng Pointsize del PNG (default 18)
 #' @return Produce un gráfico con los lances en los que ha habido cigala en el lance y especialmente los lances en cada FU dentro de Demersales FU25,FU26 y FU31
 #' @family mapas, NEP
 #' @examples
 #' \dontrun{
 #'   NepFU31.camp("N21")
+#'   NepFU31.camp64("N24",graf="FU31_2024")
 #'   }
 #' @export
 NepFU31.camp64<-function(camp,zona="cant",dns=c("local","serv"),plot=TRUE,es=FALSE,ti=TRUE,ICESlab=FALSE,
                          ceros=T,ICESrectcol=1,ICESrect=TRUE,FU="FU31",ColFU="white",dens=20,places=TRUE,
-                         out.dat=TRUE,bw=FALSE,escmult=.25,leg=TRUE,cexleg=.9,cor.time=TRUE) 
+                         out.dat=TRUE,bw=FALSE,escmult=.25,leg=TRUE,cexleg=.9,cor.time=TRUE,
+                         graf=FALSE,xpng=1400,ypng=700,ppng=18)
   {
-  # --- Device con proporciones geograficas correctas -------------------------
-  xlims <- c(-8.2, -1.8)
-  ylims <- c(42.5, 44.5)
-  asp   <- diff(ylims) / (diff(xlims) * cos(mean(ylims) * pi / 180))
-  
-  # Cerrar cualquier device existente y abrir uno nuevo bien dimensionado.
-  # Esto evita el error "plot region too large" que ocurre cuando se intenta
-  # reutilizar un device con dimensiones incompatibles con los margenes actuales.
-  if (dev.cur() != 1) graphics.off()
-  dev.new(width=15, height=15*asp, noRStudioGD=TRUE)
+  # --- Dispositivo gráfico: PNG si graf es un nombre de fichero, si no pantalla ---
+  if (!is.logical(graf)) {
+    png(filename = paste0(graf, ".png"), width = xpng, height = ypng, pointsize = ppng)
+    on.exit(dev.off(), add = TRUE)
+  } else {
+    if (dev.cur() != 1) graphics.off()
+    dev.new(width = xpng/96, height = ypng/96, noRStudioGD = TRUE)
+  }
   # ---------------------------------------------------------------------------
   Nep     <- maphist64(2, 19, camp, zona, dns, plot=FALSE, cor.time=cor.time, out.dat=TRUE)
   Nep_31  <- subset(Nep, long > -8 & long < -2 & lat < 44.5 & lat > 43)

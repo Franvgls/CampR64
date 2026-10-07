@@ -26,29 +26,42 @@
 #' @param ColFU color de relleno de la FU, blanco por defecto, con dens=0 se omite el relleno.
 #' @param dens valores de 20 hace que el color permita ver el fondo con los ICES rects y la batimetría, más lo deja en color sólido, 0 quita el relleno del todo.
 #' @param out.dat Si T el resultado final de la función es la figura en pantalla, pero los datos de abundancia de cigala en cada FU con datos de biomasa, numero, desviaciones estándar y número de lances en cada FU.
+#' @param ref Vector de referencia opcional para fijar la escala de la leyenda (p.ej. el máximo histórico), NA usa el máximo de la propia campaña
+#' @param graf Si FALSE el gráfico va a pantalla; si es un string guarda como PNG con ese nombre
+#' @param xpng Anchura del PNG en píxeles (default 1000)
+#' @param ypng Altura del PNG en píxeles (default 1000)
+#' @param ppng Pointsize del PNG (default 12)
 #' @return Produce un gráfico con los lances en los que ha habido cigala en el lance en la FU FU25
 #' @family mapas, NEP
 #' @examples
 #' \dontrun{
 #'   NepFU25.camp64("N21",zona="cant",dns="local")
+#'   NepFU25.camp64("N24",zona="cant",dns="local",graf="FU25_2024")
 #'   }
 #' @export
-NepFU25.camp64<-function(camp="NNNNNNNNN23",zona="cant",dns=c("local","serv"),plot=TRUE,es=FALSE,ti=TRUE,
-                         ICESlab=FALSE,ceros=T,ICESrectcol=1,ICESrect=TRUE,                       FU=25,places=TRUE,out.dat=TRUE,ColFU="white",dens=20,leg=T,escmult=.25,cexleg=1,cex0=1) {
-  xlims <- c(-8.5, -7.9)
-  ylims <- c(43, 44.5)
-  asp   <- diff(ylims) / (diff(xlims) * cos(mean(ylims) * pi / 180))
-  
-  # Cerrar cualquier device existente y abrir uno nuevo bien dimensionado.
-  # Esto evita el error "plot region too large" que ocurre cuando se intenta
-  # reutilizar un device con dimensiones incompatibles con los margenes actuales.
-  if (dev.cur() != 1) graphics.off()
-  dev.new(width=15, height=15*asp, noRStudioGD=TRUE)
+NepFU25.camp64<-function(camp="N23",zona="cant",dns=c("local","serv"),plot=TRUE,es=FALSE,ti=TRUE,
+                         ICESlab=FALSE,ref=NA,ceros=T,ICESrectcol=1,ICESrect=TRUE,FU=25,places=TRUE,out.dat=TRUE,ColFU="white",dens=20,leg=T,escmult=.25,cexleg=1,cex0=1,
+                         graf=FALSE,xpng=550,ypng=550,ppng=11) {
+  # --- Dispositivo gráfico: PNG si graf es un nombre de fichero, si no pantalla ---
+  if (!is.logical(graf)) {
+    png(filename = paste0(graf, ".png"), width = xpng, height = ypng, pointsize = ppng)
+    on.exit(dev.off(), add = TRUE)
+  } else {
+    if (dev.cur() != 1) graphics.off()
+    dev.new(width = xpng/96, height = ypng/96, noRStudioGD = TRUE)
+  }
   Nep<-maphist64(2,19,camp,"cant",dns="local",plot=F,out.dat=T)
   Nep_25<-subset(Nep,c(long<c(-7.9) &lat>c(43) & lat<(44.5)))
-  leyenda<-signif(max(Nep$numero)*.9,1)
-  leyenda<-signif(c(1,.5,.25)*leyenda,1)
-  escala<-signif(max(Nep$numero),1)*escmult
+  if (is.na(ref)) {
+    leyenda<-signif(max(Nep$numero)*.9,1)
+    leyenda<-signif(c(1,.5,.25)*leyenda,1)
+    escala<-signif(max(Nep$numero),1)*escmult
+  }
+  else {
+    leyenda<-signif(max(ref)*.9,1)
+    leyenda<-signif(c(1,.5,.25)*leyenda,1)
+    escala<-signif(max(ref),1)*escmult
+  }
   lans_FU25<-subset(datlan.camp64(camp,zona,dns = dns,redux=T,incl2=T,incl0 = F),c(long<c(-8) & lat>c(43) & lat<(44.5)))
   lans_FU25<-lans_FU25[,c("camp","lance","lat","long","prof","sector","StatRec","zona")]
   #lans_FU25.All<-rbind(lans_FU25[lans_FU25$long>c(-10) & lans_FU25$lat<43.5,],lans_FU25[lans_FU25$long>c(-9) & lans_FU25$lat>44.5,])

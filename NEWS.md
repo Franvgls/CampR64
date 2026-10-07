@@ -1,3 +1,17 @@
+# CampR64 0.1.19
+* `NepFU25/26/30/31.camp64()` y `NepFUs.camp64()`: nuevos argumentos `graf`,
+  `xpng`, `ypng` y `ppng` para guardar directamente a PNG (como
+  `ArteParComp64()`), con tamaños por defecto ajustados a cada FU. Se corrige
+  el `dev.new()` que calculaba el aspecto con límites distintos a los del mapa.
+  `NepFU25/26` añaden `ref` para fijar la escala de la leyenda.
+* `NepFUs.camp64()`: usa `MapIberia64()` como mapa base; tamaño PNG por defecto
+  según zona (cant 1200x600, arsa 600x600); `out.dat` ya funciona con
+  `zona="arsa"` y con `out.dat=FALSE` (antes fallaba por `datFus` no definido).
+* Fix: `MapArsa64(FU="FU30")` fallaba (`draw_FU` usaba `names()` sobre una
+  matriz); ahora indexa `long`/`lat` como `MapNort64()`.
+* `qcdistlan.camp64()`: los lances con recorrido NA/-9/<=0 se rellenan con la
+  distancia Haversine y se avisa con un `warning()`, no solo si faltan todos.
+
 # CampR64 0.1.18
 * Fix: `maphist64()`, `maphistage64()`, `maphistal64()` y `MapEcol64.camp()`
   no pintaban el fondo del mar ni variaban el color de la tierra según `bw`

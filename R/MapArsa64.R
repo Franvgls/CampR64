@@ -146,9 +146,8 @@ MapArsa64 <- function(xlims = c(-8.149, -5.52),
   draw_FU <- function(obj_name, lab) {
     if (!exists(obj_name, inherits = TRUE)) return()
     obj <- get(obj_name, inherits = TRUE)
-    nms <- tolower(names(obj))
-    lo  <- obj[[nms[grep("long|lon|x", nms)[1]]]]
-    la  <- obj[[nms[grep("lat|y",  nms)[1]]]]
+    lo  <- obj[, "long"]
+    la  <- obj[, "lat"]
     graphics::polypath(lo, la,
                        density = if (is.na(dens)) NULL else dens,
                        col     = if (is.na(dens)) ColFU else NA,

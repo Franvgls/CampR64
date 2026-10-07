@@ -26,16 +26,30 @@
 #' @param ColFU color de relleno de la FU, blanco por defecto, con dens=0 se omite el relleno.
 #' @param dens valores de 20 hace que el color permita ver el fondo con los ICES rects y la batimetría, más lo deja en color sólido, 0 quita el relleno del todo.
 #' @param out.dat Si T el resultado final de la función es la figura en pantalla, pero los datos de abundancia de cigala en cada FU con datos de biomasa, numero, desviaciones estándar y número de lances en cada FU.
+#' @param graf Si FALSE el gráfico va a pantalla; si es un string guarda como PNG con ese nombre
+#' @param xpng Anchura del PNG en píxeles (default 1100)
+#' @param ypng Altura del PNG en píxeles (default 1100)
+#' @param ppng Pointsize del PNG (default 20)
 #' @return Produce un gráfico con los lances en los que ha habido cigala en el lance y especialmente los lances en cada FU dentro de Demersales FU25,FU30 y FU31
 #' @family mapas, NEP
 #' @examples
 #' \dontrun{
-#'   NepFU30.camp(camp="121",dns="Arsa")
+#'   NepFU30.camp64(camp="112",zona="arsa")
+#'   NepFU30.camp64(camp="124",zona="arsa",dns="local",graf="FU30_2024")
 #'   }
 #' @export
 NepFU30.camp64<-function(camp,zona="arsa",dns=c("local","serv"),trimes=4,plot=TRUE,es=FALSE,ti=TRUE,ICESlab=FALSE,ceros=T,leg=T,escmult=.25,cexleg=1,
-                      ICESrectcol=1,ICESrect=TRUE,places=TRUE,FU="FU30",ColFU="white",dens=20,out.dat=TRUE,bw=FALSE) {
+                      ICESrectcol=1,ICESrect=TRUE,places=TRUE,FU="FU30",ColFU="white",dens=20,out.dat=TRUE,bw=FALSE,
+                      graf=FALSE,xpng=1100,ypng=1100,ppng=20) {
   if (zona!="arsa") stop("esta funcion solo es operativa para el Golfo de Cadiz con zona arsa")
+  # --- Dispositivo gráfico: PNG si graf es un nombre de fichero, si no pantalla ---
+  if (!is.logical(graf)) {
+    png(filename = paste0(graf, ".png"), width = xpng, height = ypng, pointsize = ppng)
+    on.exit(dev.off(), add = TRUE)
+  } else {
+    if (dev.cur() != 1) graphics.off()
+    dev.new(width = xpng/96, height = ypng/96, noRStudioGD = TRUE)
+  }
   Nep<-maphist64(2,19,camp,zona,dns,plot=F,out.dat=T)
   Nep_30<-subset(Nep,c(long>c(-7.5) & long<c(-6) & lat<c(37.501) & lat>36.005))
   leyenda<-signif(max(Nep$numero)*.9,1)
