@@ -1,3 +1,15 @@
+# CampR64 0.1.20
+* `datlan.camp64()`: nuevo argumento `fill.dist` (TRUE por defecto). Los lances
+  válidos con recorrido NA/-9/<=0 en el CAMP se rellenan con la distancia
+  Haversine entre largada y virada y se avisa con un `warning()`. Los lances
+  nulos no se rellenan.
+* `CAMPtoHH64()` y `CAMPtoHHnw64()`: argumento `fill.dist`, pasado a
+  `datlan.camp64()`, para que `Distance` no salga como -9 al probar lances en
+  IMBUS. Con `fill.dist=FALSE` se mantiene el comportamiento anterior.
+* `qcdistlan.camp64()`: usa `datlan.camp64(fill.dist=FALSE)` y rellena por su
+  cuenta, avisando de que `error.dist` es 0 por construcción en esos lances.
+* Nuevo auxiliar interno `.fill_recorrido64()`.
+
 # CampR64 0.1.19
 * `NepFU25/26/30/31.camp64()` y `NepFUs.camp64()`: nuevos argumentos `graf`,
   `xpng`, `ypng` y `ppng` para guardar directamente a PNG (como

@@ -7,6 +7,7 @@
 #' @param dns elige de dónde se toman los datos, si del ordenador ("local") o del servidor ("serv") si se ha configurado {\code{configurarCampR64}}
 #' @param quart si F deja en cada lance el valor del trimestre en que se realizó el lance, si T se deja el que tiene la campaña por defecto, 1 para Arsa 1Q, 3 para Porcupine y 4 para Arsa 4Q y Demersales Northern Shelf
 #' @param incl2 Si F deja fuera los lances especiales que actualmente no se transmiten a DATRAS, si T los incluye
+#' @param fill.dist Si T (por defecto) los lances con recorrido NA/-9 en el CAMP se rellenan con la distancia Haversine entre largada y virada y se avisa; si F se dejan como -9
 #' @return Devuelve un data.table con datos de cada lance en el formato HH de DATRAS. DATRAS requiere que los datos no tengan cabecera y el trimestre sea el que corresponde a la campaña, además de no tener "". Por ello se debe pasar a fichero con la orden: write.table(CAMPtoHH(Xyy,dns),"nombrearchivo.csv",sep=",",quote=F,col.names=F,row.names=F))
 #' @seealso \code{CAMPtoHL}
 #' @examples 
@@ -14,9 +15,9 @@
 #' CAMPtoHHnw64("P01","porc","local")
 #' }
 #' @export
-CAMPtoHHnw64<-function(camp,zona="cant",dns=c("local","serv"),quart=T,incl2=F) {
+CAMPtoHHnw64<-function(camp,zona="cant",dns=c("local","serv"),quart=T,incl2=F,fill.dist=TRUE) {
     if (length(camp)>1) {stop("seleccionadas más de una campaña, no se pueden sacar resultados de más de una")}
-    DB<-datlan.camp64(camp,zona,dns,redux=F,incl0 = T,incl2=incl2)
+    DB<-datlan.camp64(camp,zona,dns,redux=F,incl0 = T,incl2=incl2,fill.dist=fill.dist)
     if (zona=="cant") {
       DB$Survey="G2784"
       DB$rectlong<-cut(DB$longitud_l,breaks=seq(from=-10,to=-1,by=1),labels=rev(c("E8","E7","E6","E5","E4","E3","E2","E1","E0"))) # ,"D9","D8"
