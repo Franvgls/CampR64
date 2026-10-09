@@ -30,13 +30,13 @@
 #' @examples
 #' \dontrun{
 #'   # Cantábrico/Galicia, campaña N15
-#'   qcDupFauna64.camp(Cant, N15, Cant)
+#'   qcDupFauna64.camp("N15","cant", "local")
 #'
-#'   dups <- qcDupFauna64.camp(Cant, N15, Cant, verbose = FALSE)
+#'   dups <- qcDupFauna64.camp("N15","cant","local", verbose = FALSE)
 #'   nrow(dups)
 #' }
 #' @export
-qcDupFauna64.camp <- function(zona, camp, dns, verbose = TRUE) {
+qcDupFauna64.camp <- function(camp, zona, dns, verbose = TRUE) {
 
   # Lectura de la faunistica. read_dbf_simple aplica tolower() a los nombres,
   # de modo que las columnas son: lance, grupo, esp, peso_gr, numero.

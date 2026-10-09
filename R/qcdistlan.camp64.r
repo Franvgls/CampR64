@@ -42,7 +42,7 @@ qcdistlan.camp64<-function(camp,zona="cant",dns=c("local","serv"),todos=FALSE,pc
   dumblan$dist.hf<-round(geosphere::distHaversine(dumblan[,c("longitud_l","latitud_l")],dumblan[,c("longitud_v","latitud_v")]))
   # En el CAMP un recorrido no calculado se guarda como -9 (o NA): se rellena con la distancia de Haversine
   dumblan$recorrido<-.fill_recorrido64(dumblan$recorrido,dumblan$dist.hf,dumblan$lance,camp,
-                                       nota=" Para esos lances error.dist es 0 por construcción.")
+                                       nota=" Para esos lances error.dist es 0 por defecto.")
   dumblan$vel.dist<-round((dumblan$dist.hf/1852)/(dumblan$weight.time*dumblan$haul.mins/60),1)
   dumblan$error.vel<-round((dumblan$dist.vel-dumblan$recorrido)*100/dumblan$recorrido,2)
   dumblan$error.dist<-round((dumblan$dist.hf-dumblan$recorrido)*100/dumblan$recorrido,2)
