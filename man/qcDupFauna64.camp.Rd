@@ -4,13 +4,13 @@
 \alias{qcDupFauna64.camp}
 \title{Control de calidad: especies duplicadas en las faunisticas de una campaña}
 \usage{
-qcDupFauna64.camp(zona, camp, dns, verbose = TRUE)
+qcDupFauna64.camp(camp, zona, dns, verbose = TRUE)
 }
 \arguments{
+\item{camp}{Código de campaña, sin comillas (p.ej. \code{N15}).}
+
 \item{zona}{Zona / origen de datos tal como lo espera \code{readCampDBF}
 (\code{Cant}, \code{Porc}, \code{Arsa}, \code{Medi}...). Sin comillas.}
-
-\item{camp}{Código de campaña, sin comillas (p.ej. \code{N15}).}
 
 \item{dns}{Ruta / DSN de la zona, sin comillas, según el patrón habitual de
 \code{readCampDBF} en CampR64.}
@@ -43,9 +43,9 @@ frente a \code{"9"}).
 \examples{
 \dontrun{
   # Cantábrico/Galicia, campaña N15
-  qcDupFauna64.camp(Cant, N15, Cant)
+  qcDupFauna64.camp("N15","cant", "local")
 
-  dups <- qcDupFauna64.camp(Cant, N15, Cant, verbose = FALSE)
+  dups <- qcDupFauna64.camp("N15","cant","local", verbose = FALSE)
   nrow(dups)
 }
 }

@@ -14,7 +14,8 @@ datlan.camp64(
   redux = FALSE,
   year = TRUE,
   quarter = TRUE,
-  bio = FALSE
+  bio = FALSE,
+  fill.dist = TRUE
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ datlan.camp64(
 \item{quarter}{si T incluye una columna con el trimestre de los datos teniendo en cuenta la fecha del lance, puede cambiar a mitad de la campaña, cuidado con campañas IBTS adscritas a un trimestre particular.}
 
 \item{bio}{reduce el data.frame a los datos para los proyectos de biología, con datos en formato decimal y hexadecimal y las zonas ICES}
+
+\item{fill.dist}{Si T (por defecto) los lances válidos con recorrido NA/-9 en el CAMP se rellenan con la distancia Haversine entre largada y virada y se avisa con un warning; si F se dejan como están}
 
 \item{outhidro}{si T saca los datos del fichero hidro al final de todo el proceso como salida}
 }

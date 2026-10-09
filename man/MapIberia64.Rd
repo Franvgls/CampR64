@@ -17,7 +17,7 @@ MapIberia64(
   es = TRUE,
   places = TRUE,
   escmult = 1,
-  new.dev = T
+  new.dev = F
 )
 }
 \arguments{
@@ -44,6 +44,9 @@ MapIberia64(
 \item{places}{Si T saca ciudades y puntos geográficos de referencia}
 
 \item{escmult}{=1 aumenta o disminuye el tamaño de las etiquetas y textos menos de 1 lo disminuye, m?s de uno lo aumenta}
+
+\item{new.dev}{Si TRUE abre una ventana externa nueva con las proporciones correctas del mapa.
+Si FALSE (por defecto) usa el device activo (útil para grabar a PNG, PDF, o al panel Plots de RStudio).}
 }
 \value{
 Saca en pantalla el mapa y es utilizada por otras funciones

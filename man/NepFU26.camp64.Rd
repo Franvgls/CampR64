@@ -5,7 +5,7 @@
 \title{Información anual sobre cigala por FUs en el Cantábrico y Galicia}
 \usage{
 NepFU26.camp64(
-  camp = camp,
+  camp = "N25",
   zona = "cant",
   dns = c("local", "serv"),
   plot = TRUE,
@@ -18,12 +18,17 @@ NepFU26.camp64(
   cexleg = 1,
   ICESrectcol = 1,
   ICESrect = TRUE,
-  FU = 31,
+  FU = 26,
+  ref = NA,
   places = TRUE,
   out.dat = TRUE,
   bw = FALSE,
   ColFU = "white",
-  dens = 20
+  dens = 20,
+  graf = FALSE,
+  xpng = 650,
+  ypng = 550,
+  ppng = 13
 )
 }
 \arguments{
@@ -45,6 +50,8 @@ NepFU26.camp64(
 
 \item{FU}{pinta los límites de la FU26 en color rojo}
 
+\item{ref}{Vector de referencia opcional para fijar la escala de la leyenda (p.ej. el máximo histórico), NA usa el máximo de la propia campaña}
+
 \item{places}{Si T saca etiquetas de principales ciudades en el mapa, si F se omiten los letreros}
 
 \item{out.dat}{Si T el resultado final de la función es la figura en pantalla, pero los datos de abundancia de cigala en cada FU con datos de biomasa, numero, desviaciones estándar y número de lances en cada FU.}
@@ -52,6 +59,14 @@ NepFU26.camp64(
 \item{ColFU}{color de relleno de la FU, blanco por defecto, con dens=0 se omite el relleno.}
 
 \item{dens}{valores de 20 hace que el color permita ver el fondo con los ICES rects y la batimetría, más lo deja en color sólido, 0 quita el relleno del todo.}
+
+\item{graf}{Si FALSE el gráfico va a pantalla; si es un string guarda como PNG con ese nombre}
+
+\item{xpng}{Anchura del PNG en píxeles (default 650)}
+
+\item{ypng}{Altura del PNG en píxeles (default 550)}
+
+\item{ppng}{Pointsize del PNG (default 13)}
 
 \item{year}{si T incluye una columna con el año al final de los datos}
 
@@ -77,6 +92,7 @@ otros ficheros de lances de los últimos años
 \examples{
 \dontrun{
   NepFU26.camp64("N21","cant","local",ColFU=)
+  NepFU26.camp64("N24","cant","local",graf="FU26_2024")
   }
 }
 \seealso{

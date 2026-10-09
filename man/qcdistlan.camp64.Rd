@@ -63,6 +63,7 @@ distHaversine function gives the haversine calculation of distance between two g
 
 Other Control de calidad: 
 \code{\link{qcLW64.camp}()},
+\code{\link{qcLWbucl64.camp}()},
 \code{\link{qcTalPez64.camp}()},
 \code{\link{qcTalPez64.lan}()},
 \code{\link{qcdtall64.camp}()},

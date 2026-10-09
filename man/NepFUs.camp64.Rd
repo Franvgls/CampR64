@@ -17,7 +17,12 @@ NepFUs.camp64(
   ICESrect = TRUE,
   FU = NA,
   places = TRUE,
-  out.dat = TRUE
+  out.dat = TRUE,
+  bw = FALSE,
+  graf = FALSE,
+  xpng = NA,
+  ypng = NA,
+  ppng = 20
 )
 }
 \arguments{
@@ -33,9 +38,9 @@ NepFUs.camp64(
 
 \item{es}{si T letreros en español, si F en inglés (F por defecto)}
 
-\item{ICESlab}{Si T incluye las etiquetas de los rectángulos ICES}
+\item{ICESlab}{Sin efecto: se mantiene por compatibilidad, MapIberia64 no incluye etiquetas por rectángulo ICES}
 
-\item{ICESrectcol}{Color para los rectángulos ICES}
+\item{ICESrectcol}{Sin efecto: se mantiene por compatibilidad, MapIberia64 no colorea los rectángulos ICES individualmente}
 
 \item{ICESrect}{Si T saca los rectangulos ices de 1 grado de latitud por medio de longitud}
 
@@ -44,6 +49,16 @@ NepFUs.camp64(
 \item{places}{Si T saca etiquetas de principales ciudades en el mapa, si F se omiten los letreros}
 
 \item{out.dat}{Si T el resultado final de la función es la figura en pantalla, pero los datos de abundancia de cigala en cada FU con datos de biomasa, numero, desviaciones estándar y número de lances en cada FU.}
+
+\item{bw}{Si T mapa base en blanco y negro (MapIberia64), si F en color}
+
+\item{graf}{Si FALSE el gráfico va a pantalla; si es un string guarda como PNG con ese nombre}
+
+\item{xpng}{Anchura del PNG en píxeles; si NA (por defecto) usa 1200 para zona "cant" y 600 para "arsa"}
+
+\item{ypng}{Altura del PNG en píxeles; si NA (por defecto) usa 600 para zona "cant" y 600 para "arsa"}
+
+\item{ppng}{Pointsize del PNG (default 20)}
 
 \item{year}{si T incluye una columna con el año al final de los datos}
 
@@ -67,6 +82,7 @@ otros ficheros de lances de los últimos años
 \examples{
 \dontrun{
   NepFUs.camp64(camp="N20",zona="cant",dns="local",plot=T,plotnep=T)
+  NepFUs.camp64(camp="N24",zona="cant",dns="local",graf="NepFUs_2024")
   }
 }
 \seealso{
@@ -75,6 +91,9 @@ Other mapas:
 \code{\link{MapEcol64.camp}()},
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
+\code{\link{VedaCigala}},
+\code{\link{VedaCigala.out}},
+\code{\link{VedasBesugo}},
 \code{\link{arMapLansGPS64}()},
 \code{\link{armap.camp64}()},
 \code{\link{maparea64}()},

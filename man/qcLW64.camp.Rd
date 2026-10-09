@@ -53,6 +53,7 @@ qcLW.camp64(1, 50, "N25", zona="porc", dns="local")
 }
 \seealso{
 Other Control de calidad: 
+\code{\link{qcLWbucl64.camp}()},
 \code{\link{qcTalPez64.camp}()},
 \code{\link{qcTalPez64.lan}()},
 \code{\link{qcdistlan.camp64}()},

@@ -24,7 +24,11 @@ NepFU30.camp64(
   ColFU = "white",
   dens = 20,
   out.dat = TRUE,
-  bw = FALSE
+  bw = FALSE,
+  graf = FALSE,
+  xpng = 1100,
+  ypng = 1100,
+  ppng = 20
 )
 }
 \arguments{
@@ -54,6 +58,14 @@ NepFU30.camp64(
 
 \item{out.dat}{Si T el resultado final de la función es la figura en pantalla, pero los datos de abundancia de cigala en cada FU con datos de biomasa, numero, desviaciones estándar y número de lances en cada FU.}
 
+\item{graf}{Si FALSE el gráfico va a pantalla; si es un string guarda como PNG con ese nombre}
+
+\item{xpng}{Anchura del PNG en píxeles (default 1100)}
+
+\item{ypng}{Altura del PNG en píxeles (default 1100)}
+
+\item{ppng}{Pointsize del PNG (default 20)}
+
 \item{year}{si T incluye una columna con el año al final de los datos}
 
 \item{plotnep}{si T presenta todos los lances en los que ha habido cigala en la campaña, además de los lances en cada FU, con o sín captura. Si F sólo saca los lances en cada FU sin marcar si ha habido cigala o no.}
@@ -77,7 +89,8 @@ otros ficheros de lances de los últimos años
 }
 \examples{
 \dontrun{
-  NepFU30.camp(camp="121",dns="Arsa")
+  NepFU30.camp64(camp="112",zona="arsa")
+  NepFU30.camp64(camp="124",zona="arsa",dns="local",graf="FU30_2024")
   }
 }
 \seealso{

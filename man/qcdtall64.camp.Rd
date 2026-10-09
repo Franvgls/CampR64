@@ -61,6 +61,7 @@ length-frequency data. Fish. Bull. 106: 116-120.
 
 Other Control de calidad: 
 \code{\link{qcLW64.camp}()},
+\code{\link{qcLWbucl64.camp}()},
 \code{\link{qcTalPez64.camp}()},
 \code{\link{qcTalPez64.lan}()},
 \code{\link{qcdistlan.camp64}()},

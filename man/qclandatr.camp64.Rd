@@ -30,6 +30,7 @@ qclandatr.camp64("216","arsa","local")
 
 Other Control de calidad: 
 \code{\link{qcLW64.camp}()},
+\code{\link{qcLWbucl64.camp}()},
 \code{\link{qcTalPez64.camp}()},
 \code{\link{qcTalPez64.lan}()},
 \code{\link{qcdistlan.camp64}()},

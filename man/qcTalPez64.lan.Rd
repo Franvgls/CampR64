@@ -44,6 +44,7 @@ qcTalPez64.lan("N25", zona="cant", dns="local", lan=23, gr=1)
 
 Other Control de calidad: 
 \code{\link{qcLW64.camp}()},
+\code{\link{qcLWbucl64.camp}()},
 \code{\link{qcTalPez64.camp}()},
 \code{\link{qcdistlan.camp64}()},
 \code{\link{qcdtall64.camp}()},

@@ -5,13 +5,14 @@
 \title{Información anual sobre cigala para la FU 25 Galicia norte}
 \usage{
 NepFU25.camp64(
-  camp = "NNNNNNNNN23",
+  camp = "N23",
   zona = "cant",
   dns = c("local", "serv"),
   plot = TRUE,
   es = FALSE,
   ti = TRUE,
   ICESlab = FALSE,
+  ref = NA,
   ceros = T,
   ICESrectcol = 1,
   ICESrect = TRUE,
@@ -23,7 +24,11 @@ NepFU25.camp64(
   leg = T,
   escmult = 0.25,
   cexleg = 1,
-  cex0 = 1
+  cex0 = 1,
+  graf = FALSE,
+  xpng = 550,
+  ypng = 550,
+  ppng = 11
 )
 }
 \arguments{
@@ -39,6 +44,8 @@ NepFU25.camp64(
 
 \item{ICESlab}{Si T incluye las etiquetas de los rectángulos ICES}
 
+\item{ref}{Vector de referencia opcional para fijar la escala de la leyenda (p.ej. el máximo histórico), NA usa el máximo de la propia campaña}
+
 \item{ICESrectcol}{Color para los rectángulos ICES}
 
 \item{ICESrect}{Si T saca los rectangulos ices de 1 grado de latitud por medio de longitud}
@@ -52,6 +59,14 @@ NepFU25.camp64(
 \item{ColFU}{color de relleno de la FU, blanco por defecto, con dens=0 se omite el relleno.}
 
 \item{dens}{valores de 20 hace que el color permita ver el fondo con los ICES rects y la batimetría, más lo deja en color sólido, 0 quita el relleno del todo.}
+
+\item{graf}{Si FALSE el gráfico va a pantalla; si es un string guarda como PNG con ese nombre}
+
+\item{xpng}{Anchura del PNG en píxeles (default 1000)}
+
+\item{ypng}{Altura del PNG en píxeles (default 1000)}
+
+\item{ppng}{Pointsize del PNG (default 12)}
 
 \item{year}{si T incluye una columna con el año al final de los datos}
 
@@ -77,6 +92,7 @@ otros ficheros de lances de los últimos años
 \examples{
 \dontrun{
   NepFU25.camp64("N21",zona="cant",dns="local")
+  NepFU25.camp64("N24",zona="cant",dns="local",graf="FU25_2024")
   }
 }
 \seealso{

@@ -40,6 +40,9 @@ Other mapas:
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},
+\code{\link{VedaCigala}},
+\code{\link{VedaCigala.out}},
+\code{\link{VedasBesugo}},
 \code{\link{arMapLansGPS64}()},
 \code{\link{armap.camp64}()},
 \code{\link{maphist64}()},
@@ -52,11 +55,18 @@ Other mapas:
 \code{\link{MapLansGPS64}()},
 \code{\link{MatchHidro.ctd64}()},
 \code{\link{NepFUs.camp64}()},
+\code{\link{VedaCigala}},
+\code{\link{VedaCigala.out}},
+\code{\link{VedasBesugo}},
 \code{\link{arMapLansGPS64}()},
 \code{\link{armap.camp64}()},
 \code{\link{maphist64}()},
 \code{\link{maphistage64}()},
 \code{\link{maphistal64}()}
+
+Other Porcupine: 
+\code{\link{VedaCigala}},
+\code{\link{VedaCigala.out}}
 }
 \concept{Porcupine}
 \concept{Porcupine
