@@ -88,6 +88,7 @@ llamándola varias veces dentro de un \code{par(mfrow=...)} o
 Other Distribuciones de tallas: 
 \code{\link{denstall64.camp}()},
 \code{\link{dtallan.camp64}()},
+\code{\link{dtallan.peso64}()},
 \code{\link{dtalldens64.camp}()}
 }
 \concept{Distribuciones de tallas}

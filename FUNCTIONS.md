@@ -2,7 +2,7 @@
 
 Generado automaticamente por `tools/build_index.R`. No editar a mano.
 
-Total funciones documentadas: **132**
+Total funciones documentadas: **143**
 
 ## abunds (2)
 
@@ -53,7 +53,7 @@ Total funciones documentadas: **132**
 | `MapArsa64()` | MapArsa64.R | Mapa base Golfo de Cádiz (ARSA) con selección por regiones (modelo MapNort64) | si | no |
 | `MapEcol64.camp()` | MapEcol64.camp.R | Mapa de índices ecológicos para un grupo en una campaña | si | si |
 | `maphist64()` | maphist64.R | Mapas de distribucion en varias campañas | si | si |
-| `maphistage64()` | maphistage64.R | Mapa distribución por edad en la campaña | si | si |
+| `maphistage64()` | maphistage64.r | Mapa distribución por edad en la campaña | si | si |
 | `maphistal64()` | maphistal64.r | Mapa distribución entre tallas tmin y tmax | si | si |
 | `MapIberia64()` | MapIberia64.R | Mapa de la Península Ibérica completo | si | si |
 | `MapIBTS64()` | MapIBTS64.R | Map species distribution from IBTS NeAtl surveys (R 4.4+) | si | si |
@@ -69,7 +69,7 @@ Total funciones documentadas: **132**
 | `NepFU31.camp64()` | NepFU31.camp64.R | Información anual sobre cigala en la FU31 en el Cantábrico | si | si |
 | `NepFUs.camp64()` | NepFUs.camp64.R | Información anual sobre cigala por FUs en el Cantábrico y Galicia | si | si |
 
-## Control de calidad (8)
+## Control de calidad (9)
 
 | Función | Fichero | Título | Export | @examples |
 |---|---|---|---|---|
@@ -79,6 +79,7 @@ Total funciones documentadas: **132**
 | `qcDupFauna64.camp()` | qcDupFauna64.camp.R | Control de calidad: especies duplicadas en las faunisticas de una campaña | si | si |
 | `qclandatr.camp64()` | qcLanDatr.camp64.R | Comprueba la distancia recorrida en los lances y la consistencia con recorrido y la velocidad en los datos del CAMP | si | si |
 | `qcLW64.camp()` | qcLW64.camp.R | Outliers capturas según tallas medidas y relación talla-peso | si | si |
+| `qcLWbucl64.camp()` | qcLWbucl64.camp.R | Outliers en capturas según la relación talla-peso de todas las especies medidas en una campaña | si | si |
 | `qcTalPez64.camp()` | qcTalPez64.camp.R | Comprueba que están medidas todas las especies en capturas y viceversa en la campaña | si | si |
 | `qcTalPez64.lan()` | qcTalPez64.lan.R | Comprueba concordancia entre capturas y tallas en un lance | si | si |
 
@@ -99,7 +100,7 @@ Total funciones documentadas: **132**
 | `sacagridNort64()` | sacagridNort64.R | Saca el grid de cuadrículas para Demersales Norte | si | no |
 | `sorteo64()` | sorteo64.R | Sorteo de distribución de lances en Porcupine | si | no |
 
-## Datos de campana (13)
+## Datos de campana (15)
 
 | Función | Fichero | Título | Export | @examples |
 |---|---|---|---|---|
@@ -111,9 +112,11 @@ Total funciones documentadas: **132**
 | `datgr.camp64()` | datgr.camp64.r | Datos de biomasa y abundancia para una especie y campaña | si | si |
 | `dathidro.camp64()` | dathidro.camp64.R | Datos hidrográficos de una campaña | si | si |
 | `datlan.camp64()` | datlan.camp64.R | Características del lance | si | si |
+| `datmuest.camp64()` | datmuest.camp64.R | Datos del muestreo de la especie esp en la campaña | si | si |
 | `datos.camp64()` | datos.camp64.R | Datos de abundancia y biomasa de una especie  | si | si |
 | `dattal.camp64()` | dattal.camp64.R | Abundancia estratificada por talla y sexo | si | si |
 | `dattal.camps64()` | dattal.camps64.r | Abundancia estratificada para un rango de talla | si | si |
+| `datTalaGeo.camp64()` | datTalaGeo.camp64.R | Datos de tallas y sexo con geografía (para uso en especies a evaluar con datos de tallas: L. circularis, Phycis...) | si | si |
 | `datTalCatch64.camp()` | datTalCatch64.camp.R | Crea datos de capturas en formato para evaluaciones tipo Capros o modelos bayesianos (completar con datCatches.camp) | si | si |
 | `dattalgr.camp64()` | dattalgr.camp64.r | Biomasa y abundancia para un rango de talla | si | si |
 
@@ -134,13 +137,16 @@ Total funciones documentadas: **132**
 | `CoGDpth.sp64.camp()` | CoGDpth.sp64.camp.R | Centro de gravedad batimétrico de una especie a lo largo de una serie de campañas | si | si |
 | `CoGLng.sp64.camp()` | CoGLng.sp64.camp.R | Centro de gravedad batimétrico de una especie a lo largo de una serie de campañas | si | si |
 
-## Distribuciones de tallas (9)
+## Distribuciones de tallas (12)
 
 | Función | Fichero | Título | Export | @examples |
 |---|---|---|---|---|
 | `denstall64.camp()` | denstall64.camp.r | Función de densidad distribución de tallas | si | si |
 | `dtall.camp64()` | dtall.camp64.r | Crea un histograma distribución de tallas estratificada especie y campañas | si | si |
+| `dtall.campa64()` | dtall.campa64.R | *(sin @title)* | si | no |
+| `dtall05.camp64()` | dtall05.camp64.R | Crea un histograma distribución de tallas estratificada especie y campañas corrigiendo el que haya unas campañas a .5 y otras a 1 cm | si | si |
 | `dtallan.camp64()` | dtallan.camp64.R | Valores absolutos en número por talla | si | si |
+| `dtallan.peso64()` | dtallan.peso64.R | Peso de la distribución de tallas de esp en los lances solicitados | si | si |
 | `dtallbarplot64()` | dtallbarplot64.r | Histograma de la distribución de tallas media de una o varias campañas | si | si |
 | `dtalldens64.camp()` | dtalldens64.camp.R | Histograma y densidad de tallas combinados | si | si |
 | `dtallmean64.camp()` | dtallmean64.camp.R | **Talla media** de la distribución de tallas media estandarizada del conjunto de la campaña **Xxx** | si | si |
@@ -176,7 +182,7 @@ Total funciones documentadas: **132**
 | `grafedtal.camps64()` | grafedtal.camps64.R |  Histograma de distribución de tallas con edades para varias campañas | si | si |
 | `logabage64.camp()` | logabage64.camp.r | Descenso logarítmico de abundancia por cohorte | no | si |
 
-## Estadistica/CV (4)
+## Estadistica/CV (5)
 
 | Función | Fichero | Título | Export | @examples |
 |---|---|---|---|---|
@@ -184,6 +190,7 @@ Total funciones documentadas: **132**
 | `CV.camp64()` | CV.camp64.R | Abundancias, SE y coeficientes de variación paramétricos por subestrato, estrato y total | si | no |
 | `CV.camps64()` | CV.camps64.R | Abundancias en número y peso totales de la especie para varias campañas | si | no |
 | `CV.camps64_full()` | CV.camps64_full.R | Estadísticos estratificados completos (media, SE, CV) para varias campañas | si | no |
+| `CVlist.camp64()` | CVlist.camp64.R | Abundancias en número y peso totales para todas las especies de un grupo en una campaña | si | si |
 
 ## Faunísticas (3)
 
@@ -210,6 +217,12 @@ Total funciones documentadas: **132**
 | `grafhistbox64()` | grafhistbox64.R | Evolución en biomasa o abundancia de la especie en la serie histórica | si | si |
 | `grafhistbox64.comp()` | grafhistbox64.comp.r | Gráficas grafhistbox combinadas biomasa y peso | si | si |
 
+## QC (1)
+
+| Función | Fichero | Título | Export | @examples |
+|---|---|---|---|---|
+| `.qcdistlan64_plot()` | qcdistlan.camp64.r | Gráficos internos de qcdistlan.camp64 | no | no |
+
 ## Series datos (1)
 
 | Función | Fichero | Título | Export | @examples |
@@ -224,10 +237,11 @@ Total funciones documentadas: **132**
 | `list_shapes()` | shapes_utils.R | Listar shapes disponibles en CampR64 | si | no |
 | `read_shape()` | shapes_utils.R | Leer un shape interno de CampR64 como objeto sf | si | no |
 
-## Sin clasificar (19)
+## Sin clasificar (22)
 
 | Función | Fichero | Título | Export | @examples |
 |---|---|---|---|---|
+| `.fill_recorrido64()` | fill_recorrido64.R | Rellena el recorrido ausente de los lances con la distancia Haversine | no | no |
 | `.ices_map_cant()` | utils-ceph.R | *(sin @title)* | no | no |
 | `binom64()` | binom64.r | Distribucion binomial: exitos necesarios para ser significativo | si | si |
 | `buscaFuncion64()` | buscaFuncion64.R | Busca funciones de CampR64 por palabra clave | si | si |
@@ -240,11 +254,13 @@ Total funciones documentadas: **132**
 | `lan2.camp()` | lan2.camp.r | Lances especiales de una campaña | si | si |
 | `ListALKs.camp64()` | ListALKs.camp64.R | Listar ALKs (EDAD<camp>.dbf) y especies por campaña, con nº de otolitos | si | no |
 | `load_worldHires64()` | load_worldHires64.R | *(sin @title)* | no | no |
+| `PresenciaEsp.camp64()` | PresenciaEsp.camp64.R | Presencia de una especie en las campañas de una zona | si | si |
 | `propmat64.camp()` | propmat64.camp.r | Proporcion en peso de peces mayores de L50 | si | si |
 | `readCampDBF()` | readCampDBF.R | Leer un fichero DBF de CampR64 según zona y origen | si | no |
 | `sefos64.camp()` | sefos64.camp.R | Crea datos en formato SEFOS a partir de Camp, dns | si | si |
 | `set_campR64_root()` | set_campR64_root.R | Establecer la ruta raíz de los datos para CampR64 | si | si |
 | `sexr64.camp()` | sexr64.camp.R | Sex ratio por talla de una especie | si | si |
+| `TabAbsEsp.camp64()` | TabAbsEsp.camp64.R | Tabla resumen abundancias estratificadas por estrato y sector | si | si |
 | `unid64.camp()` | unid64.camp.R | Unidades en que se mide una especie | si | no |
 | `unload_worldHires64()` | load_worldHires64.R | *(sin @title)* | no | no |
 

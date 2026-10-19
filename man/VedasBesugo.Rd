@@ -3,7 +3,7 @@
 \docType{data}
 \name{VedasBesugo}
 \alias{VedasBesugo}
-\title{Polígonos áreas de veda besugo Cantábrico}
+\title{Polígonos áreas de veda besugo en el Cantábrico}
 \format{
 A data.frame with long and lat points defining the closed areas, polygons separated by NA
 }

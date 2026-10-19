@@ -3,7 +3,7 @@
 \docType{data}
 \name{VedaCigala}
 \alias{VedaCigala}
-\title{Polígono área de veda cigala Porcupine}
+\title{Polígono área de veda cigala en el banco Porcupine}
 \format{
 A data.frame with long and lat points defining the closed area
 }
@@ -17,7 +17,7 @@ data(VedaCigala)
 VedaCigala: Veda Cigala Porcupine
 }
 \details{
-Polígono que delimita la zona de veda de la cigala en el Porcupine Bank, la zona de veda fue propuesta por los armadores españoles, y puesta en vigor en 2010 desde el 1 de mayo al 31 de julio. Desde entonces ha estado vigente en diversos periodos, pero al menos todo el mes de mayo desde 2013 a 2016.
+Polígono que delimita la zona de veda de la cigala en el banco de Porcupine FU-16, la zona de veda fue propuesta por los armadores españoles, y puesta en vigor en 2010 desde el 1 de mayo al 31 de julio. Desde entonces ha estado vigente en diversos periodos, pero al menos todo el mes de mayo desde 2013 a 2016.
 }
 \examples{
 MapPorc64(); lines(lat ~ long, VedaCigala, col = 2, lwd = 2)

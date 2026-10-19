@@ -17,9 +17,9 @@
 #' @param plot Saca el gráfico (T) o lo guarda como objeto para componer con otros gráficos (F)
 #' @param idi Nombre científico de la especie ("l") o nombre común ("e")
 #' @param clms Número de columnas para ordenar la serie histórica
-#' @param layout Organización de gráficos en filas ó columnas c(r,c) 
+#' @param layout Organización de gráficos en filas y columnas c(r,c) 
 #' @param excl.sect Sectores a excluir como carácter, se pueden elegir tanto los sectores como estratos
-#' @param ymax Valor máximo del eje y
+#' @param ymax Valor máximo del eje Y
 #' @param out.dat Si T el resultado final de la función es la figura en pantalla, pero los datos en objeto
 #' @param years Si T saca los años como nombre de campaña en los paneles lattice de campañas
 #' @param verbose Si T saca avisos de consistencia en tallas, sino los omite
@@ -132,7 +132,7 @@ dtall.camp64<- function(gr,esp,camp,zona,dns=c("local","serv"),cor.time=TRUE,ti=
   if (length(camp)==1) {
 		foo<-lattice::barchart(n~talla,a,groups=a$sex,subscripts=T,key=leg,box.ratio=1000,box.width=increm,ylim=ylim,xlim=xlimi,
 			scales=list(alternating=F,tck=c(1,1),
-			            x=list(at= a$talla[abs(round(a$talla/10,1)-round(a$talla/10))==.5 | abs(round(a$talla/10,1)-round(a$talla/10))==0],
+			            x=list(at= ticks.tal(a$talla),
 			            rot=45)),
 			stack=T,h=F,main=tit,par.strip.text=list(cex=cexleg*.8,font=2),
 			xlab=list(label=ax[1],cex=cexleg*1.2),ylab=list(label=ax[2],cex=cexleg*1.2),sub=sub,strip=TRUE,
@@ -159,7 +159,7 @@ dtall.camp64<- function(gr,esp,camp,zona,dns=c("local","serv"),cor.time=TRUE,ti=
 			}
     #*browser()
 		foo<-lattice::barchart(n~talla|camp,a,groups=a$sex,subscripts=T,key=leg,box.ratio=1000,box.width=increm,ylim=ylim,xlim=xlimi,col=colbars,drop.unused.levels=FALSE,
-			scales=list(alternating=F,tck=c(1,0),cex=cexleg*.7,x=list(at=a$talla[abs(round(a$talla/10,1)-round(a$talla/10))==.5 | abs(round(a$talla/10,1)-round(a$talla/10))==0],
+			scales=list(alternating=F,tck=c(1,0),cex=cexleg*.7,x=list(at=ticks.tal(a$talla),
 			            rot=45)),stack=T,h=F,main=tit,xlab=list(label=ax[1],cex=cexleg*.9),
 			ylab=list(label=ax[2],cex=cexleg*.9),layout=layout,par.strip.text=list(cex=cexleg*.8,font=2),as.table=ifelse(!is.null(orden),F,T),sub=sub,
 			panel=function(x,y,...) {

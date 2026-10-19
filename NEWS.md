@@ -1,3 +1,40 @@
+# CampR64 0.2.0
+Migración desde CampR de las funciones que quedaban pendientes, leyendo los DBF
+con `readCampDBF()` en lugar de RODBC/ODBC.
+
+## Nuevas funciones
+* `dtall05.camp64()`: distribución de tallas estratificada por campañas con
+  `cor.5` para pasar a 1 cm las campañas medidas a .5 cm (en mm), campaña a
+  campaña, de modo que se pueden comparar series con unidades mezcladas
+  (*Capros aper*, sardina, boquerón...). Antes `dtall.campa` en CampR; con
+  `sex=TRUE` y `cor.5` ya no pierde machos y hembras, y con `sex=FALSE` ya no
+  duplica los totales. `dtall.campa64()` se mantiene como alias obsoleto
+  (`.Deprecated`).
+* `CVlist.camp64()`: biomasa, número y nº de lances de todas las especies de un
+  grupo (o `gr=9`) con familia, `percents` y `minim`. `minim` filtra siempre en
+  kg/g y los porcentajes se calculan sobre todas las especies.
+* `TabAbsEsp.camp64()`: tabla de medias y SE por sector x estrato, sectores,
+  estratos y total (biomasa y número) para informes de campaña. Se construye a
+  partir de los nombres de sectores y estratos, ya no sólo para el Cantábrico.
+* `datTalaGeo.camp64()`: tallas por lance con posición, profundidad y sector.
+  `number` va elevado al peso total de la muestra (en CampR se calculaba pero
+  se devolvía sin elevar) y `cor.time`, `excl.sect` y `sex` ya tienen efecto.
+* `datmuest.camp64()`: resumen del muestreo de una especie. Los pesos se suman
+  por lance y categoría (antes la media por lance subestimaba el peso con
+  varias categorías); coincide con el fichero de capturas.
+* `dtallan.peso64()`: peso de la distribución de tallas por talla-peso. Toma
+  la marca de clase en cm según `med`/`increm` (especies medidas en mm o .5 cm),
+  `sex=TRUE` da el peso por sexos y `muestr` elige captura o muestra.
+
+## Cambios
+* `dtall.camp64()` y `dtall05.camp64()`: las marcas del eje x se calculan con
+  el nuevo auxiliar interno `ticks.tal()` (~10 valores redondos), para que las
+  etiquetas no se solapen con tallas en mm o .5 cm.
+* Fix: `dtallan.camp64()` forzaba `sex=FALSE` (con aviso) también para una
+  sola especie; ahora sólo con `esp="999"`.
+* `hidrotodec` de CampR no se migra: lo cubre `dathidro.camp64()`.
+* Documentación de los datasets `VedaCigala` y `VedasBesugo` retocada.
+
 # CampR64 0.1.20
 * `datlan.camp64()`: nuevo argumento `fill.dist` (TRUE por defecto). Los lances
   válidos con recorrido NA/-9/<=0 en el CAMP se rellenan con la distancia

@@ -62,11 +62,11 @@ dtall.camp64(
 
 \item{clms}{Número de columnas para ordenar la serie histórica}
 
-\item{layout}{Organización de gráficos en filas ó columnas c(r,c)}
+\item{layout}{Organización de gráficos en filas y columnas c(r,c)}
 
 \item{excl.sect}{Sectores a excluir como carácter, se pueden elegir tanto los sectores como estratos}
 
-\item{ymax}{Valor máximo del eje y}
+\item{ymax}{Valor máximo del eje Y}
 
 \item{out.dat}{Si T el resultado final de la función es la figura en pantalla, pero los datos en objeto}
 

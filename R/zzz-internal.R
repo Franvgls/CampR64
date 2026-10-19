@@ -16,3 +16,10 @@ tiempo_decimal <- function(h_ini, h_fin) {
 
 # Operador "null-coalesce" — devuelve b si a es NULL o cadena vacía
 `%||%` <- function(a, b) if (!is.null(a) && nzchar(a)) a else b
+
+# Marcas del eje x para distribuciones de tallas: valores "redondos" (pretty)
+# con unas n etiquetas como máximo, para que no se solapen al medir en mm o .5 cm
+ticks.tal <- function(talla, n = 10) {
+  tt <- pretty(range(talla, na.rm = TRUE), n = n)
+  tt[tt >= min(talla, na.rm = TRUE) & tt <= max(talla, na.rm = TRUE)]
+}

@@ -23,7 +23,7 @@ dtallan.camp64<- function(gr,esp,camp,zona,dns=c("local","serv"),lances=NA,sex=F
   if (length(esp)==1) {
     if (esp!="999") {ntalls<-ntalls[ntalls$esp==esp & ntalls$grupo==gr,c("lance","peso_gr","peso_m","talla","sexo","numer")]}   
     if (esp=="999") {ntalls<-ntalls[ntalls$grupo==gr,c("lance","peso_gr","peso_m","talla","sexo","numer")]}   
-      if (sex==TRUE) {
+      if (esp=="999" & sex==TRUE) {
         warning("Con varias especies no se puede separar por sexos, resultados sin sexos")
         sex=F
         ntalls$sexo<-3

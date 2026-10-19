@@ -63,6 +63,7 @@ denstall64.camp(1,42,Nsh[25:42],"cant","local",layout=c(3,6))
 \seealso{
 Other Distribuciones de tallas: 
 \code{\link{dtallan.camp64}()},
+\code{\link{dtallan.peso64}()},
 \code{\link{dtallbarplot64}()},
 \code{\link{dtalldens64.camp}()}
 }

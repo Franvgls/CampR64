@@ -45,6 +45,7 @@ dtallan64.camp(gr=1,esp=10,camp="N14",zona="cant",dns="local",lances=NA,muestr=F
 \seealso{
 Other Distribuciones de tallas: 
 \code{\link{denstall64.camp}()},
+\code{\link{dtallan.peso64}()},
 \code{\link{dtallbarplot64}()},
 \code{\link{dtalldens64.camp}()}
 }
