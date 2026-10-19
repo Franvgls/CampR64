@@ -34,6 +34,8 @@ con `readCampDBF()` en lugar de RODBC/ODBC.
   sola especie; ahora sólo con `esp="999"`.
 * `hidrotodec` de CampR no se migra: lo cubre `dathidro.camp64()`.
 * Documentación de los datasets `VedaCigala` y `VedasBesugo` retocada.
+* `Nsh`, `Psh` y `As2` actualizados con N26, P26 y 226 (script en
+  `data-raw/Campanas.R`).
 
 # CampR64 0.1.20
 * `datlan.camp64()`: nuevo argumento `fill.dist` (TRUE por defecto). Los lances
