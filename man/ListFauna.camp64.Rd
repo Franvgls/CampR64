@@ -2,7 +2,7 @@
 % Please edit documentation in R/ListFauna.camp64.R
 \name{ListFauna.camp64}
 \alias{ListFauna.camp64}
-\title{Capturas medias por lance de cada especie de gr (grupo) en una campaña}
+\title{Capturas medias por lance de cada especie de gr (grupo) en una o varias campañas}
 \usage{
 ListFauna.camp64(
   gr = "1",
@@ -18,7 +18,7 @@ ListFauna.camp64(
 \arguments{
 \item{gr}{Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados 6 para deshechos y otros.}
 
-\item{camp}{Campaña de la que se extrae el listado de especies capturadas: un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
+\item{camp}{Campaña o vector de campañas de las que se extrae el listado de especies capturadas: un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX". Admite una serie, i.e. Nsh\link{25:27}}
 
 \item{zona}{Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa".}
 
@@ -29,20 +29,25 @@ ListFauna.camp64(
 \item{excl.sect}{Sectores a excluir como carácter, se pueden elegir tanto los sectores como estratos, NA no excluye ninguno}
 
 \item{incl2}{Si T incluye los lances especiales "2"}
+
+\item{kg}{No se usa, se mantiene por compatibilidad}
 }
 \value{
-Devuelve un data.frame con las capturas medias por lance de cada especie capturada del grupo gr. Columnas: gr,esp,especie,peso(kg),número,nlan (nº de lances en que ha aparecido esp) Los valores NaN en las abundancias corresponden a especies que sólo han aparecido en los lances especiales, y que no puede calcularse la abundancia estratificada al no contar con áreas para los estratos en que aparecen
+Devuelve un data.frame con las capturas medias por lance de cada especie capturada del grupo gr. Columnas: camp (sólo si se piden varias campañas),gr,esp,especie,peso(kg),número,nlan (nº de lances en que ha aparecido esp). Con varias campañas se ordena por campaña, en el orden dado en camp, y por peso decreciente dentro de cada una. Los valores NaN en las abundancias corresponden a especies que sólo han aparecido en los lances especiales, y que no puede calcularse la abundancia estratificada al no contar con áreas para los estratos en que aparecen
 }
 \description{
-Muestra un listado de la biomasa y número medio de todas las especies capturadas del grupo gr
+Muestra un listado de la biomasa y número medio de todas las especies capturadas del grupo gr en una campaña o en una serie de campañas. Sustituye también a \code{ListFauna.camps} de CampR.
 }
 \examples{
 \dontrun{
-ListFauna.camp64(gr=1,camp="N12",zona="cant",dns="local",excl.sect=FALSE,incl2=FALSE)
+ListFauna.camp64(gr=1,camp="N12",zona="cant",dns="local",excl.sect=NA,incl2=FALSE)
+ListFauna.camp64(gr=1,camp=Nsh[25:27],zona="cant",dns="local")
 }
 }
 \seealso{
 Other ListadosFauna: 
-\code{\link{Fauna.camp}()}
+\code{\link{Fauna.camp}()},
+\code{\link{ListFauna.lan64}()},
+\code{\link{ListFaunaTals.camp64}()}
 }
 \concept{ListadosFauna}

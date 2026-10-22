@@ -2,7 +2,7 @@
 
 Generado automaticamente por `tools/build_index.R`. No editar a mano.
 
-Total funciones documentadas: **143**
+Total funciones documentadas: **144**
 
 ## abunds (2)
 
@@ -192,13 +192,14 @@ Total funciones documentadas: **143**
 | `CV.camps64_full()` | CV.camps64_full.R | Estadísticos estratificados completos (media, SE, CV) para varias campañas | si | no |
 | `CVlist.camp64()` | CVlist.camp64.R | Abundancias en número y peso totales para todas las especies de un grupo en una campaña | si | si |
 
-## Faunísticas (3)
+## Faunísticas (4)
 
 | Función | Fichero | Título | Export | @examples |
 |---|---|---|---|---|
 | `Fauna.camp()` | Fauna.camp64.R | Listado de especies por campaña sin  datos de las especies del grupo, sólo nombres permite añadir los lances especiales | si | si |
-| `ListFauna.camp64()` | ListFauna.camp64.R | Capturas medias por lance de cada especie de gr (grupo) en una campaña  | si | si |
-| `ListFauna.lan64()` | ListFauna.lan64.r | Capturas de un lance específico | si | si |
+| `ListFauna.camp64()` | ListFauna.camp64.R | Capturas medias por lance de cada especie de gr (grupo) en una o varias campañas | si | si |
+| `ListFauna.lan64()` | ListFauna.lan64.r | Capturas de uno, varios o todos los lances de una campaña | si | si |
+| `ListFaunaTals.camp64()` | ListFaunaTals.camp64.R | Capturas y tallas mínima y máxima de un grupo de especies en una o varias campañas | si | si |
 
 ## Formatos DATRAS (5)
 

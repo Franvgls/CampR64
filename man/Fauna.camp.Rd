@@ -44,6 +44,8 @@ Fauna.camp(gr=1,camp="N12",dns="Cant",excl.sect=NA,getaphia=TRUE)
 }
 \seealso{
 Other ListadosFauna: 
-\code{\link{ListFauna.camp64}()}
+\code{\link{ListFauna.camp64}()},
+\code{\link{ListFauna.lan64}()},
+\code{\link{ListFaunaTals.camp64}()}
 }
 \concept{ListadosFauna}

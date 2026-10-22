@@ -1,3 +1,25 @@
+# CampR64 0.2.1
+Listados faunísticos: una misma función sirve para una campaña o una serie, y
+para un lance, varios o todos.
+
+## Nuevas funciones
+* `ListFaunaTals.camp64()` para una o varias campañas (sustituye a
+  `ListFaunaTals.camp` y `ListFaunaTals.camps` de CampR): nº de lances, peso,
+  número, ejemplares medidos y tallas mínima y máxima de cada especie del
+  grupo, con la unidad de medida. Peso y número salen del fichero de capturas:
+  en CampR el peso se sumaba por cada fila de talla, multiplicándolo, y se
+  perdían las especies sin tallas medidas.
+
+## Cambios
+* `ListFauna.camp64()` admite una o varias campañas en `camp` (sustituye a
+  `ListFauna.camps` de CampR); con varias añade la columna `camp` y ordena por
+  campaña y peso. Fix: `incl2` no tenía efecto (siempre incluía los lances
+  especiales en `nlan`).
+* `ListFauna.lan64()` admite uno, varios (`lan=c(...)`) o todos los lances
+  (`lan=NA`, con `excl.sect` e `incl2`), sustituyendo a `ListFauna.lans` de
+  CampR. Devuelve siempre `lance,grupo,esp,especie,peso,numero` (antes perdía
+  `esp`) y busca los nombres de especie de una sola lectura.
+
 # CampR64 0.2.0
 Migración desde CampR de las funciones que quedaban pendientes, leyendo los DBF
 con `readCampDBF()` en lugar de RODBC/ODBC.

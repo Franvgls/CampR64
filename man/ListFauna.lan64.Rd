@@ -2,9 +2,17 @@
 % Please edit documentation in R/ListFauna.lan64.r
 \name{ListFauna.lan64}
 \alias{ListFauna.lan64}
-\title{Capturas de un lance específico}
+\title{Capturas de uno, varios o todos los lances de una campaña}
 \usage{
-ListFauna.lan64(camp, zona = "cant", dns = c("local", "serv"), lan, gr = NA)
+ListFauna.lan64(
+  camp,
+  zona = "cant",
+  dns = c("local", "serv"),
+  lan = NA,
+  gr = NA,
+  excl.sect = NA,
+  incl2 = FALSE
+)
 }
 \arguments{
 \item{camp}{Campaña de la que se extrae los datos del lance (lan) un año comcreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX"}
@@ -13,21 +21,31 @@ ListFauna.lan64(camp, zona = "cant", dns = c("local", "serv"), lan, gr = NA)
 
 \item{dns}{Elige de dónde se toman los datos si del ordenador ("local") o del servidor ("serv")}
 
-\item{lan}{Lance del que se extrae la faunística}
+\item{lan}{Lance o vector de lances de los que se extrae la faunística. Si NA (por defecto) se sacan todos los lances de la campaña, teniendo en cuenta \code{excl.sect} e \code{incl2}}
 
-\item{gr}{Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados. Si NA, muestra todos los grupos a excepción de 6 desechos y otros no orgánicos}
+\item{gr}{Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados 6 desechos y otros no orgánicos. Si NA, muestra todos los grupos}
+
+\item{excl.sect}{Sólo con \code{lan=NA}: sectores o estratos a excluir como vector de caracteres, i.e. c("A","B"). NA no excluye ninguno}
+
+\item{incl2}{Sólo con \code{lan=NA}: si TRUE se incluyen los lances especiales}
 }
 \value{
-Devuelve un data.frame con columnas grupo,esp,especie,peso,numero
+Devuelve un data.frame con columnas lance,grupo,esp,especie,peso (kg),numero ordenado por lance, grupo y peso decreciente
 }
 \description{
-Muestra un listado de las especies capturadas en peso y número en un lance concreto. Se pueden seleccionar grupos de especies
+Muestra un listado de las especies capturadas en peso y número en un lance concreto, en varios o en todos los lances de la campaña. Se pueden seleccionar grupos de especies. Sustituye también a \code{ListFauna.lans} de CampR: con \code{lan=NA} saca todos los lances de la campaña.
 }
 \examples{
 \dontrun{
-ListFauna.lan64("12C","cant","local",1,gr=c(1,2))
+ListFauna.lan64("N12","cant","local",1,gr=c(1,2))
+ListFauna.lan64("N12","cant","local",c(1,5,10))
+ListFauna.lan64("N12","cant","local",gr=1,excl.sect="E")
 }
 }
 \seealso{
-\link{ListFauna.camps}, \link{ListFaunaTals.camps}
+Other ListadosFauna: 
+\code{\link{Fauna.camp}()},
+\code{\link{ListFauna.camp64}()},
+\code{\link{ListFaunaTals.camp64}()}
 }
+\concept{ListadosFauna}
