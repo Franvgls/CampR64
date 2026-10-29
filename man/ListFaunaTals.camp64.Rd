@@ -2,7 +2,7 @@
 % Please edit documentation in R/ListFaunaTals.camp64.R
 \name{ListFaunaTals.camp64}
 \alias{ListFaunaTals.camp64}
-\title{Capturas y tallas mínima y máxima de un grupo de especies en una o varias campañas}
+\title{Capturas y tallas mínima y máxima de uno o varios grupos de especies en una o varias campañas}
 \usage{
 ListFaunaTals.camp64(
   gr = "1",
@@ -14,7 +14,7 @@ ListFaunaTals.camp64(
 )
 }
 \arguments{
-\item{gr}{Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados. 6 desechos y no orgánicos no se puede incluir.}
+\item{gr}{Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados. 6 desechos y no orgánicos no se puede incluir. Admite varios grupos, i.e. c(1,2), y 9 para todos los grupos del 1 al 5 (como ListFaunaTals.groups)}
 
 \item{camp}{Campaña o vector de campañas de las que se extrae el listado: un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX". Admite una serie, i.e. Nsh\link{25:27}}
 
@@ -27,15 +27,16 @@ ListFaunaTals.camp64(
 \item{incl2}{Si T incluye los lances especiales "2"}
 }
 \value{
-Devuelve un data.frame con columnas: camp (sólo si se piden varias campañas),gr,esp,especie,nlans (nº de lances en que aparece la especie),peso (kg),numero,nmed (nº de ejemplares medidos),Lmin,Lmax (tallas mínima y máxima en la unidad en que se mide la especie) y medida (esa unidad: "cm", "mm" o "x5 mm" para las medidas a .5 cm, con las tallas en mm). El peso y el número salen del fichero de capturas, por lo que se incluyen también las especies sin tallas medidas (con nmed=0 y Lmin y Lmax NA). Ordenado por especie y, con varias campañas, por campaña dentro de cada especie en el orden dado en camp
+Devuelve un data.frame con columnas: camp (sólo si se piden varias campañas),gr,esp,especie,nlans (nº de lances en que aparece la especie),peso (kg),numero,nmed (nº de ejemplares medidos),Lmin,Lmax (tallas mínima y máxima en la unidad en que se mide la especie) y medida (esa unidad: "cm", "mm" o "x5 mm" para las medidas a .5 cm, con las tallas en mm). El peso y el número salen del fichero de capturas, por lo que se incluyen también las especies sin tallas medidas (con nmed=0 y Lmin y Lmax NA). Ordenado por grupo, especie y, con varias campañas, por campaña dentro de cada especie en el orden dado en camp
 }
 \description{
-Muestra las capturas totales sin estratificar, en peso y número, el número de lances en que aparece cada especie, el número de ejemplares medidos y las tallas mínima y máxima de todas las especies de un grupo en todos los lances de una campaña o de una serie de campañas. Sustituye a \code{ListFaunaTals.camp} y \code{ListFaunaTals.camps} de CampR.
+Muestra las capturas totales sin estratificar, en peso y número, el número de lances en que aparece cada especie, el número de ejemplares medidos y las tallas mínima y máxima de todas las especies de uno o varios grupos en todos los lances de una campaña o de una serie de campañas. Sustituye a \code{ListFaunaTals.camp}, \code{ListFaunaTals.camps} y \code{ListFaunaTals.groups} de CampR.
 }
 \examples{
 \dontrun{
 ListFaunaTals.camp64(gr="1",camp="N25",zona="cant",dns="local")
 ListFaunaTals.camp64(gr="2",camp=Nsh[25:27],zona="cant",dns="local",excl.sect="E")
+ListFaunaTals.camp64(gr=9,camp="N25",zona="cant",dns="local")
 }
 }
 \seealso{

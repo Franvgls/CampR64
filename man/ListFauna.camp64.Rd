@@ -2,7 +2,7 @@
 % Please edit documentation in R/ListFauna.camp64.R
 \name{ListFauna.camp64}
 \alias{ListFauna.camp64}
-\title{Capturas medias por lance de cada especie de gr (grupo) en una o varias campañas}
+\title{Capturas medias por lance de cada especie de uno o varios grupos en una o varias campañas}
 \usage{
 ListFauna.camp64(
   gr = "1",
@@ -16,7 +16,7 @@ ListFauna.camp64(
 )
 }
 \arguments{
-\item{gr}{Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados 6 para deshechos y otros.}
+\item{gr}{Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados 6 para deshechos y otros. Admite varios grupos, i.e. c(1,2), y 9 para todos los grupos del 1 al 5 (como ListFauna.groups)}
 
 \item{camp}{Campaña o vector de campañas de las que se extrae el listado de especies capturadas: un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX". Admite una serie, i.e. Nsh\link{25:27}}
 
@@ -33,15 +33,16 @@ ListFauna.camp64(
 \item{kg}{No se usa, se mantiene por compatibilidad}
 }
 \value{
-Devuelve un data.frame con las capturas medias por lance de cada especie capturada del grupo gr. Columnas: camp (sólo si se piden varias campañas),gr,esp,especie,peso(kg),número,nlan (nº de lances en que ha aparecido esp). Con varias campañas se ordena por campaña, en el orden dado en camp, y por peso decreciente dentro de cada una. Los valores NaN en las abundancias corresponden a especies que sólo han aparecido en los lances especiales, y que no puede calcularse la abundancia estratificada al no contar con áreas para los estratos en que aparecen
+Devuelve un data.frame con las capturas medias por lance de cada especie capturada del grupo gr. Columnas: camp (sólo si se piden varias campañas),gr,esp,especie,peso(kg),número,nlan (nº de lances en que ha aparecido esp). Se ordena por campaña (en el orden dado en camp), grupo y peso decreciente. Los valores NaN en las abundancias corresponden a especies que sólo han aparecido en los lances especiales, y que no puede calcularse la abundancia estratificada al no contar con áreas para los estratos en que aparecen
 }
 \description{
-Muestra un listado de la biomasa y número medio de todas las especies capturadas del grupo gr en una campaña o en una serie de campañas. Sustituye también a \code{ListFauna.camps} de CampR.
+Muestra un listado de la biomasa y número medio de todas las especies capturadas de los grupos gr en una campaña o en una serie de campañas. Sustituye también a \code{ListFauna.camps} y \code{ListFauna.groups} de CampR.
 }
 \examples{
 \dontrun{
 ListFauna.camp64(gr=1,camp="N12",zona="cant",dns="local",excl.sect=NA,incl2=FALSE)
 ListFauna.camp64(gr=1,camp=Nsh[25:27],zona="cant",dns="local")
+ListFauna.camp64(gr=9,camp="N25",zona="cant",dns="local")
 }
 }
 \seealso{

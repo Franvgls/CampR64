@@ -1,23 +1,24 @@
-#' Capturas y tallas mínima y máxima de un grupo de especies en una o varias campañas
+#' Capturas y tallas mínima y máxima de uno o varios grupos de especies en una o varias campañas
 #'
-#' Muestra las capturas totales sin estratificar, en peso y número, el número de lances en que aparece cada especie, el número de ejemplares medidos y las tallas mínima y máxima de todas las especies de un grupo en todos los lances de una campaña o de una serie de campañas. Sustituye a \code{ListFaunaTals.camp} y \code{ListFaunaTals.camps} de CampR.
-#' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados. 6 desechos y no orgánicos no se puede incluir.
+#' Muestra las capturas totales sin estratificar, en peso y número, el número de lances en que aparece cada especie, el número de ejemplares medidos y las tallas mínima y máxima de todas las especies de uno o varios grupos en todos los lances de una campaña o de una serie de campañas. Sustituye a \code{ListFaunaTals.camp}, \code{ListFaunaTals.camps} y \code{ListFaunaTals.groups} de CampR.
+#' @param gr Grupo de la especie: 1 peces, 2 crustáceos 3 moluscos 4 equinodermos 5 invertebrados. 6 desechos y no orgánicos no se puede incluir. Admite varios grupos, i.e. c(1,2), y 9 para todos los grupos del 1 al 5 (como ListFaunaTals.groups)
 #' @param camp Campaña o vector de campañas de las que se extrae el listado: un año concreto (XX): Demersales "NXX", Porcupine "PXX", Arsa primavera "1XX" y Arsa otoño "2XX". Admite una serie, i.e. Nsh[25:27]
 #' @param zona Elige el origen de las bases de datos: Porcupine "porc", Cantábrico "cant", Golfo de Cádiz "arsa"
 #' @param dns Elige si los datos se toman del ordenador ("local") o del servidor ("serv")
 #' @param excl.sect Sectores a excluir como carácter, se pueden elegir tanto los sectores como estratos, NA no excluye ninguno
 #' @param incl2 Si T incluye los lances especiales "2"
-#' @return Devuelve un data.frame con columnas: camp (sólo si se piden varias campañas),gr,esp,especie,nlans (nº de lances en que aparece la especie),peso (kg),numero,nmed (nº de ejemplares medidos),Lmin,Lmax (tallas mínima y máxima en la unidad en que se mide la especie) y medida (esa unidad: "cm", "mm" o "x5 mm" para las medidas a .5 cm, con las tallas en mm). El peso y el número salen del fichero de capturas, por lo que se incluyen también las especies sin tallas medidas (con nmed=0 y Lmin y Lmax NA). Ordenado por especie y, con varias campañas, por campaña dentro de cada especie en el orden dado en camp
+#' @return Devuelve un data.frame con columnas: camp (sólo si se piden varias campañas),gr,esp,especie,nlans (nº de lances en que aparece la especie),peso (kg),numero,nmed (nº de ejemplares medidos),Lmin,Lmax (tallas mínima y máxima en la unidad en que se mide la especie) y medida (esa unidad: "cm", "mm" o "x5 mm" para las medidas a .5 cm, con las tallas en mm). El peso y el número salen del fichero de capturas, por lo que se incluyen también las especies sin tallas medidas (con nmed=0 y Lmin y Lmax NA). Ordenado por grupo, especie y, con varias campañas, por campaña dentro de cada especie en el orden dado en camp
 #' @examples
 #' \dontrun{
 #' ListFaunaTals.camp64(gr="1",camp="N25",zona="cant",dns="local")
 #' ListFaunaTals.camp64(gr="2",camp=Nsh[25:27],zona="cant",dns="local",excl.sect="E")
+#' ListFaunaTals.camp64(gr=9,camp="N25",zona="cant",dns="local")
 #' }
 #' @family ListadosFauna
 #' @export
 ListFaunaTals.camp64<- function(gr="1",camp,zona,dns=c("local","serv"),excl.sect=NA,incl2=TRUE) {
-  if (length(gr)>1 | any(gr==9)) {stop("no se pueden mezclar grupos en esta función")}
-  if (gr==6) {stop("No tiene sentido tallas de deshechos")}
+  if (any(gr==9)) gr<-1:5
+  if (any(gr==6)) {stop("No tiene sentido tallas de deshechos")}
   dns<-match.arg(dns)
   if (length(camp)>1) {
     dumb<-do.call(rbind,lapply(camp,function(x) {
@@ -25,7 +26,13 @@ ListFaunaTals.camp64<- function(gr="1",camp,zona,dns=c("local","serv"),excl.sect
       if (nrow(res)==0) return(NULL)
       cbind(camp=x,res)
     }))
-    dumb<-dumb[order(dumb$especie,match(dumb$camp,camp)),]
+    dumb<-dumb[order(as.numeric(dumb$gr),dumb$especie,match(dumb$camp,camp)),]
+    rownames(dumb)<-NULL
+    return(dumb)
+  }
+  if (length(gr)>1) {
+    dumb<-do.call(rbind,lapply(gr,function(x) ListFaunaTals.camp64(x,camp,zona,dns,excl.sect=excl.sect,incl2=incl2)))
+    dumb<-dumb[order(as.numeric(dumb$gr),dumb$especie),]
     rownames(dumb)<-NULL
     return(dumb)
   }

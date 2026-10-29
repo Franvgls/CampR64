@@ -1,6 +1,6 @@
 # CampR64 0.2.1
-Listados faunísticos: una misma función sirve para una campaña o una serie, y
-para un lance, varios o todos.
+Listados faunísticos: una misma función sirve para una campaña o una serie,
+para uno o varios grupos y para un lance, varios o todos.
 
 ## Nuevas funciones
 * `ListFaunaTals.camp64()` para una o varias campañas (sustituye a
@@ -19,6 +19,11 @@ para un lance, varios o todos.
   (`lan=NA`, con `excl.sect` e `incl2`), sustituyendo a `ListFauna.lans` de
   CampR. Devuelve siempre `lance,grupo,esp,especie,peso,numero` (antes perdía
   `esp`) y busca los nombres de especie de una sola lectura.
+* `ListFauna.camp64()` y `ListFaunaTals.camp64()` admiten varios grupos en
+  `gr` (i.e. `c(1,2)`) y `gr=9` para todos los grupos del 1 al 5, también con
+  varias campañas. Sustituyen a `ListFauna.groups` y `ListFaunaTals.groups` de
+  CampR. Salen ordenados por campaña, grupo y peso (`ListFauna.camp64`) o por
+  grupo, especie y campaña (`ListFaunaTals.camp64`).
 
 # CampR64 0.2.0
 Migración desde CampR de las funciones que quedaban pendientes, leyendo los DBF

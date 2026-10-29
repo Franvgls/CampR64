@@ -197,9 +197,9 @@ Total funciones documentadas: **144**
 | Función | Fichero | Título | Export | @examples |
 |---|---|---|---|---|
 | `Fauna.camp()` | Fauna.camp64.R | Listado de especies por campaña sin  datos de las especies del grupo, sólo nombres permite añadir los lances especiales | si | si |
-| `ListFauna.camp64()` | ListFauna.camp64.R | Capturas medias por lance de cada especie de gr (grupo) en una o varias campañas | si | si |
+| `ListFauna.camp64()` | ListFauna.camp64.R | Capturas medias por lance de cada especie de uno o varios grupos en una o varias campañas | si | si |
 | `ListFauna.lan64()` | ListFauna.lan64.r | Capturas de uno, varios o todos los lances de una campaña | si | si |
-| `ListFaunaTals.camp64()` | ListFaunaTals.camp64.R | Capturas y tallas mínima y máxima de un grupo de especies en una o varias campañas | si | si |
+| `ListFaunaTals.camp64()` | ListFaunaTals.camp64.R | Capturas y tallas mínima y máxima de uno o varios grupos de especies en una o varias campañas | si | si |
 
 ## Formatos DATRAS (5)
 
