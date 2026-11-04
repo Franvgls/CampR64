@@ -1,14 +1,7 @@
-# CampR64 0.2.1
-Listados faunísticos: una misma función sirve para una campaña o una serie,
-para uno o varios grupos y para un lance, varios o todos.
+# CampR64 0.2.2
+Funciones auxiliares del PescaWin migradas desde CampR.
 
 ## Nuevas funciones
-* `ListFaunaTals.camp64()` para una o varias campañas (sustituye a
-  `ListFaunaTals.camp` y `ListFaunaTals.camps` de CampR): nº de lances, peso,
-  número, ejemplares medidos y tallas mínima y máxima de cada especie del
-  grupo, con la unidad de medida. Peso y número salen del fichero de capturas:
-  en CampR el peso se sumaba por cada fila de talla, multiplicándolo, y se
-  perdían las especies sin tallas medidas.
 * `pasa.lan64()` (antes `pasa.lan` con RODBC): lances de la campaña en formato
   PescaWin (`long_l,lat_l,prof_l,long_v,lat_v,prof_v` en grados decimales con
   signo) leyendo el lanceXXX.dbf con `readCampDBF()`; `gps=TRUE` guarda
@@ -27,6 +20,18 @@ para uno o varios grupos y para un lance, varios o todos.
   perdía el primero, con varios lances fallaba el filtro de válidos, el
   espacio libre de los primeros 6' comparaba el tiempo como texto y
   `gps=TRUE` no llegaba a escribir el fichero.
+
+# CampR64 0.2.1
+Listados faunísticos: una misma función sirve para una campaña o una serie,
+para uno o varios grupos y para un lance, varios o todos.
+
+## Nuevas funciones
+* `ListFaunaTals.camp64()` para una o varias campañas (sustituye a
+  `ListFaunaTals.camp` y `ListFaunaTals.camps` de CampR): nº de lances, peso,
+  número, ejemplares medidos y tallas mínima y máxima de cada especie del
+  grupo, con la unidad de medida. Peso y número salen del fichero de capturas:
+  en CampR el peso se sumaba por cada fila de talla, multiplicándolo, y se
+  perdían las especies sin tallas medidas.
 
 ## Cambios
 * `ListFauna.camp64()` admite una o varias campañas en `camp` (sustituye a
