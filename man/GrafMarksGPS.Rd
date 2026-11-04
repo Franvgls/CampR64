@@ -78,7 +78,9 @@ Other mapas:
 
 Other PescaWin: 
 \code{\link{MapLansGPS64}()},
-\code{\link{arMapLansGPS64}()}
+\code{\link{arMapLansGPS64}()},
+\code{\link{pasa.arte64}()},
+\code{\link{pasa.lan64}()}
 }
 \concept{PescaWin}
 \concept{mapas}

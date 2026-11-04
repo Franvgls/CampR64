@@ -9,6 +9,24 @@ para uno o varios grupos y para un lance, varios o todos.
   grupo, con la unidad de medida. Peso y número salen del fichero de capturas:
   en CampR el peso se sumaba por cada fila de talla, multiplicándolo, y se
   perdían las especies sin tallas medidas.
+* `pasa.lan64()` (antes `pasa.lan` con RODBC): lances de la campaña en formato
+  PescaWin (`long_l,lat_l,prof_l,long_v,lat_v,prof_v` en grados decimales con
+  signo) leyendo el lanceXXX.dbf con `readCampDBF()`; `gps=TRUE` guarda
+  XXX.lan en `folder`. El signo sale de `nsl`/`ewl` (antes todas las
+  longitudes se pasaban a W).
+* `pasa.arte64()` (antes `pasa.arte`): gráficos de control de abertura
+  vertical, puertas y calones a lo largo del arrastre y medianas por lance
+  (`dista_p`, `abert_h`, `abert_v`, con los registros `Val==1` en FIRME) a
+  partir del Arte_XXX.csv del PescaWin. Busca el fichero en el directorio de
+  marcas según `zona` bajo `c:/gps/` (`dns="local"`) o `z:/gps/`
+  (`dns="serv"`), cambiables con `options(CampR64.gps.local=...)` y
+  `options(CampR64.gps.serv=...)`. Los ceros de los sensores son dato ausente:
+  sus lances salen con `NA` y panel vacío, con aviso si son los tres sensores.
+  Lee los tiempos en `m:ss`, `mm:ss` y `mm:ss:00` y ya no
+  necesita `robustbase` ni `gridExtra`. Fixes: con `lan=NA` o varios lances
+  perdía el primero, con varios lances fallaba el filtro de válidos, el
+  espacio libre de los primeros 6' comparaba el tiempo como texto y
+  `gps=TRUE` no llegaba a escribir el fichero.
 
 ## Cambios
 * `ListFauna.camp64()` admite una o varias campañas en `camp` (sustituye a

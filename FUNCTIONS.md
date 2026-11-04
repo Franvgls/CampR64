@@ -2,7 +2,7 @@
 
 Generado automaticamente por `tools/build_index.R`. No editar a mano.
 
-Total funciones documentadas: **144**
+Total funciones documentadas: **146**
 
 ## abunds (2)
 
@@ -217,6 +217,13 @@ Total funciones documentadas: **144**
 |---|---|---|---|---|
 | `grafhistbox64()` | grafhistbox64.R | Evolución en biomasa o abundancia de la especie en la serie histórica | si | si |
 | `grafhistbox64.comp()` | grafhistbox64.comp.r | Gráficas grafhistbox combinadas biomasa y peso | si | si |
+
+## PescaWin (2)
+
+| Función | Fichero | Título | Export | @examples |
+|---|---|---|---|---|
+| `pasa.arte64()` | pasa.arte64.R | Geometría del arte por lance a partir del registro del PescaWin | si | si |
+| `pasa.lan64()` | pasa.lan64.R | Lances de una campaña en formato PescaWin | si | si |
 
 ## QC (1)
 

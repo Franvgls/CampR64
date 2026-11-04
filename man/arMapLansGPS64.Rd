@@ -80,7 +80,9 @@ Other mapas:
 
 Other PescaWin: 
 \code{\link{GrafMarksGPS}()},
-\code{\link{MapLansGPS64}()}
+\code{\link{MapLansGPS64}()},
+\code{\link{pasa.arte64}()},
+\code{\link{pasa.lan64}()}
 }
 \concept{PescaWin}
 \concept{mapas}
