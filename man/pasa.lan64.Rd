@@ -46,6 +46,7 @@ pasa.lan64("P25","porc",gps=TRUE,folder="c:/gps/lan/porcupin/")
 \link{pasa.arte64}, \link{MapLansGPS64}
 
 Other PescaWin: 
+\code{\link{Get.arte64}()},
 \code{\link{GrafMarksGPS}()},
 \code{\link{MapLansGPS64}()},
 \code{\link{arMapLansGPS64}()},

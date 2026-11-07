@@ -63,6 +63,7 @@ pasa.arte64("N25","cant","local",lan=c(16,17))
 \link{pasa.lan64}, \link{ArtePars64}
 
 Other PescaWin: 
+\code{\link{Get.arte64}()},
 \code{\link{GrafMarksGPS}()},
 \code{\link{MapLansGPS64}()},
 \code{\link{arMapLansGPS64}()},

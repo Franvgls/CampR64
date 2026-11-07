@@ -77,6 +77,7 @@ Other mapas:
 \code{\link{maphistal64}()}
 
 Other PescaWin: 
+\code{\link{Get.arte64}()},
 \code{\link{MapLansGPS64}()},
 \code{\link{arMapLansGPS64}()},
 \code{\link{pasa.arte64}()},
