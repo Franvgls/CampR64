@@ -59,7 +59,7 @@ en cada una y junta los resultados en una única tabla. Equivale al bucle
 todas las campañas de la serie.
 }
 \details{
-Si una campaña falla (p.ej. no hay ALK, como en \code{"N87"}, o hay tallas que no
+Si una campaña falla (p.ej. no hay ALK de la especie o hay tallas que no
 están en la clave) no se detiene el bucle: se avisa con un \code{warning} y esa
 campaña sale con \code{NA} (o se omite si \code{incl.na=FALSE}).
 
