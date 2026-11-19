@@ -14,7 +14,7 @@ edadsect.camps64(
   sect = "total",
   excl.sect = NA,
   cor.time = TRUE,
-  wide = FALSE,
+  wide = TRUE,
   incl.na = TRUE,
   file = NA
 )
@@ -40,17 +40,18 @@ todos los sectores y el total.}
 
 \item{cor.time}{Si \code{TRUE} corrige las abundancias en función de la duración del lance.}
 
-\item{wide}{Si \code{TRUE} y sólo se pide una columna en \code{sect}, devuelve una matriz
-edad x campaña en lugar de la tabla larga.}
+\item{wide}{Si \code{TRUE} (por defecto) y sólo se pide una columna en \code{sect}, devuelve una
+matriz con las edades en filas y los años en columnas, lista para guardar como dato.
+Si \code{FALSE} devuelve la tabla larga \code{camp}, \code{year}, \code{edad}.}
 
 \item{incl.na}{Si \code{TRUE} las campañas que fallan aparecen con \code{NA}; si \code{FALSE} se omiten.}
 
 \item{file}{Ruta de un fichero csv donde ir salvando los resultados campaña a campaña. \code{NA} no guarda nada.}
 }
 \value{
-Por defecto un data.frame con columnas \code{camp}, \code{year}, \code{edad} y una columna por
-cada elemento de \code{sect} (abundancia media estratificada). Con \code{wide=TRUE} una matriz
-edad x campaña.
+Por defecto una matriz edad (filas) x año (columnas) con la abundancia media
+estratificada. Con \code{wide=FALSE} (o varias columnas en \code{sect}) un data.frame con columnas
+\code{camp}, \code{year}, \code{edad} y una columna por cada elemento de \code{sect}.
 }
 \description{
 Recorre una serie de campañas (p.ej. \code{Nsh}) llamando a \code{\link[=edadsect.camp64]{edadsect.camp64()}}
@@ -69,12 +70,10 @@ se pierde lo ya calculado.
 }
 \examples{
 \dontrun{
-# Total de la serie histórica de merluza (esp=50) en el Cantábrico
-edadsect.camps64(1,50,Nsh,"cant","local")
-# Bacaladilla (esp=51), todos los sectores, guardando según avanza
-edadsect.camps64(1,51,Nsh,"cant","local",sect=NULL,file="c:/datos/edadsect_51.csv")
-# Matriz edad x campaña del total
-edadsect.camps64(1,51,Nsh[20:40],"cant","local",wide=TRUE)
+# Matriz edad x año del total de bacaladilla (esp=51) en el Cantábrico
+edadsect.camps64(1,51,Nsh,"cant","local")
+# Tabla larga con todos los sectores, guardando según avanza
+edadsect.camps64(1,51,Nsh,"cant","local",sect=NULL,wide=FALSE,file="c:/datos/edadsect_51.csv")
 }
 
 }

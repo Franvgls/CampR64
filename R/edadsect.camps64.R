@@ -25,31 +25,30 @@
 #'   todos los sectores y el total.
 #' @param excl.sect Sectores excluidos, se pasa a [edadsect.camp64()].
 #' @param cor.time Si `TRUE` corrige las abundancias en función de la duración del lance.
-#' @param wide Si `TRUE` y sólo se pide una columna en `sect`, devuelve una matriz
-#'   edad x campaña en lugar de la tabla larga.
+#' @param wide Si `TRUE` (por defecto) y sólo se pide una columna en `sect`, devuelve una
+#'   matriz con las edades en filas y los años en columnas, lista para guardar como dato.
+#'   Si `FALSE` devuelve la tabla larga `camp`, `year`, `edad`.
 #' @param incl.na Si `TRUE` las campañas que fallan aparecen con `NA`; si `FALSE` se omiten.
 #' @param file Ruta de un fichero csv donde ir salvando los resultados campaña a campaña. `NA` no guarda nada.
 #'
-#' @returns Por defecto un data.frame con columnas `camp`, `year`, `edad` y una columna por
-#'   cada elemento de `sect` (abundancia media estratificada). Con `wide=TRUE` una matriz
-#'   edad x campaña.
+#' @returns Por defecto una matriz edad (filas) x año (columnas) con la abundancia media
+#'   estratificada. Con `wide=FALSE` (o varias columnas en `sect`) un data.frame con columnas
+#'   `camp`, `year`, `edad` y una columna por cada elemento de `sect`.
 #'
 #' @seealso [edadsect.camp64()] para una sola campaña, [edadstr.camp64()] por estrato.
 #'
 #' @examples
 #' \dontrun{
-#' # Total de la serie histórica de merluza (esp=50) en el Cantábrico
-#' edadsect.camps64(1,50,Nsh,"cant","local")
-#' # Bacaladilla (esp=51), todos los sectores, guardando según avanza
-#' edadsect.camps64(1,51,Nsh,"cant","local",sect=NULL,file="c:/datos/edadsect_51.csv")
-#' # Matriz edad x campaña del total
-#' edadsect.camps64(1,51,Nsh[20:40],"cant","local",wide=TRUE)
+#' # Matriz edad x año del total de bacaladilla (esp=51) en el Cantábrico
+#' edadsect.camps64(1,51,Nsh,"cant","local")
+#' # Tabla larga con todos los sectores, guardando según avanza
+#' edadsect.camps64(1,51,Nsh,"cant","local",sect=NULL,wide=FALSE,file="c:/datos/edadsect_51.csv")
 #' }
 #'
 #' @family edades
 #' @export
 edadsect.camps64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),plus=8,sect="total",
-                           excl.sect=NA,cor.time=TRUE,wide=FALSE,incl.na=TRUE,file=NA) {
+                           excl.sect=NA,cor.time=TRUE,wide=TRUE,incl.na=TRUE,file=NA) {
   if (length(esp)>1) stop("Sólo se puede incluir una especie en esta función")
   dns<-match.arg(dns)
   res<-vector("list",length(camps))
@@ -87,7 +86,7 @@ edadsect.camps64<-function(gr,esp,camps,zona="cant",dns=c("local","serv"),plus=8
     }
     vcol<-setdiff(names(out),c("camp","year","edad"))
     out<-tapply(out[[vcol]],list(edad=factor(out$edad,levels=unique(out$edad)),
-                                 camp=factor(out$camp,levels=unique(out$camp))),sum)
+                                 year=factor(out$year,levels=unique(out$year))),sum)
   }
   out
 }
