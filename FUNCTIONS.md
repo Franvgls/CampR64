@@ -168,7 +168,7 @@ Total funciones documentadas: **146**
 | `ecolgr.camp64()` | ecolgr.camp64.R | Índices ecológicos para un grupo en una campaña | si | si |
 | `ecolmatrix.camp64()` | ecolmatrix.camp64.r | Extrae los datos del FAUNA de una especie en concreto.  | si | si |
 
-## edades (9)
+## edades (10)
 
 | Función | Fichero | Título | Export | @examples |
 |---|---|---|---|---|
@@ -177,6 +177,7 @@ Total funciones documentadas: **146**
 | `bubbage64.camp()` | bubbage64.camp.r | Gráfico de burbujas de abundancia por edad y campaña | si | si |
 | `datagegr.camp64()` | datagegr.camp64.R | Extrae los datos del FAUNA de una especie en concreto en una edad.  | si | no |
 | `edadsect.camp64()` | edadsect.camp64.R | Calcula las abundancias estratificadas por edad | si | si |
+| `edadsect.camps64()` | edadsect.camps64.R | Serie histórica de abundancias estratificadas por edad y sector | si | si |
 | `edadstr.camp64()` | edadstr.camp64.r | Calcula las abundancias estratificadas por edad  | si | si |
 | `GetAlk.camp64()` | GetAlk.camp64.R | Extrae ALK para una especie de los ficheros del camp  | si | si |
 | `grafedtal.camps64()` | grafedtal.camps64.R |  Histograma de distribución de tallas con edades para varias campañas | si | si |

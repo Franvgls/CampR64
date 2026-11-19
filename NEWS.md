@@ -2,6 +2,11 @@
 Funciones auxiliares del PescaWin migradas desde CampR.
 
 ## Nuevas funciones
+* `edadsect.camps64()`: recorre una serie de campañas (p.ej. `Nsh`) con
+  `edadsect.camp64()` y devuelve una tabla `camp`, `year`, `edad` con el total
+  (o los sectores pedidos en `sect`); `wide=TRUE` da la matriz edad x campaña.
+  Las campañas que fallan (sin ALK, tallas fuera de la clave) salen con `NA`
+  y un aviso sin parar el bucle; con `file` va guardando un csv tras cada campaña.
 * `pasa.lan64()` (antes `pasa.lan` con RODBC): lances de la campaña en formato
   PescaWin (`long_l,lat_l,prof_l,long_v,lat_v,prof_v` en grados decimales con
   signo) leyendo el lanceXXX.dbf con `readCampDBF()`; `gps=TRUE` guarda
