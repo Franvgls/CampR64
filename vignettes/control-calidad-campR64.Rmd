@@ -59,7 +59,7 @@ MapLansGPS64(camp = "N12", zona = "cant", dns = "local", Nlans = TRUE)
 
 `qcdistlan.camp64()` permite ver errores en la distancia recorrida y la
 velocidad, comparando lo tecleado con lo calculado a partir de las posiciones
-(fórmula de Haversine) y la relación con la duración del lance y el rumbo.
+(distancia geodésica sobre el elipsoide WGS84 con `geosphere::distGeo()`, igual que el recorrido del CAMP) y la relación con la duración del lance y el rumbo.
 Además de la tabla, con `plot = "all"` recupera los tres gráficos que existían
 en la versión original de CampR (y que se mantuvieron en el shiny de IMBUS,
 adaptados de `qcHaulsDist()` sobre datos DATRAS), apilados con

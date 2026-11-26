@@ -21,7 +21,7 @@
 #' @param year si T incluye una columna con el año al final de los datos
 #' @param quarter si T incluye una columna con el trimestre de los datos teniendo en cuenta la fecha del lance, puede cambiar a mitad de la campaña, cuidado con campañas IBTS adscritas a un trimestre particular.
 #' @param bio reduce el data.frame a los datos para los proyectos de biología, con datos en formato decimal y hexadecimal y las zonas ICES
-#' @param fill.dist Si T (por defecto) los lances válidos con recorrido NA/-9 en el CAMP se rellenan con la distancia Haversine entre largada y virada y se avisa con un warning; si F se dejan como están
+#' @param fill.dist Si T (por defecto) los lances válidos con recorrido NA/-9 en el CAMP se rellenan con la distancia geodésica (distGeo) entre largada y virada y se avisa con un warning; si F se dejan como están
 #' @return Devuelve un data.frame con datos de cada lance, las variables dependen de la selección de hidro y redux. En cualquier caso incluye variables weight.time con el factor de calibración para lances con menos tiempo del estándar y arsect: el área del sector al que corresponde el lance dentro del muestreo
 #' @seealso \link{MapLansGPS64}
 #' @examples
@@ -141,7 +141,7 @@ datlan.camp64<-function(camp,zona,dns=c("local","serv"),incl2=TRUE,incl0=FALSE,e
     if (!incl0) {lan<-lan[c(lan$validez!=0),]}
     if (!incl2) {lan<-lan[c(as.numeric(lan$validez)<=1),]}
     if (fill.dist & nrow(lan)>0) {
-      dist.hf<-round(geosphere::distHaversine(lan[,c("longitud_l","latitud_l")],lan[,c("longitud_v","latitud_v")]))
+      dist.hf<-round(geosphere::distGeo(lan[,c("longitud_l","latitud_l")],lan[,c("longitud_v","latitud_v")]))
       dist.hf[!lan$validez %in% 1:3]<-NA
       lan$recorrido<-.fill_recorrido64(lan$recorrido,dist.hf,lan$lance,camp)
     }

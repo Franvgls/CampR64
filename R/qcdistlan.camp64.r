@@ -12,6 +12,14 @@
 #' de dónde termine el barco al final del lance y de cómo lo mueva la corriente, así que
 #' hay que interpretarlo con más cautela que los de distancia y velocidad.
 #'
+#' La distancia entre largada y virada (\code{dist.hf}) se calcula con
+#' \code{geosphere::distGeo()} sobre el elipsoide WGS84, igual que el recorrido del CAMP.
+#' Hasta la versión 0.2.2 se usaba \code{distHaversine()}: la curvatura no tiene efecto
+#' a la escala de un lance, pero Haversine usa una esfera de radio ecuatorial (6378137 m)
+#' y a las latitudes de las campañas sobrestima las distancias en torno a un 0,2\%. Eso
+#' desplazaba todo el gráfico de distancias hacia +0,2\% y dejaba en 0 precisamente los
+#' lances con el recorrido desajustado.
+#'
 #' @param camp campaña a revisar los datos en formato Camp Xyy
 #' @param zona Origen de bases de datos: "cant" cantábrico, "porc"  Porcupine, "arsa" para el Golfo de Cádiz y "medi" para MEDITS
 #' @param todos Por defecto F. Si T lista todos los lances con valores, si no sólo los que pc.error>error
@@ -21,7 +29,7 @@
 #'   (rumbo vs. puntos de largada/virada) o \code{"all"} (los tres apilados con
 #'   \code{par(mfrow=c(3,1))}, como en la versión original de CampR)
 #' @param esc.mult factor de escala del texto en los gráficos (cex.lab, cex.axis, cex.main)
-#' @return Devuelve un data.frame con campaña, lance, recorrido, recorrido según la fórmula de Haversine, recorrido según la velocidad x el tiempo, velocidad, tiempo, rumbo, rumbo estimado según posiciones,velocidad calculada a partir de la distancia y el tiempo, y los porcentajes de errores de distancia, velocidad y rumbo. Si \code{plot} no es \code{"none"} además dibuja el gráfico correspondiente como efecto lateral.
+#' @return Devuelve un data.frame con campaña, lance, recorrido, recorrido según la distancia geodésica sobre el elipsoide WGS84 entre largada y virada (\code{dist.hf}, calculada con \code{\link[geosphere]{distGeo}}), recorrido según la velocidad x el tiempo, velocidad, tiempo, rumbo, rumbo estimado según posiciones,velocidad calculada a partir de la distancia y el tiempo, y los porcentajes de errores de distancia, velocidad y rumbo. Si \code{plot} no es \code{"none"} además dibuja el gráfico correspondiente como efecto lateral.
 #' @examples
 #' \dontrun{
 #' qcdistlan.camp64("C14","cant","local",pc.error=.01)
@@ -30,7 +38,7 @@
 #' qcdistlan.camp64("N12","cant","local",pc.error=2,plot="all")
 #' }
 #' @seealso \link{MapLansGPS64}
-#' @references distHaversine function gives the haversine calculation of distance between two geographic points \code{\link[geosphere]{distHaversine}}
+#' @references \code{\link[geosphere]{distGeo}}: distancia geodésica sobre el elipsoide WGS84 (Karney, 2013. Algorithms for geodesics. J. Geodesy 87: 43-55), el mismo criterio con el que se calcula el recorrido en el CAMP
 #' @family Control de calidad
 #' @export
 qcdistlan.camp64<-function(camp,zona="cant",dns=c("local","serv"),todos=FALSE,pc.error=2,
@@ -39,8 +47,8 @@ qcdistlan.camp64<-function(camp,zona="cant",dns=c("local","serv"),todos=FALSE,pc
   dumblan<-datlan.camp64(camp,zona,dns,redux=FALSE,fill.dist=FALSE)
   dumblan$mins<-round(dumblan$haul.mins*dumblan$weight.time,1)
   dumblan$dist.vel<-round(c(dumblan$weight.time*dumblan$haul.mins)/60*dumblan$velocidad*1852,0)
-  dumblan$dist.hf<-round(geosphere::distHaversine(dumblan[,c("longitud_l","latitud_l")],dumblan[,c("longitud_v","latitud_v")]))
-  # En el CAMP un recorrido no calculado se guarda como -9 (o NA): se rellena con la distancia de Haversine
+  dumblan$dist.hf<-round(geosphere::distGeo(dumblan[,c("longitud_l","latitud_l")],dumblan[,c("longitud_v","latitud_v")]))
+  # En el CAMP un recorrido no calculado se guarda como -9 (o NA): se rellena con la distancia geodésica (distGeo)
   dumblan$recorrido<-.fill_recorrido64(dumblan$recorrido,dumblan$dist.hf,dumblan$lance,camp,
                                        nota=" Para esos lances error.dist es 0 por defecto.")
   dumblan$vel.dist<-round((dumblan$dist.hf/1852)/(dumblan$weight.time*dumblan$haul.mins/60),1)

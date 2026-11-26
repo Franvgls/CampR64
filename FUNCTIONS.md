@@ -249,7 +249,7 @@ Total funciones documentadas: **146**
 
 | Función | Fichero | Título | Export | @examples |
 |---|---|---|---|---|
-| `.fill_recorrido64()` | fill_recorrido64.R | Rellena el recorrido ausente de los lances con la distancia Haversine | no | no |
+| `.fill_recorrido64()` | fill_recorrido64.R | Rellena el recorrido ausente de los lances con la distancia geodésica (distGeo) | no | no |
 | `.ices_map_cant()` | utils-ceph.R | *(sin @title)* | no | no |
 | `binom64()` | binom64.r | Distribucion binomial: exitos necesarios para ser significativo | si | si |
 | `buscaFuncion64()` | buscaFuncion64.R | Busca funciones de CampR64 por palabra clave | si | si |

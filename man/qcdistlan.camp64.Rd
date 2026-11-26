@@ -31,7 +31,7 @@ qcdistlan.camp64(
 \item{esc.mult}{factor de escala del texto en los gráficos (cex.lab, cex.axis, cex.main)}
 }
 \value{
-Devuelve un data.frame con campaña, lance, recorrido, recorrido según la fórmula de Haversine, recorrido según la velocidad x el tiempo, velocidad, tiempo, rumbo, rumbo estimado según posiciones,velocidad calculada a partir de la distancia y el tiempo, y los porcentajes de errores de distancia, velocidad y rumbo. Si \code{plot} no es \code{"none"} además dibuja el gráfico correspondiente como efecto lateral.
+Devuelve un data.frame con campaña, lance, recorrido, recorrido según la distancia geodésica sobre el elipsoide WGS84 entre largada y virada (\code{dist.hf}, calculada con \code{\link[geosphere]{distGeo}}), recorrido según la velocidad x el tiempo, velocidad, tiempo, rumbo, rumbo estimado según posiciones,velocidad calculada a partir de la distancia y el tiempo, y los porcentajes de errores de distancia, velocidad y rumbo. Si \code{plot} no es \code{"none"} además dibuja el gráfico correspondiente como efecto lateral.
 }
 \description{
 Sirve para control de calidad y asegurarse que los datos de distancias y posiciones son correctos.
@@ -46,6 +46,14 @@ habían perdido en la migración a CampR64, donde la función solo devolvía la 
 De los tres gráficos, el de rumbo (\code{"course"}) es el más espurio: depende mucho
 de dónde termine el barco al final del lance y de cómo lo mueva la corriente, así que
 hay que interpretarlo con más cautela que los de distancia y velocidad.
+
+La distancia entre largada y virada (\code{dist.hf}) se calcula con
+\code{geosphere::distGeo()} sobre el elipsoide WGS84, igual que el recorrido del CAMP.
+Hasta la versión 0.2.2 se usaba \code{distHaversine()}: la curvatura no tiene efecto
+a la escala de un lance, pero Haversine usa una esfera de radio ecuatorial (6378137 m)
+y a las latitudes de las campañas sobrestima las distancias en torno a un 0,2\%. Eso
+desplazaba todo el gráfico de distancias hacia +0,2\% y dejaba en 0 precisamente los
+lances con el recorrido desajustado.
 }
 \examples{
 \dontrun{
@@ -56,7 +64,7 @@ qcdistlan.camp64("N12","cant","local",pc.error=2,plot="all")
 }
 }
 \references{
-distHaversine function gives the haversine calculation of distance between two geographic points \code{\link[geosphere]{distHaversine}}
+\code{\link[geosphere]{distGeo}}: distancia geodésica sobre el elipsoide WGS84 (Karney, 2013. Algorithms for geodesics. J. Geodesy 87: 43-55), el mismo criterio con el que se calcula el recorrido en el CAMP
 }
 \seealso{
 \link{MapLansGPS64}

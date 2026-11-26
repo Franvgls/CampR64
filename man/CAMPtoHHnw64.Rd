@@ -24,7 +24,7 @@ CAMPtoHHnw64(
 
 \item{incl2}{Si F deja fuera los lances especiales que actualmente no se transmiten a DATRAS, si T los incluye}
 
-\item{fill.dist}{Si T (por defecto) los lances con recorrido NA/-9 en el CAMP se rellenan con la distancia Haversine entre largada y virada y se avisa; si F se dejan como -9}
+\item{fill.dist}{Si T (por defecto) los lances con recorrido NA/-9 en el CAMP se rellenan con la distancia geodésica (distGeo) entre largada y virada y se avisa; si F se dejan como -9}
 }
 \value{
 Devuelve un data.table con datos de cada lance en el formato HH de DATRAS. DATRAS requiere que los datos no tengan cabecera y el trimestre sea el que corresponde a la campaña, además de no tener "". Por ello se debe pasar a fichero con la orden: write.table(CAMPtoHH(Xyy,dns),"nombrearchivo.csv",sep=",",quote=F,col.names=F,row.names=F))

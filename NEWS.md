@@ -1,3 +1,17 @@
+# CampR64 (desarrollo)
+
+## Cambios
+* `qcdistlan.camp64()` y `datlan.camp64()` (y con ella `CAMPtoHH64()` y
+  `CAMPtoHHnw64()` al rellenar recorridos con `fill.dist=TRUE`) calculan la
+  distancia entre largada y virada con `geosphere::distGeo()` (elipsoide
+  WGS84) en lugar de `geosphere::distHaversine()`. A la escala de un lance la
+  curvatura no influye, pero Haversine usa una esfera de radio ecuatorial y a
+  las latitudes de las campañas sobrestima las distancias un ~0,2 %, mientras
+  que el recorrido del CAMP está calculado sobre el elipsoide. Con el cambio el
+  gráfico `plot="dist"` queda centrado en 0 y los lances con el recorrido
+  desajustado destacan en lugar de quedar en 0. La columna `dist.hf` mantiene
+  su nombre por compatibilidad.
+
 # CampR64 0.2.2
 Funciones auxiliares del PescaWin migradas desde CampR.
 
